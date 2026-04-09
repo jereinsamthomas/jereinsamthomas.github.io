@@ -34,6 +34,7 @@
             overflow-x: hidden;
             min-height: 100vh;
             padding-top: 80px; /* Space for fixed navigation bar */
+            scroll-behavior: smooth; /* Added for smooth scrolling */
         }
 
         h1, h2, h3 {
@@ -49,7 +50,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(30, 21, 58, 0.9);
+            background: rgba(30, 21, 58, 0.95);
             padding: 20px 10%;
             display: flex;
             justify-content: space-between;
@@ -103,14 +104,13 @@
         #hero {
             position: relative;
             text-align: left;
-            /* Live Tech Background Image */
+            /* Background Image */
             background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop'); 
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Creates a sleek parallax effect */
+            background-attachment: fixed;
         }
 
-        /* Dark overlay to ensure your name pops against the tech background */
         #hero::before {
             content: '';
             position: absolute;
@@ -119,7 +119,6 @@
             z-index: 1;
         }
 
-        /* Ensure text stays above the overlay */
         .hero-title, .hero-subtitle {
             position: relative;
             z-index: 2;
@@ -149,12 +148,12 @@
             box-shadow: -20px 0px 0px 10px rgba(76, 29, 149, 0.5); 
         }
         .about-text { flex: 1; }
-        .about-text h2 { margin-bottom: 20px; font-size: 2rem; }
+        .about-text h2 { margin-bottom: 20px; font-size: 2rem; color: var(--accent-cyan); }
 
         /* =========================================
-           6. CONTENT / PROJECTS SECTION (Upgraded Cards)
+           6. CONTENT / PROJECTS SECTION
         ========================================= */
-        #content h2 { text-align: center; margin-bottom: 50px; font-size: 2rem; }
+        #content h2 { text-align: center; margin-bottom: 50px; font-size: 2rem; color: var(--accent-cyan); }
         .card-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
 
         .card { 
@@ -181,7 +180,7 @@
             position: relative;
         }
 
-        /* Live Placeholder Images for Cards */
+        /* Images for Cards */
         .card-img.project-img { background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop'); }
         .card-img.tactics-img { background-image: url('https://images.unsplash.com/photo-1508344928928-7137b29de216?q=80&w=2070&auto=format&fit=crop'); }
         .card-img.analysis-img { background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop'); }
@@ -208,7 +207,7 @@
         ========================================= */
         #analysis { flex-direction: row; gap: 40px; }
         .analysis-left { flex: 1; }
-        .analysis-left h2 { font-size: 2.5rem; margin-bottom: 30px; }
+        .analysis-left h2 { font-size: 2.5rem; margin-bottom: 30px; color: var(--accent-cyan); }
         .chart-placeholder { 
             width: 100%; height: 300px; 
             background: linear-gradient(to top, rgba(157, 78, 221, 0.5), transparent); 
@@ -216,8 +215,8 @@
             border-bottom: 2px solid var(--accent-cyan); 
         }
         .analysis-right { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-        .analysis-box { border: 1px solid rgba(255, 255, 255, 0.3); padding: 20px; background: rgba(255, 255, 255, 0.05); }
-        .analysis-box h3 { color: #ffdd00; font-size: 1.2rem; margin-bottom: 10px; font-family: 'Roboto Mono', monospace; }
+        .analysis-box { border: 1px solid rgba(255, 255, 255, 0.3); padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;}
+        .analysis-box h3 { color: #00f5d4; font-size: 1.2rem; margin-bottom: 10px; font-family: 'Roboto Mono', monospace; }
         .analysis-box p { font-size: 0.9rem; }
 
         /* =========================================
@@ -225,11 +224,11 @@
         ========================================= */
         #contact { flex-direction: row; align-items: center; gap: 50px; }
         .contact-info { flex: 1; }
-        .contact-info h2 { margin-bottom: 40px; }
+        .contact-info h2 { margin-bottom: 40px; color: var(--accent-cyan); }
         .contact-block { margin-bottom: 30px; }
         .contact-block h3 { font-size: 1.2rem; margin-bottom: 5px; }
-        .contact-block a { color: var(--accent-purple); text-decoration: none; }
-        .contact-block .cyan-text { color: var(--accent-cyan); }
+        .contact-block a { color: var(--accent-purple); text-decoration: none; transition: color 0.3s; }
+        .contact-block a:hover { color: var(--accent-cyan); }
         .social-icons { display: flex; gap: 15px; margin-top: 10px; }
         .icon { 
             width: 30px; height: 30px; border: 1px solid var(--accent-purple); 
@@ -239,14 +238,14 @@
         .contact-visual { flex: 1; display: flex; justify-content: center; }
         .donut-chart { 
             width: 250px; height: 250px; border-radius: 50%; border: 40px solid; 
-            border-color: #c77dff #c77dff #3c096c #3c096c; transform: rotate(45deg); 
+            border-color: #00f5d4 #00f5d4 #9d4edd #9d4edd; transform: rotate(45deg); 
         }
 
         /* =========================================
            9. RESPONSIVE DESIGN (Mobile)
         ========================================= */
         @media (max-width: 768px) {
-            nav { flex-direction: column; padding: 15px; }
+            nav { flex-direction: column; padding: 15px; height: auto; }
             .nav-links { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
             #about, #analysis, #contact { flex-direction: column; }
             .hero-title { font-size: 2.5rem; }
@@ -257,19 +256,18 @@
 <body>
 
     <nav>
-        <a href="index.html" class="nav-logo">JST.</a>
+        <a href="#hero" class="nav-logo">JST.</a>
         <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="projects.html">Projects</a>
-            <a href="tactics.html">Tactical Analyser</a>
-            <a href="analysis.html">Match Analyzer</a>
-            <a href="contact.html">Contact</a>
+            <a href="#hero">Home</a>
+            <a href="#content">Projects</a>
+            <a href="#analysis">Match Analyzer</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <section id="hero">
         <h1 class="hero-title">JEREIN SAM<br>THOMAS</h1>
-        <div class="hero-subtitle">PORTFOLIO</div>
+        <div class="hero-subtitle">DATA SCIENCE PORTFOLIO</div>
     </section>
 
     <section id="about">
@@ -283,7 +281,7 @@
     </section>
 
     <section id="content">
-        <h2>CONTENT</h2>
+        <h2>TECHNICAL CONTENT</h2>
         <div class="card-container">
             <div class="card">
                 <div class="card-img project-img"></div>
@@ -311,11 +309,11 @@
                 <p>Studied team formations, player positioning, and in-game tactical changes to understand how strategies influence match outcomes.</p>
             </div>
             <div class="analysis-box">
-                <h3 style="color: #a8b2d1;">Performance Metrics</h3>
+                <h3>Performance Metrics</h3>
                 <p>Analyzed key statistics such as possession, passing accuracy, shots on target, and player contributions to evaluate overall team performance.</p>
             </div>
             <div class="analysis-box">
-                <h3 style="color: #a8b2d1;">Predictive Insights</h3>
+                <h3>Predictive Insights</h3>
                 <p>Applied data science techniques to identify trends and patterns, enabling match outcome predictions and deeper understanding of game dynamics.</p>
             </div>
         </div>
@@ -326,18 +324,17 @@
             <h2>CONTACT ME ON:</h2>
             <div class="contact-block">
                 <h3>GITHUB</h3>
-                <a href="#">(LINK)</a>
+                <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
             </div>
             <div class="contact-block">
                 <h3>EMAIL</h3>
-                <a href="mailto:hello@reallygreatsite.com" class="cyan-text">hello@reallygreatsite.com</a>
+                <a href="mailto:your.email@example.com" class="cyan-text">your.email@example.com</a>
             </div>
             <div class="contact-block">
                 <h3>SOCIAL</h3>
                 <div class="social-icons">
-                    <div class="icon">M</div>
-                    <div class="icon">P</div>
-                    <div class="icon">T</div>
+                    <div class="icon">in</div>
+                    <div class="icon">X</div>
                 </div>
             </div>
         </div>
