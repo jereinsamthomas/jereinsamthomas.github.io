@@ -79,19 +79,6 @@ body::before {
   box-shadow: 0 0 12px var(--green);
 }
 
-/* BACK BUTTON ADDED HERE */
-.back-btn {
-  display: block;
-  text-decoration: none;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text2);
-  padding: 12px 16px 0px;
-  letter-spacing: 1px;
-  transition: color 0.2s;
-}
-.back-btn:hover { color: var(--green); }
-
 .logo {
   padding: 18px 16px 14px;
   border-bottom: 1px solid var(--border);
@@ -777,19 +764,21 @@ body::before {
 .role-bar-fill.def { background: var(--red); }
 
 /* ========== MATCH ANALYZER ========== */
-.match-layout {
+.analyzer-wrapper {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
-  align-items: start;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .team-panel {
   background: var(--panel);
   border: 1px solid var(--border);
-  padding: 20px;
+  padding: 18px;
 }
+
+.team-panel.home-panel { border-top: 2px solid var(--green); }
+.team-panel.away-panel { border-top: 2px solid var(--red); }
 
 .team-label {
   font-family: var(--font-display);
@@ -797,16 +786,16 @@ body::before {
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--border);
 }
 
 .team-label.home { color: var(--green); }
-.team-label.away { color: var(--red); text-align: right; }
+.team-label.away { color: var(--red); }
 
 .form-group {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .form-label {
@@ -835,19 +824,86 @@ body::before {
 
 .form-select:focus, .form-input:focus { border-color: var(--green); }
 
-.vs-divider {
+/* 11 Player Roles Grid */
+.roles-section-title {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--green);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 14px 0 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.roles-section-title::after {
+  content:'';
+  flex:1;
+  height:1px;
+  background: var(--border);
+}
+
+.player-roles-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.player-roles-grid::-webkit-scrollbar { width: 3px; }
+.player-roles-grid::-webkit-scrollbar-thumb { background: var(--border2); }
+
+.player-role-row {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.pos-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--green);
+  background: var(--green4);
+  border: 1px solid var(--green3);
+  padding: 5px 0;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.pos-tag.away-tag {
+  color: var(--red);
+  background: var(--red2);
+  border-color: #ff414144;
+}
+
+.vs-bar {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 0;
+  gap: 12px;
+  padding: 14px 0;
+  margin-bottom: 16px;
 }
 
 .vs-text {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 900;
   color: var(--text3);
-  letter-spacing: 4px;
+  letter-spacing: 6px;
+}
+
+.vs-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
 }
 
 .analyze-btn {
@@ -1035,8 +1091,8 @@ body::before {
 <body>
 <div class="app">
 
+<!-- ===== SIDEBAR ===== -->
 <div class="sidebar">
-  <a href="index.html" class="back-btn">← BACK TO PORTFOLIO</a>
   <div class="logo">
     <div class="logo-text">TACTICS<span>OS</span></div>
     <div class="status-line"><span class="status-dot"></span>SYSTEM ONLINE</div>
@@ -1075,6 +1131,7 @@ body::before {
   </div>
 </div>
 
+<!-- ===== MAIN ===== -->
 <div class="main">
   <div class="topbar">
     <div class="breadcrumb" id="breadcrumb">SYS / <span>dashboard</span></div>
@@ -1083,6 +1140,7 @@ body::before {
     </div>
   </div>
 
+  <!-- ===== DASHBOARD ===== -->
   <div class="page active" id="page-dashboard">
     <div class="hero-section">
       <div class="hero-label">Professional Analysis Suite</div>
@@ -1129,6 +1187,7 @@ body::before {
     </div>
   </div>
 
+  <!-- ===== FORMATIONS ===== -->
   <div class="page" id="page-formations">
     <div class="page-header">
       <div class="page-title">FORMATIONS</div>
@@ -1142,6 +1201,7 @@ body::before {
     <div class="formations-grid" id="formationsGrid"></div>
   </div>
 
+  <!-- ===== STYLES ===== -->
   <div class="page" id="page-styles">
     <div class="page-header">
       <div class="page-title">PLAYING STYLES</div>
@@ -1150,6 +1210,7 @@ body::before {
     <div class="styles-list" id="stylesList"></div>
   </div>
 
+  <!-- ===== ROLES ===== -->
   <div class="page" id="page-roles">
     <div class="page-header">
       <div class="page-title">PLAYER ROLES</div>
@@ -1161,63 +1222,64 @@ body::before {
     <div class="roles-grid" id="rolesGrid"></div>
   </div>
 
+  <!-- ===== MATCH ANALYZER ===== -->
   <div class="page" id="page-analyzer">
     <div class="page-header">
       <div class="page-title">MATCH ANALYZER</div>
-      <div class="page-sub">Simulate tactical matchups. Select two teams to uncover strategic exploits.</div>
+      <div class="page-sub">Assign roles to all 11 positions and a playing style per team — then run a full tactical breakdown.</div>
     </div>
 
-    <div class="match-layout">
-      <div class="team-panel">
+    <div class="vs-bar">
+      <div class="vs-line"></div>
+      <div class="vs-text">HOME vs AWAY</div>
+      <div class="vs-line"></div>
+    </div>
+
+    <div class="analyzer-wrapper">
+      <!-- HOME TEAM -->
+      <div class="team-panel home-panel">
         <div class="team-label home">⚽ HOME TEAM</div>
         <div class="form-group">
-          <div class="form-label">Select Formation</div>
-          <select class="form-select" id="homeFormation">
-            <option value="">-- FORMATION --</option>
+          <div class="form-label">Formation</div>
+          <select class="form-select" id="homeFormation" onchange="buildPlayerRoles('home')">
+            <option value="">-- SELECT FORMATION --</option>
           </select>
         </div>
         <div class="form-group">
-          <div class="form-label">Select Style</div>
+          <div class="form-label">Playing Style</div>
           <select class="form-select" id="homeStyle">
-            <option value="">-- STYLE --</option>
+            <option value="">-- SELECT STYLE --</option>
           </select>
         </div>
-        <div class="form-group">
-          <div class="form-label">Select Key Role</div>
-          <select class="form-select" id="homeRole">
-            <option value="">-- ROLE --</option>
-          </select>
+        <div class="roles-section-title">Player Roles — 11 Positions</div>
+        <div class="player-roles-grid" id="homeRolesGrid">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--text3);padding:8px 0;">Select a formation to assign player roles.</div>
         </div>
       </div>
 
-      <div class="vs-divider">
-        <div class="vs-text">VS</div>
-      </div>
-
-      <div class="team-panel">
+      <!-- AWAY TEAM -->
+      <div class="team-panel away-panel">
         <div class="team-label away">AWAY TEAM ⚽</div>
         <div class="form-group">
-          <div class="form-label">Select Formation</div>
-          <select class="form-select" id="awayFormation">
-            <option value="">-- FORMATION --</option>
+          <div class="form-label">Formation</div>
+          <select class="form-select" id="awayFormation" onchange="buildPlayerRoles('away')">
+            <option value="">-- SELECT FORMATION --</option>
           </select>
         </div>
         <div class="form-group">
-          <div class="form-label">Select Style</div>
+          <div class="form-label">Playing Style</div>
           <select class="form-select" id="awayStyle">
-            <option value="">-- STYLE --</option>
+            <option value="">-- SELECT STYLE --</option>
           </select>
         </div>
-        <div class="form-group">
-          <div class="form-label">Select Key Role</div>
-          <select class="form-select" id="awayRole">
-            <option value="">-- ROLE --</option>
-          </select>
+        <div class="roles-section-title">Player Roles — 11 Positions</div>
+        <div class="player-roles-grid" id="awayRolesGrid">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--text3);padding:8px 0;">Select a formation to assign player roles.</div>
         </div>
       </div>
     </div>
 
-    <button class="analyze-btn" onclick="runAnalysis()">▶ RUN MATCH ANALYSIS</button>
+    <button class="analyze-btn" onclick="runAnalysis()">▶ RUN FULL MATCH ANALYSIS</button>
 
     <div class="analysis-result" id="analysisResult">
       <div class="result-title">⚡ ANALYSIS OUTPUT</div>
@@ -1225,6 +1287,7 @@ body::before {
     </div>
   </div>
 
+  <!-- ===== AI TEAM GENERATOR ===== -->
   <div class="page" id="page-generator">
     <div class="page-header">
       <div class="page-title">AI TEAM GENERATOR</div>
@@ -1260,6 +1323,7 @@ body::before {
     </div>
   </div>
 
+  <!-- ===== MOVEMENTS EXPLORER ===== -->
   <div class="page" id="page-movements">
     <div class="page-header">
       <div class="page-title">MOVEMENTS EXPLORER</div>
@@ -1290,7 +1354,10 @@ body::before {
     </div>
   </div>
 
-</div></div><script>
+</div><!-- end main -->
+</div><!-- end app -->
+
+<script>
 // ===== DATA =====
 const formations = {
   "4-4-2": {pos:["LB","CB","CB","RB","LM","CM","CM","RM","ST","ST"],type:"Classic"},
@@ -1524,6 +1591,52 @@ function filterRoles() {
   renderRoles(document.getElementById('roleSearch').value);
 }
 
+// ===== ROLE SUGGESTIONS BY POSITION =====
+const roleSuggestions = {
+  GK: ["Sweeper Keeper","Shot Stopper","Ball Playing Keeper","Modern Goalkeeper","Reflex Keeper","Defensive Keeper","Traditional Goalkeeper","Aggressive Sweeper Keeper","Commanding Keeper","Line Keeper"],
+  CB: ["Central Defender","Ball Playing Defender","No-Nonsense Defender","Stopper","Cover Defender","Sweeper","Libero","Wide Centre Back","Aggressive Defender","Man Marker","High Line Defender","Build-Up Defender"],
+  LB: ["Fullback","Wingback","Attacking Fullback","Defensive Fullback","Inverted Fullback","Overlapping Fullback","Modern Fullback","Pressing Fullback","Complete Wingback"],
+  RB: ["Fullback","Wingback","Attacking Fullback","Defensive Fullback","Inverted Fullback","Overlapping Fullback","Modern Fullback","Pressing Fullback","Complete Wingback"],
+  CDM: ["Holding Midfielder","Anchor Man","Destroyer","Deep-Lying Playmaker","Regista","Half Back","Ball Winning Midfielder","Defensive Playmaker","Engine Midfielder"],
+  CM: ["Box-to-Box Midfielder","Mezzala","Carrilero","Central Midfielder Attack","Central Midfielder Support","Central Midfielder Defense","Advanced Midfielder","Shuttler","Dynamic Midfielder","Control Midfielder","Link Midfielder","Ball Carrier"],
+  CAM: ["Attacking Midfielder","Playmaker","Advanced Playmaker","Enganche","Trequartista","Roaming Playmaker","Creative Midfielder","Attacking Playmaker","Free Playmaker","Shadow Striker"],
+  LM: ["Wide Midfielder","Winger","Inverted Winger","Inside Forward","Defensive Winger","Pressing Winger","Wide Playmaker Left","Touchline Winger","Tracking Winger"],
+  RM: ["Wide Midfielder","Winger","Inverted Winger","Inside Forward","Defensive Winger","Pressing Winger","Wide Playmaker Right","Touchline Winger","Tracking Winger"],
+  LW: ["Winger","Inside Forward","Inverted Winger","Raumdeuter","Direct Winger","Creative Winger","Wide Attacker","Wide Creator","Cut Inside Winger"],
+  RW: ["Winger","Inside Forward","Inverted Winger","Raumdeuter","Direct Winger","Creative Winger","Wide Attacker","Wide Creator","Cut Inside Winger"],
+  ST: ["Poacher","Advanced Forward","Complete Forward","Target Man","False 9","Pressing Forward","Shadow Striker","Fox in the Box","Penalty Box Striker","Mobile Striker","Deep Lying Forward","Second Striker"],
+  CF: ["Complete Forward","False 9","Deep Lying Forward","Advanced Forward","Support Striker","Withdrawn Forward"],
+};
+
+function buildPlayerRoles(team) {
+  const formId = team+'Formation';
+  const gridId = team+'RolesGrid';
+  const fVal = document.getElementById(formId).value;
+  const grid = document.getElementById(gridId);
+  if(!fVal) { grid.innerHTML = '<div style="font-family:var(--font-mono);font-size:10px;color:var(--text3);padding:8px 0;">Select a formation to assign player roles.</div>'; return; }
+
+  const positions = formations[fVal].pos;
+  const isAway = team === 'away';
+  const tagClass = isAway ? 'pos-tag away-tag' : 'pos-tag';
+
+  // Count duplicates to label them
+  const counts = {}, idx = {};
+  positions.forEach(p=>{ counts[p]=(counts[p]||0)+1; });
+
+  grid.innerHTML = positions.map((pos, i) => {
+    idx[pos] = (idx[pos]||0)+1;
+    const label = counts[pos]>1 ? `${pos} ${idx[pos]}` : pos;
+    const options = (roleSuggestions[pos] || Object.keys(roles)).map(r=>`<option value="${r}">${r}</option>`).join('');
+    return `<div class="player-role-row">
+      <span class="${tagClass}">${label}</span>
+      <select class="form-select" id="${team}-role-${i}" style="font-size:10px;padding:7px 10px;">
+        <option value="">-- ROLE --</option>
+        ${options}
+      </select>
+    </div>`;
+  }).join('');
+}
+
 // ===== POPULATE SELECTS =====
 function populateSelects() {
   const fKeys = Object.keys(formations);
@@ -1537,45 +1650,78 @@ function populateSelects() {
     const el = document.getElementById(id);
     sKeys.forEach(k=>{ const o=document.createElement('option');o.value=k;o.textContent=k;el.appendChild(o); });
   });
-  ['homeRole','awayRole'].forEach(id=>{
-    const el = document.getElementById(id);
-    rKeys.forEach(k=>{ const o=document.createElement('option');o.value=k;o.textContent=k;el.appendChild(o); });
-  });
 }
 
 // ===== MATCH ANALYSIS =====
 function runAnalysis() {
-  const hF=document.getElementById('homeFormation').value;
-  const aF=document.getElementById('awayFormation').value;
-  const hS=document.getElementById('homeStyle').value;
-  const aS=document.getElementById('awayStyle').value;
-  const hR=document.getElementById('homeRole').value;
-  const aR=document.getElementById('awayRole').value;
+  const hF = document.getElementById('homeFormation').value;
+  const aF = document.getElementById('awayFormation').value;
+  const hS = document.getElementById('homeStyle').value;
+  const aS = document.getElementById('awayStyle').value;
 
-  if(!hF||!aF||!hS||!aS||!hR||!aR) { alert('Please select all options.'); return; }
+  if(!hF||!aF||!hS||!aS) { alert('Please select formations and playing styles for both teams.'); return; }
+
+  // Collect selected player roles
+  const hPositions = formations[hF].pos;
+  const aPositions = formations[aF].pos;
+  const hRoles = hPositions.map((_,i)=>document.getElementById('home-role-'+i)?.value||'').filter(Boolean);
+  const aRoles = aPositions.map((_,i)=>document.getElementById('away-role-'+i)?.value||'').filter(Boolean);
 
   const insights = [];
-  if(formations[hF].pos.includes('LW')||formations[hF].pos.includes('RW'))
-    insights.push('Home team has wide attacking threats from the wings.');
-  if(styles[hS].attack > styles[aS].defense)
-    insights.push(`${hS} (ATK ${styles[hS].attack}) likely breaks through ${aS} (DEF ${styles[aS].defense}).`);
-  if(styles[aS].attack > styles[hS].defense)
-    insights.push(`${aS} (ATK ${styles[aS].attack}) can exploit ${hS} defense (DEF ${styles[hS].defense}).`);
-  if(roles[hR].attack > roles[aR].defense)
-    insights.push(`${hR} (ATK ${roles[hR].attack}) wins the individual battle vs ${aR} (DEF ${roles[aR].defense}).`);
-  if(hS==='Wing Play'&&(hR==='Winger'||hR==='Inside Forward'))
-    insights.push('Strong wing strategy synergy detected for home team.');
-  if(aS==='Park the Bus')
-    insights.push('Away team parking the bus — use crosses, set pieces, or long shots.');
-  if(styles[hS].tempo > styles[aS].tempo+2)
-    insights.push(`Home team has significant tempo advantage (${styles[hS].tempo} vs ${styles[aS].tempo}) — control pace early.`);
-  if(formations[hF].pos.includes('CDM')&&!formations[aF].pos.includes('CDM'))
-    insights.push('Home team has a defensive midfielder advantage in midfield protection.');
+
+  // Formation insights
+  if(hPositions.includes('LW')||hPositions.includes('RW'))
+    insights.push('🟢 HOME — Wing attacking options available from wide positions.');
+  if(aPositions.includes('LW')||aPositions.includes('RW'))
+    insights.push('🔴 AWAY — Wide threats on both flanks; home fullbacks must track runs.');
+  if(hPositions.includes('CDM')&&!aPositions.includes('CDM'))
+    insights.push('🟢 HOME — Midfield defensive cover advantage with CDM; away midfield exposed.');
+  if(!hPositions.includes('CDM')&&aPositions.includes('CDM'))
+    insights.push('🔴 AWAY — CDM screens the defense effectively; home attacks may be stifled.');
+
+  // Style matchup
+  const hAtk = styles[hS].attack, hDef = styles[hS].defense, hTmp = styles[hS].tempo;
+  const aAtk = styles[aS].attack, aDef = styles[aS].defense, aTmp = styles[aS].tempo;
+  if(hAtk > aDef) insights.push(`🟢 HOME — ${hS} (ATK ${hAtk}) is likely to break through ${aS} defense (DEF ${aDef}).`);
+  if(aAtk > hDef) insights.push(`🔴 AWAY — ${aS} (ATK ${aAtk}) poses a real threat to ${hS} defense (DEF ${hDef}).`);
+  if(hTmp > aTmp+2) insights.push(`🟢 HOME — Significant tempo edge (${hTmp} vs ${aTmp}); dictate the game early.`);
+  if(aTmp > hTmp+2) insights.push(`🔴 AWAY — Higher tempo (${aTmp} vs ${hTmp}); home must be compact and disciplined.`);
+
+  // Style-specific tactics
+  if(aS==='Park the Bus') insights.push('🟡 TACTIC — Away parking the bus. Use set pieces, crosses, and wide overloads.');
+  if(hS==='Park the Bus') insights.push('🟡 TACTIC — Home parking the bus. Away must be patient; exploit through-balls.');
+  if(hS==='High Press'&&aS==='Build-Up Play') insights.push('🟢 HOME — High press directly counters Away\'s build-up play. Force errors in the defensive third.');
+  if(hS==='Counter Attack') insights.push('🟡 TACTIC — Home counter strategy: stay compact, win the ball, release quickly.');
+  if(hS==='Wing Play') insights.push('🟢 HOME — Wing Play demands disciplined fullback overlaps and quality crossing.');
+  if(hS==='Total Football') insights.push('🟢 HOME — Total Football: positional rotation required; all players must be comfortable in multiple roles.');
+
+  // Player role insights
+  const attackerRoles = hRoles.filter(r=>roles[r]&&roles[r].attack>=9);
+  if(attackerRoles.length>0) insights.push(`🟢 HOME — High-threat attackers assigned: ${attackerRoles.join(', ')}. Danger in final third.`);
+  const defenderRoles = aRoles.filter(r=>roles[r]&&roles[r].defense>=9);
+  if(defenderRoles.length>0) insights.push(`🔴 AWAY — Solid defensive wall: ${defenderRoles.join(', ')}. Home must work hard to break through.`);
+
+  // Role battle analysis (compare attack of home forward vs away defender)
+  const hStrikerIdx = hPositions.findIndex(p=>['ST','CF','LW','RW'].includes(p));
+  const aDefIdx = aPositions.findIndex(p=>['CB','CDM'].includes(p));
+  if(hStrikerIdx>=0&&aDefIdx>=0){
+    const hR = document.getElementById('home-role-'+hStrikerIdx)?.value;
+    const aR = document.getElementById('away-role-'+aDefIdx)?.value;
+    if(hR&&aR&&roles[hR]&&roles[aR]){
+      if(roles[hR].attack > roles[aR].defense)
+        insights.push(`🟢 HOME — ${hR} (ATK ${roles[hR].attack}) has the edge over ${aR} (DEF ${roles[aR].defense}) in key duel.`);
+      else if(roles[aR].defense >= roles[hR].attack)
+        insights.push(`🔴 AWAY — ${aR} (DEF ${roles[aR].defense}) can neutralize ${hR} (ATK ${roles[hR].attack}) effectively.`);
+    }
+  }
+
+  if(insights.length===0) insights.push('→ Analysis complete. No dominant tactical advantages detected — evenly matched.');
 
   const el = document.getElementById('analysisResult');
   const items = document.getElementById('analysisItems');
-  items.innerHTML = insights.map(i=>`<div class="result-item"><span class="result-arrow">→</span>${i}</div>`).join('');
+  items.innerHTML = insights.map(i=>`<div class="result-item"><span class="result-arrow">→</span><span>${i}</span></div>`).join('');
   el.classList.add('visible');
+  el.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
 // ===== GENERATOR =====
