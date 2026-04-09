@@ -6,7 +6,6 @@
     <title>Jerein Sam Thomas - Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -129,8 +128,12 @@
         .card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0, 245, 212, 0.2); }
 
         .card-img { height: 200px; background-size: cover; background-position: center; position: relative; }
+        
         .card-img.project-img { background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop'); }
-        .card-img.tactics-img { background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070&auto=format&fit=crop'); }
+        
+        /* UPDATED: Path pointing to the Catapult image you download and add to GitHub */
+        .card-img.tactics-img { background-image: url('tactical-analysis.jpg'); }
+        
         .card-img.analysis-img { background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop'); }
 
         .card-body { 
@@ -209,7 +212,7 @@
         <a href="#hero" class="nav-logo">JST.</a>
         <div class="nav-links">
             <a href="#hero">Home</a>
-            <a href="#content">Projects</a>
+            <a href="projects.html">Projects</a>
             <a href="tactics.html">Tactical Analyser</a>
             <a href="#analysis">Match Analyzer</a>
             <a href="#contact">Contact</a>
@@ -234,7 +237,7 @@
     <section id="content">
         <h2>TECHNICAL CONTENT</h2>
         <div class="card-container">
-            <div class="card">
+            <div class="card" onclick="window.location.href='projects.html';" style="cursor: pointer;">
                 <div class="card-img project-img"></div>
                 <div class="card-body">MY PROJECTS</div>
             </div>
