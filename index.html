@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jerein Sam Thomas - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --bg-dark: #1e153a;
+            --bg-gradient: linear-gradient(135deg, #181028 0%, #291c52 50%, #15224a 100%);
+            --text-main: #ffffff;
+            --accent-purple: #9d4edd;
+            --accent-cyan: #00f5d4;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            font-family: 'Roboto Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 80px 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero Section */
+        #hero {
+            position: relative;
+            text-align: left;
+            background-image: radial-gradient(circle at 20% 50%, rgba(157, 78, 221, 0.3) 0%, transparent 50%);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            letter-spacing: 5px;
+        }
+
+        /* About Section */
+        #about {
+            flex-direction: row;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .circle-graphic {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #dfa2ff, #7b2cbf);
+            box-shadow: -20px 0px 0px 10px rgba(76, 29, 149, 0.5);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        /* Content Section */
+        #content h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            color: #000;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .card-img {
+            height: 200px;
+            background-color: #333;
+            /* Replace the background color with your actual images using inline CSS or a class later */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: center;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: bold;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-body.red-text {
+            color: red;
+        }
+
+        .card-body.blue-text {
+            color: #1a2a6c;
+        }
+
+        /* Match Analysis Section */
+        #analysis {
+            flex-direction: row;
+            gap: 40px;
+        }
+
+        .analysis-left {
+            flex: 1;
+        }
+
+        .analysis-left h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(to top, rgba(157, 78, 221, 0.5), transparent);
+            border-left: 2px solid var(--accent-cyan);
+            border-bottom: 2px solid var(--accent-cyan);
+            position: relative;
+        }
+
+        .analysis-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .analysis-box {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .analysis-box h3 {
+            color: #ffdd00;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .analysis-box p {
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            flex-direction: row;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h2 {
+            margin-bottom: 40px;
+        }
+
+        .contact-block {
+            margin-bottom: 30px;
+        }
+
+        .contact-block h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-block a {
+            color: var(--accent-purple);
+            text-decoration: none;
+        }
+        
+        .contact-block .cyan-text {
+            color: var(--accent-cyan);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .icon {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--accent-purple);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--accent-purple);
+            font-size: 0.8rem;
+        }
+
+        .contact-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .donut-chart {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 40px solid;
+            border-color: #c77dff #c77dff #3c096c #3c096c;
+            transform: rotate(45deg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #about, #analysis, #contact {
+                flex-direction: column;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .chart-placeholder, .donut-chart {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="hero">
+        <h1 class="hero-title">JEREIN SAM<br>THOMAS</h1>
+        <div class="hero-subtitle">PORTFOLIO</div>
+    </section>
+
+    <section id="about">
+        <div class="about-visual">
+            <div class="circle-graphic"></div>
+        </div>
+        <div class="about-text">
+            <h2>ABOUT ME</h2>
+            <p>I am a passionate and dedicated MSc Applied Data Science student with a strong foundation in physics and a growing expertise in data-driven problem solving. I completed my Bachelor's degree in Physics from Mar Thoma College, Thiruvalla, and I am currently pursuing my Master's degree in Applied Data Science at SRM University, where I have developed skills in machine learning, data analysis, and statistical modeling.</p>
+        </div>
+    </section>
+
+    <section id="content">
+        <h2>CONTENT</h2>
+        <div class="card-container">
+            <div class="card">
+                <div class="card-img" style="background-color: #555;"></div>
+                <div class="card-body">MY PROJECT</div>
+            </div>
+            <div class="card">
+                <div class="card-img" style="background-color: #2b5c77;"></div>
+                <div class="card-body red-text">CONTACT US</div>
+            </div>
+            <div class="card">
+                <div class="card-img" style="background-color: #ccc;"></div>
+                <div class="card-body blue-text">FOOTBALL<br>MATCH<br>ANALYSIS</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="analysis">
+        <div class="analysis-left">
+            <h2>MATCH<br>ANALYSIS</h2>
+            <div class="chart-placeholder"></div>
+        </div>
+        <div class="analysis-right">
+            <div class="analysis-box">
+                <h3>I Tactical Analysis</h3>
+                <p>Studied team formations, player positioning, and in-game tactical changes to understand how strategies influence match outcomes.</p>
+            </div>
+            <div class="analysis-box">
+                <h3 style="color: #a8b2d1;">Performance Metrics</h3>
+                <p>Analyzed key statistics such as possession, passing accuracy, shots on target, and player contributions to evaluate overall team performance.</p>
+            </div>
+            <div class="analysis-box">
+                <h3 style="color: #a8b2d1;">Predictive Insights</h3>
+                <p>Applied data science techniques to identify trends and patterns, enabling match outcome predictions and deeper understanding of game dynamics.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-info">
+            <h2>CONTACT ME ON:</h2>
+            
+            <div class="contact-block">
+                <h3>GITHUB</h3>
+                <a href="#">(LINK)</a>
+            </div>
+            
+            <div class="contact-block">
+                <h3>EMAIL</h3>
+                <a href="mailto:hello@reallygreatsite.com" class="cyan-text">hello@reallygreatsite.com</a>
+            </div>
+            
+            <div class="contact-block">
+                <h3>SOCIAL</h3>
+                <div class="social-icons">
+                    <div class="icon">M</div>
+                    <div class="icon">P</div>
+                    <div class="icon">T</div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-visual">
+            <div class="donut-chart"></div>
+        </div>
+    </section>
+
+</body>
+</html>
