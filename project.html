@@ -3,344 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jerein Sam Thomas | Projects Portfolio</title>
+    <title>Jerein Sam Thomas - Projects</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --bg-color: #0d1117;
-            --surface-color: #161b22;
-            --text-main: #e6edf3;
-            --text-muted: #8b949e;
-            --accent-blue: #2f81f7;
-            --accent-orange: #f78166;
-            --border-color: #30363d;
+            --bg-dark: #1e153a;
+            --bg-gradient: linear-gradient(135deg, #181028 0%, #291c52 50%, #15224a 100%);
+            --text-main: #ffffff;
+            --accent-purple: #9d4edd;
+            --accent-cyan: #00f5d4;
+            --card-bg: #ffffff;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
+            background: var(--bg-gradient);
             color: var(--text-main);
+            font-family: 'Roboto Mono', monospace;
             line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-top: 100px;
         }
 
-        /* Navigation */
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
+
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 5%;
-            background-color: rgba(13, 17, 23, 0.9);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(30, 21, 58, 0.95);
+            padding: 20px 10%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-main);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif; font-weight: bold;
+            color: var(--text-main); text-decoration: none;
+            font-size: 1.2rem; letter-spacing: 1px;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
+        .nav-links { display: flex; gap: 30px; }
         .nav-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
+            color: var(--text-main); text-decoration: none;
+            font-size: 0.9rem; text-transform: uppercase;
+            letter-spacing: 1px; transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--accent-cyan); }
+
+        .page-header {
+            text-align: center;
+            padding: 40px 10% 20px;
         }
 
-        .nav-links a:hover {
-            color: var(--accent-blue);
+        .page-header h1 {
+            font-size: 3rem;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
         }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            padding: 40px 10% 80px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 5%;
-            background: radial-gradient(circle at center, #1f2937 0%, var(--bg-color) 70%);
-            position: relative;
         }
 
-        .hero-tags {
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            color: var(--accent-blue);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--accent-purple);
+            transition: background 0.3s ease;
         }
 
-        .hero h1 {
-            font-size: 4.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 245, 212, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 2rem;
-        }
+        .project-card:hover::before { background: var(--accent-cyan); }
 
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background-color: var(--accent-blue);
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #1f6feb;
-        }
-
-        /* Projects Section */
-        .projects {
-            padding: 5rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            padding-top: 4rem; /* Added padding to clear the fixed nav bar */
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-blue);
-        }
-
-        .project-number {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: monospace;
-            margin-bottom: 0.5rem;
-        }
-
-        .card h3 {
+        .project-card h2 {
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 15px;
+            color: #fff;
         }
 
-        .card .subtitle {
-            color: var(--accent-orange);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card p {
-            color: var(--text-muted);
+        .project-card p {
             font-size: 0.95rem;
-            margin-bottom: 1.5rem;
+            color: #d1d5db;
+            margin-bottom: 25px;
+            flex-grow: 1;
         }
 
-        .tags {
+        .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 10px;
+            margin-bottom: 25px;
         }
 
-        .tag {
-            background-color: rgba(47, 129, 247, 0.1);
-            color: var(--accent-blue);
-            padding: 0.2rem 0.6rem;
+        .tech-tag {
+            background: rgba(157, 78, 221, 0.2);
+            color: var(--accent-cyan);
+            padding: 5px 10px;
             border-radius: 4px;
             font-size: 0.8rem;
-            font-family: monospace;
+            border: 1px solid rgba(157, 78, 221, 0.4);
         }
 
-        /* Contact Section */
-        .contact {
-            padding: 8rem 5%;
+        .btn-view {
+            display: inline-block;
+            padding: 10px 20px;
+            background: transparent;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border: 1px solid var(--accent-cyan);
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s ease;
             text-align: center;
-            background-color: var(--surface-color);
-            border-top: 1px solid var(--border-color);
         }
 
-        .contact h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
+        .btn-view:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .nav-links { display: none; }
+            nav { flex-direction: column; padding: 15px; }
+            .nav-links { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+            .page-header h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" class="logo">JST.</a>
+        <a href="index.html" class="nav-logo">JST.</a>
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <a href="projects.html" style="color: var(--accent-blue);">Projects</a>
+            <a href="projects.html" style="color: var(--accent-cyan);">Projects</a>
             <a href="tactics.html">Tactical Analyser</a>
-            <a href="index.html#analysis">Match Analyzer</a>
+            <a href="analysis.html">Match Analyzer</a>
             <a href="index.html#contact">Contact</a>
         </div>
     </nav>
 
-    <section id="projects" class="projects">
-        <div class="section-header">
-            <h2>Featured Projects</h2>
-            <p>Six distinct projects across sports tech, data science, and analytics.</p>
+    <div class="page-header">
+        <h1>PROJECT PORTFOLIO</h1>
+        <p>A collection of my work in Data Science, Machine Learning, and Football Analytics.</p>
+    </div>
+
+    <div class="projects-grid">
+        
+        <div class="project-card">
+            <h2>TACTICS OS</h2>
+            <p>A professional-grade interactive football analysis suite. Features dynamic formation builders, playing style evaluations, and a real-time 2D movement visualization engine for tactical mastery.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">HTML5 Canvas</span>
+                <span class="tech-tag">Data Viz</span>
+            </div>
+            <a href="tactics.html" class="btn-view">Launch TACTICS OS</a>
         </div>
 
-        <div class="grid">
-            <div class="card">
-                <div class="project-number">Project 01</div>
-                <h3>Football Match Prediction</h3>
-                <div class="subtitle">Machine Learning Forecasting</div>
-                <p>Developed a predictive framework to forecast football match outcomes using historical data and team performance metrics. Scheduled for international conference presentation.</p>
-                <div class="tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Machine Learning</span>
-                    <span class="tag">Data Analysis</span>
-                </div>
+        <div class="project-card">
+            <h2>ISL Match Prediction Model</h2>
+            <p>Published research analyzing 1,100 Indian Super League matches (2015-2024) across 37 feature variables. Applied multiple ML algorithms, with Logistic Regression achieving 82.4% accuracy to forecast outcomes based on tactical formations and player metrics.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Machine Learning</span>
+                <span class="tech-tag">Logistic Regression</span>
             </div>
-
-            <div class="card">
-                <div class="project-number">Project 02</div>
-                <h3>Tactical Diagram Renderer</h3>
-                <div class="subtitle">Interactive football tactics builder</div>
-                <p>An interactive tool for coaches and analysts to draw, animate, and share tactical formations and play diagrams with full code export capabilities.</p>
-                <div class="tags">
-                    <span class="tag">TypeScript</span>
-                    <span class="tag">Canvas API</span>
-                    <span class="tag">Node.js</span>
-                    <span class="tag">SVG</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="project-number">Project 03</div>
-                <h3>Mask-RCNN Instance Segmentation</h3>
-                <div class="subtitle">Computer Vision Pipeline</div>
-                <p>Implemented a computer vision pipeline utilizing the Mask-RCNN architecture for precise object detection and instance segmentation, documented in a comprehensive technical report.</p>
-                <div class="tags">
-                    <span class="tag">Computer Vision</span>
-                    <span class="tag">Deep Learning</span>
-                    <span class="tag">Python</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="project-number">Project 04</div>
-                <h3>GenSons Store</h3>
-                <div class="subtitle">E-commerce with on-chain inventory</div>
-                <p>A decentralised e-commerce experience built on the Internet Computer, featuring on-chain inventory management and crypto-native checkout flows.</p>
-                <div class="tags">
-                    <span class="tag">Motoko</span>
-                    <span class="tag">React</span>
-                    <span class="tag">ICP</span>
-                    <span class="tag">Internet Identity</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="project-number">Project 05</div>
-                <h3>Players Rendition</h3>
-                <div class="subtitle">3D athlete profile visualiser</div>
-                <p>A WebGL-powered tool that renders 3D player models and overlays biometric stats, injury maps, and performance trends for sports science teams.</p>
-                <div class="tags">
-                    <span class="tag">WebGL</span>
-                    <span class="tag">React</span>
-                    <span class="tag">REST API</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="project-number">Project 06</div>
-                <h3>Football Stats Aggregator</h3>
-                <div class="subtitle">Multi-league data pipeline</div>
-                <p>An automated data pipeline that scrapes, normalises, and serves football statistics from multiple global leagues via a unified GraphQL API.</p>
-                <div class="tags">
-                    <span class="tag">GraphQL</span>
-                    <span class="tag">PostgreSQL</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">Docker</span>
-                </div>
-            </div>
+            <a href="ISL_Paper_v13.pdf" target="_blank" class="btn-view">Read Research Paper</a>
         </div>
-    </section>
 
-    <section id="contact" class="contact">
-        <h2>Let's build something together</h2>
-        <p>Open to collaboration, freelance work, and full-time opportunities in Data Science & Sports Tech.</p>
-        <a href="mailto:jereinsamthomas1009@gmail.com" class="btn">Contact Me</a>
-    </section>
+        <div class="project-card">
+            <h2>Instance Segmentation with Mask-RCNN</h2>
+            <p>Authored a comprehensive technical report and implemented a computer vision pipeline utilizing the Mask-RCNN architecture for precise object detection and instance segmentation.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Computer Vision</span>
+                <span class="tech-tag">Deep Learning</span>
+                <span class="tech-tag">Python</span>
+            </div>
+            <a href="#" class="btn-view">View Details</a>
+        </div>
 
-    <footer>
-        <p>&copy; 2026 Jerein Sam Thomas. Built with love using caffeine.ai</p>
-    </footer>
+    </div>
 
 </body>
 </html>
