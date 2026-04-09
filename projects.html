@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jerein Sam Thomas - Projects</title>
+    <title>Jerein Sam Thomas - Data Science Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* =========================================
+           1. GLOBAL VARIABLES & RESET
+        ========================================= */
         :root {
             --bg-dark: #1e153a;
             --bg-gradient: linear-gradient(135deg, #181028 0%, #291c52 50%, #15224a 100%);
             --text-main: #ffffff;
+            --text-muted: #d1d5db;
             --accent-purple: #9d4edd;
             --accent-cyan: #00f5d4;
-            --card-bg: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.03);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             background: var(--bg-gradient);
@@ -27,7 +35,8 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            padding-top: 100px;
+            padding-top: 80px;
+            scroll-behavior: smooth;
         }
 
         h1, h2, h3 {
@@ -35,8 +44,12 @@
             letter-spacing: 2px;
         }
 
+        /* =========================================
+           2. NAVIGATION BAR
+        ========================================= */
         nav {
-            position: fixed; top: 0; left: 0; width: 100%;
+            position: fixed;
+            top: 0; left: 0; width: 100%;
             background: rgba(30, 21, 58, 0.95);
             padding: 20px 10%;
             display: flex; justify-content: space-between; align-items: center;
@@ -58,27 +71,72 @@
         }
         .nav-links a:hover { color: var(--accent-cyan); }
 
-        .page-header {
-            text-align: center;
-            padding: 40px 10% 20px;
+        /* =========================================
+           3. GENERAL SECTION LAYOUT
+        ========================================= */
+        section {
+            min-height: calc(100vh - 80px);
+            padding: 80px 10%;
+            display: flex; flex-direction: column; justify-content: center;
         }
 
-        .page-header h1 {
-            font-size: 3rem;
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
             color: var(--accent-cyan);
             margin-bottom: 10px;
             text-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
         }
 
-        .projects-grid {
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+        }
+
+        /* =========================================
+           4. HERO SECTION
+        ========================================= */
+        #hero {
+            position: relative; text-align: left;
+            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+
+        #hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 21, 58, 0.85) 0%, rgba(21, 34, 74, 0.7) 100%);
+            z-index: 1;
+        }
+
+        .hero-title, .hero-subtitle { position: relative; z-index: 2; }
+        .hero-title { font-size: 4rem; line-height: 1.1; text-transform: uppercase; text-shadow: 2px 4px 10px rgba(0,0,0,0.5); }
+        .hero-subtitle { font-size: 1.5rem; margin-top: 10px; letter-spacing: 5px; color: var(--accent-cyan); }
+
+        /* =========================================
+           5. ABOUT SECTION
+        ========================================= */
+        #about { flex-direction: row; align-items: center; gap: 50px; min-height: 60vh; }
+        .about-visual { flex: 1; display: flex; justify-content: center; }
+        .circle-graphic { 
+            width: 300px; height: 300px; border-radius: 50%; 
+            background: linear-gradient(45deg, #dfa2ff, #7b2cbf); 
+            box-shadow: -20px 0px 0px 10px rgba(76, 29, 149, 0.5); 
+        }
+        .about-text { flex: 1; }
+        .about-text h2 { margin-bottom: 20px; font-size: 2rem; color: var(--accent-cyan); }
+
+        /* =========================================
+           6. GRID CARDS (Used for Projects & Analysis)
+        ========================================= */
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px;
-            padding: 40px 10% 80px;
         }
 
-        .project-card {
-            background: rgba(255, 255, 255, 0.03);
+        .card {
+            background: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             padding: 30px;
@@ -89,7 +147,7 @@
             flex-direction: column;
         }
 
-        .project-card::before {
+        .card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 4px;
@@ -97,23 +155,32 @@
             transition: background 0.3s ease;
         }
 
-        .project-card:hover {
+        .card:hover {
             transform: translateY(-10px);
             border-color: rgba(0, 245, 212, 0.4);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .project-card:hover::before { background: var(--accent-cyan); }
+        .card:hover::before { background: var(--accent-cyan); }
 
-        .project-card h2 {
+        .card-number {
+            font-size: 0.8rem;
+            color: var(--accent-purple);
+            font-family: monospace;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .card h3 {
             font-size: 1.5rem;
             margin-bottom: 15px;
             color: #fff;
         }
 
-        .project-card p {
+        .card p {
             font-size: 0.95rem;
-            color: #d1d5db;
+            color: var(--text-muted);
             margin-bottom: 25px;
             flex-grow: 1;
         }
@@ -136,7 +203,7 @@
 
         .btn-view {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 12px 20px;
             background: transparent;
             color: var(--accent-cyan);
             text-decoration: none;
@@ -145,6 +212,7 @@
             font-weight: bold;
             transition: all 0.3s ease;
             text-align: center;
+            width: 100%;
         }
 
         .btn-view:hover {
@@ -152,67 +220,198 @@
             color: var(--bg-dark);
         }
 
+        /* =========================================
+           7. CONTACT SECTION
+        ========================================= */
+        #contact { flex-direction: row; align-items: center; gap: 50px; background: rgba(0,0,0,0.2); }
+        .contact-info { flex: 1; }
+        .contact-info h2 { margin-bottom: 40px; color: var(--accent-cyan); font-size: 2.5rem; }
+        .contact-block { margin-bottom: 30px; }
+        
+        .contact-block h3 { font-size: 1.2rem; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
+        .contact-block h3 i { font-size: 1.5rem; color: var(--accent-cyan); }
+        
+        .contact-block a { color: var(--accent-purple); text-decoration: none; transition: color 0.3s; margin-left: 35px; display: block; }
+        .contact-block a:hover { color: var(--accent-cyan); }
+        
+        .contact-visual { flex: 1; display: flex; justify-content: center; }
+        
+        @keyframes spinDonut {
+            0% { transform: rotate(45deg); }
+            100% { transform: rotate(405deg); }
+        }
+
+        .donut-chart { 
+            width: 250px; height: 250px; border-radius: 50%; 
+            border: 40px solid; border-color: #00f5d4 #00f5d4 #9d4edd #9d4edd; 
+            animation: spinDonut 12s linear infinite; 
+            box-shadow: 0 0 20px rgba(0, 245, 212, 0.2); 
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.4);
+        }
+
+        /* =========================================
+           8. RESPONSIVE DESIGN
+        ========================================= */
         @media (max-width: 768px) {
-            nav { flex-direction: column; padding: 15px; }
+            nav { flex-direction: column; padding: 15px; height: auto; }
             .nav-links { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
-            .page-header h1 { font-size: 2.2rem; }
+            #about, #contact { flex-direction: column; }
+            .hero-title { font-size: 2.5rem; }
+            .donut-chart { margin: 0 auto; }
+            .contact-block a { margin-left: 0; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" class="nav-logo">JST.</a>
+        <a href="#hero" class="nav-logo">JST.</a>
         <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="projects.html" style="color: var(--accent-cyan);">Projects</a>
-            <a href="tactics.html">Tactical Analyser</a>
-            <a href="analysis.html">Match Analyzer</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="#hero">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#analysis">Match Analyzer</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
-    <div class="page-header">
-        <h1>PROJECT PORTFOLIO</h1>
-        <p>A collection of my work in Data Science, Machine Learning, and Football Analytics.</p>
-    </div>
+    <section id="hero">
+        <h1 class="hero-title">JEREIN SAM<br>THOMAS</h1>
+        <div class="hero-subtitle">DATA SCIENCE PORTFOLIO</div>
+    </section>
 
-    <div class="projects-grid">
+    <section id="about">
+        <div class="about-visual">
+            <div class="circle-graphic"></div>
+        </div>
+        <div class="about-text">
+            <h2>ABOUT ME</h2>
+            <p>I am a passionate and dedicated MSc Applied Data Science student with a strong foundation in physics and a growing expertise in data-driven problem solving. I completed my Bachelor's degree in Physics from Mar Thoma College, Thiruvalla, and I am currently pursuing my Master's degree in Applied Data Science at SRM University, where I have developed skills in machine learning, data analysis, and statistical modeling.</p>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">PROJECT PORTFOLIO</h2>
+        <p class="section-subtitle">A collection of my work in Data Science, Machine Learning, and Football Analytics.</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-number">Project 01</div>
+                <h3>TACTICS OS</h3>
+                <p>A professional-grade interactive football analysis suite. Features dynamic formation builders, playing style evaluations, and a real-time 2D movement visualization engine for tactical mastery.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">HTML5 Canvas</span>
+                    <span class="tech-tag">Data Viz</span>
+                </div>
+                <a href="tactics.html" target="_blank" class="btn-view">Launch TACTICS OS</a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">Project 02</div>
+                <h3>ISL Match Prediction Model</h3>
+                <p>Published research analyzing 1,100 Indian Super League matches across 37 feature variables. Applied multiple ML algorithms, with Logistic Regression achieving 82.4% accuracy to forecast outcomes.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Machine Learning</span>
+                    <span class="tech-tag">Logistic Regression</span>
+                </div>
+                <a href="isl-paper.html" target="_blank" class="btn-view">Read Research Paper</a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">Project 03</div>
+                <h3>Mask-RCNN Segmentation</h3>
+                <p>Authored a comprehensive technical report and implemented a computer vision pipeline utilizing the Mask-RCNN architecture for precise object detection and instance segmentation.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Computer Vision</span>
+                    <span class="tech-tag">Deep Learning</span>
+                    <span class="tech-tag">Python</span>
+                </div>
+                <a href="#" class="btn-view">View Details</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="analysis">
+        <h2 class="section-title">MATCH ANALYSIS</h2>
+        <p class="section-subtitle">Data-driven breakdowns, tactical reports, and performance metrics.</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-number">Analysis 01</div>
+                <h3>TACTICS OS Simulation</h3>
+                <p>A live tactical sandbox powered by the TACTICS OS engine. Simulate matchups by configuring formations, defining playing styles, and assigning specific player roles to visualize movement and pressing lines.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Live Simulation</span>
+                    <span class="tech-tag">Tactical Setup</span>
+                </div>
+                <a href="tactics.html" target="_blank" class="btn-view">Launch Match Analyzer</a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">Analysis 02</div>
+                <h3>Midfield Pivot Evaluation</h3>
+                <p>Evaluated the effectiveness of a double pivot system using tracking data. Generated heatmaps for progressive carries and calculated pass completion rates under high pressing scenarios.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Heatmaps</span>
+                    <span class="tech-tag">Player Tracking</span>
+                </div>
+                <a href="#" class="btn-view">View Details</a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">Analysis 03</div>
+                <h3>Set-Piece Vulnerabilities</h3>
+                <p>A video and data-backed analysis breaking down corner kick routines. Identified structural flaws in zonal marking strategies that led to high-quality chances for the opposition.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Set-Pieces</span>
+                    <span class="tech-tag">Video Analysis</span>
+                </div>
+                <a href="#" class="btn-view">View Details</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-info">
+            <h2>CONTACT ME ON:</h2>
+            
+            <div class="contact-block">
+                <h3><i class="fa-solid fa-envelope"></i>EMAIL</h3>
+                <a href="mailto:jereinsamthomas1009@gmail.com">jereinsamthomas1009@gmail.com</a>
+            </div>
+
+            <div class="contact-block">
+                <h3><i class="fa-brands fa-github"></i>GITHUB</h3>
+                <a href="https://github.com/jereinsamthomas" target="_blank">github.com/jereinsamthomas</a>
+            </div>
+            
+            <div class="contact-block">
+                <h3><i class="fa-brands fa-linkedin"></i>LINKEDIN</h3>
+                <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a75a2a7" target="_blank">linkedin.com/in/jerein-sam-thomas</a>
+            </div>
+
+            <div class="contact-block">
+                <h3><i class="fa-brands fa-instagram"></i>INSTAGRAM</h3>
+                <a href="https://www.instagram.com/jerein_sam_thomas" target="_blank">@jerein_sam_thomas</a>
+            </div>
+        </div>
         
-        <div class="project-card">
-            <h2>TACTICS OS</h2>
-            <p>A professional-grade interactive football analysis suite. Features dynamic formation builders, playing style evaluations, and a real-time 2D movement visualization engine for tactical mastery.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">HTML5 Canvas</span>
-                <span class="tech-tag">Data Viz</span>
-            </div>
-            <a href="tactics.html" class="btn-view">Launch TACTICS OS</a>
+        <div class="contact-visual">
+            <div class="donut-chart"></div>
         </div>
+    </section>
 
-        <div class="project-card">
-            <h2>ISL Match Prediction Model</h2>
-            <p>Published research analyzing 1,100 Indian Super League matches (2015-2024) across 37 feature variables. Applied multiple ML algorithms, with Logistic Regression achieving 82.4% accuracy to forecast outcomes based on tactical formations and player metrics.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Machine Learning</span>
-                <span class="tech-tag">Logistic Regression</span>
-            </div>
-            <a href="ISL_Paper_v13.pdf" target="_blank" class="btn-view">Read Research Paper</a>
-        </div>
-
-        <div class="project-card">
-            <h2>Instance Segmentation with Mask-RCNN</h2>
-            <p>Authored a comprehensive technical report and implemented a computer vision pipeline utilizing the Mask-RCNN architecture for precise object detection and instance segmentation.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Computer Vision</span>
-                <span class="tech-tag">Deep Learning</span>
-                <span class="tech-tag">Python</span>
-            </div>
-            <a href="#" class="btn-view">View Details</a>
-        </div>
-
-    </div>
+    <footer>
+        <p>&copy; 2026 Jerein Sam Thomas. Built with love using caffeine.ai</p>
+    </footer>
 
 </body>
 </html>
