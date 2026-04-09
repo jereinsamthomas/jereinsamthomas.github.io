@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jerein Sam Thomas | Modern Tech projects</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --surface-color: #161b22;
+            --text-main: #e6edf3;
+            --text-muted: #8b949e;
+            --accent-blue: #2f81f7;
+            --accent-orange: #f78166;
+            --border-color: #30363d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: rgba(13, 17, 23, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            background: radial-gradient(circle at center, #1f2937 0%, var(--bg-color) 70%);
+            position: relative;
+        }
+
+        .hero-tags {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1f6feb;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+        }
+
+        .project-number {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .subtitle {
+            color: var(--accent-orange);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background-color: rgba(47, 129, 247, 0.1);
+            color: var(--accent-blue);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: monospace;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 5%;
+            text-align: center;
+            background-color: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">&lt;/&gt; Portfolio</a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#projects">Work</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-tags">Tech · Football · Innovation</div>
+        <h1>Modern Tech<br>Portfolio</h1>
+        <p>A showcase of innovative projects spanning football analytics, tactical tooling, IoT systems, and the decentralised web.</p>
+        <a href="#projects" class="btn">Explore Projects &rarr;</a>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="section-header">
+            <h2>Featured Projects</h2>
+            <p>Six distinct projects across sports tech, infrastructure, and the decentralised web.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="project-number">Project 01</div>
+                <h3>Football Analytics Platform</h3>
+                <div class="subtitle">Real-time match data visualisation</div>
+                <p>A comprehensive platform for analysing football match statistics, player performance metrics, and team dynamics using advanced data visualisation.</p>
+                <div class="tags">
+                    <span class="tag">React</span>
+                    <span class="tag">D3.js</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">WebSocket</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="project-number">Project 02</div>
+                <h3>Tactical Diagram Renderer</h3>
+                <div class="subtitle">Interactive football tactics builder</div>
+                <p>An interactive tool for coaches and analysts to draw, animate, and share tactical formations and play diagrams with full code export capabilities.</p>
+                <div class="tags">
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">Canvas API</span>
+                    <span class="tag">Node.js</span>
+                    <span class="tag">SVG</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="project-number">Project 03</div>
+                <h3>Sensor Fusion Engine</h3>
+                <div class="subtitle">IoT data aggregation at scale</div>
+                <p>A distributed system for ingesting and processing multi-source sensor data streams in real-time, powering predictive maintenance pipelines.</p>
+                <div class="tags">
+                    <span class="tag">Rust</span>
+                    <span class="tag">Kafka</span>
+                    <span class="tag">InfluxDB</span>
+                    <span class="tag">gRPC</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="project-number">Project 04</div>
+                <h3>GenSons Store</h3>
+                <div class="subtitle">E-commerce with on-chain inventory</div>
+                <p>A decentralised e-commerce experience built on the Internet Computer, featuring on-chain inventory management and crypto-native checkout flows.</p>
+                <div class="tags">
+                    <span class="tag">Motoko</span>
+                    <span class="tag">React</span>
+                    <span class="tag">ICP</span>
+                    <span class="tag">Internet Identity</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="project-number">Project 05</div>
+                <h3>Players Rendition</h3>
+                <div class="subtitle">3D athlete profile visualiser</div>
+                <p>A WebGL-powered tool that renders 3D player models and overlays biometric stats, injury maps, and performance trends for sports science teams.</p>
+                <div class="tags">
+                    <span class="tag">WebGL</span>
+                    <span class="tag">React</span>
+                    <span class="tag">REST API</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="project-number">Project 06</div>
+                <h3>Football Stats Aggregator</h3>
+                <div class="subtitle">Multi-league data pipeline</div>
+                <p>An automated data pipeline that scrapes, normalises, and serves football statistics from multiple global leagues via a unified GraphQL API.</p>
+                <div class="tags">
+                    <span class="tag">GraphQL</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Docker</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Let's build something together</h2>
+        <p>Open to collaboration, freelance work, and full-time opportunities in Data Science & Sports Tech.</p>
+        <a href="mailto:your.email@example.com" class="btn">Contact Me</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Jerein Sam Thomas. Built with love using caffeine.ai</p>
+    </footer>
+
+</body>
+</html>
