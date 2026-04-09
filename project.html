@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jerein Sam Thomas | Modern Tech projects</title>
+    <title>Jerein Sam Thomas | Projects Portfolio</title>
     <style>
         :root {
             --bg-color: #0d1117;
@@ -132,6 +132,7 @@
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
+            padding-top: 4rem; /* Added padding to clear the fixed nav bar */
         }
 
         .section-header h2 {
@@ -237,38 +238,32 @@
 <body>
 
     <nav>
-        <a href="#" class="logo">&lt;/&gt; Portfolio</a>
+        <a href="index.html" class="logo">JST.</a>
         <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#projects">Work</a>
-            <a href="#contact">Contact</a>
+            <a href="index.html">Home</a>
+            <a href="projects.html" style="color: var(--accent-blue);">Projects</a>
+            <a href="tactics.html">Tactical Analyser</a>
+            <a href="index.html#analysis">Match Analyzer</a>
+            <a href="index.html#contact">Contact</a>
         </div>
     </nav>
-
-    <section id="home" class="hero">
-        <div class="hero-tags">Tech · Football · Innovation</div>
-        <h1>Modern Tech<br>Portfolio</h1>
-        <p>A showcase of innovative projects spanning football analytics, tactical tooling, IoT systems, and the decentralised web.</p>
-        <a href="#projects" class="btn">Explore Projects &rarr;</a>
-    </section>
 
     <section id="projects" class="projects">
         <div class="section-header">
             <h2>Featured Projects</h2>
-            <p>Six distinct projects across sports tech, infrastructure, and the decentralised web.</p>
+            <p>Six distinct projects across sports tech, data science, and analytics.</p>
         </div>
 
         <div class="grid">
             <div class="card">
                 <div class="project-number">Project 01</div>
-                <h3>Football Analytics Platform</h3>
-                <div class="subtitle">Real-time match data visualisation</div>
-                <p>A comprehensive platform for analysing football match statistics, player performance metrics, and team dynamics using advanced data visualisation.</p>
+                <h3>Football Match Prediction</h3>
+                <div class="subtitle">Machine Learning Forecasting</div>
+                <p>Developed a predictive framework to forecast football match outcomes using historical data and team performance metrics. Scheduled for international conference presentation.</p>
                 <div class="tags">
-                    <span class="tag">React</span>
-                    <span class="tag">D3.js</span>
                     <span class="tag">Python</span>
-                    <span class="tag">WebSocket</span>
+                    <span class="tag">Machine Learning</span>
+                    <span class="tag">Data Analysis</span>
                 </div>
             </div>
 
@@ -287,14 +282,13 @@
 
             <div class="card">
                 <div class="project-number">Project 03</div>
-                <h3>Sensor Fusion Engine</h3>
-                <div class="subtitle">IoT data aggregation at scale</div>
-                <p>A distributed system for ingesting and processing multi-source sensor data streams in real-time, powering predictive maintenance pipelines.</p>
+                <h3>Mask-RCNN Instance Segmentation</h3>
+                <div class="subtitle">Computer Vision Pipeline</div>
+                <p>Implemented a computer vision pipeline utilizing the Mask-RCNN architecture for precise object detection and instance segmentation, documented in a comprehensive technical report.</p>
                 <div class="tags">
-                    <span class="tag">Rust</span>
-                    <span class="tag">Kafka</span>
-                    <span class="tag">InfluxDB</span>
-                    <span class="tag">gRPC</span>
+                    <span class="tag">Computer Vision</span>
+                    <span class="tag">Deep Learning</span>
+                    <span class="tag">Python</span>
                 </div>
             </div>
 
@@ -341,7 +335,7 @@
     <section id="contact" class="contact">
         <h2>Let's build something together</h2>
         <p>Open to collaboration, freelance work, and full-time opportunities in Data Science & Sports Tech.</p>
-        <a href="mailto:your.email@example.com" class="btn">Contact Me</a>
+        <a href="mailto:jereinsamthomas1009@gmail.com" class="btn">Contact Me</a>
     </section>
 
     <footer>
