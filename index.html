@@ -7,6 +7,8 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         /* =========================================
            1. GLOBAL VARIABLES & RESET
@@ -33,8 +35,8 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            padding-top: 80px; /* Space for fixed navigation bar */
-            scroll-behavior: smooth; /* Added for smooth scrolling */
+            padding-top: 80px;
+            scroll-behavior: smooth;
         }
 
         h1, h2, h3 {
@@ -47,45 +49,27 @@
         ========================================= */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            top: 0; left: 0; width: 100%;
             background: rgba(30, 21, 58, 0.95);
             padding: 20px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .nav-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif; font-weight: bold;
+            color: var(--text-main); text-decoration: none;
+            font-size: 1.2rem; letter-spacing: 1px;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
+        .nav-links { display: flex; gap: 30px; }
         .nav-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
+            color: var(--text-main); text-decoration: none;
+            font-size: 0.9rem; text-transform: uppercase;
+            letter-spacing: 1px; transition: color 0.3s ease;
         }
-
-        .nav-links a:hover {
-            color: var(--accent-cyan);
-        }
+        .nav-links a:hover { color: var(--accent-cyan); }
 
         /* =========================================
            3. GENERAL SECTION LAYOUT
@@ -93,49 +77,27 @@
         section {
             min-height: calc(100vh - 80px);
             padding: 60px 10%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            display: flex; flex-direction: column; justify-content: center;
         }
 
         /* =========================================
-           4. HERO SECTION (Tech Background)
+           4. HERO SECTION
         ========================================= */
         #hero {
-            position: relative;
-            text-align: left;
-            /* Background Image */
+            position: relative; text-align: left;
             background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-size: cover; background-position: center; background-attachment: fixed;
         }
 
         #hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background: linear-gradient(135deg, rgba(30, 21, 58, 0.85) 0%, rgba(21, 34, 74, 0.7) 100%);
             z-index: 1;
         }
 
-        .hero-title, .hero-subtitle {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-title { 
-            font-size: 4rem; 
-            line-height: 1.1; 
-            text-transform: uppercase; 
-            text-shadow: 2px 4px 10px rgba(0,0,0,0.5); 
-        }
-        .hero-subtitle { 
-            font-size: 1.5rem; 
-            margin-top: 10px; 
-            letter-spacing: 5px; 
-            color: var(--accent-cyan); 
-        }
+        .hero-title, .hero-subtitle { position: relative; z-index: 2; }
+        .hero-title { font-size: 4rem; line-height: 1.1; text-transform: uppercase; text-shadow: 2px 4px 10px rgba(0,0,0,0.5); }
+        .hero-subtitle { font-size: 1.5rem; margin-top: 10px; letter-spacing: 5px; color: var(--accent-cyan); }
 
         /* =========================================
            5. ABOUT SECTION
@@ -157,48 +119,25 @@
         .card-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
 
         .card { 
-            background-color: var(--card-bg); 
-            color: #000; 
-            width: 280px; 
-            display: flex; 
-            flex-direction: column; 
+            background-color: var(--card-bg); color: #000; width: 280px; 
+            display: flex; flex-direction: column; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
-            border-radius: 8px; 
-            overflow: hidden;
+            border-radius: 8px; overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px); 
-            box-shadow: 0 15px 40px rgba(0, 245, 212, 0.2); 
-        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0, 245, 212, 0.2); }
 
-        .card-img { 
-            height: 200px; 
-            background-size: cover; 
-            background-position: center; 
-            position: relative;
-        }
-
-        /* Images for Cards */
+        .card-img { height: 200px; background-size: cover; background-position: center; position: relative; }
         .card-img.project-img { background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop'); }
-        .card-img.tactics-img { background-image: url('https://images.unsplash.com/photo-1508344928928-7137b29de216?q=80&w=2070&auto=format&fit=crop'); }
+        .card-img.tactics-img { background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070&auto=format&fit=crop'); }
         .card-img.analysis-img { background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop'); }
 
         .card-body { 
-            padding: 20px; 
-            text-align: center; 
-            font-family: 'Roboto Mono', monospace; 
-            font-weight: bold; 
-            min-height: 80px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            background: #111827; 
-            color: #ffffff;
-            border-top: 2px solid var(--accent-purple);
+            padding: 20px; text-align: center; font-family: 'Roboto Mono', monospace; 
+            font-weight: bold; min-height: 80px; display: flex; align-items: center; justify-content: center;
+            background: #111827; color: #ffffff; border-top: 2px solid var(--accent-purple);
         }
-
         .card-body.red-text { color: #ff4141; border-top-color: #ff4141; }
         .card-body.blue-text { color: var(--accent-cyan); border-top-color: var(--accent-cyan); }
 
@@ -211,8 +150,7 @@
         .chart-placeholder { 
             width: 100%; height: 300px; 
             background: linear-gradient(to top, rgba(157, 78, 221, 0.5), transparent); 
-            border-left: 2px solid var(--accent-cyan); 
-            border-bottom: 2px solid var(--accent-cyan); 
+            border-left: 2px solid var(--accent-cyan); border-bottom: 2px solid var(--accent-cyan); 
         }
         .analysis-right { flex: 1; display: flex; flex-direction: column; gap: 20px; }
         .analysis-box { border: 1px solid rgba(255, 255, 255, 0.3); padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;}
@@ -220,29 +158,40 @@
         .analysis-box p { font-size: 0.9rem; }
 
         /* =========================================
-           8. CONTACT SECTION
+           8. CONTACT SECTION (With Icons & Animation)
         ========================================= */
         #contact { flex-direction: row; align-items: center; gap: 50px; }
         .contact-info { flex: 1; }
         .contact-info h2 { margin-bottom: 40px; color: var(--accent-cyan); }
         .contact-block { margin-bottom: 30px; }
-        .contact-block h3 { font-size: 1.2rem; margin-bottom: 5px; }
-        .contact-block a { color: var(--accent-purple); text-decoration: none; transition: color 0.3s; }
+        
+        .contact-block h3 { font-size: 1.2rem; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
+        .contact-block h3 i { font-size: 1.5rem; color: var(--accent-cyan); }
+        
+        .contact-block a { color: var(--accent-purple); text-decoration: none; transition: color 0.3s; margin-left: 35px; display: block; }
         .contact-block a:hover { color: var(--accent-cyan); }
-        .social-icons { display: flex; gap: 15px; margin-top: 10px; }
-        .icon { 
-            width: 30px; height: 30px; border: 1px solid var(--accent-purple); 
-            border-radius: 50%; display: flex; justify-content: center; 
-            align-items: center; color: var(--accent-purple); font-size: 0.8rem; 
-        }
+        
         .contact-visual { flex: 1; display: flex; justify-content: center; }
+        
+        /* Animation definition for the smooth spin */
+        @keyframes spinDonut {
+            0% { transform: rotate(45deg); }
+            100% { transform: rotate(405deg); } /* 45deg + 360deg for a seamless loop */
+        }
+
         .donut-chart { 
-            width: 250px; height: 250px; border-radius: 50%; border: 40px solid; 
-            border-color: #00f5d4 #00f5d4 #9d4edd #9d4edd; transform: rotate(45deg); 
+            width: 250px; 
+            height: 250px; 
+            border-radius: 50%; 
+            border: 40px solid; 
+            border-color: #00f5d4 #00f5d4 #9d4edd #9d4edd; 
+            /* Animation and subtle glow */
+            animation: spinDonut 12s linear infinite; 
+            box-shadow: 0 0 20px rgba(0, 245, 212, 0.2); 
         }
 
         /* =========================================
-           9. RESPONSIVE DESIGN (Mobile)
+           9. RESPONSIVE DESIGN
         ========================================= */
         @media (max-width: 768px) {
             nav { flex-direction: column; padding: 15px; height: auto; }
@@ -250,6 +199,7 @@
             #about, #analysis, #contact { flex-direction: column; }
             .hero-title { font-size: 2.5rem; }
             .chart-placeholder, .donut-chart { margin: 0 auto; }
+            .contact-block a { margin-left: 0; }
         }
     </style>
 </head>
@@ -260,6 +210,7 @@
         <div class="nav-links">
             <a href="#hero">Home</a>
             <a href="#content">Projects</a>
+            <a href="tactics.html">Tactical Analyser</a>
             <a href="#analysis">Match Analyzer</a>
             <a href="#contact">Contact</a>
         </div>
@@ -322,22 +273,28 @@
     <section id="contact">
         <div class="contact-info">
             <h2>CONTACT ME ON:</h2>
+            
             <div class="contact-block">
-                <h3>GITHUB</h3>
-                <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+                <h3><i class="fa-solid fa-envelope"></i>EMAIL</h3>
+                <a href="mailto:jereinsamthomas1009@gmail.com" class="cyan-text">jereinsamthomas1009@gmail.com</a>
             </div>
+
             <div class="contact-block">
-                <h3>EMAIL</h3>
-                <a href="mailto:your.email@example.com" class="cyan-text">your.email@example.com</a>
+                <h3><i class="fa-brands fa-github"></i>GITHUB</h3>
+                <a href="https://github.com/jereinsamthomas" target="_blank">github.com/jereinsamthomas</a>
             </div>
+            
             <div class="contact-block">
-                <h3>SOCIAL</h3>
-                <div class="social-icons">
-                    <div class="icon">in</div>
-                    <div class="icon">X</div>
-                </div>
+                <h3><i class="fa-brands fa-linkedin"></i>LINKEDIN</h3>
+                <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a75a2a7" target="_blank">linkedin.com/in/jerein-sam-thomas</a>
+            </div>
+
+            <div class="contact-block">
+                <h3><i class="fa-brands fa-instagram"></i>INSTAGRAM</h3>
+                <a href="https://www.instagram.com/jerein_sam_thomas" target="_blank">@jerein_sam_thomas</a>
             </div>
         </div>
+        
         <div class="contact-visual">
             <div class="donut-chart"></div>
         </div>
