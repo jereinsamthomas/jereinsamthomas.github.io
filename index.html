@@ -130,10 +130,7 @@
         .card-img { height: 200px; background-size: cover; background-position: center; position: relative; }
         
         .card-img.project-img { background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop'); }
-        
-        /* UPDATED: Path pointing to the Catapult image you download and add to GitHub */
-        .card-img.tactics-img { background-image: url('tactical-analysis.jpg'); }
-        
+        .card-img.tactics-img { background-image: url('tactical-analysis.jpg'); } /* Update image name if needed */
         .card-img.analysis-img { background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop'); }
 
         .card-body { 
@@ -145,7 +142,7 @@
         .card-body.blue-text { color: var(--accent-cyan); border-top-color: var(--accent-cyan); }
 
         /* =========================================
-           7. MATCH ANALYSIS SECTION
+           7. MATCH ANALYSIS SECTION (Preview)
         ========================================= */
         #analysis { flex-direction: row; gap: 40px; }
         .analysis-left { flex: 1; }
@@ -214,7 +211,7 @@
             <a href="#hero">Home</a>
             <a href="projects.html">Projects</a>
             <a href="tactics.html">Tactical Analyser</a>
-            <a href="#analysis">Match Analyzer</a>
+            <a href="analysis.html">Match Analyzer</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
@@ -247,7 +244,7 @@
                 <div class="card-body red-text">TACTICAL ANALYSER</div>
             </div>
             
-            <div class="card">
+            <div class="card" onclick="window.location.href='analysis.html';" style="cursor: pointer;">
                 <div class="card-img analysis-img"></div>
                 <div class="card-body blue-text">MATCH ANALYZER</div>
             </div>
