@@ -102,6 +102,7 @@
         
         .nav-links a:hover { 
             color: var(--accent-cyan); 
+            text-shadow: 0 0 8px rgba(79, 195, 247, 0.5);
         }
 
         /* =========================================
@@ -126,7 +127,7 @@
         }
 
         /* =========================================
-           4. HERO SECTION
+           4. HERO SECTION (Tech-Focused)
         ========================================= */
         #hero {
             position: relative; text-align: left;
@@ -142,13 +143,67 @@
 
         .hero-content { position: relative; z-index: 2; }
         
+        /* Tech Name Styling with Glitch Effect */
         .hero-title { 
-            font-size: 4.5rem; line-height: 1.1; 
-            text-transform: uppercase; 
-            background: linear-gradient(to right, #fff, var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 4rem; line-height: 1.1; 
+            font-family: 'Roboto Mono', monospace;
+            color: #fff;
             margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .tech-tag {
+            color: var(--accent-cyan);
+            opacity: 0.8;
+        }
+
+        .glitch-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch-wrapper::before,
+        .glitch-wrapper::after {
+            content: "Jerein_Sam_Thomas";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .glitch-wrapper::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--accent-purple);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        .glitch-wrapper::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--accent-cyan);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(15px, 9999px, 86px, 0); }
+            20% { clip: rect(67px, 9999px, 14px, 0); }
+            40% { clip: rect(32px, 9999px, 73px, 0); }
+            60% { clip: rect(98px, 9999px, 4px, 0); }
+            80% { clip: rect(2px, 9999px, 64px, 0); }
+            100% { clip: rect(45px, 9999px, 23px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            20% { clip: rect(3px, 9999px, 54px, 0); }
+            40% { clip: rect(82px, 9999px, 33px, 0); }
+            60% { clip: rect(28px, 9999px, 84px, 0); }
+            80% { clip: rect(12px, 9999px, 44px, 0); }
+            100% { clip: rect(55px, 9999px, 13px, 0); }
         }
         
         .hero-subtitle { 
@@ -199,7 +254,7 @@
         .about-text p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 20px;}
 
         /* =========================================
-           6. CONTENT / PROJECTS SECTION
+           6. CONTENT / PROJECTS SECTION (Linked)
         ========================================= */
         #content h2 { text-align: center; margin-bottom: 60px; font-size: 2.5rem; color: #fff; }
         .card-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
@@ -247,15 +302,15 @@
         .card-subtitle { font-size: 0.8rem; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px;}
         
         .card.red-theme .card-subtitle { color: var(--accent-purple); }
+        .card.blue-theme .card-subtitle { color: #82b1ff; }
 
         /* =========================================
-           7. MATCH ANALYSIS SECTION (Refined 4-3-3)
+           7. MATCH ANALYSIS SECTION
         ========================================= */
         #analysis { flex-direction: row; gap: 60px; align-items: center; }
         .analysis-left { flex: 1.2; }
         .analysis-left h2 { font-size: 2.5rem; margin-bottom: 30px; color: #fff; }
         
-        /* The Tactical Pitch */
         .tactical-pitch {
             position: relative;
             width: 100%; height: 450px;
@@ -281,7 +336,6 @@
             content: ''; position: absolute; top: 50%; left: 50%; width: 80px; height: 80px; border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 50%; transform: translate(-50%, -50%);
         }
 
-        /* Players */
         .player {
             position: absolute; width: 12px; height: 12px;
             background: var(--accent-cyan); border-radius: 50%;
@@ -302,7 +356,7 @@
             100% { transform: scale(2.5); opacity: 0; }
         }
 
-        /* Coordinated 4-3-3 Attacking Build-up Animation */
+        /* 4-3-3 Attacking Build-up Animation */
         .p-gk  { bottom: 5%; left: 50%; }
         .p-lb  { bottom: 20%; left: 15%; animation: shiftWide 6s infinite alternate ease-in-out; }
         .p-cb1 { bottom: 15%; left: 35%; animation: pushUp 6s infinite alternate ease-in-out; }
@@ -385,8 +439,9 @@
             .about-text h2 { background-position: center; }
             .analysis-box { border-left: none; border-top: 3px solid rgba(255,255,255,0.1); padding: 20px 0 0 0; }
             .analysis-box:hover { transform: translateY(-5px); border-top-color: var(--accent-cyan); }
-            .hero-title { font-size: 3rem; }
-            .hero-subtitle { font-size: 1rem; }
+            .hero-title { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 0.9rem; }
+            .glitch-wrapper::before, .glitch-wrapper::after { display: none; } /* Disable glitch on mobile for performance/readability */
         }
     </style>
 </head>
@@ -395,17 +450,19 @@
     <nav id="navbar">
         <a href="#hero" class="nav-logo">JST.</a>
         <div class="nav-links">
-            <a href="#hero">Home</a>
-            <a href="#about">About</a>
-            <a href="#content">Projects</a>
-            <a href="#analysis">Analysis</a>
+            <a href="projects.html">Projects</a>
+            <a href="tactics.html">Tactical Analysis</a>
+            <a href="ISL_Paper_v13.pdf.pdf" target="_blank">ISL Research</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <section id="hero">
         <div class="hero-content reveal">
-            <h1 class="hero-title">Jerein Sam<br>Thomas</h1>
+            <h1 class="hero-title">
+                <span class="tech-tag">&lt;</span><span class="glitch-wrapper">Jerein_Sam_Thomas</span><span class="tech-tag">/&gt;</span>
+            </h1>
+            <br>
             <div class="hero-subtitle">MSc Applied Data Science</div>
         </div>
     </section>
@@ -426,15 +483,16 @@
     <section id="content">
         <h2 class="reveal">TECHNICAL PORTFOLIO</h2>
         <div class="card-container">
-            <div class="card reveal" onclick="window.location.href='#';">
+            
+            <div class="card reveal" onclick="window.location.href='projects.html';">
                 <div class="card-img project-img"></div>
                 <div class="card-body">
-                    <div class="card-subtitle">Overview</div>
+                    <div class="card-subtitle">Portfolio</div>
                     <div class="card-title">All Projects</div>
                 </div>
             </div>
             
-            <div class="card red-theme reveal delay-1" onclick="window.location.href='#';">
+            <div class="card red-theme reveal delay-1" onclick="window.location.href='tactics.html';">
                 <div class="card-img tactics-img"></div>
                 <div class="card-body">
                     <div class="card-subtitle">Python / Modeling</div>
@@ -442,13 +500,14 @@
                 </div>
             </div>
             
-            <div class="card reveal delay-2" onclick="window.location.href='#';">
+            <div class="card blue-theme reveal delay-2" onclick="window.open('ISL_Paper_v13.pdf.pdf', '_blank');">
                 <div class="card-img analysis-img"></div>
                 <div class="card-body">
                     <div class="card-subtitle">Classification Models</div>
-                    <div class="card-title">ISL Match Predictor</div>
+                    <div class="card-title">ISL Match Predictor (PDF)</div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -530,8 +589,6 @@
                     return;
                 } else {
                     entry.target.classList.add('active');
-                    // Optional: Stop observing once revealed
-                    // observer.unobserve(entry.target); 
                 }
             });
         }, revealOptions);
