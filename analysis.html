@@ -12,7 +12,7 @@
             --text-muted: #6b7280;
             --accent-blue: #3b82f6;
             --accent-gradient: linear-gradient(90deg, #3b82f6 0%, #f97316 100%);
-            --subtitle-color: #9f5b5b; /* Reddish-brown for card subtitles */
+            --subtitle-color: #9f5b5b;
             --border-color: #e5e7eb;
             --tag-bg: #f3f4f6;
             --tag-text: #4b5563;
@@ -30,6 +30,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Navigation */
@@ -38,7 +39,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.2rem 5%;
-            background-color: var(--surface-color);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
             position: fixed;
             width: 100%;
             top: 0;
@@ -73,19 +75,98 @@
             cursor: pointer;
         }
 
-        /* Hero Section */
+        /* Hero Section with Animations & New Background Image */
         .hero {
             margin-top: 70px;
             padding: 6rem 5%;
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
-                        url('https://www.transparenttextures.com/patterns/cubes.png') #0f172a; /* Techy dark background simulation */
+            /* NEW BACKGROUND IMAGE LOGIC HERE */
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.95)), 
+                        url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
             text-align: center;
             color: white;
-            min-height: 60vh;
+            min-height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
+            overflow: hidden; 
+        }
+
+        /* Tech Grid Animation */
+        .tech-grid {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+
+        /* Floating Tech Particles */
+        .particle {
+            position: absolute;
+            color: rgba(96, 165, 250, 0.8);
+            font-family: monospace;
+            font-size: 0.85rem;
+            pointer-events: none;
+            z-index: 1;
+            animation: float-up linear infinite;
+            text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Kicking Football Animation */
+        .football-wrapper {
+            position: absolute;
+            bottom: 20px;
+            left: -100px;
+            z-index: 2;
+            animation: kick-across 8s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .football {
+            font-size: 3rem;
+            filter: drop-shadow(0 10px 5px rgba(0,0,0,0.5));
+            animation: spin-ball 2s infinite linear, bounce-ball 8s infinite ease-in-out;
+        }
+
+        @keyframes kick-across {
+            0% { left: -10vw; }
+            100% { left: 110vw; }
+        }
+
+        @keyframes spin-ball {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce-ball {
+            0%, 100% { transform: translateY(0); }
+            15% { transform: translateY(-150px); }
+            30% { transform: translateY(0); }
+            45% { transform: translateY(-100px); }
+            60% { transform: translateY(0); }
+            75% { transform: translateY(-50px); }
+            90% { transform: translateY(0); }
+        }
+
+        /* Keep Hero content above animations */
+        .hero-content {
+            position: relative;
+            z-index: 10;
         }
 
         .hero-top-text {
@@ -110,16 +191,17 @@
         .hero h2 {
             font-size: 4rem;
             font-weight: 800;
-            color: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.2);
             margin-top: -10px;
             margin-bottom: 1.5rem;
         }
 
         .hero p {
-            color: #cbd5e1;
+            color: #e2e8f0;
             max-width: 700px;
             margin: 0 auto 2.5rem auto;
             font-size: 1.1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .hero-buttons {
@@ -137,6 +219,12 @@
             font-weight: 600;
             border: none;
             cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
         }
 
         .btn-secondary {
@@ -148,6 +236,11 @@
             font-weight: 600;
             border: none;
             cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f3f4f6;
         }
 
         /* Analysis Section */
@@ -155,7 +248,8 @@
             padding: 5rem 5%;
             max-width: 1200px;
             margin: 0 auto;
-            background-color: var(--bg-color);
+            position: relative;
+            z-index: 10;
         }
 
         .section-header {
@@ -185,13 +279,14 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 2rem;
-            transition: box-shadow 0.3s, transform 0.3s;
+            transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
             position: relative;
         }
 
         .card:hover {
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transform: translateY(-2px);
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
         }
 
         .external-icon {
@@ -242,6 +337,12 @@
             font-size: 0.8rem;
             font-family: monospace;
             font-weight: 600;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .card:hover .tag {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
         }
 
         /* Contact Section */
@@ -291,14 +392,22 @@
         <div class="menu-icon">&#9776;</div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-top-text">TECH · FOOTBALL · INNOVATION</div>
-        <h1>Modern Tech</h1>
-        <h2>Portfolio</h2>
-        <p>A showcase of six innovative analyses spanning football analytics, tactical tooling, IoT systems, and decentralised web.</p>
-        <div class="hero-buttons">
-            <a href="#analysis" class="btn-primary">Explore Analyses &rarr;</a>
-            <a href="#contact" class="btn-secondary">Get in Touch</a>
+    <section class="hero" id="hero">
+        <div class="tech-grid"></div>
+        
+        <div class="football-wrapper">
+            <div class="football">⚽</div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-top-text">TECH · FOOTBALL · INNOVATION</div>
+            <h1>Modern Tech</h1>
+            <h2>Portfolio</h2>
+            <p>A showcase of six innovative analyses spanning football analytics, tactical tooling, IoT systems, and decentralised web.</p>
+            <div class="hero-buttons">
+                <a href="#analysis" class="btn-primary">Explore Analyses &rarr;</a>
+                <a href="#contact" class="btn-secondary">Get in Touch</a>
+            </div>
         </div>
     </section>
 
@@ -309,7 +418,6 @@
         </div>
 
         <div class="grid">
-            
             <div class="card">
                 <div class="external-icon">&#8599;</div>
                 <div class="analysis-number">Analysis 01</div>
@@ -392,7 +500,6 @@
                     <span class="tag">Docker</span>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -406,5 +513,30 @@
         <p>&copy; 2026. Built with love using caffeine.ai</p>
     </footer>
 
+    <script>
+        const heroSection = document.getElementById('hero');
+        const dataBits = ['0101', '1010', '{...}', '</>', 'data', '0x1A', 'sys.req', '⚽'];
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Randomize text, position, and animation duration
+            particle.innerText = dataBits[Math.floor(Math.random() * dataBits.length)];
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5s to 10s
+            particle.style.opacity = Math.random() * 0.5 + 0.2;
+
+            heroSection.appendChild(particle);
+
+            // Remove particle after animation ends to prevent DOM clutter
+            setTimeout(() => {
+                particle.remove();
+            }, 10000);
+        }
+
+        // Generate a new particle every 800ms
+        setInterval(createParticle, 800);
+    </script>
 </body>
 </html>
