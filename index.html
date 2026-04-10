@@ -13,14 +13,16 @@
            1. GLOBAL VARIABLES & RESET 
         ========================================= */
         :root {
-            --bg-dark: #05070e; /* Deeper, sleeker dark for tech theme */
-            --bg-gradient: linear-gradient(135deg, #05070e 0%, #110817 50%, #07101f 100%);
+            --bg-dark: #030409; /* Slightly deeper dark */
+            /* Advanced Gradient: Adding a hint of deep cyber purple */
+            --bg-gradient: linear-gradient(135deg, #030409 0%, #0d0614 40%, #07101f 100%);
             --text-main: #e2e8f0;
-            --text-muted: #94a3b8;
-            --accent-purple: #e91e63;
-            --accent-cyan: #00e5ff; /* Brighter, more electric cyan */
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
+            --text-muted: #8492a6;
+            --accent-purple: #f50057; /* Intense Pink/Purple */
+            --accent-cyan: #00e5ff; /* Electric Cyan */
+            --accent-green: #00e676;
+            --card-bg: rgba(255, 255, 255, 0.02); /* More transparent cards */
+            --card-border: rgba(255, 255, 255, 0.06);
             --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -55,19 +57,19 @@
         nav {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            background: rgba(5, 7, 14, 0.8);
+            background: rgba(3, 4, 9, 0.85);
             padding: 20px 10%;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; 
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.1);
             transition: var(--transition-smooth);
         }
 
         nav.scrolled {
             padding: 15px 10%;
-            background: rgba(5, 7, 14, 0.98);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            background: rgba(3, 4, 9, 0.98);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
         }
 
         .nav-logo {
@@ -89,15 +91,15 @@
             transform: scaleX(1); transform-origin: left;
         }
 
-        .nav-links { display: flex; gap: 35px; }
+        .nav-links { display: flex; gap: 30px; }
         .nav-links a {
             color: var(--text-muted); text-decoration: none;
             font-size: 0.85rem; text-transform: uppercase;
-            letter-spacing: 1.5px; transition: color 0.3s ease;
+            letter-spacing: 1px; transition: color 0.3s ease;
         }
         .nav-links a:hover { 
             color: var(--accent-cyan); 
-            text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
         }
 
         /* =========================================
@@ -105,11 +107,12 @@
         ========================================= */
         .reveal {
             opacity: 0; transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        .reveal.delay-1 { transition-delay: 0.2s; }
-        .reveal.delay-2 { transition-delay: 0.4s; }
+        .reveal.delay-1 { transition-delay: 0.15s; }
+        .reveal.delay-2 { transition-delay: 0.3s; }
+        .reveal.delay-3 { transition-delay: 0.45s; }
 
         section {
             min-height: 100vh;
@@ -118,33 +121,30 @@
         }
 
         /* =========================================
-           4. HERO SECTION (Tech/Data Theme)
+           4. HERO SECTION (Tech/Data Theme UPDATED)
         ========================================= */
         #hero {
             position: relative; text-align: left;
-            /* Tech/Server/Data background image */
-            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop'); 
+            /* Updated to a more abstract, advanced futuristic network mesh */
+            background-image: url('https://images.unsplash.com/photo-1504386106331-3e4e71712b38?q=80&w=2070&auto=format&fit=crop'); 
             background-size: cover; background-position: center; background-attachment: fixed;
         }
 
-        /* Dark overlay */
         #hero::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(5, 7, 14, 0.92) 0%, rgba(17, 8, 23, 0.85) 100%);
+            /* Enhanced Overlay: Adding a slight purple tint for futuristic depth */
+            background: linear-gradient(135deg, rgba(3, 4, 9, 0.95) 0%, rgba(13, 6, 20, 0.88) 100%);
             z-index: 1;
         }
 
-        /* Animated Cyber Grid Overlay */
         .cyber-grid {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
                 linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: 1;
+            background-size: 50px 50px; z-index: 1;
             transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-            animation: gridMove 15s linear infinite;
-            opacity: 0.6;
+            animation: gridMove 15s linear infinite; opacity: 0.6;
         }
 
         @keyframes gridMove {
@@ -161,7 +161,20 @@
         }
 
         .tech-tag { color: var(--accent-cyan); opacity: 0.8; }
-        .glitch-wrapper { position: relative; display: inline-block; }
+        
+        /* New Wrapper for slide-in entry animation */
+        .glitch-reveal-wrapper {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: bottom;
+        }
+
+        .glitch-wrapper { 
+            position: relative; display: inline-block; 
+            /* NEW: Slide Up, Fade, and Unblur on Entry */
+            opacity: 0;
+            animation: glitchSystemReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
 
         .glitch-wrapper::before, .glitch-wrapper::after {
             content: "Jerein_Sam_Thomas"; position: absolute; top: 0; left: 0;
@@ -176,6 +189,12 @@
         .glitch-wrapper::after {
             left: -2px; text-shadow: -2px 0 var(--accent-cyan);
             clip: rect(85px, 550px, 140px, 0); animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        /* NEW KEYFRAME: System reveal animation for name entry */
+        @keyframes glitchSystemReveal {
+            0% { opacity: 0; transform: translateY(60px) scale(1.1); filter: blur(10px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
         @keyframes glitch-anim {
@@ -200,117 +219,103 @@
             font-size: 1.2rem; letter-spacing: 4px; color: var(--accent-cyan); 
             display: inline-block; border-right: 2px solid var(--accent-cyan);
             white-space: nowrap; overflow: hidden;
-            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+            /* Typing animation starts after reveal */
+            opacity: 0;
+            animation: typing 3s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+            animation-delay: 1s;
         }
 
-        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes typing { 0% { opacity: 1; width: 0 } 100% { opacity: 1; width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent-cyan); } }
 
         /* =========================================
-           5. ABOUT SECTION (Neural Node Animation)
+           5. ABOUT SECTION (Neural Node Updated)
         ========================================= */
         #about { flex-direction: row; align-items: center; gap: 60px; }
         
         .about-visual { flex: 1; display: flex; justify-content: center; position: relative; perspective: 1000px;}
         
-        /* The New 3D Data Node Animation */
         .data-node-container {
-            width: 300px; height: 300px;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: floatNode 6s ease-in-out infinite;
+            width: 300px; height: 300px; position: relative;
+            transform-style: preserve-3d; animation: floatNode 6s ease-in-out infinite;
         }
 
         .node-core {
-            position: absolute; top: 50%; left: 50%;
-            width: 50px; height: 50px;
-            background: var(--accent-cyan);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 40px var(--accent-cyan), 0 0 80px var(--accent-cyan);
-            z-index: 10;
+            position: absolute; top: 50%; left: 50%; width: 50px; height: 50px;
+            background: var(--accent-cyan); border-radius: 50%; transform: translate(-50%, -50%);
+            box-shadow: 0 0 40px var(--accent-cyan), 0 0 80px var(--accent-cyan); z-index: 10;
         }
 
         .node-ring {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            border: 2px solid rgba(0, 229, 255, 0.3);
-            border-radius: 50%;
-            transform-style: preserve-3d;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border: 2px solid rgba(0, 229, 255, 0.3); border-radius: 50%; transform-style: preserve-3d;
         }
 
         .node-ring::before {
-            content: ''; position: absolute;
-            width: 10px; height: 10px; background: var(--accent-purple);
-            border-radius: 50%; top: -5px; left: 50%;
-            box-shadow: 0 0 15px var(--accent-purple);
+            content: ''; position: absolute; width: 10px; height: 10px; background: var(--accent-purple);
+            border-radius: 50%; top: -5px; left: 50%; box-shadow: 0 0 15px var(--accent-purple);
             transform: translateX(-50%);
         }
 
         .ring-x { animation: spinAxisX 8s linear infinite; }
-        .ring-y { animation: spinAxisY 12s linear infinite; border-color: rgba(233, 30, 99, 0.3); }
+        .ring-y { animation: spinAxisY 12s linear infinite; border-color: rgba(245, 0, 87, 0.3); } /* Accent Purple Tinted Ring */
         .ring-z { animation: spinAxisZ 10s linear infinite; }
 
-        @keyframes floatNode {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
+        @keyframes floatNode { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
         @keyframes spinAxisX { 0% { transform: rotateX(0deg) rotateY(60deg); } 100% { transform: rotateX(360deg) rotateY(60deg); } }
         @keyframes spinAxisY { 0% { transform: rotateY(0deg) rotateX(120deg); } 100% { transform: rotateY(360deg) rotateX(120deg); } }
         @keyframes spinAxisZ { 0% { transform: rotateZ(0deg) rotateY(120deg); } 100% { transform: rotateZ(360deg) rotateY(120deg); } }
 
         .about-text { flex: 1.2; }
         .about-text h2 { 
-            margin-bottom: 30px; font-size: 2.5rem; 
-            color: #fff;
-            border-left: 4px solid var(--accent-cyan);
-            padding-left: 15px;
+            margin-bottom: 30px; font-size: 2.5rem; color: #fff;
+            border-left: 4px solid var(--accent-cyan); padding-left: 15px;
         }
         .about-text p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 20px;}
         
-        .tech-skills {
-            display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;
-        }
+        .tech-skills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
         
         .skill-tag {
-            padding: 8px 15px;
-            background: rgba(0, 229, 255, 0.05);
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            border-radius: 4px;
-            font-size: 0.85rem; color: var(--accent-cyan);
-            font-family: 'Orbitron', sans-serif;
+            padding: 8px 15px; background: rgba(0, 229, 255, 0.04);
+            border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 4px;
+            font-size: 0.85rem; color: var(--accent-cyan); font-family: 'Orbitron', sans-serif;
             letter-spacing: 1px; transition: var(--transition-smooth);
         }
         
         .skill-tag:hover {
-            background: rgba(0, 229, 255, 0.2);
+            background: rgba(0, 229, 255, 0.1); border-color: var(--accent-cyan);
             box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
             transform: translateY(-2px);
         }
 
         /* =========================================
-           6. CONTENT / PROJECTS SECTION
+           6. CONTENT / PROJECTS SECTION (4-grid)
         ========================================= */
         #content h2 { text-align: center; margin-bottom: 60px; font-size: 2.5rem; color: #fff; }
-        .card-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        
+        .card-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 40px; 
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
         .card { 
-            background: var(--card-bg); width: 300px; 
-            border: 1px solid var(--card-border);
-            border-radius: 16px; overflow: hidden;
-            backdrop-filter: blur(12px); transition: var(--transition-smooth);
-            cursor: pointer; position: relative;
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            border-radius: 16px; overflow: hidden; backdrop-filter: blur(12px); 
+            transition: var(--transition-smooth); cursor: pointer; position: relative;
         }
 
         .card::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, transparent 0%, rgba(5, 7, 14, 0.95) 100%);
+            background: linear-gradient(180deg, transparent 0%, rgba(3, 4, 9, 0.98) 100%);
             z-index: 1; transition: opacity 0.4s ease;
         }
 
         .card:hover { 
             transform: translateY(-15px); border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 255, 0.1); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 229, 255, 0.05); 
         }
 
         .card:hover::before { opacity: 0.8; }
@@ -320,6 +325,7 @@
         .card-img.project-img { background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop'); }
         .card-img.tactics-img { background-image: url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070&auto=format&fit=crop'); } 
         .card-img.analysis-img { background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop'); }
+        .card-img.isl-img { background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop'); }
 
         .card-body { 
             position: absolute; bottom: 0; left: 0; width: 100%;
@@ -333,9 +339,10 @@
         
         .card.red-theme .card-subtitle { color: var(--accent-purple); }
         .card.blue-theme .card-subtitle { color: #82b1ff; }
+        .card.green-theme .card-subtitle { color: var(--accent-green); }
 
         /* =========================================
-           7. MATCH ANALYSIS SECTION
+           7. MATCH DYNAMICS PREVIEW SECTION
         ========================================= */
         #analysis { flex-direction: row; gap: 60px; align-items: center; }
         .analysis-left { flex: 1.2; }
@@ -344,7 +351,7 @@
         .tactical-pitch {
             position: relative; width: 100%; height: 450px;
             background: linear-gradient(180deg, rgba(10, 15, 30, 0.4) 0%, rgba(10, 15, 30, 0.8) 100%);
-            border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 12px;
+            border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px;
             overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
         
@@ -372,7 +379,7 @@
         
         .player::after {
             content: ''; position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px;
-            border: 1px solid rgba(0, 229, 255, 0.5); border-radius: 50%;
+            border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 50%;
             animation: pulseRing 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
         }
 
@@ -389,7 +396,7 @@
         .p-rcm { bottom: 40%; left: 65%; animation: attackRight 6s infinite alternate ease-in-out 0.5s; }
         .p-lw  { bottom: 65%; left: 20%; animation: cutInsideLeft 6s infinite alternate ease-in-out 1s; }
         .p-st  { bottom: 70%; left: 50%; animation: dropDeep 6s infinite alternate ease-in-out 1s; background: var(--accent-purple); box-shadow: 0 0 15px var(--accent-purple);}
-        .p-st::after { border-color: rgba(233, 30, 99, 0.5); }
+        .p-st::after { border-color: rgba(245, 0, 87, 0.4); } /* Tinted purple player ring */
         .p-rw  { bottom: 65%; left: 80%; animation: cutInsideRight 6s infinite alternate ease-in-out 1s; }
 
         @keyframes pushUp { 100% { bottom: 35%; } }
@@ -403,8 +410,8 @@
         @keyframes dropDeep { 100% { bottom: 60%; } }
 
         .analysis-right { flex: 1; display: flex; flex-direction: column; gap: 25px; }
-        .analysis-box { border-left: 3px solid rgba(255,255,255,0.1); padding: 5px 0 5px 25px; transition: var(--transition-smooth); }
-        .analysis-box:hover { border-left-color: var(--accent-cyan); transform: translateX(10px); }
+        .analysis-box { border-left: 3px solid rgba(255,255,255,0.06); padding: 5px 0 5px 25px; transition: var(--transition-smooth); }
+        .analysis-box:hover { border-left-color: var(--accent-cyan); background: rgba(255,255,255,0.02); transform: translateX(10px); }
         .analysis-box:nth-child(2):hover { border-left-color: var(--accent-purple); }
         
         .analysis-box h3 { color: #fff; font-size: 1.2rem; margin-bottom: 8px; }
@@ -427,7 +434,7 @@
 
         .social-btn:hover {
             transform: translateY(-10px); background: var(--accent-cyan); border-color: var(--accent-cyan);
-            box-shadow: 0 15px 30px rgba(0, 229, 255, 0.3); color: #05070e;
+            box-shadow: 0 15px 30px rgba(0, 229, 255, 0.4); color: #030409;
         }
 
         .social-btn.linkedin:hover { background: #0077b5; border-color: #0077b5; box-shadow: 0 15px 30px rgba(0, 119, 181, 0.3); color: #fff;}
@@ -445,7 +452,7 @@
             #about, #analysis { flex-direction: column; text-align: center; }
             .about-text h2 { border-left: none; border-bottom: 4px solid var(--accent-cyan); display: inline-block; padding: 0 0 10px 0; }
             .tech-skills { justify-content: center; }
-            .analysis-box { border-left: none; border-top: 3px solid rgba(255,255,255,0.1); padding: 20px 0 0 0; }
+            .analysis-box { border-left: none; border-top: 3px solid rgba(255,255,255,0.06); padding: 20px 0 0 0; }
             .analysis-box:hover { transform: translateY(-5px); border-top-color: var(--accent-cyan); }
             .hero-title { font-size: 2.2rem; }
             .hero-subtitle { font-size: 0.9rem; }
@@ -459,7 +466,8 @@
         <a href="#hero" class="nav-logo">JST.</a>
         <div class="nav-links">
             <a href="projects.html">Projects</a>
-            <a href="tactics.html">Tactical Analysis</a>
+            <a href="tactics.html">Tactics Engine</a>
+            <a href="analysis.html">Match Analysis</a>
             <a href="ISL_Paper_v13.pdf.pdf" target="_blank">ISL Research</a>
             <a href="#contact">Contact</a>
         </div>
@@ -468,9 +476,9 @@
     <section id="hero">
         <div class="cyber-grid"></div>
         
-        <div class="hero-content reveal">
-            <h1 class="hero-title">
-                <span class="tech-tag">&lt;</span><span class="glitch-wrapper">Jerein_Sam_Thomas</span><span class="tech-tag">/&gt;</span>
+        <div class="hero-content">
+            <h1 class="hero-title reveal">
+                <span class="tech-tag">&lt;</span><div class="glitch-reveal-wrapper"><span class="glitch-wrapper">Jerein_Sam_Thomas</span></div><span class="tech-tag">/&gt;</span>
             </h1>
             <br>
             <div class="hero-subtitle">MSc Applied Data Science</div>
@@ -521,8 +529,16 @@
                 </div>
             </div>
             
-            <div class="card blue-theme reveal delay-2" onclick="window.open('ISL_Paper_v13.pdf.pdf', '_blank');">
+            <div class="card green-theme reveal delay-2" onclick="window.location.href='analysis.html';">
                 <div class="card-img analysis-img"></div>
+                <div class="card-body">
+                    <div class="card-subtitle">Data Visualization</div>
+                    <div class="card-title">Match Analysis</div>
+                </div>
+            </div>
+
+            <div class="card blue-theme reveal delay-3" onclick="window.open('ISL_Paper_v13.pdf.pdf', '_blank');">
+                <div class="card-img isl-img"></div>
                 <div class="card-body">
                     <div class="card-subtitle">Classification Models</div>
                     <div class="card-title">ISL Match Predictor (PDF)</div>
@@ -562,7 +578,7 @@
                 <h3>Performance Analytics</h3>
                 <p>Analyzed vast historical datasets from the ISL to extract key performance indicators, evaluating passing networks and high-intensity attacking transitions.</p>
             </div>
-            <div class="analysis-box reveal delay-2">
+            <div class="analysis-box reveal delay-3">
                 <h3>Predictive Outcomes</h3>
                 <p>Utilized exploratory data analysis and classification algorithms to identify hidden patterns, building robust engines capable of forecasting match results.</p>
             </div>
@@ -598,12 +614,13 @@
 
         // Intersection Observer for Scroll Reveal Animations
         const revealElements = document.querySelectorAll('.reveal');
-        const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }; // slightly triggers earlier
 
         const revealOnScroll = new IntersectionObserver(function(entries, observer) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Stop observing after initial reveal
                 }
             });
         }, revealOptions);
