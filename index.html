@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jerein Sam Thomas - Portfolio</title>
+    <title>Jerein Sam Thomas - Data Science Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* =========================================
-           1. GLOBAL VARIABLES & RESET
+           1. GLOBAL VARIABLES & RESET 
         ========================================= */
         :root {
-            --bg-dark: #1e153a;
-            --bg-gradient: linear-gradient(135deg, #181028 0%, #291c52 50%, #15224a 100%);
-            --text-main: #ffffff;
-            --accent-purple: #9d4edd;
-            --accent-cyan: #00f5d4;
-            --card-bg: #ffffff;
+            --bg-dark: #070913;
+            --bg-gradient: linear-gradient(135deg, #070913 0%, #1a0b1c 50%, #0a1128 100%);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-purple: #e91e63;
+            --accent-cyan: #4fc3f7;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -27,15 +30,18 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background: var(--bg-gradient);
+            background: var(--bg-dark);
+            background-image: var(--bg-gradient);
             color: var(--text-main);
             font-family: 'Roboto Mono', monospace;
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
             min-height: 100vh;
-            padding-top: 80px;
-            scroll-behavior: smooth;
         }
 
         h1, h2, h3 {
@@ -49,33 +55,73 @@
         nav {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            background: rgba(30, 21, 58, 0.95);
+            background: rgba(7, 9, 19, 0.7);
             padding: 20px 10%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000; 
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(79, 195, 247, 0.1);
+            transition: var(--transition-smooth);
+        }
+
+        nav.scrolled {
+            padding: 15px 10%;
+            background: rgba(7, 9, 19, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .nav-logo {
-            font-family: 'Orbitron', sans-serif; font-weight: bold;
-            color: var(--text-main); text-decoration: none;
-            font-size: 1.2rem; letter-spacing: 1px;
+            font-weight: bold;
+            color: #fff; text-decoration: none;
+            font-size: 1.5rem; letter-spacing: 2px;
+            position: relative;
         }
 
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a {
-            color: var(--text-main); text-decoration: none;
-            font-size: 0.9rem; text-transform: uppercase;
-            letter-spacing: 1px; transition: color 0.3s ease;
+        .nav-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0; width: 100%; height: 2px;
+            background: var(--accent-cyan);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
         }
-        .nav-links a:hover { color: var(--accent-cyan); }
+
+        .nav-logo:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-links { display: flex; gap: 35px; }
+        .nav-links a {
+            color: var(--text-muted); text-decoration: none;
+            font-size: 0.85rem; text-transform: uppercase;
+            letter-spacing: 1.5px; transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover { 
+            color: var(--accent-cyan); 
+        }
 
         /* =========================================
-           3. GENERAL SECTION LAYOUT
+           3. SCROLL REVEAL UTILITIES
         ========================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal.delay-1 { transition-delay: 0.2s; }
+        .reveal.delay-2 { transition-delay: 0.4s; }
+
         section {
-            min-height: calc(100vh - 80px);
-            padding: 60px 10%;
+            min-height: 100vh;
+            padding: 100px 10%;
             display: flex; flex-direction: column; justify-content: center;
         }
 
@@ -84,223 +130,415 @@
         ========================================= */
         #hero {
             position: relative; text-align: left;
-            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop'); 
+            background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2048&auto=format&fit=crop'); 
             background-size: cover; background-position: center; background-attachment: fixed;
         }
 
         #hero::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(30, 21, 58, 0.85) 0%, rgba(21, 34, 74, 0.7) 100%);
+            background: linear-gradient(135deg, rgba(7, 9, 19, 0.9) 0%, rgba(26, 11, 28, 0.8) 100%);
             z-index: 1;
         }
 
-        .hero-title, .hero-subtitle { position: relative; z-index: 2; }
-        .hero-title { font-size: 4rem; line-height: 1.1; text-transform: uppercase; text-shadow: 2px 4px 10px rgba(0,0,0,0.5); }
-        .hero-subtitle { font-size: 1.5rem; margin-top: 10px; letter-spacing: 5px; color: var(--accent-cyan); }
+        .hero-content { position: relative; z-index: 2; }
+        
+        .hero-title { 
+            font-size: 4.5rem; line-height: 1.1; 
+            text-transform: uppercase; 
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle { 
+            font-size: 1.2rem; letter-spacing: 4px; color: var(--accent-cyan); 
+            display: inline-block;
+            border-right: 2px solid var(--accent-cyan);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent-cyan); } }
 
         /* =========================================
            5. ABOUT SECTION
         ========================================= */
-        #about { flex-direction: row; align-items: center; gap: 50px; }
-        .about-visual { flex: 1; display: flex; justify-content: center; }
-        .circle-graphic { 
-            width: 300px; height: 300px; border-radius: 50%; 
-            background: linear-gradient(45deg, #dfa2ff, #7b2cbf); 
-            box-shadow: -20px 0px 0px 10px rgba(76, 29, 149, 0.5); 
+        #about { flex-direction: row; align-items: center; gap: 60px; }
+        .about-visual { flex: 1; display: flex; justify-content: center; position: relative; }
+        
+        .glow-orb { 
+            width: 320px; height: 320px; border-radius: 50%; 
+            background: radial-gradient(circle, rgba(79,195,247,0.1) 0%, rgba(233,30,99,0.05) 50%, transparent 70%);
+            border: 1px solid rgba(79, 195, 247, 0.2);
+            box-shadow: 0 0 50px rgba(79, 195, 247, 0.1), inset 0 0 30px rgba(233, 30, 99, 0.1); 
+            animation: pulseOrb 8s infinite alternate ease-in-out;
+            display: flex; align-items: center; justify-content: center;
         }
+        
+        .inner-orb {
+            width: 200px; height: 200px; border-radius: 50%;
+            border: 2px dashed rgba(233, 30, 99, 0.4);
+            animation: spinOrb 20s linear infinite;
+        }
+
+        @keyframes pulseOrb {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 80px rgba(79, 195, 247, 0.2), inset 0 0 50px rgba(233, 30, 99, 0.2); }
+        }
+        @keyframes spinOrb { 100% { transform: rotate(360deg); } }
+
         .about-text { flex: 1; }
-        .about-text h2 { margin-bottom: 20px; font-size: 2rem; color: var(--accent-cyan); }
+        .about-text h2 { 
+            margin-bottom: 30px; font-size: 2.5rem; 
+            background: linear-gradient(90deg, var(--accent-cyan), #fff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .about-text p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 20px;}
 
         /* =========================================
            6. CONTENT / PROJECTS SECTION
         ========================================= */
-        #content h2 { text-align: center; margin-bottom: 50px; font-size: 2rem; color: var(--accent-cyan); }
-        .card-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        #content h2 { text-align: center; margin-bottom: 60px; font-size: 2.5rem; color: #fff; }
+        .card-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
 
         .card { 
-            background-color: var(--card-bg); color: #000; width: 280px; 
-            display: flex; flex-direction: column; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
-            border-radius: 8px; overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--card-bg); width: 300px; 
+            border: 1px solid var(--card-border);
+            border-radius: 16px; overflow: hidden;
+            backdrop-filter: blur(12px);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            position: relative;
         }
 
-        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0, 245, 212, 0.2); }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, transparent 0%, rgba(7, 9, 19, 0.9) 100%);
+            z-index: 1;
+            transition: opacity 0.4s ease;
+        }
 
-        .card-img { height: 200px; background-size: cover; background-position: center; position: relative; }
+        .card:hover { 
+            transform: translateY(-15px); 
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(79, 195, 247, 0.1); 
+        }
+
+        .card:hover::before { opacity: 0.8; }
+
+        .card-img { height: 220px; background-size: cover; background-position: center; position: relative; z-index: 0;}
         
         .card-img.project-img { background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop'); }
-        .card-img.tactics-img { background-image: url('tactical-analysis.jpg'); } /* Update image name if needed */
+        .card-img.tactics-img { background-image: url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070&auto=format&fit=crop'); } 
         .card-img.analysis-img { background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop'); }
 
         .card-body { 
-            padding: 20px; text-align: center; font-family: 'Roboto Mono', monospace; 
-            font-weight: bold; min-height: 80px; display: flex; align-items: center; justify-content: center;
-            background: #111827; color: #ffffff; border-top: 2px solid var(--accent-purple);
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 25px 20px; text-align: left; z-index: 2;
+            transform: translateY(10px); transition: var(--transition-smooth);
         }
-        .card-body.red-text { color: #ff4141; border-top-color: #ff4141; }
-        .card-body.blue-text { color: var(--accent-cyan); border-top-color: var(--accent-cyan); }
+        
+        .card:hover .card-body { transform: translateY(0); }
+
+        .card-title { font-family: 'Orbitron', sans-serif; font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; color: #fff;}
+        .card-subtitle { font-size: 0.8rem; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px;}
+        
+        .card.red-theme .card-subtitle { color: var(--accent-purple); }
 
         /* =========================================
-           7. MATCH ANALYSIS SECTION (Preview)
+           7. MATCH ANALYSIS SECTION (Refined 4-3-3)
         ========================================= */
-        #analysis { flex-direction: row; gap: 40px; }
-        .analysis-left { flex: 1; }
-        .analysis-left h2 { font-size: 2.5rem; margin-bottom: 30px; color: var(--accent-cyan); }
-        .chart-placeholder { 
-            width: 100%; height: 300px; 
-            background: linear-gradient(to top, rgba(157, 78, 221, 0.5), transparent); 
-            border-left: 2px solid var(--accent-cyan); border-bottom: 2px solid var(--accent-cyan); 
+        #analysis { flex-direction: row; gap: 60px; align-items: center; }
+        .analysis-left { flex: 1.2; }
+        .analysis-left h2 { font-size: 2.5rem; margin-bottom: 30px; color: #fff; }
+        
+        /* The Tactical Pitch */
+        .tactical-pitch {
+            position: relative;
+            width: 100%; height: 450px;
+            background: linear-gradient(180deg, rgba(10, 15, 30, 0.4) 0%, rgba(10, 15, 30, 0.8) 100%);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
-        .analysis-right { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-        .analysis-box { border: 1px solid rgba(255, 255, 255, 0.3); padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;}
-        .analysis-box h3 { color: #00f5d4; font-size: 1.2rem; margin-bottom: 10px; font-family: 'Roboto Mono', monospace; }
-        .analysis-box p { font-size: 0.9rem; }
+        
+        .pitch-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .tactical-pitch::before { 
+            content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255, 255, 255, 0.1);
+        }
+        .tactical-pitch::after { 
+            content: ''; position: absolute; top: 50%; left: 50%; width: 80px; height: 80px; border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 50%; transform: translate(-50%, -50%);
+        }
+
+        /* Players */
+        .player {
+            position: absolute; width: 12px; height: 12px;
+            background: var(--accent-cyan); border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent-cyan);
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            transition: all 0.5s ease;
+        }
+        
+        .player::after {
+            content: ''; position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px;
+            border: 1px solid rgba(79, 195, 247, 0.5); border-radius: 50%;
+            animation: pulseRing 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        @keyframes pulseRing {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        /* Coordinated 4-3-3 Attacking Build-up Animation */
+        .p-gk  { bottom: 5%; left: 50%; }
+        .p-lb  { bottom: 20%; left: 15%; animation: shiftWide 6s infinite alternate ease-in-out; }
+        .p-cb1 { bottom: 15%; left: 35%; animation: pushUp 6s infinite alternate ease-in-out; }
+        .p-cb2 { bottom: 15%; left: 65%; animation: pushUp 6s infinite alternate ease-in-out; }
+        .p-rb  { bottom: 20%; left: 85%; animation: shiftWideRight 6s infinite alternate ease-in-out; }
+        .p-lcm { bottom: 40%; left: 35%; animation: attackLeft 6s infinite alternate ease-in-out 0.5s; }
+        .p-cdm { bottom: 30%; left: 50%; animation: holdMid 6s infinite alternate ease-in-out; }
+        .p-rcm { bottom: 40%; left: 65%; animation: attackRight 6s infinite alternate ease-in-out 0.5s; }
+        .p-lw  { bottom: 65%; left: 20%; animation: cutInsideLeft 6s infinite alternate ease-in-out 1s; }
+        .p-st  { bottom: 70%; left: 50%; animation: dropDeep 6s infinite alternate ease-in-out 1s; background: var(--accent-purple); box-shadow: 0 0 15px var(--accent-purple);}
+        .p-st::after { border-color: rgba(233, 30, 99, 0.5); }
+        .p-rw  { bottom: 65%; left: 80%; animation: cutInsideRight 6s infinite alternate ease-in-out 1s; }
+
+        @keyframes pushUp { 100% { bottom: 35%; } }
+        @keyframes shiftWide { 100% { bottom: 50%; left: 10%; } }
+        @keyframes shiftWideRight { 100% { bottom: 50%; left: 90%; } }
+        @keyframes holdMid { 100% { bottom: 45%; } }
+        @keyframes attackLeft { 100% { bottom: 65%; left: 30%; } }
+        @keyframes attackRight { 100% { bottom: 65%; left: 70%; } }
+        @keyframes cutInsideLeft { 100% { bottom: 85%; left: 40%; } }
+        @keyframes cutInsideRight { 100% { bottom: 85%; left: 60%; } }
+        @keyframes dropDeep { 100% { bottom: 60%; } }
+
+        .analysis-right { flex: 1; display: flex; flex-direction: column; gap: 25px; }
+        .analysis-box { 
+            border-left: 3px solid rgba(255,255,255,0.1); 
+            padding: 5px 0 5px 25px; 
+            transition: var(--transition-smooth);
+        }
+        .analysis-box:hover {
+            border-left-color: var(--accent-cyan);
+            transform: translateX(10px);
+        }
+        .analysis-box:nth-child(2):hover { border-left-color: var(--accent-purple); }
+        
+        .analysis-box h3 { color: #fff; font-size: 1.2rem; margin-bottom: 8px; }
+        .analysis-box p { font-size: 0.95rem; color: var(--text-muted); }
 
         /* =========================================
            8. CONTACT SECTION
         ========================================= */
-        #contact { flex-direction: row; align-items: center; gap: 50px; }
-        .contact-info { flex: 1; }
-        .contact-info h2 { margin-bottom: 40px; color: var(--accent-cyan); }
-        .contact-block { margin-bottom: 30px; }
+        #contact { text-align: center; padding-top: 150px; }
+        #contact h2 { margin-bottom: 20px; font-size: 3rem; background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+        #contact p { color: var(--text-muted); margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto;}
         
-        .contact-block h3 { font-size: 1.2rem; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
-        .contact-block h3 i { font-size: 1.5rem; color: var(--accent-cyan); }
+        .social-links { display: flex; justify-content: center; gap: 30px; }
         
-        .contact-block a { color: var(--accent-purple); text-decoration: none; transition: color 0.3s; margin-left: 35px; display: block; }
-        .contact-block a:hover { color: var(--accent-cyan); }
-        
-        .contact-visual { flex: 1; display: flex; justify-content: center; }
-        
-        /* Animation definition for the smooth spin */
-        @keyframes spinDonut {
-            0% { transform: rotate(45deg); }
-            100% { transform: rotate(405deg); } /* 45deg + 360deg for a seamless loop */
+        .social-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: #fff; font-size: 1.5rem;
+            text-decoration: none;
+            transition: var(--transition-smooth);
         }
 
-        .donut-chart { 
-            width: 250px; 
-            height: 250px; 
-            border-radius: 50%; 
-            border: 40px solid; 
-            border-color: #00f5d4 #00f5d4 #9d4edd #9d4edd; 
-            /* Animation and subtle glow */
-            animation: spinDonut 12s linear infinite; 
-            box-shadow: 0 0 20px rgba(0, 245, 212, 0.2); 
+        .social-btn:hover {
+            transform: translateY(-10px);
+            background: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 30px rgba(79, 195, 247, 0.3);
+            color: #070913;
         }
+
+        .social-btn.linkedin:hover { background: #0077b5; border-color: #0077b5; box-shadow: 0 15px 30px rgba(0, 119, 181, 0.3); }
+        .social-btn.github:hover { background: #fff; border-color: #fff; box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2); }
+        .social-btn.instagram:hover { background: #e1306c; border-color: #e1306c; box-shadow: 0 15px 30px rgba(225, 48, 108, 0.3); }
+
+        footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 100px;}
 
         /* =========================================
            9. RESPONSIVE DESIGN
         ========================================= */
         @media (max-width: 768px) {
-            nav { flex-direction: column; padding: 15px; height: auto; }
-            .nav-links { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
-            #about, #analysis, #contact { flex-direction: column; }
-            .hero-title { font-size: 2.5rem; }
-            .chart-placeholder, .donut-chart { margin: 0 auto; }
-            .contact-block a { margin-left: 0; }
+            nav { flex-direction: column; padding: 15px; }
+            .nav-links { margin-top: 15px; flex-wrap: wrap; justify-content: center; gap: 15px;}
+            #about, #analysis { flex-direction: column; text-align: center; }
+            .about-text h2 { background-position: center; }
+            .analysis-box { border-left: none; border-top: 3px solid rgba(255,255,255,0.1); padding: 20px 0 0 0; }
+            .analysis-box:hover { transform: translateY(-5px); border-top-color: var(--accent-cyan); }
+            .hero-title { font-size: 3rem; }
+            .hero-subtitle { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
+    <nav id="navbar">
         <a href="#hero" class="nav-logo">JST.</a>
         <div class="nav-links">
             <a href="#hero">Home</a>
-            <a href="projects.html">Projects</a>
-            <a href="tactics.html">Tactical Analyser</a>
-            <a href="analysis.html">Match Analyzer</a>
+            <a href="#about">About</a>
+            <a href="#content">Projects</a>
+            <a href="#analysis">Analysis</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <section id="hero">
-        <h1 class="hero-title">JEREIN SAM<br>THOMAS</h1>
-        <div class="hero-subtitle">DATA SCIENCE PORTFOLIO</div>
+        <div class="hero-content reveal">
+            <h1 class="hero-title">Jerein Sam<br>Thomas</h1>
+            <div class="hero-subtitle">MSc Applied Data Science</div>
+        </div>
     </section>
 
     <section id="about">
-        <div class="about-visual">
-            <div class="circle-graphic"></div>
+        <div class="about-visual reveal">
+            <div class="glow-orb">
+                <div class="inner-orb"></div>
+            </div>
         </div>
-        <div class="about-text">
+        <div class="about-text reveal delay-1">
             <h2>ABOUT ME</h2>
-            <p>I am a passionate and dedicated MSc Applied Data Science student with a strong foundation in physics and a growing expertise in data-driven problem solving. I completed my Bachelor's degree in Physics from Mar Thoma College, Thiruvalla, and I am currently pursuing my Master's degree in Applied Data Science at SRM University, where I have developed skills in machine learning, data analysis, and statistical modeling.</p>
+            <p>I am a passionate and dedicated MSc Applied Data Science student with a strong foundation in physics and a growing expertise in data-driven problem solving.</p>
+            <p>Currently pursuing my Master's degree at SRM University, I focus on the intersection of machine learning, statistical modeling, and sports analytics—specifically analyzing football data to uncover actionable insights.</p>
         </div>
     </section>
 
     <section id="content">
-        <h2>TECHNICAL CONTENT</h2>
+        <h2 class="reveal">TECHNICAL PORTFOLIO</h2>
         <div class="card-container">
-            <div class="card" onclick="window.location.href='projects.html';" style="cursor: pointer;">
+            <div class="card reveal" onclick="window.location.href='#';">
                 <div class="card-img project-img"></div>
-                <div class="card-body">MY PROJECTS</div>
+                <div class="card-body">
+                    <div class="card-subtitle">Overview</div>
+                    <div class="card-title">All Projects</div>
+                </div>
             </div>
             
-            <div class="card" onclick="window.location.href='tactics.html';" style="cursor: pointer;">
+            <div class="card red-theme reveal delay-1" onclick="window.location.href='#';">
                 <div class="card-img tactics-img"></div>
-                <div class="card-body red-text">TACTICAL ANALYSER</div>
+                <div class="card-body">
+                    <div class="card-subtitle">Python / Modeling</div>
+                    <div class="card-title">Football Tactics Engine</div>
+                </div>
             </div>
             
-            <div class="card" onclick="window.location.href='analysis.html';" style="cursor: pointer;">
+            <div class="card reveal delay-2" onclick="window.location.href='#';">
                 <div class="card-img analysis-img"></div>
-                <div class="card-body blue-text">MATCH ANALYZER</div>
+                <div class="card-body">
+                    <div class="card-subtitle">Classification Models</div>
+                    <div class="card-title">ISL Match Predictor</div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="analysis">
-        <div class="analysis-left">
-            <h2>MATCH<br>ANALYSIS</h2>
-            <div class="chart-placeholder"></div>
+        <div class="analysis-left reveal">
+            <h2>MATCH DYNAMICS</h2>
+            
+            <div class="tactical-pitch">
+                <div class="pitch-grid"></div>
+                
+                <div class="player p-gk"></div>
+                <div class="player p-lb"></div>
+                <div class="player p-cb1"></div>
+                <div class="player p-cb2"></div>
+                <div class="player p-rb"></div>
+                <div class="player p-lcm"></div>
+                <div class="player p-cdm"></div>
+                <div class="player p-rcm"></div>
+                <div class="player p-lw"></div>
+                <div class="player p-st" title="Target Man"></div>
+                <div class="player p-rw"></div>
+            </div>
         </div>
+
         <div class="analysis-right">
-            <div class="analysis-box">
-                <h3>I Tactical Analysis</h3>
-                <p>Studied team formations, player positioning, and in-game tactical changes to understand how strategies influence match outcomes.</p>
+            <div class="analysis-box reveal delay-1">
+                <h3>Tactical Formation Modeling</h3>
+                <p>Engineered models to represent over 40 tactical setups and player roles, tracking how in-game structural shifts dictate possession and defensive solidity.</p>
             </div>
-            <div class="analysis-box">
-                <h3>Performance Metrics</h3>
-                <p>Analyzed key statistics such as possession, passing accuracy, shots on target, and player contributions to evaluate overall team performance.</p>
+            <div class="analysis-box reveal delay-2">
+                <h3>Performance Analytics</h3>
+                <p>Analyzed vast historical datasets from the ISL to extract key performance indicators, evaluating passing networks and high-intensity attacking transitions.</p>
             </div>
-            <div class="analysis-box">
-                <h3>Predictive Insights</h3>
-                <p>Applied data science techniques to identify trends and patterns, enabling match outcome predictions and deeper understanding of game dynamics.</p>
+            <div class="analysis-box reveal delay-2">
+                <h3>Predictive Outcomes</h3>
+                <p>Utilized exploratory data analysis and classification algorithms to identify hidden patterns, building robust engines capable of forecasting match results.</p>
             </div>
         </div>
     </section>
 
-    <section id="contact">
-        <div class="contact-info">
-            <h2>CONTACT ME ON:</h2>
-            
-            <div class="contact-block">
-                <h3><i class="fa-solid fa-envelope"></i>EMAIL</h3>
-                <a href="mailto:jereinsamthomas1009@gmail.com" class="cyan-text">jereinsamthomas1009@gmail.com</a>
-            </div>
-
-            <div class="contact-block">
-                <h3><i class="fa-brands fa-github"></i>GITHUB</h3>
-                <a href="https://github.com/jereinsamthomas" target="_blank">github.com/jereinsamthomas</a>
-            </div>
-            
-            <div class="contact-block">
-                <h3><i class="fa-brands fa-linkedin"></i>LINKEDIN</h3>
-                <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a75a2a7" target="_blank">linkedin.com/in/jerein-sam-thomas</a>
-            </div>
-
-            <div class="contact-block">
-                <h3><i class="fa-brands fa-instagram"></i>INSTAGRAM</h3>
-                <a href="https://www.instagram.com/jerein_sam_thomas" target="_blank">@jerein_sam_thomas</a>
-            </div>
-        </div>
+    <section id="contact" class="reveal">
+        <h2>LET'S CONNECT</h2>
+        <p>Whether you want to discuss data science, football analytics, or potential internship opportunities, my inbox is always open.</p>
         
-        <div class="contact-visual">
-            <div class="donut-chart"></div>
+        <div class="social-links">
+            <a href="mailto:jereinsamthomas1009@gmail.com" class="social-btn"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://github.com/jereinsamthomas" target="_blank" class="social-btn github"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a75a2a7" target="_blank" class="social-btn linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/jerein_sam_thomas" target="_blank" class="social-btn instagram"><i class="fa-brands fa-instagram"></i></a>
         </div>
     </section>
 
+    <footer>
+        <p>&copy; 2026 Jerein Sam Thomas. Engineered with precision.</p>
+    </footer>
+
+    <script>
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for Scroll Reveal Animations
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            revealOnScroll.observe(el);
+        });
+    </script>
 </body>
 </html>
