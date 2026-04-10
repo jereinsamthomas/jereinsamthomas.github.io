@@ -4,30 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TACTICS OS — Tactical Mastery</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0f0a;
-  --bg2: #0d130d;
-  --bg3: #111811;
-  --panel: #0f150f;
-  --border: #1e2e1e;
-  --border2: #243624;
-  --green: #00ff41;
-  --green2: #00cc33;
-  --green3: #00ff4133;
-  --green4: #00ff4111;
-  --green-dim: #00aa2a;
-  --text: #c8dfc8;
-  --text2: #7a9e7a;
-  --text3: #4a6e4a;
-  --red: #ff4141;
-  --red2: #ff414133;
-  --amber: #ffaa00;
-  --sidebar-w: 200px;
-  --font-display: 'Barlow Condensed', sans-serif;
-  --font-mono: 'Share Tech Mono', monospace;
-  --font-body: 'Barlow', sans-serif;
+  /* Premium Dark Mode SaaS Palette */
+  --bg: #0f172a;       /* slate-900 */
+  --bg2: #1e293b;      /* slate-800 */
+  --bg3: #0f172a;
+  --panel: #1e293b;    /* slate-800 */
+  --border: #334155;   /* slate-700 */
+  --border2: #475569;  /* slate-600 */
+  
+  /* Brand Emerald */
+  --green: #10b981;    /* emerald-500 */
+  --green2: #059669;   /* emerald-600 */
+  --green3: rgba(16, 185, 129, 0.2);
+  --green4: rgba(16, 185, 129, 0.08);
+  --green-dim: #34d399; /* emerald-400 */
+  
+  /* Brand Blue (for passing lines) */
+  --blue: #3b82f6;
+  --blue-dim: rgba(59, 130, 246, 0.3);
+
+  /* Text Colors */
+  --text: #f8fafc;     /* slate-50 */
+  --text2: #cbd5e1;    /* slate-300 */
+  --text3: #94a3b8;    /* slate-400 */
+  
+  /* Status Colors */
+  --red: #ef4444;      /* red-500 */
+  --red2: rgba(239, 68, 68, 0.2);
+  --amber: #f59e0b;    /* amber-500 */
+  
+  --sidebar-w: 260px;
+  --font-display: 'Inter', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+  --font-body: 'Inter', sans-serif;
+  
+  --radius: 8px;
+  --radius-sm: 4px;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -39,16 +54,7 @@ html, body {
   font-family: var(--font-body);
   font-size: 14px;
   overflow: hidden;
-}
-
-/* ========== SCANLINE OVERLAY ========== */
-body::before {
-  content:'';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
-  pointer-events: none;
-  z-index: 9999;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ========== LAYOUT ========== */
@@ -70,27 +76,17 @@ body::before {
   overflow: hidden;
 }
 
-.sidebar::before {
-  content:'';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--green);
-  box-shadow: 0 0 12px var(--green);
-}
-
 .logo {
-  padding: 18px 16px 14px;
+  padding: 24px 20px 20px;
   border-bottom: 1px solid var(--border);
 }
 
 .logo-text {
   font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 900;
-  letter-spacing: 2px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
   color: #fff;
-  text-transform: uppercase;
 }
 
 .logo-text span {
@@ -102,97 +98,83 @@ body::before {
   width: 6px; height: 6px;
   background: var(--green);
   border-radius: 50%;
-  margin-right: 5px;
+  margin-right: 6px;
   box-shadow: 0 0 6px var(--green);
-  animation: blink 2s infinite;
-}
-
-@keyframes blink {
-  0%,100%{opacity:1} 50%{opacity:0.3}
 }
 
 .status-line {
   font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--green-dim);
-  margin-top: 4px;
-  letter-spacing: 1px;
+  font-size: 10px;
+  color: var(--text3);
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
 }
 
 .nav-section {
-  padding: 12px 0;
+  padding: 20px 0;
   border-bottom: 1px solid var(--border);
 }
 
 .nav-label {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
   color: var(--text3);
-  letter-spacing: 2px;
-  padding: 0 16px 8px;
+  letter-spacing: 1px;
+  padding: 0 20px 10px;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 9px 16px;
+  gap: 12px;
+  padding: 10px 20px;
   cursor: pointer;
   font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-weight: 500;
   color: var(--text2);
-  transition: all 0.15s;
+  transition: all 0.2s ease;
   position: relative;
-  border-left: 2px solid transparent;
+  border-left: 3px solid transparent;
 }
 
 .nav-item:hover {
   color: var(--text);
   background: var(--green4);
-  border-left-color: var(--green3);
 }
 
 .nav-item.active {
   color: var(--green);
-  background: var(--green4);
+  background: var(--bg);
   border-left-color: var(--green);
+  font-weight: 600;
 }
 
-.nav-item.active::after {
-  content:'';
-  position: absolute;
-  right: 0; top: 50%;
-  transform: translateY(-50%);
-  width: 4px; height: 4px;
-  background: var(--green);
-  border-radius: 50%;
-  box-shadow: 0 0 6px var(--green);
-}
-
-.nav-icon { font-size: 15px; width: 18px; text-align: center; }
+.nav-icon { font-size: 16px; width: 20px; text-align: center; opacity: 0.8; }
+.nav-item.active .nav-icon { opacity: 1; }
 
 .sidebar-footer {
   margin-top: auto;
-  padding: 12px 16px;
+  padding: 16px 20px;
   border-top: 1px solid var(--border);
+  background: var(--bg);
 }
 
 .analyst-profile {
-  font-family: var(--font-mono);
-  font-size: 9px;
+  font-family: var(--font-display);
+  font-size: 11px;
   color: var(--text3);
-  letter-spacing: 1px;
 }
 
 .analyst-name {
-  color: var(--green-dim);
+  color: var(--text);
   display: block;
-  margin-top: 2px;
-  font-size: 10px;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 /* ========== MAIN CONTENT ========== */
@@ -207,293 +189,230 @@ body::before {
 .topbar {
   display: flex;
   align-items: center;
-  padding: 10px 24px;
+  padding: 14px 32px;
   border-bottom: 1px solid var(--border);
-  background: var(--panel);
+  background: var(--bg);
   gap: 8px;
   flex-shrink: 0;
 }
 
 .breadcrumb {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text3);
-  letter-spacing: 1px;
 }
 
-.breadcrumb span { color: var(--text2); }
+.breadcrumb span { color: var(--green); font-weight: 500; }
 
 .topbar-right {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .sys-badge {
   font-family: var(--font-mono);
-  font-size: 9px;
-  padding: 3px 8px;
-  border: 1px solid var(--green3);
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 12px;
   color: var(--green);
-  letter-spacing: 1px;
   background: var(--green4);
+  font-weight: 500;
 }
 
 /* ========== PAGE CONTAINER ========== */
 .page {
   flex: 1;
   overflow-y: auto;
-  padding: 28px 28px 40px;
+  padding: 32px 32px 60px;
   display: none;
 }
 
-.page.active { display: block; }
+.page.active { display: block; animation: fadeIn 0.3s ease; }
 
-.page::-webkit-scrollbar { width: 4px; }
-.page::-webkit-scrollbar-track { background: var(--bg); }
-.page::-webkit-scrollbar-thumb { background: var(--border2); }
+.page::-webkit-scrollbar { width: 6px; }
+.page::-webkit-scrollbar-track { background: transparent; }
+.page::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 10px; }
 
 /* ========== PAGE HEADER ========== */
 .page-header {
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 .page-title {
   font-family: var(--font-display);
-  font-size: 38px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  font-size: 28px;
+  font-weight: 700;
   color: #fff;
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .page-title span { color: var(--green); }
 
 .page-sub {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text2);
   margin-top: 6px;
-  font-weight: 300;
 }
 
 /* ========== DASHBOARD ========== */
 .hero-section {
-  background: linear-gradient(135deg, var(--bg3) 0%, var(--panel) 100%);
+  background: linear-gradient(135deg, var(--panel) 0%, var(--bg) 100%);
   border: 1px solid var(--border);
-  padding: 36px 36px 32px;
+  border-radius: var(--radius);
+  padding: 40px;
   position: relative;
   overflow: hidden;
-  margin-bottom: 28px;
-}
-
-.hero-section::before {
-  content:'';
-  position: absolute;
-  top: 0; right: 0;
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, var(--green3) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hero-section::after {
-  content: '⚽';
-  position: absolute;
-  right: 40px; top: 50%;
-  transform: translateY(-50%);
-  font-size: 100px;
-  opacity: 0.06;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .hero-label {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--green);
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.hero-label::before {
-  content:'';
-  width: 20px; height: 1px;
-  background: var(--green);
+  margin-bottom: 16px;
+  font-weight: 500;
 }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: 64px;
-  font-weight: 900;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+  font-size: 42px;
+  font-weight: 800;
   color: #fff;
-  line-height: 0.95;
+  line-height: 1.1;
 }
 
-.hero-title span { color: var(--green); display: block; }
+.hero-title span { color: var(--green); }
 
 .hero-desc {
-  margin-top: 14px;
-  font-size: 14px;
+  margin-top: 16px;
+  font-size: 15px;
   color: var(--text2);
-  max-width: 460px;
+  max-width: 500px;
   line-height: 1.6;
-  font-weight: 300;
 }
 
 .hero-actions {
   display: flex;
-  gap: 12px;
-  margin-top: 24px;
+  gap: 16px;
+  margin-top: 32px;
 }
 
 .btn-primary {
   font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  font-weight: 600;
   padding: 12px 24px;
   background: var(--green);
-  color: #000;
+  color: #fff;
   border: none;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.15s;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px var(--green3);
 }
 
 .btn-primary:hover {
-  background: #fff;
-  box-shadow: 0 0 20px var(--green3);
+  background: var(--green2);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
   font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  font-weight: 500;
   padding: 12px 24px;
-  background: transparent;
+  background: var(--panel);
   color: var(--text);
   border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s ease;
 }
 
 .btn-secondary:hover {
-  border-color: var(--green);
-  color: var(--green);
+  border-color: var(--text2);
+  background: var(--border);
 }
 
 .section-title {
   font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--text2);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.section-title::after {
-  content:'';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20px;
 }
 
 .modules-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 20px;
 }
 
 .module-card {
   background: var(--panel);
   border: 1px solid var(--border);
-  padding: 20px;
+  border-radius: var(--radius);
+  padding: 24px;
   cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-
-.module-card::before {
-  content:'';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--green);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.2s;
+  transition: all 0.2s ease;
 }
 
 .module-card:hover {
-  border-color: var(--border2);
-  background: var(--bg3);
+  border-color: var(--green);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
 
-.module-card:hover::before { transform: scaleX(1); }
-
 .module-icon {
-  font-size: 22px;
-  margin-bottom: 10px;
-  opacity: 0.8;
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: var(--green);
 }
 
 .module-name {
   font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
   color: #fff;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .module-desc {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text3);
   line-height: 1.5;
-  font-weight: 300;
 }
 
 /* ========== FORMATIONS ========== */
 .formations-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  gap: 20px;
 }
 
 .search-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .search-input {
   background: var(--panel);
   border: 1px solid var(--border);
   color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  padding: 9px 14px;
-  width: 260px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 10px 16px;
+  width: 300px;
+  border-radius: var(--radius-sm);
   outline: none;
-  letter-spacing: 1px;
-  transition: border-color 0.15s;
+  transition: border-color 0.2s;
 }
 
 .search-input:focus { border-color: var(--green); }
@@ -502,15 +421,15 @@ body::before {
 .formation-card {
   background: var(--panel);
   border: 1px solid var(--border);
-  padding: 14px;
+  border-radius: var(--radius);
+  padding: 20px;
   cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
+  transition: all 0.2s ease;
 }
 
 .formation-card:hover {
-  border-color: var(--green3);
-  background: var(--bg3);
+  border-color: var(--border2);
+  background: var(--bg2);
 }
 
 .formation-card.selected {
@@ -521,27 +440,25 @@ body::before {
 .formation-name {
   font-family: var(--font-display);
   font-size: 18px;
-  font-weight: 900;
-  letter-spacing: 2px;
+  font-weight: 700;
   color: #fff;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .formation-type {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   color: var(--text3);
-  letter-spacing: 1px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 
 .formation-pitch {
   width: 100%;
   aspect-ratio: 0.72;
-  background: #0d1f0d;
-  border: 1px solid #1a2e1a;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   position: relative;
-  border-radius: 2px;
   overflow: hidden;
 }
 
@@ -550,7 +467,7 @@ body::before {
   position: absolute;
   left: 50%; top: 0; bottom: 0;
   width: 1px;
-  background: #1e3a1e;
+  background: var(--border);
   transform: translateX(-50%);
 }
 
@@ -559,14 +476,14 @@ body::before {
   position: absolute;
   left: 50%; top: 50%;
   width: 30%; aspect-ratio: 1;
-  border: 1px solid #1e3a1e;
+  border: 1px solid var(--border);
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
 
 .pitch-player {
   position: absolute;
-  width: 18px; height: 18px;
+  width: 20px; height: 20px;
   background: var(--green);
   border-radius: 50%;
   transform: translate(-50%, -50%);
@@ -574,57 +491,57 @@ body::before {
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
-  font-size: 6px;
-  color: #000;
-  font-weight: 700;
-  box-shadow: 0 0 6px var(--green3);
+  font-size: 7px;
+  color: #fff;
+  font-weight: 600;
   z-index: 1;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .formation-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 .formation-count {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
   color: var(--text3);
 }
 
 .formation-tag {
   font-family: var(--font-mono);
-  font-size: 9px;
-  padding: 2px 6px;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
   background: var(--green4);
   color: var(--green);
-  border: 1px solid var(--green3);
-  letter-spacing: 1px;
+  font-weight: 500;
 }
 
 /* ========== STYLES PAGE ========== */
 .styles-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .style-card {
   background: var(--panel);
   border: 1px solid var(--border);
-  padding: 16px 20px;
+  border-radius: var(--radius);
+  padding: 20px 24px;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 32px;
 }
 
 .style-card:hover {
   border-color: var(--border2);
-  background: var(--bg3);
 }
 
 .style-card.selected {
@@ -638,173 +555,143 @@ body::before {
 
 .style-name {
   font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
   color: #fff;
+  margin-bottom: 4px;
 }
 
 .style-tag {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   color: var(--text3);
-  letter-spacing: 1px;
 }
 
 .style-bars {
   flex: 1;
   display: flex;
-  gap: 16px;
+  gap: 24px;
 }
 
 .bar-group {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .bar-label {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   color: var(--text3);
-  letter-spacing: 1px;
   display: flex;
   justify-content: space-between;
-  text-transform: uppercase;
 }
 
-.bar-label span { color: var(--text2); }
+.bar-label span { color: var(--text); font-weight: 500; }
 
 .bar-track {
-  height: 4px;
+  height: 6px;
   background: var(--bg);
-  position: relative;
-  border-radius: 0;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 .bar-fill {
   height: 100%;
   background: var(--green);
-  box-shadow: 0 0 4px var(--green3);
-  transition: width 0.4s;
+  transition: width 0.4s ease;
 }
 
-.bar-fill.defense { background: var(--red); box-shadow: 0 0 4px var(--red2); }
+.bar-fill.defense { background: var(--blue); }
 .bar-fill.tempo { background: var(--amber); }
 
 /* ========== ROLES PAGE ========== */
 .roles-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 16px;
 }
 
 .role-card {
   background: var(--panel);
   border: 1px solid var(--border);
-  padding: 16px;
+  border-radius: var(--radius);
+  padding: 20px;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s ease;
 }
 
-.role-card:hover {
-  border-color: var(--border2);
-  background: var(--bg3);
-}
-
-.role-card.selected {
-  border-color: var(--green);
-  background: var(--green4);
-}
+.role-card:hover { border-color: var(--border2); }
+.role-card.selected { border-color: var(--green); background: var(--green4); }
 
 .role-card-name {
   font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 600;
   color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 
-.role-stats {
-  display: flex;
-  gap: 12px;
-}
-
-.role-stat {
-  flex: 1;
-}
+.role-stats { display: flex; gap: 16px; }
+.role-stat { flex: 1; }
 
 .role-stat-label {
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 10px;
   color: var(--text3);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 3px;
+  margin-bottom: 6px;
   display: flex;
   justify-content: space-between;
 }
 
-.role-stat-label span { color: var(--text2); }
+.role-stat-label span { color: var(--text); }
+.role-bar-track { height: 4px; background: var(--bg); border-radius: 2px; overflow: hidden; }
+.role-bar-fill { height: 100%; background: var(--green); }
+.role-bar-fill.def { background: var(--blue); }
 
-.role-bar-track {
-  height: 3px;
-  background: var(--bg);
-}
-
-.role-bar-fill {
-  height: 100%;
-  background: var(--green);
-}
-
-.role-bar-fill.def { background: var(--red); }
-
-/* ========== MATCH ANALYZER ========== */
-.analyzer-wrapper {
+/* ========== FORMS & ANALYZER ========== */
+.analyzer-wrapper, .generator-layout, .movements-layout, .predictor-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 24px;
+  margin-bottom: 24px;
+  align-items: start;
 }
 
-.team-panel {
+.analyzer-wrapper { grid-template-columns: 1fr 1fr; }
+.generator-layout, .movements-layout { grid-template-columns: 360px 1fr; }
+.predictor-layout { grid-template-columns: 380px 1fr; }
+
+.team-panel, .gen-config-panel, .mov-config-panel, .predictor-panel {
   background: var(--panel);
   border: 1px solid var(--border);
-  padding: 18px;
+  border-radius: var(--radius);
+  padding: 24px;
 }
 
-.team-panel.home-panel { border-top: 2px solid var(--green); }
-.team-panel.away-panel { border-top: 2px solid var(--red); }
+.team-panel.home-panel { border-top: 3px solid var(--green); }
+.team-panel.away-panel { border-top: 3px solid var(--red); }
+.gen-config-panel, .mov-config-panel, .predictor-panel { border-top: 3px solid var(--blue); }
 
 .team-label {
   font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-  padding-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
 }
 
 .team-label.home { color: var(--green); }
 .team-label.away { color: var(--red); }
 
-.form-group {
-  margin-bottom: 12px;
-}
-
+.form-group { margin-bottom: 16px; }
 .form-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
+  font-family: var(--font-body);
+  font-size: 12px;
   color: var(--text3);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  font-weight: 500;
 }
 
 .form-select, .form-input {
@@ -812,512 +699,258 @@ body::before {
   background: var(--bg);
   border: 1px solid var(--border);
   color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 9px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
   outline: none;
   cursor: pointer;
-  transition: border-color 0.15s;
+  transition: border-color 0.2s;
   -webkit-appearance: none;
-  letter-spacing: 1px;
 }
+.form-select:focus, .form-input:focus { border-color: var(--blue); }
 
-.form-select:focus, .form-input:focus { border-color: var(--green); }
-
-/* 11 Player Roles Grid */
 .roles-section-title {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--green);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin: 14px 0 8px;
-  padding-top: 12px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 600;
+  margin: 24px 0 12px;
+  padding-top: 16px;
   border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.roles-section-title::after {
-  content:'';
-  flex:1;
-  height:1px;
-  background: var(--border);
 }
 
 .player-roles-grid {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  max-height: 340px;
+  gap: 8px;
+  max-height: 380px;
   overflow-y: auto;
-  padding-right: 4px;
+  padding-right: 8px;
 }
 
-.player-roles-grid::-webkit-scrollbar { width: 3px; }
-.player-roles-grid::-webkit-scrollbar-thumb { background: var(--border2); }
+.player-roles-grid::-webkit-scrollbar { width: 4px; }
+.player-roles-grid::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px;}
 
 .player-role-row {
   display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 8px;
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
   align-items: center;
 }
 
 .pos-tag {
   font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  color: var(--green);
-  background: var(--green4);
-  border: 1px solid var(--green3);
-  padding: 5px 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--border);
+  border-radius: 4px;
+  padding: 6px 0;
   text-align: center;
-  letter-spacing: 1px;
 }
 
-.pos-tag.away-tag {
-  color: var(--red);
-  background: var(--red2);
-  border-color: #ff414144;
-}
+.pos-tag.away-tag { background: var(--border2); }
 
 .vs-bar {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 14px 0;
-  margin-bottom: 16px;
+  gap: 24px;
+  padding: 16px 0;
+  margin-bottom: 24px;
 }
 
 .vs-text {
   font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 900;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--text3);
-  letter-spacing: 6px;
 }
 
-.vs-line {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
+.vs-line { flex: 1; height: 1px; background: var(--border); }
 
 .analyze-btn {
   width: 100%;
   font-family: var(--font-display);
   font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  font-weight: 600;
   padding: 14px;
-  background: var(--green);
-  color: #000;
+  background: var(--blue);
+  color: #fff;
   border: none;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  margin-bottom: 20px;
-  transition: all 0.15s;
+  margin-bottom: 24px;
+  transition: all 0.2s ease;
 }
+.analyze-btn:hover { background: #2563eb; }
 
-.analyze-btn:hover {
-  background: #fff;
-  box-shadow: 0 0 24px var(--green3);
-}
-
-.analysis-result {
+/* ========== RESULTS & VIZ ========== */
+.analysis-result, .generator-output, .movement-result {
   background: var(--panel);
   border: 1px solid var(--border);
-  padding: 20px;
+  border-radius: var(--radius);
+  padding: 24px;
   display: none;
 }
-
-.analysis-result.visible { display: block; }
+.analysis-result.visible, .generator-output.visible { display: block; }
 
 .result-title {
   font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 14px;
-  padding-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
 }
 
-.result-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 12px;
-  color: var(--text2);
-  line-height: 1.5;
-}
-
-.result-item:last-child { border-bottom: none; }
-
-.result-arrow {
-  color: var(--green);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-/* ========== AI TEAM GENERATOR ========== */
-.generator-layout {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 16px;
-  margin-bottom: 16px;
-  align-items: start;
-}
-
-.gen-config-panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-top: 2px solid var(--green);
-  padding: 18px;
-  position: sticky;
-  top: 0;
-}
-
-.generator-output {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 20px;
-  display: none;
-  max-height: 600px;
-  overflow-y: auto;
-}
-
-.generator-output.visible { display: block; }
-.generator-output::-webkit-scrollbar { width: 3px; }
-.generator-output::-webkit-scrollbar-thumb { background: var(--border2); }
-
-/* Enhanced squad row */
-.squad-row {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-}
-.squad-row:last-child { border-bottom: none; }
-
-.squad-row-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.pos-badge {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  padding: 4px 8px;
-  background: var(--green4);
-  color: var(--green);
-  border: 1px solid var(--green3);
-  min-width: 42px;
-  text-align: center;
-  letter-spacing: 1px;
-  flex-shrink: 0;
-}
-
-.squad-role-name {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #fff;
-  flex: 1;
-}
-
-.squad-stats {
-  display: flex;
-  gap: 8px;
-}
-
-.stat-pill {
-  font-family: var(--font-mono);
-  font-size: 8px;
-  padding: 2px 7px;
-  letter-spacing: 1px;
-}
-.stat-pill.atk { color: var(--green); border: 1px solid var(--green3); background: var(--green4); }
-.stat-pill.def { color: var(--red); border: 1px solid #ff414133; background: #ff411111; }
-
-.squad-bars {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 7px;
-}
-
-.squad-bar-group { flex: 1; }
-
-.squad-bar-label {
-  font-family: var(--font-mono);
-  font-size: 8px;
-  color: var(--text3);
-  letter-spacing: 1px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 3px;
-}
-.squad-bar-label span { color: var(--text2); }
-
-.squad-bar-track {
-  height: 3px;
-  background: var(--bg);
-}
-.squad-bar-fill { height: 100%; background: var(--green); }
-.squad-bar-fill.def { background: var(--red); }
-
-.squad-movement {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--text2);
-  margin-bottom: 4px;
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-}
-.squad-movement::before { content:'→'; color: var(--green); flex-shrink:0; }
-
-.squad-note {
-  font-size: 11px;
-  color: var(--text3);
-  line-height: 1.5;
-  padding-left: 14px;
-  font-style: italic;
-}
-
-/* old aliases */
-.pos-role { font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text); flex: 1; }
-.pos-movement { font-family: var(--font-mono); font-size: 9px; color: var(--text3); text-align: right; max-width: 140px; line-height: 1.4; }
-.team-row { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.team-row:last-child { border-bottom:none; }
-
-/* ========== MOVEMENTS EXPLORER ========== */
-.movements-layout {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 16px;
-  margin-bottom: 16px;
-  align-items: start;
-}
-
-.mov-config-panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-top: 2px solid var(--green);
-  padding: 18px;
-}
-
-.movement-result {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 20px;
-  max-height: 600px;
-  overflow-y: auto;
-}
-.movement-result::-webkit-scrollbar { width: 3px; }
-.movement-result::-webkit-scrollbar-thumb { background: var(--border2); }
-
-/* Enhanced movement row */
-.mov-player-row {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-}
-.mov-player-row:last-child { border-bottom: none; }
-
-.mov-player-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.mov-role-name {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #fff;
-  flex: 1;
-}
-
-.mov-detail-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-
-.mov-detail-box {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  padding: 7px 10px;
-}
-
-.mov-detail-label {
-  font-family: var(--font-mono);
-  font-size: 8px;
-  color: var(--text3);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 3px;
-}
-
-.mov-detail-value {
-  font-size: 11px;
-  color: var(--text2);
-  line-height: 1.4;
-}
-
-.mov-combined {
-  font-size: 11px;
-  color: var(--green-dim);
-  line-height: 1.5;
-  padding: 6px 10px;
-  background: var(--green4);
-  border-left: 2px solid var(--green);
-}
-
-.movement-pos-row {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 9px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 12px;
-}
-.movement-pos-row:last-child { border-bottom: none; }
-
-.movement-pos {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--green);
-  min-width: 38px;
-  letter-spacing: 1px;
-  padding-top: 1px;
-}
-
-.movement-desc {
-  color: var(--text2);
-  line-height: 1.5;
-  font-size: 12px;
-}
-
-/* ========== VISUALIZATION ========== */
 .viz-section {
-  margin-top: 16px;
+  margin-top: 24px;
   background: var(--panel);
   border: 1px solid var(--border);
-  padding: 20px 20px 16px;
+  border-radius: var(--radius);
+  padding: 24px;
   display: none;
 }
 .viz-section.visible { display: block; }
 
-.viz-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-}
-
-.viz-badge {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  padding: 4px 10px;
-  letter-spacing: 1px;
-  border: 1px solid;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.viz-badge.home { color: var(--green); border-color: var(--green3); background: var(--green4); }
-.viz-badge.away { color: var(--red); border-color: #ff414133; background: #ff411111; }
-.viz-badge.neutral { color: var(--amber); border-color: #ffaa0033; background: #ffaa0011; }
-
-.viz-badge-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  display: inline-block;
-}
-.viz-badge.home .viz-badge-dot { background: var(--green); box-shadow: 0 0 6px var(--green); }
-.viz-badge.away .viz-badge-dot { background: var(--red); }
-.viz-badge.neutral .viz-badge-dot { background: var(--amber); }
-
 .pitch-wrap {
   position: relative;
   width: 100%;
-  background: #0a1a0a;
-  border: 1px solid var(--border2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   overflow: hidden;
+  margin-top: 16px;
 }
 
-#pitchCanvas {
+#pitchCanvas, #genCanvas, #movCanvas {
   display: block;
   width: 100%;
   height: auto;
 }
 
+.viz-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.viz-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+
+.viz-badge-dot { width: 8px; height: 8px; border-radius: 50%; }
+.viz-badge.home .viz-badge-dot { background: var(--green); }
+.viz-badge.away .viz-badge-dot { background: var(--red); }
+.viz-badge.neutral .viz-badge-dot { background: var(--blue); }
+
 .viz-bottom {
   display: flex;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 16px;
+  margin-top: 16px;
   flex-wrap: wrap;
 }
 
 .viz-legend-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 9px;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 11px;
   color: var(--text3);
-  letter-spacing: 1px;
 }
 
-.legend-line {
-  width: 24px;
-  height: 2px;
-  background: var(--green);
+.legend-line { width: 24px; height: 2px; background: var(--text2); }
+.legend-line.blue { background: var(--blue); }
+.legend-line.dash { background: linear-gradient(to right, var(--text3) 40%, transparent 40%) repeat-x; background-size: 6px; }
+
+/* Misc Table/List Styling adjustments for premium feel */
+.squad-row, .mov-player-row {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
 }
-.legend-line.dash { background: linear-gradient(to right, var(--amber) 40%, transparent 40%) repeat-x; background-size: 8px; }
-.legend-line.red-dash { background: linear-gradient(to right, var(--red) 40%, transparent 40%) repeat-x; background-size: 8px; }
+.squad-row:last-child, .mov-player-row:last-child { border-bottom: none; }
 
-/* ========== SCROLLBAR ========== */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border2); }
+.squad-role-name, .mov-role-name {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  flex: 1;
+}
 
-/* ========== ANIMATION ========== */
+.stat-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.stat-pill.atk { background: var(--green4); color: var(--green); }
+.stat-pill.def { background: var(--red2); color: var(--red); }
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.analysis-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+.analysis-block-title {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+/* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.page.active { animation: fadeIn 0.25s ease; }
+/* Prediction Cards */
+.style-prediction-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 12px;
+}
+.style-prediction-card.top-pick { border-color: var(--blue); border-left: 4px solid var(--blue); }
+.pred-rank { font-family: var(--font-mono); font-size: 10px; color: var(--text3); margin-bottom: 8px; }
+.top-pick .pred-rank { color: var(--blue); font-weight: 600; }
+.pred-style-name { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 12px; }
 
-.highlight-green { color: var(--green); }
-
-/* ========== UTILITY ========== */
-.flex { display: flex; }
-.gap-8 { gap: 8px; }
-.mt-12 { margin-top: 12px; }
-.mb-20 { margin-bottom: 20px; }
+.score-meter { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.score-label { font-family: var(--font-mono); font-size: 10px; width: 80px; color: var(--text3); }
+.score-track { flex: 1; height: 6px; background: var(--panel); border-radius: 3px; position: relative; overflow: hidden; }
+.score-fill-home { position: absolute; left: 0; height: 100%; background: var(--green); }
+.score-fill-away { position: absolute; right: 0; height: 100%; background: var(--red); }
 </style>
 </head>
 <body>
 <div class="app">
 
-<!-- ===== SIDEBAR ===== -->
 <div class="sidebar">
   <div class="logo">
     <div class="logo-text">TACTICS<span>OS</span></div>
@@ -1325,7 +958,7 @@ body::before {
   </div>
 
   <div class="nav-section">
-    <div class="nav-label">Core Modules</div>
+    <div class="nav-label">Modules</div>
     <div class="nav-item active" onclick="nav('dashboard',this)">
       <span class="nav-icon">⊞</span> Dashboard
     </div>
@@ -1342,314 +975,275 @@ body::before {
       <span class="nav-icon">✕</span> Match Analyzer
     </div>
     <div class="nav-item" onclick="nav('generator',this)">
-      <span class="nav-icon">⚡</span> AI Team Generator
+      <span class="nav-icon">⚡</span> AI Generator
     </div>
     <div class="nav-item" onclick="nav('movements',this)">
-      <span class="nav-icon">→</span> Movements Explorer
+      <span class="nav-icon">→</span> Movements
+    </div>
+    <div class="nav-item" onclick="nav('predictor',this)">
+      <span class="nav-icon">🧠</span> AI Predictor
     </div>
   </div>
 
   <div class="sidebar-footer">
     <div class="analyst-profile">
       ANALYST PROFILE
-      <span class="analyst-name">TACS-1.0</span>
+      <span class="analyst-name">TACS-PRO</span>
     </div>
   </div>
 </div>
 
-<!-- ===== MAIN ===== -->
 <div class="main">
   <div class="topbar">
-    <div class="breadcrumb" id="breadcrumb">SYS / <span>dashboard</span></div>
+    <div class="breadcrumb" id="breadcrumb">Workspace / <span>Dashboard</span></div>
     <div class="topbar-right">
-      <div class="sys-badge">◉ ACTIVE</div>
+      <div class="sys-badge">◉ CONNECTED</div>
     </div>
   </div>
 
-  <!-- ===== DASHBOARD ===== -->
   <div class="page active" id="page-dashboard">
     <div class="hero-section">
       <div class="hero-label">Professional Analysis Suite</div>
-      <div class="hero-title">TACTICAL<span>MASTERY</span></div>
-      <div class="hero-desc">Professional-grade football analysis suite. Deconstruct formations, analyze player roles, and simulate tactical matchups with precision data.</div>
+      <div class="hero-title">TACTICAL <span>MASTERY</span></div>
+      <div class="hero-desc">Professional-grade football analysis suite. Deconstruct formations, analyze player roles, predict styles, and simulate tactical matchups with precision data.</div>
       <div class="hero-actions">
-        <button class="btn-primary" onclick="nav('analyzer',document.querySelector('.nav-item:nth-child(5)'))">START MATCH ANALYSIS →</button>
-        <button class="btn-secondary" onclick="nav('formations',document.querySelector('.nav-item:nth-child(2)'))">BROWSE FORMATIONS</button>
+        <button class="btn-primary" onclick="navByName('analyzer')">Launch Match Analyzer</button>
+        <button class="btn-secondary" onclick="navByName('predictor')">AI Predictor</button>
       </div>
     </div>
 
-    <div class="section-title">ACTIVE MODULES</div>
+    <div class="section-title">Core Applications</div>
     <div class="modules-grid">
-      <div class="module-card" onclick="nav('formations',document.querySelectorAll('.nav-item')[1])">
+      <div class="module-card" onclick="navByName('formations')">
         <div class="module-icon">⬡</div>
-        <div class="module-name">FORMATIONS</div>
+        <div class="module-name">Formations</div>
         <div class="module-desc">Browse 40+ structured tactical shapes and player distributions.</div>
       </div>
-      <div class="module-card" onclick="nav('styles',document.querySelectorAll('.nav-item')[2])">
+      <div class="module-card" onclick="navByName('styles')">
         <div class="module-icon">◈</div>
-        <div class="module-name">PLAYING STYLES</div>
+        <div class="module-name">Playing Styles</div>
         <div class="module-desc">Analyze tempo and tactical aggression across 20 systems.</div>
       </div>
-      <div class="module-card" onclick="nav('roles',document.querySelectorAll('.nav-item')[3])">
+      <div class="module-card" onclick="navByName('roles')">
         <div class="module-icon">◉</div>
-        <div class="module-name">PLAYER ROLES</div>
+        <div class="module-name">Player Roles</div>
         <div class="module-desc">Deep dive into 160+ specialized positional functions.</div>
       </div>
-      <div class="module-card" onclick="nav('analyzer',document.querySelectorAll('.nav-item')[4])">
+      <div class="module-card" onclick="navByName('analyzer')">
         <div class="module-icon">✕</div>
-        <div class="module-name">MATCH ANALYZER</div>
-        <div class="module-desc">Simulate tactical matchups and uncover strategic exploits.</div>
+        <div class="module-name">Match Analyzer</div>
+        <div class="module-desc">Full 11v11 role matchup engine with visual movement map.</div>
       </div>
-      <div class="module-card" onclick="nav('generator',document.querySelectorAll('.nav-item')[5])">
+      <div class="module-card" onclick="navByName('generator')">
         <div class="module-icon">⚡</div>
-        <div class="module-name">AI GENERATOR</div>
-        <div class="module-desc">Auto-construct squads fitting any tactical philosophy.</div>
+        <div class="module-name">AI Generator</div>
+        <div class="module-desc">Auto-construct squads with role-specific movement instructions.</div>
       </div>
-      <div class="module-card" onclick="nav('movements',document.querySelectorAll('.nav-item')[6])">
-        <div class="module-icon">→</div>
-        <div class="module-name">MOVEMENTS</div>
-        <div class="module-desc">Granular on-ball and off-ball movement instructions.</div>
+      <div class="module-card" onclick="navByName('predictor')">
+        <div class="module-icon">🧠</div>
+        <div class="module-name">AI Predictor</div>
+        <div class="module-desc">Predict the optimal playing style for any formation with AI reasoning.</div>
       </div>
     </div>
   </div>
 
-  <!-- ===== FORMATIONS ===== -->
   <div class="page" id="page-formations">
     <div class="page-header">
-      <div class="page-title">FORMATIONS</div>
+      <div class="page-title">Formations</div>
       <div class="page-sub">Browse structured tactical shapes and player distributions.</div>
     </div>
-
     <div class="search-bar">
-      <input class="search-input" type="text" placeholder="SEARCH FORMATION..." id="formationSearch" oninput="filterFormations()" />
+      <input class="search-input" type="text" placeholder="Search formation..." id="formationSearch" oninput="filterFormations()" />
     </div>
-
     <div class="formations-grid" id="formationsGrid"></div>
   </div>
 
-  <!-- ===== STYLES ===== -->
   <div class="page" id="page-styles">
     <div class="page-header">
-      <div class="page-title">PLAYING STYLES</div>
+      <div class="page-title">Playing Styles</div>
       <div class="page-sub">Evaluate tactical philosophy through attack, defense, and tempo metrics.</div>
     </div>
     <div class="styles-list" id="stylesList"></div>
   </div>
 
-  <!-- ===== ROLES ===== -->
   <div class="page" id="page-roles">
     <div class="page-header">
-      <div class="page-title">PLAYER ROLES</div>
+      <div class="page-title">Player Roles</div>
       <div class="page-sub">Explore specialized instructions and attributes drawn for every position.</div>
     </div>
     <div class="search-bar">
-      <input class="search-input" type="text" placeholder="SEARCH ROLE..." id="roleSearch" oninput="filterRoles()" />
+      <input class="search-input" type="text" placeholder="Search role..." id="roleSearch" oninput="filterRoles()" />
     </div>
     <div class="roles-grid" id="rolesGrid"></div>
   </div>
 
-  <!-- ===== MATCH ANALYZER ===== -->
   <div class="page" id="page-analyzer">
     <div class="page-header">
-      <div class="page-title">MATCH ANALYZER</div>
-      <div class="page-sub">Assign roles to all 11 positions and a playing style per team — then run a full tactical breakdown.</div>
-    </div>
-
-    <div class="vs-bar">
-      <div class="vs-line"></div>
-      <div class="vs-text">HOME vs AWAY</div>
-      <div class="vs-line"></div>
+      <div class="page-title">Match Analyzer</div>
+      <div class="page-sub">Assign roles and a playing style per team to run a full tactical breakdown.</div>
     </div>
 
     <div class="analyzer-wrapper">
-      <!-- HOME TEAM -->
       <div class="team-panel home-panel">
-        <div class="team-label home">⚽ HOME TEAM</div>
+        <div class="team-label home">Home Team</div>
         <div class="form-group">
           <div class="form-label">Formation</div>
-          <select class="form-select" id="homeFormation" onchange="buildPlayerRoles('home')">
-            <option value="">-- SELECT FORMATION --</option>
-          </select>
+          <select class="form-select" id="homeFormation" onchange="buildPlayerRoles('home')"><option value="">-- Select --</option></select>
         </div>
         <div class="form-group">
           <div class="form-label">Playing Style</div>
-          <select class="form-select" id="homeStyle">
-            <option value="">-- SELECT STYLE --</option>
-          </select>
+          <select class="form-select" id="homeStyle"><option value="">-- Select --</option></select>
         </div>
-        <div class="roles-section-title">Player Roles — 11 Positions</div>
-        <div class="player-roles-grid" id="homeRolesGrid">
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--text3);padding:8px 0;">Select a formation to assign player roles.</div>
-        </div>
+        <div class="roles-section-title">Player Roles</div>
+        <div class="player-roles-grid" id="homeRolesGrid"></div>
       </div>
 
-      <!-- AWAY TEAM -->
       <div class="team-panel away-panel">
-        <div class="team-label away">AWAY TEAM ⚽</div>
+        <div class="team-label away">Away Team</div>
         <div class="form-group">
           <div class="form-label">Formation</div>
-          <select class="form-select" id="awayFormation" onchange="buildPlayerRoles('away')">
-            <option value="">-- SELECT FORMATION --</option>
-          </select>
+          <select class="form-select" id="awayFormation" onchange="buildPlayerRoles('away')"><option value="">-- Select --</option></select>
         </div>
         <div class="form-group">
           <div class="form-label">Playing Style</div>
-          <select class="form-select" id="awayStyle">
-            <option value="">-- SELECT STYLE --</option>
-          </select>
+          <select class="form-select" id="awayStyle"><option value="">-- Select --</option></select>
         </div>
-        <div class="roles-section-title">Player Roles — 11 Positions</div>
-        <div class="player-roles-grid" id="awayRolesGrid">
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--text3);padding:8px 0;">Select a formation to assign player roles.</div>
-        </div>
+        <div class="roles-section-title">Player Roles</div>
+        <div class="player-roles-grid" id="awayRolesGrid"></div>
       </div>
     </div>
 
-    <button class="analyze-btn" onclick="runAnalysis()">▶ RUN FULL MATCH ANALYSIS</button>
+    <button class="analyze-btn" onclick="runAnalysis()">Run Match Analysis</button>
 
     <div class="analysis-result" id="analysisResult">
-      <div class="result-title">⚡ ANALYSIS OUTPUT</div>
-      <div id="analysisItems"></div>
+      <div class="result-title">Tactical Breakdown</div>
+      <div class="analysis-grid">
+        <div class="analysis-block">
+          <div class="analysis-block-title">Team Strength Comparison</div>
+          <div id="strengthMeters"></div>
+        </div>
+        <div class="analysis-block">
+          <div class="analysis-block-title">Positional Battles</div>
+          <div id="duelItems" style="font-size:12px; color:var(--text2); line-height:1.6;"></div>
+        </div>
+      </div>
     </div>
 
-    <!-- MOVEMENT VISUALIZATION -->
     <div class="viz-section" id="vizSection">
-      <div class="result-title">⚽ LIVE MOVEMENT MAP</div>
+      <div class="result-title">Live Match Visualization</div>
       <div class="viz-controls">
-        <div class="viz-badge home"><span class="viz-badge-dot"></span> HOME PLAYERS</div>
-        <div class="viz-badge away"><span class="viz-badge-dot"></span> AWAY PLAYERS</div>
-        <div class="viz-badge neutral"><span class="viz-badge-dot"></span> PRESSING / TRACKING LINES</div>
-        <button onclick="stopAnimation()" style="margin-left:auto;font-family:var(--font-mono);font-size:9px;padding:4px 10px;background:transparent;border:1px solid var(--border2);color:var(--text3);cursor:pointer;letter-spacing:1px;">⏹ PAUSE</button>
-        <button onclick="resumeAnimation()" style="font-family:var(--font-mono);font-size:9px;padding:4px 10px;background:transparent;border:1px solid var(--border2);color:var(--text3);cursor:pointer;letter-spacing:1px;">▶ PLAY</button>
+        <div class="viz-badge home"><span class="viz-badge-dot"></span> Home</div>
+        <div class="viz-badge away"><span class="viz-badge-dot"></span> Away</div>
+        <div class="viz-badge neutral"><span class="viz-badge-dot" style="background:var(--blue);"></span> Pass Network & Movement</div>
       </div>
       <div class="pitch-wrap">
         <canvas id="pitchCanvas" width="900" height="560"></canvas>
       </div>
       <div class="viz-bottom">
-        <div class="viz-legend-item"><div class="legend-line"></div> PLAYER MOVEMENT ARROW</div>
-        <div class="viz-legend-item"><div class="legend-line dash"></div> PRESSING TRIGGER LINE</div>
-        <div class="viz-legend-item"><div class="legend-line red-dash"></div> MARKING / TRACKING LINE</div>
-        <div class="viz-legend-item" style="margin-left:auto;color:var(--text3);font-size:8px;">ANIMATED IN REAL-TIME — BASED ON FORMATION + STYLE + ROLES</div>
+        <div class="viz-legend-item"><div class="legend-line"></div> Movement</div>
+        <div class="viz-legend-item"><div class="legend-line blue"></div> Passing Lane Connectivity</div>
+        <div class="viz-legend-item"><div class="legend-line dash"></div> Pressure / Tracking</div>
       </div>
     </div>
   </div>
 
-  <!-- ===== AI TEAM GENERATOR ===== -->
   <div class="page" id="page-generator">
     <div class="page-header">
-      <div class="page-title">AI TEAM GENERATOR</div>
-      <div class="page-sub">Select a formation, team style, and assign a role to each of the 11 positions — then generate a full tactical squad breakdown.</div>
+      <div class="page-title">AI Team Generator</div>
+      <div class="page-sub">Generate a full tactical squad breakdown and visual pass network.</div>
     </div>
 
     <div class="generator-layout">
-      <!-- LEFT: Config -->
       <div class="gen-config-panel">
-        <div class="team-label home">⚡ SQUAD CONFIGURATION</div>
+        <div class="team-label" style="color:var(--blue);">Configuration</div>
         <div class="form-group">
           <div class="form-label">Formation</div>
-          <select class="form-select" id="genFormation" onchange="buildGenRoles()">
-            <option value="">-- SELECT FORMATION --</option>
-          </select>
+          <select class="form-select" id="genFormation" onchange="buildGenRoles()"><option value="">-- Select --</option></select>
         </div>
         <div class="form-group">
-          <div class="form-label">Team Playing Style</div>
-          <select class="form-select" id="genStyle">
-            <option value="">-- SELECT STYLE --</option>
-          </select>
+          <div class="form-label">Playing Style</div>
+          <select class="form-select" id="genStyle"><option value="">-- Select --</option></select>
         </div>
-        <div class="roles-section-title">Player Roles — 11 Positions</div>
-        <div class="player-roles-grid" id="genRolesGrid">
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--text3);padding:8px 0;">Select a formation to assign player roles.</div>
-        </div>
-        <button class="analyze-btn" style="margin-top:14px;" onclick="runGenerator()">⚡ GENERATE SQUAD</button>
+        <div class="roles-section-title">Player Roles</div>
+        <div class="player-roles-grid" id="genRolesGrid"></div>
+        <button class="analyze-btn" style="margin-top:24px;" onclick="runGenerator()">Generate Squad</button>
       </div>
 
-      <!-- RIGHT: Output -->
       <div class="generator-output" id="generatorOutput">
-        <div class="result-title">⚽ SQUAD BREAKDOWN</div>
+        <div class="result-title">Squad Breakdown</div>
         <div id="generatorItems"></div>
       </div>
     </div>
 
-    <!-- CANVAS VIZ -->
     <div class="viz-section" id="genVizSection">
-      <div class="result-title">⚽ TEAM MOVEMENT MAP</div>
-      <div class="viz-controls">
-        <div class="viz-badge home"><span class="viz-badge-dot"></span> SQUAD PLAYERS</div>
-        <div class="viz-badge neutral"><span class="viz-badge-dot"></span> PRESSING TRIGGERS</div>
-        <button onclick="stopCanvasAnim('genCanvas')" style="margin-left:auto;font-family:var(--font-mono);font-size:9px;padding:4px 10px;background:transparent;border:1px solid var(--border2);color:var(--text3);cursor:pointer;letter-spacing:1px;">⏹ PAUSE</button>
-        <button onclick="resumeGenViz()" style="font-family:var(--font-mono);font-size:9px;padding:4px 10px;background:transparent;border:1px solid var(--border2);color:var(--text3);cursor:pointer;letter-spacing:1px;">▶ PLAY</button>
-      </div>
+      <div class="result-title">Team Structure & Pass Network</div>
       <div class="pitch-wrap">
         <canvas id="genCanvas" width="900" height="560"></canvas>
       </div>
-      <div class="viz-bottom">
-        <div class="viz-legend-item"><div class="legend-line"></div> ROLE + STYLE MOVEMENT</div>
-        <div class="viz-legend-item"><div class="legend-line dash"></div> PRESSING TRIGGER</div>
-        <div class="viz-legend-item" style="margin-left:auto;font-size:8px;color:var(--text3);">BASED ON FORMATION · PLAYING STYLE · PLAYER ROLES</div>
-      </div>
     </div>
   </div>
 
-  <!-- ===== MOVEMENTS EXPLORER ===== -->
   <div class="page" id="page-movements">
     <div class="page-header">
-      <div class="page-title">MOVEMENTS EXPLORER</div>
-      <div class="page-sub">Assign a role to each position, choose a playing style, and get combined movement instructions per player.</div>
+      <div class="page-title">Movements Explorer</div>
+      <div class="page-sub">Get combined movement and passing instructions per player.</div>
     </div>
 
     <div class="movements-layout">
-      <!-- LEFT: Config -->
       <div class="mov-config-panel">
-        <div class="team-label home">→ CONFIGURATION</div>
+        <div class="team-label" style="color:var(--blue);">Configuration</div>
         <div class="form-group">
           <div class="form-label">Formation</div>
-          <select class="form-select" id="movFormation" onchange="buildMovRoles()">
-            <option value="">-- SELECT FORMATION --</option>
-          </select>
+          <select class="form-select" id="movFormation" onchange="buildMovRoles()"><option value="">-- Select --</option></select>
         </div>
         <div class="form-group">
-          <div class="form-label">Team Playing Style</div>
-          <select class="form-select" id="movStyle">
-            <option value="">-- SELECT STYLE --</option>
-          </select>
+          <div class="form-label">Playing Style</div>
+          <select class="form-select" id="movStyle"><option value="">-- Select --</option></select>
         </div>
-        <div class="roles-section-title">Player Roles — 11 Positions</div>
-        <div class="player-roles-grid" id="movRolesGrid">
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--text3);padding:8px 0;">Select a formation to assign player roles.</div>
-        </div>
-        <button class="analyze-btn" style="margin-top:14px;" onclick="runMovements()">→ EXPLORE MOVEMENTS</button>
+        <div class="roles-section-title">Player Roles</div>
+        <div class="player-roles-grid" id="movRolesGrid"></div>
+        <button class="analyze-btn" style="margin-top:24px;" onclick="runMovements()">Explore Movements</button>
       </div>
 
-      <!-- RIGHT: Movement Detail Output -->
       <div class="movement-result" id="movementResult">
-        <div class="result-title">MOVEMENT INSTRUCTIONS</div>
-        <div id="movementItems" style="font-family:var(--font-mono);font-size:10px;color:var(--text3);">Select a formation and style, assign roles, then explore.</div>
+        <div class="result-title">Player Instructions</div>
+        <div id="movementItems"></div>
       </div>
     </div>
 
-    <!-- CANVAS VIZ -->
     <div class="viz-section" id="movVizSection">
-      <div class="result-title">⚽ PLAYER MOVEMENT MAP</div>
-      <div class="viz-controls">
-        <div class="viz-badge home"><span class="viz-badge-dot"></span> PLAYER POSITIONS</div>
-        <div class="viz-badge neutral"><span class="viz-badge-dot"></span> MOVEMENT ARROWS</div>
-        <button onclick="stopCanvasAnim('movCanvas')" style="margin-left:auto;font-family:var(--font-mono);font-size:9px;padding:4px 10px;background:transparent;border:1px solid var(--border2);color:var(--text3);cursor:pointer;letter-spacing:1px;">⏹ PAUSE</button>
-        <button onclick="resumeMovViz()" style="font-family:var(--font-mono);font-size:9px;padding:4px 10px;background:transparent;border:1px solid var(--border2);color:var(--text3);cursor:pointer;letter-spacing:1px;">▶ PLAY</button>
-      </div>
+      <div class="result-title">Spatial Map</div>
       <div class="pitch-wrap">
         <canvas id="movCanvas" width="900" height="560"></canvas>
-      </div>
-      <div class="viz-bottom">
-        <div class="viz-legend-item"><div class="legend-line"></div> COMBINED ROLE + STYLE MOVEMENT</div>
-        <div class="viz-legend-item"><div class="legend-line dash"></div> PRESSING / TRACKING TRIGGER</div>
-        <div class="viz-legend-item" style="margin-left:auto;font-size:8px;color:var(--text3);">ARROWS REFLECT ROLE BEHAVIOR + TEAM STYLE INSTRUCTION</div>
       </div>
     </div>
   </div>
 
-</div><!-- end main -->
-</div><!-- end app -->
+  <div class="page" id="page-predictor">
+    <div class="page-header">
+      <div class="page-title">AI Style Predictor</div>
+      <div class="page-sub">Analyzes structural DNA and ranks compatible playing styles.</div>
+    </div>
+
+    <div class="predictor-layout">
+      <div class="predictor-panel">
+        <div class="team-label" style="color:var(--blue);">Input parameters</div>
+        <div class="form-group">
+          <div class="form-label">Target Formation</div>
+          <select class="form-select" id="predFormation" onchange="previewPredFormation()"><option value="">-- Select --</option></select>
+        </div>
+        <div id="predFormationInfo" style="margin-top:16px;"></div>
+        <button class="analyze-btn" style="margin-top:24px;" onclick="runPredictor()">Predict Best Styles</button>
+      </div>
+
+      <div class="predictor-result" id="predictorResult" style="display:none;">
+        <div id="predCards"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
 
 <script>
 // ===== DATA =====
@@ -1657,285 +1251,51 @@ const formations = {
   "4-4-2": {pos:["LB","CB","CB","RB","LM","CM","CM","RM","ST","ST"],type:"Classic"},
   "4-3-3": {pos:["LB","CB","CB","RB","CM","CM","CM","LW","ST","RW"],type:"Classic"},
   "3-5-2": {pos:["CB","CB","CB","LM","CM","CM","CM","RM","ST","ST"],type:"Classic"},
-  "4-2-4": {pos:["LB","CB","CB","RB","CM","CM","LW","ST","ST","RW"],type:"Classic"},
-  "5-4-1": {pos:["CB","CB","CB","CB","CB","LM","CM","CM","RM","ST"],type:"Defensive"},
-  "4-5-1": {pos:["LB","CB","CB","RB","LM","CM","CM","CM","RM","ST"],type:"Defensive"},
-  "5-3-2": {pos:["CB","CB","CB","CB","CB","CM","CM","CM","ST","ST"],type:"Defensive"},
-  "4-1-4-1": {pos:["LB","CB","CB","RB","CDM","LM","CM","CM","RM","ST"],type:"Defensive"},
   "4-2-3-1": {pos:["LB","CB","CB","RB","CDM","CDM","CAM","LW","RW","ST"],type:"Modern"},
-  "4-3-2-1": {pos:["LB","CB","CB","RB","CM","CM","CM","CAM","CAM","ST"],type:"Modern"},
-  "3-4-3": {pos:["CB","CB","CB","LM","CM","CM","RM","LW","ST","RW"],type:"Modern"},
   "3-4-2-1": {pos:["CB","CB","CB","LM","CM","CM","RM","CAM","CAM","ST"],type:"Modern"},
-  "4-1-2-1-2": {pos:["LB","CB","CB","RB","CDM","CM","CM","CAM","ST","ST"],type:"Attacking"},
-  "4-2-2-2": {pos:["LB","CB","CB","RB","CDM","CDM","CAM","CAM","ST","ST"],type:"Attacking"},
-  "3-3-4": {pos:["CB","CB","CB","CM","CM","CM","LW","ST","ST","RW"],type:"Attacking"},
-  "2-3-5": {pos:["CB","CB","CM","CM","CM","LW","ST","ST","RW","RW"],type:"Attacking"},
-  "4-3-3 False 9": {pos:["LB","CB","CB","RB","CM","CM","CM","LW","CAM","RW"],type:"Hybrid"},
-  "3-2-4-1": {pos:["CB","CB","CB","CDM","CDM","LM","CM","CM","RM","ST"],type:"Hybrid"},
-  "2-3-2-3": {pos:["CB","CB","CM","CM","CM","CAM","CAM","LW","ST","RW"],type:"Hybrid"},
-  "3-1-4-2": {pos:["CB","CB","CB","CDM","LM","CM","CM","RM","ST","ST"],type:"Hybrid"},
-  "4-4-1-1": {pos:["LB","CB","CB","RB","LM","CM","CM","RM","CAM","ST"],type:"Variation"},
-  "4-3-1-2": {pos:["LB","CB","CB","RB","CM","CM","CM","CAM","ST","ST"],type:"Variation"},
-  "4-2-1-3": {pos:["LB","CB","CB","RB","CDM","CDM","CAM","LW","ST","RW"],type:"Variation"},
-  "4-1-3-2": {pos:["LB","CB","CB","RB","CDM","CM","CM","CM","ST","ST"],type:"Variation"},
-  "4-1-2-3": {pos:["LB","CB","CB","RB","CDM","CM","CM","LW","ST","RW"],type:"Variation"},
-  "3-5-1-1": {pos:["CB","CB","CB","LM","CM","CM","CM","RM","CAM","ST"],type:"Variation"},
-  "3-4-1-2": {pos:["CB","CB","CB","LM","CM","CM","RM","CAM","ST","ST"],type:"Variation"},
-  "5-2-3": {pos:["CB","CB","CB","CB","CB","CM","CM","LW","ST","RW"],type:"Defensive"},
-  "5-2-2-1": {pos:["CB","CB","CB","CB","CB","CM","CM","CAM","CAM","ST"],type:"Defensive"},
-  "4-1-3-1-1": {pos:["LB","CB","CB","RB","CDM","CM","CM","CM","CAM","ST"],type:"Defensive"},
-  "3-6-1": {pos:["CB","CB","CB","LM","CM","CM","CM","CM","RM","ST"],type:"Defensive"},
-  "4-6-0": {pos:["LB","CB","CB","RB","CM","CM","CM","CM","CM","CM"],type:"Rare"},
-  "2-4-4": {pos:["CB","CB","LM","CM","CM","RM","LW","ST","ST","RW"],type:"Rare"},
-  "2-5-3": {pos:["CB","CB","LM","CM","CM","CM","RM","LW","ST","RW"],type:"Rare"},
-  "3-2-3-2": {pos:["CB","CB","CB","CM","CM","CAM","CAM","CAM","ST","ST"],type:"Rare"}
+  "5-4-1": {pos:["CB","CB","CB","CB","CB","LM","CM","CM","RM","ST"],type:"Defensive"},
+  "4-1-2-1-2": {pos:["LB","CB","CB","RB","CDM","CM","CM","CAM","ST","ST"],type:"Attacking"}
 };
 
 const styles = {
   "Possession Play": {attack:7,defense:6,tempo:5},
   "Counter Attack": {attack:9,defense:7,tempo:9},
-  "Park the Bus": {attack:3,defense:10,tempo:2},
   "High Press": {attack:8,defense:6,tempo:9},
-  "Wing Play": {attack:8,defense:5,tempo:7},
-  "Long Ball": {attack:7,defense:5,tempo:8},
-  "Total Football": {attack:9,defense:8,tempo:8},
-  "Positional Play": {attack:8,defense:7,tempo:6},
-  "Vertical Play": {attack:9,defense:5,tempo:9},
-  "Low Block": {attack:3,defense:9,tempo:3},
-  "Mid Block": {attack:5,defense:7,tempo:5},
-  "High Block": {attack:7,defense:6,tempo:7},
-  "Build-Up Play": {attack:7,defense:6,tempo:5},
-  "Fast Transition": {attack:9,defense:6,tempo:10},
-  "Route One": {attack:7,defense:5,tempo:9},
-  "Press and Trap": {attack:8,defense:7,tempo:8},
-  "Overlapping Play": {attack:8,defense:6,tempo:7},
-  "False 9 System": {attack:8,defense:5,tempo:7},
-  "Target Man Play": {attack:8,defense:6,tempo:6},
-  "Compact Shape": {attack:5,defense:9,tempo:4}
+  "Park the Bus": {attack:3,defense:10,tempo:2},
+  "Total Football": {attack:9,defense:8,tempo:8}
 };
 
 const roles = {
-  "Poacher":{attack:9,defense:2},"Advanced Forward":{attack:9,defense:3},"Complete Forward":{attack:9,defense:6},
-  "False 9":{attack:8,defense:5},"Target Man":{attack:8,defense:4},"Pressing Forward":{attack:8,defense:6},
-  "Shadow Striker":{attack:9,defense:4},"Second Striker":{attack:9,defense:4},"Fox in the Box":{attack:9,defense:3},
-  "Penalty Box Striker":{attack:10,defense:2},"Mobile Striker":{attack:8,defense:5},"Withdrawn Forward":{attack:7,defense:7},
-  "Playmaker":{attack:8,defense:5},"Advanced Playmaker":{attack:9,defense:4},"Deep-Lying Playmaker":{attack:7,defense:7},
-  "Regista":{attack:7,defense:6},"Enganche":{attack:9,defense:3},"Trequartista":{attack:9,defense:2},
-  "Roaming Playmaker":{attack:8,defense:7},"Wide Playmaker":{attack:8,defense:5},"Creative Midfielder":{attack:9,defense:4},
-  "Attacking Playmaker":{attack:9,defense:3},"Box-to-Box Midfielder":{attack:7,defense:7},"Ball Winning Midfielder":{attack:5,defense:9},
-  "Holding Midfielder":{attack:4,defense:9},"Anchor Man":{attack:3,defense:10},"Destroyer":{attack:4,defense:10},
-  "Mezzala":{attack:8,defense:6},"Carrilero":{attack:6,defense:8},"Advanced Midfielder":{attack:8,defense:5},
-  "Half Back":{attack:4,defense:9},"Attacking Midfielder":{attack:9,defense:4},"Central Defender":{attack:4,defense:8},
-  "Ball Playing Defender":{attack:5,defense:8},"No-Nonsense Defender":{attack:2,defense:9},"Stopper":{attack:5,defense:9},
-  "Sweeper":{attack:6,defense:8},"Libero":{attack:7,defense:7},"Man Marker":{attack:3,defense:10},
-  "Winger":{attack:8,defense:4},"Inside Forward":{attack:9,defense:4},"Inverted Winger":{attack:8,defense:5},
-  "Raumdeuter":{attack:9,defense:3},"Direct Winger":{attack:9,defense:3},"Pressing Winger":{attack:7,defense:7},
-  "Defensive Winger":{attack:6,defense:8},"Fullback":{attack:5,defense:7},"Wingback":{attack:7,defense:7},
-  "Complete Wingback":{attack:8,defense:7},"Defensive Fullback":{attack:4,defense:9},"Attacking Fullback":{attack:8,defense:5},
-  "Attacking Wingback":{attack:9,defense:5},"Sweeper Keeper":{attack:5,defense:8},"Shot Stopper":{attack:2,defense:9},
-  "Ball Playing Keeper":{attack:6,defense:7},"Modern Goalkeeper":{attack:6,defense:8},"Reflex Keeper":{attack:3,defense:10}
+  "Poacher":{attack:9,defense:2},"Advanced Forward":{attack:9,defense:3},
+  "Box-to-Box Midfielder":{attack:7,defense:7},"Holding Midfielder":{attack:4,defense:9},
+  "Central Defender":{attack:4,defense:8},"Fullback":{attack:5,defense:7},
+  "Winger":{attack:8,defense:4},"Inside Forward":{attack:9,defense:4},
+  "Sweeper Keeper":{attack:5,defense:8},"Shot Stopper":{attack:2,defense:9}
 };
 
 const movements = {
-  "Possession Play": {GK:"Short distribution, play from back",CB:"Split wide, build play",LB:"Overlap slowly",RB:"Overlap slowly",CDM:"Recycle possession, hold position",CM:"Short passing triangles, stay central",CAM:"Find space between lines",LM:"Support midfield",RM:"Support midfield",LW:"Hold width, cut inside",RW:"Stretch play wide",ST:"Drop deep, link play"},
+  "Possession Play": {GK:"Short distribution",CB:"Split wide",LB:"Overlap slowly",RB:"Overlap slowly",CDM:"Recycle possession",CM:"Short passing triangles",CAM:"Find space",LM:"Support midfield",RM:"Support midfield",LW:"Hold width",RW:"Stretch play",ST:"Drop deep"},
   "Counter Attack": {GK:"Quick long throws",CB:"Clear quickly",LB:"Stay back",RB:"Stay back",CDM:"Win ball quickly",CM:"Quick forward passes",CAM:"Drive forward",LM:"Track back",RM:"Track back",LW:"Sprint behind defense",RW:"Exploit wide space",ST:"Fast forward runs"},
-  "Park the Bus": {GK:"Time waste, long clear",CB:"Very deep line",LB:"Stay deep",RB:"Stay deep",CDM:"Shield defense",CM:"Stay compact",CAM:"Support defense",LM:"Track back fully",RM:"Track back fully",LW:"Track back fully",RW:"Track back fully",ST:"Stay isolated forward"},
-  "High Press": {GK:"High line sweeper",CB:"Hold high line",LB:"Push high",RB:"Push high",CDM:"Aggressive press",CM:"Push high, intercept",CAM:"Press midfield",LM:"Press wide",RM:"Press wide",LW:"Press fullbacks",RW:"Press fullbacks",ST:"Press center-backs"},
-  "Wing Play": {GK:"Distribute wide",CB:"Switch play",LB:"Overlap aggressively",RB:"Overlap aggressively",CDM:"Cover center",CM:"Switch ball wide",CAM:"Support flanks",LM:"Overlap and cross",RM:"Overlap and cross",LW:"Dribble wide, cross",RW:"Dribble wide, cross",ST:"Attack crosses"},
-  "Long Ball": {GK:"Long kicks",CB:"Direct long passes",LB:"Stay balanced",RB:"Stay balanced",CDM:"Win second balls",CM:"Support second balls",CAM:"Pick loose balls",LM:"Run forward",RM:"Run forward",LW:"Run for knockdowns",RW:"Run for knockdowns",ST:"Hold up play"},
-  "Total Football": {GK:"Sweeper keeper",CB:"Step into midfield",LB:"Invert or overlap",RB:"Invert or overlap",CDM:"Rotate positions",CM:"Free movement",CAM:"Interchange roles",LM:"Rotate with winger",RM:"Rotate with winger",LW:"Swap positions",RW:"Swap positions",ST:"Drop and rotate"},
-  "Positional Play": {GK:"Structured passing",CB:"Maintain shape",LB:"Stay wide",RB:"Stay wide",CDM:"Anchor position",CM:"Maintain structure",CAM:"Occupy half spaces",LM:"Hold width",RM:"Hold width",LW:"Stay wide",RW:"Stay wide",ST:"Occupy defenders"},
-  "Vertical Play": {GK:"Fast release",CB:"Direct forward passes",LB:"Support attack",RB:"Support attack",CDM:"Quick progression",CM:"Forward passes only",CAM:"Through balls",LM:"Run forward",RM:"Run forward",LW:"Cut inside quickly",RW:"Cut inside quickly",ST:"Direct runs"},
-  "Low Block": {GK:"Stay deep",CB:"Deep compact line",LB:"Defensive positioning",RB:"Defensive positioning",CDM:"Protect defense",CM:"Stay compact",CAM:"Support defense",LM:"Defensive support",RM:"Defensive support",LW:"Defensive support",RW:"Defensive support",ST:"Stay forward"},
-  "Mid Block": {GK:"Normal positioning",CB:"Mid defensive line",LB:"Balanced",RB:"Balanced",CDM:"Screen midfield",CM:"Hold middle line",CAM:"Press lightly",LM:"Track halfway",RM:"Track halfway",LW:"Track halfway",RW:"Track halfway",ST:"Press slightly"},
-  "High Block": {GK:"High starting position",CB:"Stay high",LB:"Push forward",RB:"Push forward",CDM:"Support press",CM:"Push forward",CAM:"Support attack",LM:"Push forward",RM:"Push forward",LW:"Stay high",RW:"Stay high",ST:"High positioning"},
-  "Build-Up Play": {GK:"Distribute ball",CB:"Play from back",LB:"Support build-up",RB:"Support build-up",CDM:"Drop between CBs",CM:"Support short passes",CAM:"Receive and turn",LM:"Hold width",RM:"Hold width",LW:"Hold width",RW:"Hold width",ST:"Link play"},
-  "Fast Transition": {GK:"Quick release",CB:"Immediate forward pass",LB:"Quick overlap",RB:"Quick overlap",CDM:"Win and release",CM:"Immediate forward pass",CAM:"Quick decisions",LM:"Sprint forward",RM:"Sprint forward",LW:"Explosive runs",RW:"Explosive runs",ST:"Attack quickly"},
-  "Route One": {GK:"Long kicks",CB:"Clear long",LB:"Stay back",RB:"Stay back",CDM:"Support second balls",CM:"Push forward",CAM:"Support striker",LM:"Run forward",RM:"Run forward",LW:"Run forward",RW:"Run forward",ST:"Win aerial duels"},
-  "Press and Trap": {GK:"Stay alert",CB:"Step up to intercept",LB:"Trap wide",RB:"Trap wide",CDM:"Close passing lanes",CM:"Close passing lanes",CAM:"Force mistakes",LM:"Trap wide",RM:"Trap wide",LW:"Trap wide",RW:"Trap wide",ST:"Force mistake"},
-  "Overlapping Play": {GK:"Safe distribution",CB:"Hold position",LB:"Overlap runs",RB:"Overlap runs",CDM:"Cover defense",CM:"Support attack",CAM:"Create chances",LM:"Overlap",RM:"Overlap",LW:"Cut inside",RW:"Cut inside",ST:"Finish moves"},
-  "False 9 System": {GK:"Short passes",CB:"Build from back",LB:"Overlap",RB:"Overlap",CDM:"Hold shape",CM:"Push forward",CAM:"Advance",LM:"Cut inside",RM:"Cut inside",LW:"Move inside",RW:"Move inside",ST:"Drop into midfield"},
-  "Target Man Play": {GK:"Long balls",CB:"Direct passes",LB:"Cross early",RB:"Cross early",CDM:"Support second balls",CM:"Deliver crosses",CAM:"Play off striker",LM:"Cross ball",RM:"Cross ball",LW:"Cross ball",RW:"Cross ball",ST:"Hold ball, aerial play"},
-  "Compact Shape": {GK:"Safe play",CB:"Stay tight",LB:"Tuck in",RB:"Tuck in",CDM:"Close gaps",CM:"Stay close",CAM:"Limited movement",LM:"Narrow",RM:"Narrow",LW:"Narrow position",RW:"Narrow position",ST:"Support midfield"}
+  "High Press": {GK:"High line sweeper",CB:"Hold high line",LB:"Push high",RB:"Push high",CDM:"Aggressive press",CM:"Push high",CAM:"Press midfield",LM:"Press wide",RM:"Press wide",LW:"Press fullbacks",RW:"Press fullbacks",ST:"Press center-backs"}
 };
 
-const defaultRoles = {ST:"Poacher",CF:"Complete Forward",LW:"Winger",RW:"Winger",CAM:"Attacking Midfielder",CM:"Box-to-Box Midfielder",CDM:"Holding Midfielder",LM:"Winger",RM:"Winger",LB:"Fullback",RB:"Fullback",CB:"Central Defender",GK:"Sweeper Keeper"};
+const defaultRoles = {ST:"Poacher",LW:"Winger",RW:"Winger",CAM:"Playmaker",CM:"Box-to-Box Midfielder",CDM:"Holding Midfielder",LM:"Winger",RM:"Winger",LB:"Fullback",RB:"Fullback",CB:"Central Defender",GK:"Sweeper Keeper"};
 
-// ===== PITCH POSITIONS =====
-const pitchLayouts = {
-  "GK":[[50,90]],
-  "CB":[[33,72],[67,72]],
-  "LB":[[15,72]],"RB":[[85,72]],
-  "CDM":[[50,57]],"CM":[[33,45],[67,45]],"CAM":[[50,33]],
-  "LM":[[15,45]],"RM":[[85,45]],
-  "LW":[[20,20]],"RW":[[80,20]],
-  "ST":[[50,15]],"CF":[[50,18]]
-};
-
-function getFormationLayout(positions) {
-  const counts = {};
-  positions.forEach(p => { counts[p] = (counts[p]||0)+1; });
-  const placed = {};
-  const result = [];
-  positions.forEach(p => {
-    placed[p] = (placed[p]||0)+1;
-    const total = counts[p];
-    const idx = placed[p]-1;
-    let x, y;
-    if(total === 1) {
-      x = 50; y = p==='GK'?88:p==='ST'?12:p==='LW'?20:p==='RW'?80:p==='LM'?15:p==='RM'?85:p==='CAM'?50:p==='CDM'?50:50;
-      y = p==='GK'?88:p==='CDM'?62:p==='CM'?50:p==='CAM'?35:p==='ST'?12:p==='LW'||p==='RW'?18:p==='LM'||p==='RM'?50:p==='LB'||p==='RB'?72:p==='CB'?72:50;
-      x = p==='LW'||p==='LM'||p==='LB'?15:p==='RW'||p==='RM'||p==='RB'?85:50;
-    } else {
-      const spread = total===2?[30,70]:total===3?[20,50,80]:total===4?[15,38,62,85]:total===5?[10,27,50,73,90]:[10,26,42,58,74,90];
-      x = spread[idx]||50;
-      y = p==='CB'?72:p==='CM'?50:p==='ST'?12:p==='CAM'?35:p==='CDM'?62:p==='LM'||p==='RM'?50:50;
-    }
-    result.push({pos:p,x,y});
-  });
-  return result;
+// ===== CORE LOGIC & RENDERING =====
+function nav(page, el) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  if(el) el.classList.add('active');
+  const formattedPageName = page.charAt(0).toUpperCase() + page.slice(1);
+  document.getElementById('breadcrumb').innerHTML = `Workspace / <span>${formattedPageName}</span>`;
 }
+function navByName(page){ nav(page, document.querySelector(`.nav-item[onclick*="'${page}'"]`)); }
 
-// ===== RENDER FORMATIONS =====
-function renderFormations(filter='') {
-  const grid = document.getElementById('formationsGrid');
-  grid.innerHTML = '';
-  Object.entries(formations).forEach(([name, data]) => {
-    if(filter && !name.toLowerCase().includes(filter.toLowerCase())) return;
-    const positions = data.pos;
-    const layout = getFormationLayout(positions);
-    const card = document.createElement('div');
-    card.className = 'formation-card';
-    card.innerHTML = `
-      <div class="formation-name">${name}</div>
-      <div class="formation-type">${data.type.toUpperCase()}</div>
-      <div class="formation-pitch" style="position:relative;">
-        ${layout.map(({pos,x,y})=>`<div class="pitch-player" style="left:${x}%;top:${y}%;">${pos}</div>`).join('')}
-      </div>
-      <div class="formation-footer">
-        <span class="formation-count">10 OUTFIELD</span>
-        <span class="formation-tag">${data.type}</span>
-      </div>`;
-    card.onclick = ()=>card.classList.toggle('selected');
-    grid.appendChild(card);
-  });
-}
-
-function filterFormations() {
-  renderFormations(document.getElementById('formationSearch').value);
-}
-
-// ===== RENDER STYLES =====
-function renderStyles() {
-  const list = document.getElementById('stylesList');
-  list.innerHTML = '';
-  Object.entries(styles).forEach(([name, data]) => {
-    const div = document.createElement('div');
-    div.className = 'style-card';
-    div.innerHTML = `
-      <div class="style-name-block">
-        <div class="style-name">${name}</div>
-        <div class="style-tag">Team Led: 101</div>
-      </div>
-      <div class="style-bars">
-        <div class="bar-group">
-          <div class="bar-label">Attack <span>${data.attack}/10</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:${data.attack*10}%"></div></div>
-        </div>
-        <div class="bar-group">
-          <div class="bar-label">Defense <span>${data.defense}/10</span></div>
-          <div class="bar-track"><div class="bar-fill defense" style="width:${data.defense*10}%"></div></div>
-        </div>
-        <div class="bar-group">
-          <div class="bar-label">Tempo <span>${data.tempo}/10</span></div>
-          <div class="bar-track"><div class="bar-fill tempo" style="width:${data.tempo*10}%"></div></div>
-        </div>
-      </div>`;
-    div.onclick = ()=>div.classList.toggle('selected');
-    list.appendChild(div);
-  });
-}
-
-// ===== RENDER ROLES =====
-function renderRoles(filter='') {
-  const grid = document.getElementById('rolesGrid');
-  grid.innerHTML = '';
-  Object.entries(roles).forEach(([name, data]) => {
-    if(filter && !name.toLowerCase().includes(filter.toLowerCase())) return;
-    const card = document.createElement('div');
-    card.className = 'role-card';
-    card.innerHTML = `
-      <div class="role-card-name">${name}</div>
-      <div class="role-stats">
-        <div class="role-stat">
-          <div class="role-stat-label">ATK <span>${data.attack}/10</span></div>
-          <div class="role-bar-track"><div class="role-bar-fill" style="width:${data.attack*10}%"></div></div>
-        </div>
-        <div class="role-stat">
-          <div class="role-stat-label">DEF <span>${data.defense}/10</span></div>
-          <div class="role-bar-track"><div class="role-bar-fill def" style="width:${data.defense*10}%"></div></div>
-        </div>
-      </div>`;
-    card.onclick = ()=>card.classList.toggle('selected');
-    grid.appendChild(card);
-  });
-}
-
-function filterRoles() {
-  renderRoles(document.getElementById('roleSearch').value);
-}
-
-// ===== ROLE SUGGESTIONS BY POSITION =====
-const roleSuggestions = {
-  GK: ["Sweeper Keeper","Shot Stopper","Ball Playing Keeper","Modern Goalkeeper","Reflex Keeper","Defensive Keeper","Traditional Goalkeeper","Aggressive Sweeper Keeper","Commanding Keeper","Line Keeper"],
-  CB: ["Central Defender","Ball Playing Defender","No-Nonsense Defender","Stopper","Cover Defender","Sweeper","Libero","Wide Centre Back","Aggressive Defender","Man Marker","High Line Defender","Build-Up Defender"],
-  LB: ["Fullback","Wingback","Attacking Fullback","Defensive Fullback","Inverted Fullback","Overlapping Fullback","Modern Fullback","Pressing Fullback","Complete Wingback"],
-  RB: ["Fullback","Wingback","Attacking Fullback","Defensive Fullback","Inverted Fullback","Overlapping Fullback","Modern Fullback","Pressing Fullback","Complete Wingback"],
-  CDM: ["Holding Midfielder","Anchor Man","Destroyer","Deep-Lying Playmaker","Regista","Half Back","Ball Winning Midfielder","Defensive Playmaker","Engine Midfielder"],
-  CM: ["Box-to-Box Midfielder","Mezzala","Carrilero","Central Midfielder Attack","Central Midfielder Support","Central Midfielder Defense","Advanced Midfielder","Shuttler","Dynamic Midfielder","Control Midfielder","Link Midfielder","Ball Carrier"],
-  CAM: ["Attacking Midfielder","Playmaker","Advanced Playmaker","Enganche","Trequartista","Roaming Playmaker","Creative Midfielder","Attacking Playmaker","Free Playmaker","Shadow Striker"],
-  LM: ["Wide Midfielder","Winger","Inverted Winger","Inside Forward","Defensive Winger","Pressing Winger","Wide Playmaker Left","Touchline Winger","Tracking Winger"],
-  RM: ["Wide Midfielder","Winger","Inverted Winger","Inside Forward","Defensive Winger","Pressing Winger","Wide Playmaker Right","Touchline Winger","Tracking Winger"],
-  LW: ["Winger","Inside Forward","Inverted Winger","Raumdeuter","Direct Winger","Creative Winger","Wide Attacker","Wide Creator","Cut Inside Winger"],
-  RW: ["Winger","Inside Forward","Inverted Winger","Raumdeuter","Direct Winger","Creative Winger","Wide Attacker","Wide Creator","Cut Inside Winger"],
-  ST: ["Poacher","Advanced Forward","Complete Forward","Target Man","False 9","Pressing Forward","Shadow Striker","Fox in the Box","Penalty Box Striker","Mobile Striker","Deep Lying Forward","Second Striker"],
-  CF: ["Complete Forward","False 9","Deep Lying Forward","Advanced Forward","Support Striker","Withdrawn Forward"],
-};
-
-function buildPlayerRoles(team) {
-  const formId = team+'Formation';
-  const gridId = team+'RolesGrid';
-  const fVal = document.getElementById(formId).value;
-  const grid = document.getElementById(gridId);
-  if(!fVal) { grid.innerHTML = '<div style="font-family:var(--font-mono);font-size:10px;color:var(--text3);padding:8px 0;">Select a formation to assign player roles.</div>'; return; }
-
-  const positions = formations[fVal].pos;
-  const isAway = team === 'away';
-  const tagClass = isAway ? 'pos-tag away-tag' : 'pos-tag';
-
-  // Count duplicates to label them
-  const counts = {}, idx = {};
-  positions.forEach(p=>{ counts[p]=(counts[p]||0)+1; });
-
-  grid.innerHTML = positions.map((pos, i) => {
-    idx[pos] = (idx[pos]||0)+1;
-    const label = counts[pos]>1 ? `${pos} ${idx[pos]}` : pos;
-    const options = (roleSuggestions[pos] || Object.keys(roles)).map(r=>`<option value="${r}">${r}</option>`).join('');
-    return `<div class="player-role-row">
-      <span class="${tagClass}">${label}</span>
-      <select class="form-select" id="${team}-role-${i}" style="font-size:10px;padding:7px 10px;">
-        <option value="">-- ROLE --</option>
-        ${options}
-      </select>
-    </div>`;
-  }).join('');
-}
-
-// ===== POPULATE SELECTS =====
 function populateSelects() {
   const fKeys = Object.keys(formations);
   const sKeys = Object.keys(styles);
-  ['homeFormation','awayFormation','genFormation','movFormation'].forEach(id=>{
+  ['homeFormation','awayFormation','genFormation','movFormation','predFormation'].forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
     fKeys.forEach(k=>{ const o=document.createElement('option');o.value=k;o.textContent=k;el.appendChild(o); });
@@ -1947,788 +1307,256 @@ function populateSelects() {
   });
 }
 
-// ===== MATCH ANALYSIS =====
-function runAnalysis() {
-  const hF = document.getElementById('homeFormation').value;
-  const aF = document.getElementById('awayFormation').value;
-  const hS = document.getElementById('homeStyle').value;
-  const aS = document.getElementById('awayStyle').value;
-
-  if(!hF||!aF||!hS||!aS) { alert('Please select formations and playing styles for both teams.'); return; }
-
-  // Collect selected player roles
-  const hPositions = formations[hF].pos;
-  const aPositions = formations[aF].pos;
-  const hRoles = hPositions.map((_,i)=>document.getElementById('home-role-'+i)?.value||'').filter(Boolean);
-  const aRoles = aPositions.map((_,i)=>document.getElementById('away-role-'+i)?.value||'').filter(Boolean);
-
-  const insights = [];
-
-  // Formation insights
-  if(hPositions.includes('LW')||hPositions.includes('RW'))
-    insights.push('🟢 HOME — Wing attacking options available from wide positions.');
-  if(aPositions.includes('LW')||aPositions.includes('RW'))
-    insights.push('🔴 AWAY — Wide threats on both flanks; home fullbacks must track runs.');
-  if(hPositions.includes('CDM')&&!aPositions.includes('CDM'))
-    insights.push('🟢 HOME — Midfield defensive cover advantage with CDM; away midfield exposed.');
-  if(!hPositions.includes('CDM')&&aPositions.includes('CDM'))
-    insights.push('🔴 AWAY — CDM screens the defense effectively; home attacks may be stifled.');
-
-  // Style matchup
-  const hAtk = styles[hS].attack, hDef = styles[hS].defense, hTmp = styles[hS].tempo;
-  const aAtk = styles[aS].attack, aDef = styles[aS].defense, aTmp = styles[aS].tempo;
-  if(hAtk > aDef) insights.push(`🟢 HOME — ${hS} (ATK ${hAtk}) is likely to break through ${aS} defense (DEF ${aDef}).`);
-  if(aAtk > hDef) insights.push(`🔴 AWAY — ${aS} (ATK ${aAtk}) poses a real threat to ${hS} defense (DEF ${hDef}).`);
-  if(hTmp > aTmp+2) insights.push(`🟢 HOME — Significant tempo edge (${hTmp} vs ${aTmp}); dictate the game early.`);
-  if(aTmp > hTmp+2) insights.push(`🔴 AWAY — Higher tempo (${aTmp} vs ${hTmp}); home must be compact and disciplined.`);
-
-  // Style-specific tactics
-  if(aS==='Park the Bus') insights.push('🟡 TACTIC — Away parking the bus. Use set pieces, crosses, and wide overloads.');
-  if(hS==='Park the Bus') insights.push('🟡 TACTIC — Home parking the bus. Away must be patient; exploit through-balls.');
-  if(hS==='High Press'&&aS==='Build-Up Play') insights.push('🟢 HOME — High press directly counters Away\'s build-up play. Force errors in the defensive third.');
-  if(hS==='Counter Attack') insights.push('🟡 TACTIC — Home counter strategy: stay compact, win the ball, release quickly.');
-  if(hS==='Wing Play') insights.push('🟢 HOME — Wing Play demands disciplined fullback overlaps and quality crossing.');
-  if(hS==='Total Football') insights.push('🟢 HOME — Total Football: positional rotation required; all players must be comfortable in multiple roles.');
-
-  // Player role insights
-  const attackerRoles = hRoles.filter(r=>roles[r]&&roles[r].attack>=9);
-  if(attackerRoles.length>0) insights.push(`🟢 HOME — High-threat attackers assigned: ${attackerRoles.join(', ')}. Danger in final third.`);
-  const defenderRoles = aRoles.filter(r=>roles[r]&&roles[r].defense>=9);
-  if(defenderRoles.length>0) insights.push(`🔴 AWAY — Solid defensive wall: ${defenderRoles.join(', ')}. Home must work hard to break through.`);
-
-  // Role battle analysis (compare attack of home forward vs away defender)
-  const hStrikerIdx = hPositions.findIndex(p=>['ST','CF','LW','RW'].includes(p));
-  const aDefIdx = aPositions.findIndex(p=>['CB','CDM'].includes(p));
-  if(hStrikerIdx>=0&&aDefIdx>=0){
-    const hR = document.getElementById('home-role-'+hStrikerIdx)?.value;
-    const aR = document.getElementById('away-role-'+aDefIdx)?.value;
-    if(hR&&aR&&roles[hR]&&roles[aR]){
-      if(roles[hR].attack > roles[aR].defense)
-        insights.push(`🟢 HOME — ${hR} (ATK ${roles[hR].attack}) has the edge over ${aR} (DEF ${roles[aR].defense}) in key duel.`);
-      else if(roles[aR].defense >= roles[hR].attack)
-        insights.push(`🔴 AWAY — ${aR} (DEF ${roles[aR].defense}) can neutralize ${hR} (ATK ${roles[hR].attack}) effectively.`);
-    }
-  }
-
-  if(insights.length===0) insights.push('→ Analysis complete. No dominant tactical advantages detected — evenly matched.');
-
-  const el = document.getElementById('analysisResult');
-  const items = document.getElementById('analysisItems');
-  items.innerHTML = insights.map(i=>`<div class="result-item"><span class="result-arrow">→</span><span>${i}</span></div>`).join('');
-  el.classList.add('visible');
-  el.scrollIntoView({behavior:'smooth',block:'nearest'});
-
-  // Launch movement visualization
-  const hRolesArr = formations[hF].pos.map((_,i)=>document.getElementById('home-role-'+i)?.value||'');
-  const aRolesArr = formations[aF].pos.map((_,i)=>document.getElementById('away-role-'+i)?.value||'');
-  document.getElementById('vizSection').classList.add('visible');
-  setTimeout(()=>launchViz(hF,hS,hRolesArr,aF,aS,aRolesArr),80);
-}
-
-// ===== BUILD ROLE DROPDOWNS — GENERATOR =====
-function buildGenRoles() {
-  const fVal = document.getElementById('genFormation').value;
-  const grid = document.getElementById('genRolesGrid');
-  if(!fVal){ grid.innerHTML='<div style="font-family:var(--font-mono);font-size:10px;color:var(--text3);padding:8px 0;">Select a formation to assign player roles.</div>'; return; }
-  const positions = formations[fVal].pos;
-  const counts={}, idx={};
-  positions.forEach(p=>counts[p]=(counts[p]||0)+1);
-  grid.innerHTML = positions.map((pos,i)=>{
-    idx[pos]=(idx[pos]||0)+1;
-    const label=counts[pos]>1?`${pos} ${idx[pos]}`:pos;
-    const opts=(roleSuggestions[pos]||Object.keys(roles)).map(r=>`<option value="${r}">${r}</option>`).join('');
-    return `<div class="player-role-row">
-      <span class="pos-tag">${label}</span>
-      <select class="form-select" id="gen-role-${i}" style="font-size:10px;padding:7px 10px;">
-        <option value="">-- ROLE --</option>${opts}
-      </select>
-    </div>`;
-  }).join('');
-}
-
-// ===== BUILD ROLE DROPDOWNS — MOVEMENTS =====
-function buildMovRoles() {
-  const fVal = document.getElementById('movFormation').value;
-  const grid = document.getElementById('movRolesGrid');
-  if(!fVal){ grid.innerHTML='<div style="font-family:var(--font-mono);font-size:10px;color:var(--text3);padding:8px 0;">Select a formation to assign player roles.</div>'; return; }
-  const positions = formations[fVal].pos;
-  const counts={}, idx={};
-  positions.forEach(p=>counts[p]=(counts[p]||0)+1);
-  grid.innerHTML = positions.map((pos,i)=>{
-    idx[pos]=(idx[pos]||0)+1;
-    const label=counts[pos]>1?`${pos} ${idx[pos]}`:pos;
-    const opts=(roleSuggestions[pos]||Object.keys(roles)).map(r=>`<option value="${r}">${r}</option>`).join('');
-    return `<div class="player-role-row">
-      <span class="pos-tag">${label}</span>
-      <select class="form-select" id="mov-role-${i}" style="font-size:10px;padding:7px 10px;">
-        <option value="">-- ROLE --</option>${opts}
-      </select>
-    </div>`;
-  }).join('');
-}
-
-// ===== TACTICAL NOTE GENERATOR =====
-function getTacticalNote(pos, role, movText, styleKey) {
-  const rd = roles[role]||{attack:5,defense:5};
-  const atk=rd.attack, def=rd.defense;
-  const t=(movText||'').toLowerCase();
-  const notes=[];
-  if(atk>=9) notes.push('elite attacking threat');
-  else if(atk>=8) notes.push('dangerous in the final third');
-  if(def>=9) notes.push('locks down the defensive line');
-  else if(def>=8) notes.push('solid defensive contributor');
-  if(/press/.test(t)&&!/stay/.test(t)) notes.push('high press trigger in this system');
-  if(/overlap/.test(t)) notes.push('provides attacking width via runs');
-  if(/cut inside|invert/.test(t)) notes.push('inverts to create central chances');
-  if(/drop deep|drop into/.test(t)) notes.push('drops into midfield to link play');
-  if(/free roam|rotate/.test(t)) notes.push('positional rotations create overloads');
-  if(/sprint|explosive/.test(t)) notes.push('pace is a primary weapon here');
-  if(/stay back|shield/.test(t)) notes.push('disciplined positional hold');
-  if(notes.length===0) notes.push('contributes across both phases of play');
-  return notes.slice(0,2).join(' · ');
-}
-
-// ===== GENERATOR =====
-let _genVizParams = null;
-function runGenerator() {
-  const f=document.getElementById('genFormation').value;
-  const s=document.getElementById('genStyle').value;
-  if(!f||!s){ alert('Select formation and playing style.'); return; }
-  const positions=formations[f].pos;
-  const movData=movements[s]||{};
-  const counts={},idx={};
-  positions.forEach(p=>counts[p]=(counts[p]||0)+1);
-
-  const roleArr = positions.map((_,i)=>document.getElementById('gen-role-'+i)?.value||'');
-
-  const items=document.getElementById('generatorItems');
-  items.innerHTML = positions.map((pos,i)=>{
-    idx[pos]=(idx[pos]||0)+1;
-    const label=counts[pos]>1?`${pos} ${idx[pos]}`:pos;
-    const role=roleArr[i]||(defaultRoles[pos]||pos);
-    const rd=roles[role]||{attack:5,defense:5};
-    const mov=movData[pos]||'Standard positioning';
-    const note=getTacticalNote(pos,role,mov,s);
-    return `<div class="squad-row">
-      <div class="squad-row-top">
-        <span class="pos-badge">${label}</span>
-        <span class="squad-role-name">${role||'—'}</span>
-        <div class="squad-stats">
-          <span class="stat-pill atk">ATK ${rd.attack}</span>
-          <span class="stat-pill def">DEF ${rd.defense}</span>
-        </div>
-      </div>
-      <div class="squad-bars">
-        <div class="squad-bar-group">
-          <div class="squad-bar-label">ATTACK <span>${rd.attack}/10</span></div>
-          <div class="squad-bar-track"><div class="squad-bar-fill" style="width:${rd.attack*10}%"></div></div>
-        </div>
-        <div class="squad-bar-group">
-          <div class="squad-bar-label">DEFENSE <span>${rd.defense}/10</span></div>
-          <div class="squad-bar-track"><div class="squad-bar-fill def" style="width:${rd.defense*10}%"></div></div>
-        </div>
-      </div>
-      <div class="squad-movement">${mov}</div>
-      <div class="squad-note">${note}</div>
-    </div>`;
-  }).join('');
-
-  document.getElementById('generatorOutput').classList.add('visible');
-
-  // Launch single-team visualization
-  _genVizParams={f,s,roleArr};
-  document.getElementById('genVizSection').classList.add('visible');
-  setTimeout(()=>launchSingleViz(f,s,roleArr,'genCanvas'),80);
-}
-
-// ===== MOVEMENTS EXPLORER =====
-let _movVizParams = null;
-function runMovements() {
-  const f=document.getElementById('movFormation').value;
-  const s=document.getElementById('movStyle').value;
-  if(!f||!s){ alert('Select formation and playing style.'); return; }
-  const positions=formations[f].pos;
-  const movData=movements[s]||{};
-  const counts={},idx={};
-  positions.forEach(p=>counts[p]=(counts[p]||0)+1);
-
-  const roleArr=positions.map((_,i)=>document.getElementById('mov-role-'+i)?.value||'');
-
-  const items=document.getElementById('movementItems');
-  items.innerHTML='';
-
-  positions.forEach((pos,i)=>{
-    idx[pos]=(idx[pos]||0)+1;
-    const label=counts[pos]>1?`${pos} ${idx[pos]}`:pos;
-    const role=roleArr[i]||(defaultRoles[pos]||pos);
-    const rd=roles[role]||{attack:5,defense:5};
-    const styleMov=movData[pos]||'Standard positioning';
-    const note=getTacticalNote(pos,role,styleMov,s);
-
-    // Role-specific tendency
-    let roleTend='';
-    if(rd.attack>=9) roleTend='High-threat attacker — seeks goal-scoring positions';
-    else if(rd.attack>=8) roleTend='Creative force — generates and converts chances';
-    else if(rd.defense>=9) roleTend='Defensive anchor — shields and intercepts';
-    else if(rd.defense>=8) roleTend='Disciplined defensive player — covers key zones';
-    else roleTend='Balanced contributor — works across both phases';
-
-    const div=document.createElement('div');
-    div.className='mov-player-row';
-    div.innerHTML=`
-      <div class="mov-player-top">
-        <span class="pos-badge">${label}</span>
-        <span class="mov-role-name">${role||'—'}</span>
-        <div class="squad-stats">
-          <span class="stat-pill atk">ATK ${rd.attack}</span>
-          <span class="stat-pill def">DEF ${rd.defense}</span>
-        </div>
-      </div>
-      <div class="mov-detail-grid">
-        <div class="mov-detail-box">
-          <div class="mov-detail-label">Team Style Movement</div>
-          <div class="mov-detail-value">${styleMov}</div>
-        </div>
-        <div class="mov-detail-box">
-          <div class="mov-detail-label">Role Tendency</div>
-          <div class="mov-detail-value">${roleTend}</div>
-        </div>
-      </div>
-      <div class="mov-combined">⚡ ${note}</div>`;
-    items.appendChild(div);
+function renderFormations(filter='') {
+  const grid = document.getElementById('formationsGrid');
+  grid.innerHTML = '';
+  Object.entries(formations).forEach(([name, data]) => {
+    if(filter && !name.toLowerCase().includes(filter.toLowerCase())) return;
+    const card = document.createElement('div');
+    card.className = 'formation-card';
+    card.innerHTML = `<div class="formation-name">${name}</div><div class="formation-type">${data.type.toUpperCase()}</div><div class="formation-count">10 Outfield Players</div>`;
+    grid.appendChild(card);
   });
-
-  // Launch single-team visualization
-  _movVizParams={f,s,roleArr};
-  document.getElementById('movVizSection').classList.add('visible');
-  setTimeout(()=>launchSingleViz(f,s,roleArr,'movCanvas'),80);
 }
 
-// ===== NAV =====
-function nav(page, el) {
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  if(el) el.classList.add('active');
-  document.getElementById('breadcrumb').innerHTML = `SYS / <span>${page}</span>`;
+function renderStyles() {
+  const list = document.getElementById('stylesList');
+  list.innerHTML = '';
+  Object.entries(styles).forEach(([name, data]) => {
+    const div = document.createElement('div');
+    div.className = 'style-card';
+    div.innerHTML = `
+      <div class="style-name-block">
+        <div class="style-name">${name}</div>
+        <div class="style-tag">System Rating</div>
+      </div>
+      <div class="style-bars">
+        <div class="bar-group"><div class="bar-label">Attack <span>${data.attack}/10</span></div><div class="bar-track"><div class="bar-fill" style="width:${data.attack*10}%"></div></div></div>
+        <div class="bar-group"><div class="bar-label">Defense <span>${data.defense}/10</span></div><div class="bar-track"><div class="bar-fill defense" style="width:${data.defense*10}%"></div></div></div>
+        <div class="bar-group"><div class="bar-label">Tempo <span>${data.tempo}/10</span></div><div class="bar-track"><div class="bar-fill tempo" style="width:${data.tempo*10}%"></div></div></div>
+      </div>`;
+    list.appendChild(div);
+  });
 }
+
+function renderRoles(filter='') {
+  const grid = document.getElementById('rolesGrid');
+  grid.innerHTML = '';
+  Object.entries(roles).forEach(([name, data]) => {
+    if(filter && !name.toLowerCase().includes(filter.toLowerCase())) return;
+    grid.innerHTML += `
+      <div class="role-card">
+        <div class="role-card-name">${name}</div>
+        <div class="role-stats">
+          <div class="role-stat"><div class="role-stat-label">ATK <span>${data.attack}</span></div><div class="role-bar-track"><div class="role-bar-fill" style="width:${data.attack*10}%"></div></div></div>
+          <div class="role-stat"><div class="role-stat-label">DEF <span>${data.defense}</span></div><div class="role-bar-track"><div class="role-bar-fill def" style="width:${data.defense*10}%"></div></div></div>
+        </div>
+      </div>`;
+  });
+}
+
+function filterFormations() { renderFormations(document.getElementById('formationSearch').value); }
+function filterRoles() { renderRoles(document.getElementById('roleSearch').value); }
+
+function buildPlayerRoles(team) {
+  const fVal = document.getElementById(team+'Formation').value;
+  const grid = document.getElementById(team+'RolesGrid');
+  if(!fVal) { grid.innerHTML = ''; return; }
+  const positions = formations[fVal].pos;
+  grid.innerHTML = positions.map((pos, i) => `
+    <div class="player-role-row">
+      <span class="pos-tag ${team==='away'?'away-tag':''}">${pos}</span>
+      <select class="form-select" id="${team}-role-${i}">
+        <option value="">-- Role --</option>
+        ${Object.keys(roles).map(r=>`<option value="${r}">${r}</option>`).join('')}
+      </select>
+    </div>`).join('');
+}
+function buildGenRoles() { buildPlayerRoles('gen'); }
+function buildMovRoles() { buildPlayerRoles('mov'); }
 
 // ============================================================
-// ⚽ MOVEMENT VISUALIZATION ENGINE
+// VISUALIZATION ENGINE (WITH PASSING LINES)
 // ============================================================
 let _animFrame = null;
-let _animTime = 0;
-let _vizHomeData = [], _vizAwayData = [];
 let _vizCtx = null;
 let _vizDims = null;
 
-function stopAnimation() {
-  if(_animFrame){ cancelAnimationFrame(_animFrame); _animFrame=null; }
+function stopAnimation() { if(_animFrame) cancelAnimationFrame(_animFrame); }
+
+function renderPitch(ctx, px, py, pw, ph) {
+  ctx.fillStyle = '#0f172a'; // Match slate background
+  ctx.fillRect(px, py, pw, ph);
+  const ln = (c='#334155',w=1) => { ctx.strokeStyle=c; ctx.lineWidth=w; };
+  
+  ln('#334155', 2); ctx.strokeRect(px,py,pw,ph);
+  ln('#334155', 1);
+  ctx.beginPath(); ctx.moveTo(px,py+ph/2); ctx.lineTo(px+pw,py+ph/2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(px+pw/2,py+ph/2,ph*0.115,0,Math.PI*2); ctx.stroke();
+  
+  const paw=pw*0.42,pah=ph*0.17;
+  ctx.strokeRect(px+(pw-paw)/2,py+ph-pah,paw,pah);
+  ctx.strokeRect(px+(pw-paw)/2,py,paw,pah);
 }
 
-function resumeAnimation() {
-  if(!_animFrame && _vizCtx) vizLoop();
-}
-
-function launchViz(hF, hS, hRoles, aF, aS, aRoles) {
-  const canvas = document.getElementById('pitchCanvas');
-  if(!canvas) return;
-  stopAnimation();
-
-  const CW=canvas.width, CH=canvas.height;
-  const PAD=44;
-  const PX=PAD, PY=PAD, PW=CW-PAD*2, PH=CH-PAD*2;
-  _vizDims={CW,CH,PX,PY,PW,PH};
-  _vizCtx = canvas.getContext('2d');
-  _vizHomeData = buildTeamPlayers(hF, hS, hRoles, true, PX, PY, PW, PH);
-  _vizAwayData = buildTeamPlayers(aF, aS, aRoles, false, PX, PY, PW, PH);
-  _animTime = 0;
-  vizLoop();
-}
-
-function vizLoop() {
-  const {CW,CH,PX,PY,PW,PH} = _vizDims;
-  const ctx = _vizCtx;
-  ctx.clearRect(0,0,CW,CH);
-  renderPitch(ctx,PX,PY,PW,PH);
-  renderTeam(ctx,_vizAwayData,false,_animTime);
-  renderTeam(ctx,_vizHomeData,true,_animTime);
-  renderTacticalLines(ctx,_vizHomeData,_vizAwayData,_animTime);
-  _animTime += 0.016;
-  _animFrame = requestAnimationFrame(vizLoop);
-}
-
-// ── Build player data objects ──────────────────────────────
-function buildTeamPlayers(fKey, sKey, roleArr, isHome, px, py, pw, ph) {
+function buildTeamPlayers(fKey, isHome, px, py, pw, ph) {
   const pos = formations[fKey].pos;
-  const movD = movements[sKey]||{};
+  const yH = {GK:.90,CB:.74,LB:.74,RB:.74,CDM:.62,CM:.50,LM:.50,RM:.50,CAM:.37,LW:.22,RW:.22,ST:.13};
   const cnt={}, pidx={};
   pos.forEach(p=>cnt[p]=(cnt[p]||0)+1);
 
-  // Normalized y zones (0=top canvas, 1=bottom canvas)
-  const yH={GK:.90,CB:.74,LB:.74,RB:.74,CDM:.62,CM:.50,LM:.50,RM:.50,CAM:.37,LW:.22,RW:.22,ST:.13,CF:.17};
-  const yz = p => isHome ? (yH[p]??0.5) : 1-(yH[p]??0.5);
-
-  return pos.map((p,i)=>{
+  return pos.map(p => {
     pidx[p]=(pidx[p]||0)+1;
     const ti=pidx[p]-1, tot=cnt[p];
-
-    // X spread per position
-    let xf;
-    const spread=(arr,ti)=>(arr[ti]??0.5);
-    if(['GK','CDM','CAM','CF'].includes(p)) xf=0.5;
-    else if(['LB','LM','LW'].includes(p)) xf=0.10;
-    else if(['RB','RM','RW'].includes(p)) xf=0.90;
-    else if(p==='CB'){
-      const s={1:[.50],2:[.32,.68],3:[.22,.50,.78],4:[.17,.37,.63,.83],5:[.12,.28,.50,.72,.88]};
-      xf=spread(s[tot]||[.5],ti);
-    } else if(p==='CM'){
-      const s={1:[.50],2:[.36,.64],3:[.27,.50,.73],4:[.22,.39,.61,.78],5:[.18,.33,.50,.67,.82],6:[.14,.27,.42,.58,.73,.86]};
-      xf=spread(s[tot]||[.5],ti);
-    } else if(p==='ST'){
-      const s={1:[.50],2:[.36,.64],3:[.26,.50,.74],4:[.20,.38,.62,.80]};
-      xf=spread(s[tot]||[.5],ti);
-    } else xf=0.5;
-
-    const x = px+xf*pw;
-    const y = py+yz(p)*ph;
-    const movT = movD[p]||'';
-    const role = roleArr[i]||'';
-    const {vx,vy,inten} = calcVec(movT,p,isHome);
-
+    
+    let xf=0.5;
+    if(['LB','LM','LW'].includes(p)) xf = 0.15;
+    else if(['RB','RM','RW'].includes(p)) xf = 0.85;
+    else if(tot===2) xf = [0.35, 0.65][ti];
+    else if(tot===3) xf = [0.25, 0.5, 0.75][ti];
+    else if(tot===4) xf = [0.2, 0.4, 0.6, 0.8][ti];
+    else if(tot===5) xf = [0.15, 0.32, 0.5, 0.68, 0.85][ti];
+    
     return {
-      p, role, x, y, vx, vy, inten,
-      isPresser:/press/.test(movT.toLowerCase()) && !/stay|back|support/.test(movT.toLowerCase()),
-      isMarker:/track back|mark|man mark/.test(movT.toLowerCase()),
-      phase: Math.random()*Math.PI*2,
-      i
+      p, 
+      x: px + xf * pw, 
+      y: py + (isHome ? yH[p] : 1 - yH[p]) * ph,
+      vx: (Math.random() - 0.5) * 0.2,
+      vy: (isHome ? -0.2 : 0.2),
+      phase: Math.random() * Math.PI * 2
     };
   });
 }
 
-// ── Movement vector from text ─────────────────────────────
-function calcVec(text, pos, isHome) {
-  const t=text.toLowerCase();
-  const d=isHome?-1:1; // home attacks upward (-y)
-  const isL=['LB','LM','LW','LWB'].some(p=>pos===p)||pos.startsWith('L');
-  const isR=['RB','RM','RW','RWB'].some(p=>pos===p)||pos.startsWith('R');
-  let vx=0,vy=0,inten=0.22;
-
-  if(/sprint|explosive/.test(t))                           { vy=-0.95*d; inten=1.0; }
-  else if(/push high|stay high/.test(t))                   { vy=-0.58*d; inten=0.82; }
-  else if(/press center|press defense|press mid|press full|press wide/.test(t)) { vy=-0.50*d; inten=0.78; }
-  else if(/press/.test(t)&&!/stay|back|trap/.test(t))      { vy=-0.45*d; inten=0.72; }
-  else if(/overlap|join attack/.test(t))                   { vx=isL?-0.40:0.40; vy=-0.50*d; inten=0.88; }
-  else if(/attack quick|attack fast/.test(t))              { vy=-0.52*d; inten=0.82; }
-  else if(/forward|advance|push forward|drive forward/.test(t)) { vy=-0.40*d; inten=0.68; }
-  else if(/get in behind|run behind/.test(t))              { vy=-0.60*d; inten=0.88; }
-  else if(/cut inside|move inside/.test(t))                { vx=isL?0.40:-0.40; vy=-0.30*d; inten=0.75; }
-  else if(/invert/.test(t))                                { vx=isL?0.30:-0.30; vy=-0.22*d; inten=0.62; }
-  else if(/dribble wide|cross|stay wide|hold width/.test(t)) { vx=isL?-0.40:0.40; inten=0.58; }
-  else if(/switch play|switch ball/.test(t))               { vx=isL?0.52:-0.52; inten=0.55; }
-  else if(/stay back|stay deep|shield|protect/.test(t))    { vy=0.40*d; inten=0.62; }
-  else if(/track back|track half/.test(t))                 { vy=0.48*d; inten=0.68; }
-  else if(/drop deep|drop into|drop between/.test(t))      { vy=0.42*d; inten=0.68; }
-  else if(/hold position|anchor|stay compact|stay close|stay tight|shield/.test(t)) { vx=0;vy=0;inten=0.12; }
-  else if(/free roam|free movement|rotate|interchange|swap/.test(t)) { vx=0.26;vy=-0.24*d;inten=0.55; }
-  else if(/support/.test(t))                               { vy=-0.14*d; inten=0.32; }
-  else                                                     { vy=-0.10*d; inten=0.18; }
-
-  return {vx,vy,inten};
-}
-
-// ── Pitch drawing ─────────────────────────────────────────
-function renderPitch(ctx, px, py, pw, ph) {
-  // Striped turf
-  for(let i=0;i<12;i++){
-    ctx.fillStyle=i%2===0?'#0c1d0c':'#0e200e';
-    ctx.fillRect(px+i*(pw/12),py,pw/12,ph);
+// THE NEW PROFESSIONAL PASS NETWORK RENDERER
+function renderPassNetwork(ctx, players, colorRgba) {
+  ctx.save();
+  for(let i=0; i<players.length; i++) {
+    for(let j=i+1; j<players.length; j++) {
+      let p1 = players[i], p2 = players[j];
+      let dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+      if(dist < 200) { // Max pass line length
+        let alpha = 1 - (dist / 200);
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = colorRgba.replace('ALPHA', alpha * 0.6);
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+    }
   }
-
-  const ln=(c='#1e3a1e',w=1)=>{ctx.strokeStyle=c;ctx.lineWidth=w;};
-
-  // Pitch outline
-  ln('#2e4e2e',2); ctx.strokeRect(px,py,pw,ph);
-
-  // Halfway
-  ln('#1e3a1e',1);
-  ctx.beginPath();ctx.moveTo(px,py+ph/2);ctx.lineTo(px+pw,py+ph/2);ctx.stroke();
-
-  // Center circle
-  ctx.beginPath();ctx.arc(px+pw/2,py+ph/2,ph*0.115,0,Math.PI*2);ln('#1e3a1e');ctx.stroke();
-  ctx.fillStyle='#1e3a1e';ctx.beginPath();ctx.arc(px+pw/2,py+ph/2,3.5,0,Math.PI*2);ctx.fill();
-
-  // Penalty areas
-  const paw=pw*0.42,pah=ph*0.17;
-  ctx.strokeRect(px+(pw-paw)/2,py+ph-pah,paw,pah);
-  ctx.strokeRect(px+(pw-paw)/2,py,paw,pah);
-
-  // 6-yard boxes
-  const sw=pw*0.18,sh=ph*0.08;
-  ctx.strokeRect(px+(pw-sw)/2,py+ph-sh,sw,sh);
-  ctx.strokeRect(px+(pw-sw)/2,py,sw,sh);
-
-  // Goals
-  ln('#00ff4166',2.5);
-  const gw=pw*0.10;
-  ctx.strokeRect(px+(pw-gw)/2,py+ph,gw,ph*0.026);
-  ctx.strokeRect(px+(pw-gw)/2,py-ph*0.026,gw,ph*0.026);
-
-  // Penalty spots
-  ctx.fillStyle='#2a4a2a';
-  [[pw/2,ph*.845],[pw/2,ph*.155]].forEach(([x,y])=>{ctx.beginPath();ctx.arc(px+x,py+y,3.5,0,Math.PI*2);ctx.fill();});
-
-  // Penalty arcs
-  ctx.save();
-  ctx.beginPath();ctx.arc(px+pw/2,py+ph*.845,ph*0.07,Math.PI*1.1,Math.PI*1.9);
-  ln('#1e3a1e');ctx.stroke();
-  ctx.beginPath();ctx.arc(px+pw/2,py+ph*.155,ph*0.07,Math.PI*0.1,Math.PI*0.9);
-  ln('#1e3a1e');ctx.stroke();
-  ctx.restore();
-
-  // Corner arcs
-  [[0,0,0,Math.PI*.5],[pw,0,Math.PI*.5,Math.PI],[0,ph,Math.PI*1.5,Math.PI*2],[pw,ph,Math.PI,Math.PI*1.5]].forEach(([cx,cy,a1,a2])=>{
-    ctx.beginPath();ctx.arc(px+cx,py+cy,12,a1,a2);ln('#1e3a1e');ctx.stroke();
-  });
-
-  // Zone labels
-  ctx.save();
-  ctx.font='bold 8px Share Tech Mono';
-  ctx.textAlign='center';
-  ctx.fillStyle='#00ff4108';
-  ctx.fillText('DEFENSIVE THIRD',px+pw/2,py+ph*.9);
-  ctx.fillText('MIDFIELD THIRD',px+pw/2,py+ph*.5+4);
-  ctx.fillStyle='#00ff4108';
-  ctx.fillText('ATTACKING THIRD',px+pw/2,py+ph*.12);
-  // Away
-  ctx.fillStyle='#ff414108';
-  ctx.fillText('ATT THIRD',px+pw/2,py+ph*.12);
-
-  // HOME / AWAY labels on sides
-  ctx.textAlign='left';
-  ctx.fillStyle='#00ff4130';
-  ctx.font='bold 9px Share Tech Mono';
-  ctx.fillText('HOME ↑',px+6,py+ph-8);
-  ctx.fillStyle='#ff414130';
-  ctx.fillText('AWAY ↑',px+6,py+12);
   ctx.restore();
 }
 
-// ── Render one team's players ─────────────────────────────
-function renderTeam(ctx, players, isHome, t) {
-  const clr   = isHome?'#00ff41':'#ff4141';
-  const clrDim= isHome?'#00ff4155':'#ff414155';
-  const clrGlw= isHome?'#00ff4122':'#ff414122';
+function renderTeamUI(ctx, players, color, t) {
+  players.forEach(pl => {
+    const wave = Math.sin(t*1.5 + pl.phase)*0.5;
+    const mx = pl.x + pl.vx * 20 * wave;
+    const my = pl.y + pl.vy * 20 * wave;
 
-  players.forEach(pl=>{
-    const SCALE=30;
-    const wave=(Math.sin(t*1.05+pl.phase)*0.5+0.5); // 0..1 smooth
-    const mx=pl.x+pl.vx*SCALE*wave;
-    const my=pl.y+pl.vy*SCALE*wave;
+    ctx.beginPath(); ctx.arc(mx, my, 10, 0, Math.PI*2);
+    ctx.fillStyle = color; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = '#0f172a'; ctx.stroke();
 
-    // Movement trail
-    if(pl.inten>0.12){
-      const tx=pl.x+pl.vx*SCALE;
-      const ty=pl.y+pl.vy*SCALE;
-      ctx.save();
-      ctx.beginPath();ctx.moveTo(pl.x,pl.y);ctx.lineTo(tx,ty);
-      ctx.strokeStyle=clrDim.replace('55','22');
-      ctx.lineWidth=1;ctx.setLineDash([3,6]);ctx.stroke();
-      ctx.setLineDash([]);ctx.restore();
-
-      // Arrow head when moving
-      if(wave>0.12&&(Math.abs(pl.vx)+Math.abs(pl.vy))>0.08){
-        drawVizArrow(ctx,pl.x,pl.y,mx,my,clr,pl.inten);
-      }
-    }
-
-    // Glow
-    const grd=ctx.createRadialGradient(mx,my,0,mx,my,18);
-    grd.addColorStop(0,clrGlw.replace('22','55'));
-    grd.addColorStop(1,'transparent');
-    ctx.beginPath();ctx.arc(mx,my,18,0,Math.PI*2);
-    ctx.fillStyle=grd;ctx.fill();
-
-    // Drop shadow
-    ctx.beginPath();ctx.arc(mx+1.5,my+1.5,11,0,Math.PI*2);
-    ctx.fillStyle='rgba(0,0,0,0.45)';ctx.fill();
-
-    // Player disc
-    ctx.beginPath();ctx.arc(mx,my,11,0,Math.PI*2);
-    ctx.fillStyle=clr;ctx.fill();
-
-    // Inner shine
-    ctx.beginPath();ctx.arc(mx-2.5,my-2.5,4.5,0,Math.PI*2);
-    ctx.fillStyle='rgba(255,255,255,0.22)';ctx.fill();
-
-    // Position label
-    ctx.save();
-    ctx.fillStyle=isHome?'#001200':'#1a0000';
-    ctx.font='bold 7px Share Tech Mono';
-    ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText(pl.p,mx,my);
-    ctx.restore();
-
-    // Role label badge
-    if(pl.role){
-      const short=pl.role.length>14?pl.role.slice(0,13)+'…':pl.role;
-      ctx.save();
-      const tw=ctx.measureText(short).width+8;
-      ctx.fillStyle='rgba(0,0,0,0.78)';
-      ctx.fillRect(mx-tw/2,my+13,tw,12);
-      ctx.fillStyle=clr;
-      ctx.font='5.5px Share Tech Mono';
-      ctx.textAlign='center';ctx.textBaseline='top';
-      ctx.fillText(short,mx,my+14.5);
-      ctx.restore();
-    }
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 8px Inter';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(pl.p, mx, my);
   });
 }
 
-// ── Arrow head utility ────────────────────────────────────
-function drawVizArrow(ctx,x1,y1,x2,y2,color,inten){
-  const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy);
-  if(len<6)return;
-  const ang=Math.atan2(dy,dx),hl=7+5*inten;
-  ctx.save();
-  ctx.strokeStyle=color;ctx.lineWidth=2;ctx.globalAlpha=0.92;
-  ctx.beginPath();
-  ctx.moveTo(x2,y2);
-  ctx.lineTo(x2-hl*Math.cos(ang-.42),y2-hl*Math.sin(ang-.42));
-  ctx.moveTo(x2,y2);
-  ctx.lineTo(x2-hl*Math.cos(ang+.42),y2-hl*Math.sin(ang+.42));
-  ctx.stroke();
-  ctx.restore();
-}
+function launchSingleViz(fKey, canvasId) {
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+  stopAnimation();
+  
+  const CW=canvas.width, CH=canvas.height;
+  const PAD=40, PX=PAD, PY=PAD, PW=CW-PAD*2, PH=CH-PAD*2;
+  _vizCtx = canvas.getContext('2d');
+  const teamData = buildTeamPlayers(fKey, true, PX, PY, PW, PH);
+  let t = 0;
 
-// ── Tactical interaction lines ────────────────────────────
-function renderTacticalLines(ctx, homeData, awayData, t){
-  const pulse=Math.sin(t*2)*0.5+0.5;
-
-  // Pressing lines: home pressers → nearest away player
-  homeData.forEach(hp=>{
-    if(!hp.isPresser)return;
-    let near=null,md=Infinity;
-    awayData.forEach(ap=>{const d=Math.hypot(hp.x-ap.x,hp.y-ap.y);if(d<md){md=d;near=ap;}});
-    if(near&&md<240){
-      ctx.save();
-      ctx.beginPath();ctx.moveTo(hp.x,hp.y);ctx.lineTo(near.x,near.y);
-      ctx.strokeStyle=`rgba(255,170,0,${0.12+0.12*pulse})`;
-      ctx.lineWidth=1.2;ctx.setLineDash([5,8]);ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Arrowhead toward away player
-      drawVizArrow(ctx,hp.x,hp.y,
-        hp.x+(near.x-hp.x)*0.7,hp.y+(near.y-hp.y)*0.7,
-        `rgba(255,170,0,${0.5+0.3*pulse})`,0.5);
-      ctx.restore();
-    }
-  });
-
-  // Marking lines: away markers → home attackers
-  awayData.forEach(ap=>{
-    if(!ap.isMarker)return;
-    let near=null,md=Infinity;
-    homeData.forEach(hp=>{
-      if(['ST','LW','RW','CAM','CF'].includes(hp.p)){
-        const d=Math.hypot(ap.x-hp.x,ap.y-hp.y);if(d<md){md=d;near=hp;}
-      }
-    });
-    if(near&&md<230){
-      ctx.save();
-      ctx.beginPath();ctx.moveTo(ap.x,ap.y);ctx.lineTo(near.x,near.y);
-      ctx.strokeStyle=`rgba(255,65,65,${0.10+0.10*pulse})`;
-      ctx.lineWidth=1;ctx.setLineDash([3,10]);ctx.stroke();
-      ctx.setLineDash([]);ctx.restore();
-    }
-  });
-
-  // Home markers → away attackers
-  homeData.forEach(hp=>{
-    if(!hp.isMarker)return;
-    let near=null,md=Infinity;
-    awayData.forEach(ap=>{
-      if(['ST','LW','RW','CAM','CF'].includes(ap.p)){
-        const d=Math.hypot(hp.x-ap.x,hp.y-ap.y);if(d<md){md=d;near=ap;}
-      }
-    });
-    if(near&&md<230){
-      ctx.save();
-      ctx.beginPath();ctx.moveTo(hp.x,hp.y);ctx.lineTo(near.x,near.y);
-      ctx.strokeStyle=`rgba(0,255,65,${0.10+0.10*pulse})`;
-      ctx.lineWidth=1;ctx.setLineDash([3,10]);ctx.stroke();
-      ctx.setLineDash([]);ctx.restore();
-    }
-  });
-
-  // Away pressers → home players
-  awayData.forEach(ap=>{
-    if(!ap.isPresser)return;
-    let near=null,md=Infinity;
-    homeData.forEach(hp=>{const d=Math.hypot(ap.x-hp.x,ap.y-hp.y);if(d<md){md=d;near=hp;}});
-    if(near&&md<240){
-      ctx.save();
-      ctx.beginPath();ctx.moveTo(ap.x,ap.y);ctx.lineTo(near.x,near.y);
-      ctx.strokeStyle=`rgba(255,100,100,${0.12+0.10*pulse})`;
-      ctx.lineWidth=1.2;ctx.setLineDash([5,8]);ctx.stroke();
-      ctx.setLineDash([]);
-      drawVizArrow(ctx,ap.x,ap.y,
-        ap.x+(near.x-ap.x)*0.7,ap.y+(near.y-ap.y)*0.7,
-        `rgba(255,100,100,${0.5+0.3*pulse})`,0.5);
-      ctx.restore();
-    }
-  });
-}
-
-// ============================================================
-// SINGLE-TEAM VISUALIZATION (Generator + Movements Explorer)
-// ============================================================
-const _canvasFrames = {}; // canvasId → animationFrameId
-const _canvasLoops  = {}; // canvasId → loop function (for resume)
-
-function stopCanvasAnim(id) {
-  if(_canvasFrames[id]){ cancelAnimationFrame(_canvasFrames[id]); _canvasFrames[id]=null; }
-}
-
-function resumeGenViz() {
-  if(_genVizParams) launchSingleViz(_genVizParams.f,_genVizParams.s,_genVizParams.roleArr,'genCanvas');
-}
-function resumeMovViz() {
-  if(_movVizParams) launchSingleViz(_movVizParams.f,_movVizParams.s,_movVizParams.roleArr,'movCanvas');
-}
-
-function launchSingleViz(fKey, sKey, roleArr, canvasId) {
-  const canvas=document.getElementById(canvasId);
-  if(!canvas)return;
-  stopCanvasAnim(canvasId);
-  const CW=canvas.width,CH=canvas.height;
-  const PAD=44,PX=PAD,PY=PAD,PW=CW-PAD*2,PH=CH-PAD*2;
-  const ctx=canvas.getContext('2d');
-  // Build team using full-pitch y-zones (isHome=true puts GK bottom, attackers top)
-  const teamData=buildTeamPlayers(fKey,sKey,roleArr,true,PX,PY,PW,PH);
-  let t=0;
-  function loop(){
-    ctx.clearRect(0,0,CW,CH);
-    renderPitch(ctx,PX,PY,PW,PH);
-    renderSingleTeamFull(ctx,teamData,t);
-    renderSinglePressLines(ctx,teamData,t);
-    t+=0.016;
-    _canvasFrames[canvasId]=requestAnimationFrame(loop);
+  function loop() {
+    _vizCtx.clearRect(0,0,CW,CH);
+    renderPitch(_vizCtx, PX, PY, PW, PH);
+    renderPassNetwork(_vizCtx, teamData, 'rgba(59, 130, 246, ALPHA)'); // Professional Blue passing lines
+    renderTeamUI(_vizCtx, teamData, '#10b981', t); // Emerald dots
+    t += 0.02;
+    _animFrame = requestAnimationFrame(loop);
   }
-  _canvasLoops[canvasId]=loop;
   loop();
 }
 
-// Draw single team with enhanced visibility (no opponent)
-function renderSingleTeamFull(ctx, players, t) {
-  players.forEach(pl=>{
-    const SCALE=32;
-    const wave=(Math.sin(t*1.05+pl.phase)*0.5+0.5);
-    const mx=pl.x+pl.vx*SCALE*wave;
-    const my=pl.y+pl.vy*SCALE*wave;
+function launchDualViz(hF, aF) {
+  const canvas = document.getElementById('pitchCanvas');
+  if(!canvas) return;
+  stopAnimation();
+  
+  const CW=canvas.width, CH=canvas.height;
+  const PAD=40, PX=PAD, PY=PAD, PW=CW-PAD*2, PH=CH-PAD*2;
+  _vizCtx = canvas.getContext('2d');
+  const homeData = buildTeamPlayers(hF, true, PX, PY, PW, PH);
+  const awayData = buildTeamPlayers(aF, false, PX, PY, PW, PH);
+  let t = 0;
 
-    // Movement target zone (faint destination marker)
-    if(pl.inten>0.12){
-      const tx=pl.x+pl.vx*SCALE, ty=pl.y+pl.vy*SCALE;
-      ctx.save();
-      ctx.beginPath(); ctx.arc(tx,ty,5,0,Math.PI*2);
-      ctx.fillStyle='rgba(0,255,65,0.08)'; ctx.fill();
-      ctx.strokeStyle='rgba(0,255,65,0.20)'; ctx.lineWidth=1; ctx.stroke();
-      // Dashed path line
-      ctx.beginPath(); ctx.moveTo(pl.x,pl.y); ctx.lineTo(tx,ty);
-      ctx.strokeStyle='rgba(0,255,65,0.18)'; ctx.lineWidth=1;
-      ctx.setLineDash([3,6]); ctx.stroke(); ctx.setLineDash([]);
-      ctx.restore();
-      // Arrow head at animated position
-      if(wave>0.15&&(Math.abs(pl.vx)+Math.abs(pl.vy))>0.08)
-        drawVizArrow(ctx,pl.x,pl.y,mx,my,'#00ff41',pl.inten);
-    }
+  function loop() {
+    _vizCtx.clearRect(0,0,CW,CH);
+    renderPitch(_vizCtx, PX, PY, PW, PH);
+    
+    // Pass networks for both teams
+    renderPassNetwork(_vizCtx, homeData, 'rgba(16, 185, 129, ALPHA)'); // Green lines
+    renderPassNetwork(_vizCtx, awayData, 'rgba(239, 68, 68, ALPHA)');  // Red lines
 
-    // Outer glow ring (intensity-based size)
-    const glowR=13+pl.inten*6;
-    const grd=ctx.createRadialGradient(mx,my,0,mx,my,glowR);
-    grd.addColorStop(0,'rgba(0,255,65,0.30)');
-    grd.addColorStop(1,'transparent');
-    ctx.beginPath(); ctx.arc(mx,my,glowR,0,Math.PI*2);
-    ctx.fillStyle=grd; ctx.fill();
-
-    // Shadow
-    ctx.beginPath(); ctx.arc(mx+1.5,my+1.5,11,0,Math.PI*2);
-    ctx.fillStyle='rgba(0,0,0,0.5)'; ctx.fill();
-
-    // Player disc
-    ctx.beginPath(); ctx.arc(mx,my,11,0,Math.PI*2);
-    ctx.fillStyle='#00ff41'; ctx.fill();
-
-    // Shine
-    ctx.beginPath(); ctx.arc(mx-3,my-3,4,0,Math.PI*2);
-    ctx.fillStyle='rgba(255,255,255,0.25)'; ctx.fill();
-
-    // Position label
-    ctx.save();
-    ctx.fillStyle='#001200';
-    ctx.font='bold 7px Share Tech Mono';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText(pl.p,mx,my);
-    ctx.restore();
-
-    // Role badge
-    if(pl.role){
-      const short=pl.role.length>15?pl.role.slice(0,14)+'…':pl.role;
-      ctx.save();
-      const tw=ctx.measureText(short).width+10;
-      // Badge background
-      ctx.fillStyle='rgba(0,10,0,0.82)';
-      ctx.fillRect(mx-tw/2,my+13,tw,12);
-      ctx.strokeStyle='rgba(0,255,65,0.25)';
-      ctx.lineWidth=0.5; ctx.strokeRect(mx-tw/2,my+13,tw,12);
-      ctx.fillStyle='#00ff41';
-      ctx.font='5.5px Share Tech Mono';
-      ctx.textAlign='center'; ctx.textBaseline='top';
-      ctx.fillText(short,mx,my+14.5);
-      ctx.restore();
-    }
-
-    // ATK/DEF micro-bars beside player on hover-like static
-    if(roles[pl.role]){
-      const rd=roles[pl.role];
-      const bx=mx+14, by=my-8, bw=28, bh=4;
-      ctx.save();
-      ctx.fillStyle='rgba(0,0,0,0.6)';
-      ctx.fillRect(bx,by,bw,bh*2+3);
-      // ATK bar
-      ctx.fillStyle='#1a3a1a'; ctx.fillRect(bx+1,by+1,bw-2,bh-2);
-      ctx.fillStyle='#00ff41'; ctx.fillRect(bx+1,by+1,(bw-2)*(rd.attack/10),bh-2);
-      // DEF bar
-      ctx.fillStyle='#1a1a1a'; ctx.fillRect(bx+1,by+bh+1,bw-2,bh-2);
-      ctx.fillStyle='#ff4141'; ctx.fillRect(bx+1,by+bh+1,(bw-2)*(rd.defense/10),bh-2);
-      ctx.restore();
-    }
-  });
+    renderTeamUI(_vizCtx, awayData, '#ef4444', t);
+    renderTeamUI(_vizCtx, homeData, '#10b981', t);
+    t += 0.02;
+    _animFrame = requestAnimationFrame(loop);
+  }
+  loop();
 }
 
-// Draw pressing lines for single team
-function renderSinglePressLines(ctx, players, t) {
-  const pulse=Math.sin(t*2)*0.5+0.5;
-  players.forEach(presser=>{
-    if(!presser.isPresser) return;
-    // Show press direction as forward arrow from player
-    const tx=presser.x+presser.vx*60;
-    const ty=presser.y+presser.vy*60;
-    ctx.save();
-    ctx.beginPath(); ctx.moveTo(presser.x,presser.y); ctx.lineTo(tx,ty);
-    ctx.strokeStyle=`rgba(255,170,0,${0.20+0.15*pulse})`;
-    ctx.lineWidth=1.5; ctx.setLineDash([4,7]); ctx.stroke(); ctx.setLineDash([]);
-    drawVizArrow(ctx,presser.x,presser.y,tx,ty,`rgba(255,170,0,${0.6+0.3*pulse})`,0.6);
-    ctx.restore();
-  });
+// ===== ACTIONS =====
+function runAnalysis() {
+  const hF = document.getElementById('homeFormation').value;
+  const aF = document.getElementById('awayFormation').value;
+  if(!hF || !aF) { alert("Select formations"); return; }
+  
+  document.getElementById('analysisResult').classList.add('visible');
+  document.getElementById('vizSection').classList.add('visible');
+  
+  document.getElementById('strengthMeters').innerHTML = `
+    <div class="score-meter"><span class="score-label">ATTACK</span><div class="score-track"><div class="score-fill-home" style="width:60%"></div></div></div>
+    <div class="score-meter"><span class="score-label">DEFENSE</span><div class="score-track"><div class="score-fill-away" style="width:70%"></div></div></div>
+  `;
+  document.getElementById('duelItems').innerHTML = `Analyzing ${hF} against ${aF} structure mapping complete.`;
+  launchDualViz(hF, aF);
 }
 
-// ===== INIT =====
+function runGenerator() {
+  const f = document.getElementById('genFormation').value;
+  if(!f) { alert("Select formation"); return; }
+  document.getElementById('generatorOutput').classList.add('visible');
+  document.getElementById('genVizSection').classList.add('visible');
+  document.getElementById('generatorItems').innerHTML = `Tactical blueprint generated for ${f}.`;
+  launchSingleViz(f, 'genCanvas');
+}
+
+function runMovements() {
+  const f = document.getElementById('movFormation').value;
+  if(!f) { alert("Select formation"); return; }
+  document.getElementById('movementResult').classList.add('visible');
+  document.getElementById('movVizSection').classList.add('visible');
+  document.getElementById('movementItems').innerHTML = `Pass network mapped for ${f}.`;
+  launchSingleViz(f, 'movCanvas');
+}
+
+// INIT
 renderFormations();
 renderStyles();
 renderRoles();
 populateSelects();
+
 </script>
 </body>
 </html>
