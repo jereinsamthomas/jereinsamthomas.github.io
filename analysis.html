@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jerein Sam Thomas | Match Analysis</title>
+    <title>Modern Tech Portfolio</title>
     <style>
         :root {
-            --bg-color: #0d1117;
-            --surface-color: #161b22;
-            --text-main: #e6edf3;
-            --text-muted: #8b949e;
-            --accent-blue: #2f81f7;
-            --accent-orange: #f78166;
-            --border-color: #30363d;
+            --bg-color: #f4f5f7;
+            --surface-color: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --accent-blue: #3b82f6;
+            --accent-gradient: linear-gradient(90deg, #3b82f6 0%, #f97316 100%);
+            --subtitle-color: #9f5b5b;
+            --border-color: #e5e7eb;
+            --tag-bg: #f3f4f6;
+            --tag-text: #4b5563;
         }
 
         * {
@@ -27,6 +30,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Navigation */
@@ -34,55 +38,209 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
-            background-color: rgba(13, 17, 23, 0.9);
+            padding: 1.2rem 5%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
         }
 
         .logo {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-main);
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            background: #4b5563;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
         }
 
-        .nav-links {
+        .logo-text {
+            color: #4b5563;
+            font-weight: 600;
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        /* Hero Section with Animations & New Background Image */
+        .hero {
+            margin-top: 70px;
+            padding: 6rem 5%;
+            /* NEW BACKGROUND IMAGE LOGIC HERE */
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.95)), 
+                        url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            text-align: center;
+            color: white;
+            min-height: 70vh;
             display: flex;
-            gap: 2rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden; 
         }
 
-        .nav-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
+        /* Tech Grid Animation */
+        .tech-grid {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            animation: grid-move 20s linear infinite;
         }
 
-        .nav-links a:hover {
-            color: var(--accent-blue);
+        @keyframes grid-move {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
         }
 
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
+        /* Floating Tech Particles */
+        .particle {
+            position: absolute;
+            color: rgba(96, 165, 250, 0.8);
+            font-family: monospace;
+            font-size: 0.85rem;
+            pointer-events: none;
+            z-index: 1;
+            animation: float-up linear infinite;
+            text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Kicking Football Animation */
+        .football-wrapper {
+            position: absolute;
+            bottom: 20px;
+            left: -100px;
+            z-index: 2;
+            animation: kick-across 8s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .football {
+            font-size: 3rem;
+            filter: drop-shadow(0 10px 5px rgba(0,0,0,0.5));
+            animation: spin-ball 2s infinite linear, bounce-ball 8s infinite ease-in-out;
+        }
+
+        @keyframes kick-across {
+            0% { left: -10vw; }
+            100% { left: 110vw; }
+        }
+
+        @keyframes spin-ball {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce-ball {
+            0%, 100% { transform: translateY(0); }
+            15% { transform: translateY(-150px); }
+            30% { transform: translateY(0); }
+            45% { transform: translateY(-100px); }
+            60% { transform: translateY(0); }
+            75% { transform: translateY(-50px); }
+            90% { transform: translateY(0); }
+        }
+
+        /* Keep Hero content above animations */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-top-text {
+            color: #818cf8;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.2);
+            margin-top: -10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            color: #e2e8f0;
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+            font-size: 1.1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-primary {
             background-color: var(--accent-blue);
             color: white;
-            text-decoration: none;
+            padding: 0.8rem 1.8rem;
             border-radius: 6px;
+            text-decoration: none;
             font-weight: 600;
-            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .btn:hover {
-            background-color: #1f6feb;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--text-main);
+            padding: 0.8rem 1.8rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f3f4f6;
         }
 
         /* Analysis Section */
@@ -90,27 +248,30 @@
             padding: 5rem 5%;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
-            padding-top: 4rem;
         }
 
         .section-header h2 {
             font-size: 2.5rem;
+            color: var(--text-main);
             margin-bottom: 0.5rem;
         }
 
         .section-header p {
             color: var(--text-muted);
+            font-size: 1.1rem;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 1.5rem;
         }
 
         .card {
@@ -118,155 +279,264 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 2rem;
-            transition: transform 0.3s, border-color 0.3s;
+            transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+            position: relative;
         }
 
         .card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             transform: translateY(-5px);
             border-color: var(--accent-blue);
         }
 
-        .analysis-number {
-            font-size: 0.8rem;
+        .external-icon {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
             color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .analysis-number {
+            font-size: 0.85rem;
+            color: #9ca3af;
             font-family: monospace;
             margin-bottom: 0.5rem;
-            text-transform: uppercase;
         }
 
         .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-bottom: 0.3rem;
         }
 
         .card .subtitle {
-            color: var(--accent-orange);
-            font-size: 0.9rem;
+            color: var(--subtitle-color);
+            font-size: 0.95rem;
             margin-bottom: 1.5rem;
         }
 
         .card p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
         }
 
         .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.8rem;
         }
 
         .tag {
-            background-color: rgba(47, 129, 247, 0.1);
-            color: var(--accent-blue);
-            padding: 0.2rem 0.6rem;
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.3rem 0.6rem;
             border-radius: 4px;
             font-size: 0.8rem;
             font-family: monospace;
+            font-weight: 600;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .card:hover .tag {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
         }
 
         /* Contact Section */
         .contact {
-            padding: 8rem 5%;
+            padding: 6rem 5%;
             text-align: center;
-            background-color: var(--surface-color);
-            border-top: 1px solid var(--border-color);
+            background-color: #ebf0f5;
         }
 
         .contact h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
+            color: #4b5563;
             margin-bottom: 1rem;
         }
 
         .contact p {
             color: var(--text-muted);
             margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
 
         footer {
             text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
+            padding: 1.5rem;
+            background-color: #ebf0f5;
+            color: #9ca3af;
             font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
         }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1, .hero h2 {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" class="logo">JST.</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="projects.html">Projects</a>
-            <a href="tactics.html">Tactical Analyser</a>
-            <a href="analysis.html" style="color: var(--accent-blue);">Match Analyzer</a>
-            <a href="index.html#contact">Contact</a>
+        <div style="display: flex; align-items: center;">
+            <div class="logo">&lt;/&gt;</div>
+            <div class="logo-text">Portfolio</div>
         </div>
+        <div class="menu-icon">&#9776;</div>
     </nav>
+
+    <section class="hero" id="hero">
+        <div class="tech-grid"></div>
+        
+        <div class="football-wrapper">
+            <div class="football">⚽</div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-top-text">TECH · FOOTBALL · INNOVATION</div>
+            <h1>Modern Tech</h1>
+            <h2>Portfolio</h2>
+            <p>A showcase of six innovative analyses spanning football analytics, tactical tooling, IoT systems, and decentralised web.</p>
+            <div class="hero-buttons">
+                <a href="#analysis" class="btn-primary">Explore Analyses &rarr;</a>
+                <a href="#contact" class="btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
 
     <section id="analysis" class="analysis-section">
         <div class="section-header">
-            <h2>Match Analysis Portfolio</h2>
-            <p>Data-driven breakdowns, tactical reports, and performance metrics.</p>
+            <h2>Featured Analyses</h2>
+            <p>Six distinct analyses across sports tech, infrastructure, and the decentralised web.</p>
         </div>
 
         <div class="grid">
-            
-            <div class="card" style="display: flex; flex-direction: column;">
+            <div class="card">
+                <div class="external-icon">&#8599;</div>
                 <div class="analysis-number">Analysis 01</div>
-                <h3>TACTICS OS Simulation</h3>
-                <div class="subtitle">Interactive Match Environment</div>
-                <p>A live tactical sandbox powered by the TACTICS OS engine. Simulate matchups by configuring formations, defining playing styles, and assigning specific player roles to visualize movement and pressing lines.</p>
-                <div class="tags" style="margin-bottom: 1.5rem;">
-                    <span class="tag">Live Simulation</span>
-                    <span class="tag">Tactical Setup</span>
-                    <span class="tag">Engine</span>
+                <h3>Football Analytics Platform</h3>
+                <div class="subtitle">Real-time match data visualisation</div>
+                <p>A comprehensive platform for analysing football match statistics, player performance metrics, and team dynamics using advanced data visualisation...</p>
+                <div class="tags">
+                    <span class="tag">React</span>
+                    <span class="tag">D3.js</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">WebSocket</span>
                 </div>
-                <a href="tactics.html" class="btn" style="margin-top: auto; text-align: center; width: 100%; display: block;">Launch Match Analyzer &rarr;</a>
             </div>
 
             <div class="card">
+                <div class="external-icon">&#8599;</div>
                 <div class="analysis-number">Analysis 02</div>
-                <h3>Midfield Pivot Evaluation</h3>
-                <div class="subtitle">Individual Player Performance Metrics</div>
-                <p>Evaluated the effectiveness of a double pivot system using tracking data. Generated heatmaps for progressive carries and calculated pass completion rates under high pressing scenarios.</p>
+                <h3>Tactical Diagram Renderer</h3>
+                <div class="subtitle">Interactive football tactics builder</div>
+                <p>An interactive tool for coaches and analysts to draw, animate, and share tactical formations and play diagrams with full code export capabilities.</p>
                 <div class="tags">
-                    <span class="tag">Heatmaps</span>
-                    <span class="tag">Player Tracking</span>
-                    <span class="tag">Data Viz</span>
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">Canvas API</span>
+                    <span class="tag">Node.js</span>
+                    <span class="tag">SVG</span>
                 </div>
             </div>
 
             <div class="card">
+                <div class="external-icon">&#8599;</div>
                 <div class="analysis-number">Analysis 03</div>
-                <h3>Set-Piece Vulnerabilities</h3>
-                <div class="subtitle">Defensive Structure Analysis</div>
-                <p>A video and data-backed analysis breaking down corner kick routines. Identified structural flaws in zonal marking strategies that led to high-quality chances for the opposition.</p>
+                <h3>Sensor Fusion Engine</h3>
+                <div class="subtitle">IoT data aggregation at scale</div>
+                <p>A distributed system for ingesting and processing multi-source sensor data streams in real-time, powering predictive maintenance pipelines.</p>
                 <div class="tags">
-                    <span class="tag">Set-Pieces</span>
-                    <span class="tag">Zonal Marking</span>
-                    <span class="tag">Video Analysis</span>
+                    <span class="tag">Rust</span>
+                    <span class="tag">Kafka</span>
+                    <span class="tag">InfluxDB</span>
+                    <span class="tag">gRPC</span>
                 </div>
             </div>
 
+            <div class="card">
+                <div class="external-icon">&#8599;</div>
+                <div class="analysis-number">Analysis 04</div>
+                <h3>GenSons Store</h3>
+                <div class="subtitle">E-commerce with on-chain inventory</div>
+                <p>A decentralised e-commerce experience built on the Internet Computer, featuring on-chain inventory management and crypto-native checkout flows.</p>
+                <div class="tags">
+                    <span class="tag">Motoko</span>
+                    <span class="tag">React</span>
+                    <span class="tag">ICP</span>
+                    <span class="tag">Internet Identity</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="external-icon">&#8599;</div>
+                <div class="analysis-number">Analysis 05</div>
+                <h3>Players Rendition</h3>
+                <div class="subtitle">3D athlete profile visualiser</div>
+                <p>A WebGL-powered tool that renders 3D player models and overlays biometric stats, injury maps, and performance trends for sports science teams.</p>
+                <div class="tags">
+                    <span class="tag">WebGL</span>
+                    <span class="tag">React</span>
+                    <span class="tag">REST API</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="external-icon">&#8599;</div>
+                <div class="analysis-number">Analysis 06</div>
+                <h3>Football Stats Aggregator</h3>
+                <div class="subtitle">Multi-league data pipeline</div>
+                <p>An automated data pipeline that scrapes, normalises, and serves football statistics from multiple global leagues via a unified GraphQL API.</p>
+                <div class="tags">
+                    <span class="tag">GraphQL</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Docker</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="contact" class="contact">
         <h2>Let's build something together</h2>
-        <p>Open to collaboration, freelance work, and full-time opportunities in Data Science & Sports Tech.</p>
-        <a href="mailto:jereinsamthomas1009@gmail.com" class="btn">Contact Me</a>
+        <p>Open to collaboration, freelance work, and full-time opportunities.</p>
+        <a href="#" class="btn-primary">Contact Me</a>
     </section>
 
     <footer>
-        <p>&copy; 2026 Jerein Sam Thomas. Built with love using caffeine.ai</p>
+        <p>&copy; 2026. Built with love using caffeine.ai</p>
     </footer>
 
+    <script>
+        const heroSection = document.getElementById('hero');
+        const dataBits = ['0101', '1010', '{...}', '</>', 'data', '0x1A', 'sys.req', '⚽'];
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Randomize text, position, and animation duration
+            particle.innerText = dataBits[Math.floor(Math.random() * dataBits.length)];
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5s to 10s
+            particle.style.opacity = Math.random() * 0.5 + 0.2;
+
+            heroSection.appendChild(particle);
+
+            // Remove particle after animation ends to prevent DOM clutter
+            setTimeout(() => {
+                particle.remove();
+            }, 10000);
+        }
+
+        // Generate a new particle every 800ms
+        setInterval(createParticle, 800);
+    </script>
 </body>
 </html>
