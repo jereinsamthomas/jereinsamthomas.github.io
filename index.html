@@ -3,171 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jerein Sam Thomas | Data Architect</title>
+    <title>Jerein Sam Thomas | Data Scientist & Tactical Modeller</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;600&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-deep: #010204;
+            --bg-deep: #020306;
+            --bg-panel: #0a0b12;
             --accent-cyan: #00f2ff;
             --accent-purple: #7000ff;
-            --text-main: #e2e8f0;
+            --text-main: #f8fafc;
+            --text-dim: #64748b;
             --glass: rgba(255, 255, 255, 0.03);
-            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg-deep); color: var(--text-main); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
 
-        /* --- Dynamic Nebula Background --- */
-        #space-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; }
-
-        /* --- Global Reveal --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
+        /* --- Interactive Background Engine --- */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.5; }
+        
         /* --- Navigation --- */
         nav {
             position: fixed; top: 0; width: 100%; padding: 25px 8%;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-family: 'Syncopate'; font-weight: 700; color: var(--accent-cyan); text-decoration: none; letter-spacing: 3px; }
+        .logo { font-family: 'Syncopate'; font-weight: 700; color: var(--accent-cyan); text-decoration: none; letter-spacing: 5px; text-shadow: 0 0 15px var(--accent-cyan); }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { text-decoration: none; color: #888; font-size: 0.7rem; font-family: 'JetBrains Mono'; text-transform: uppercase; transition: var(--transition); }
+        .nav-links a:hover { color: var(--accent-cyan); transform: translateY(-2px); }
+
+        /* --- Global Layout --- */
+        section { min-height: 100vh; padding: 120px 10%; display: flex; flex-direction: column; justify-content: center; position: relative; border-bottom: 1px solid rgba(255,255,255,0.02); }
+        .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- Hero --- */
+        .hero-pre { font-family: 'JetBrains Mono'; color: var(--accent-cyan); font-size: 0.9rem; margin-bottom: 10px; display: block; }
+        .hero-title { font-family: 'Syncopate'; font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 30px; }
+        .hero-title span { color: transparent; -webkit-text-stroke: 1px #fff; }
+
+        /* --- Index Grid --- */
+        .index-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 50px; }
+        .index-card { background: var(--glass); border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; text-decoration: none; color: inherit; transition: var(--transition); position: relative; }
+        .index-card:hover { border-color: var(--accent-cyan); transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .index-img { width: 100%; height: 200px; background-size: cover; background-position: center; filter: grayscale(1); transition: 0.5s; }
+        .index-card:hover .index-img { filter: grayscale(0); }
+        .index-info { padding: 30px; background: var(--bg-panel); }
+        .index-info h3 { font-family: 'Syncopate'; font-size: 0.8rem; color: #fff; margin-bottom: 5px; }
+        .index-info p { font-family: 'JetBrains Mono'; font-size: 0.65rem; color: var(--accent-cyan); }
+
+        /* --- Academics --- */
+        .detail-list { list-style: none; margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .detail-list li { background: rgba(112, 0, 255, 0.02); padding: 30px; border-left: 2px solid var(--accent-purple); font-size: 0.95rem; }
+        .detail-list li strong { color: var(--accent-purple); display: block; margin-bottom: 10px; font-family: 'JetBrains Mono'; }
+
+        /* --- Tactics Page - Live Field Visual --- */
+        .tactics-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
         
-        /* Your Exact Nav Content Restored */
-        .nav-links { display: flex; gap: 25px; }
-        .nav-links a { 
-            text-decoration: none; color: #888; 
-            font-size: 0.75rem; font-family: 'JetBrains Mono'; 
-            text-transform: uppercase; letter-spacing: 1px;
-            transition: 0.3s; 
-        }
-        .nav-links a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px var(--accent-cyan); }
-
-        section { min-height: 100vh; padding: 120px 10%; display: flex; flex-direction: column; justify-content: center; position: relative; }
-
-        /* --- Hero Section --- */
-        .hero-title { font-family: 'Syncopate'; font-size: clamp(2rem, 8vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; }
-        .hero-title span { color: var(--accent-cyan); }
-
-        /* --- Visual Content Index (The Main Menu) --- */
-        .index-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
-            gap: 25px; 
-            margin-top: 50px; 
+        #pitch-canvas { 
+            width: 100%; height: 450px; 
+            background: #05070a; 
+            border: 1px solid rgba(0, 242, 255, 0.2); 
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
         }
 
-        .index-card {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 4px;
-            overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-            position: relative;
+        /* --- Data Ticker Tape --- */
+        .ticker { 
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 30px; 
+            background: rgba(10, 11, 18, 0.9); backdrop-filter: blur(10px); 
+            border-top: 1px solid rgba(255,255,255,0.05); z-index: 1000; 
+            overflow: hidden; white-space: nowrap; 
         }
+        .ticker-wrap { display: inline-block; animation: ticker 20s linear infinite; }
+        .ticker-item { font-family: 'JetBrains Mono'; font-size: 0.65rem; color: #444; margin-right: 50px; }
+        @keyframes ticker { from { transform: translateX(0%); } to { transform: translateX(-50%); } }
 
-        .index-card:hover {
-            border-color: var(--accent-cyan);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-        }
-
-        .index-img {
-            width: 100%;
-            height: 160px;
-            background-size: cover;
-            background-position: center;
-            filter: grayscale(1) brightness(0.6);
-            transition: var(--transition);
-        }
-
-        .index-card:hover .index-img {
-            filter: grayscale(0) brightness(1);
-        }
-
-        .index-info { padding: 25px; background: #05070a; }
-        .index-info h3 { font-family: 'Syncopate'; font-size: 0.8rem; letter-spacing: 2px; color: #fff; margin-bottom: 5px; }
-        .index-info p { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--accent-cyan); text-transform: uppercase; }
-
-        /* --- Academic Sections --- */
-        .academy-header { font-family: 'JetBrains Mono'; color: var(--accent-purple); font-size: 0.8rem; margin-bottom: 10px; display: block; }
-        .academic-box { border-left: 2px solid var(--accent-purple); padding-left: 30px; }
+        /* --- Page Reveals --- */
+        .page-visual { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); opacity: 0.02; font-size: 20rem; color: var(--accent-purple); }
 
         /* --- Contact --- */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-        .social-link { display: flex; align-items: center; gap: 15px; text-decoration: none; color: var(--text-main); margin-bottom: 20px; font-family: 'JetBrains Mono'; transition: 0.3s; }
-        .social-link:hover { color: var(--accent-cyan); transform: translateX(10px); }
+        .contact-links a { display: block; color: var(--text-main); text-decoration: none; font-family: 'JetBrains Mono'; margin-bottom: 20px; font-size: 1rem; transition: 0.3s; }
+        .contact-links a:hover { color: var(--accent-cyan); transform: translateX(10px); }
 
-        footer { text-align: center; padding: 50px; font-size: 0.7rem; color: #444; border-top: 1px solid rgba(255,255,255,0.02); }
+        footer { text-align: center; padding: 80px 10%; font-size: 0.7rem; color: #222; font-family: 'JetBrains Mono'; }
 
         @media (max-width: 768px) {
-            .contact-grid { grid-template-columns: 1fr; }
+            .detail-list, .tactics-layout { grid-template-columns: 1fr; }
             .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="space-canvas"></canvas>
+    <canvas id="bg-canvas"></canvas>
+    <div class="ticker"><div class="ticker-wrap"><span class="ticker-item">// [ JST.SYS ] > INITIALIZING_MODEL_v1.0</span><span class="ticker-item">// ISL_MATCH_PREDICTOR > [ CONFIDENCE: 88.7% ]</span><span class="ticker-item">// POSITIONAL_TOLERANCE_ENGINE > [ ACTIVE ]</span><span class="ticker-item">// MSc_Applied_Data_Science @ SRMIST</span></div></div>
 
     <nav>
         <a href="#hero" class="logo">JST_DATA</a>
         <div class="nav-links">
             <a href="projects.html">Projects</a>
-            <a href="tactics.html">Tactics Engine</a>
-            <a href="analysis.html">Match Analysis</a>
-            <a href="ISL_Paper_v13.pdf.pdf" target="_blank">ISL Research</a>
+            <a href="tactics.html">Tactics</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="ISL_Paper_v13.pdf.pdf" target="_blank">Research</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <section id="hero">
         <div class="reveal">
+            <span class="hero-pre">// INITIALIZING_SYSTEM_PORTAL...</span>
             <h1 class="hero-title">JEREIN<br><span>SAM THOMAS</span></h1>
-            <p style="color: #64748b; font-size: 1.2rem; max-width: 600px;">Applied Data Scientist & Physics Alumnus decoding high-dimensional systems.</p>
+            <p style="color: var(--text-dim); font-size: 1.4rem; max-width: 750px; line-height: 1.8;">
+                Physicist by training. Data Scientist by trade. Fusing core logical derivation with high-performance computational dynamics to model predictive complexity.
+            </p>
         </div>
     </section>
 
     <section id="content">
         <div class="reveal">
-            <h2 style="font-family: 'Syncopate'; margin-bottom: 40px;">SYSTEM_INDEX</h2>
+            <h2 style="font-family: 'Syncopate'; margin-bottom: 50px;">01 // SYSTEM_INDEX</h2>
             <div class="index-grid">
                 
-                <a href="#ug" class="index-card">
-                    <div class="index-img" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2070&auto=format&fit=crop');"></div>
-                    <div class="index-info">
-                        <h3>UG_ACADEMY</h3>
-                        <p>B.Sc Physics Core</p>
-                    </div>
-                </a>
-
-                <a href="#pg" class="index-card">
-                    <div class="index-img" style="background-image: url('https://images.unsplash.com/photo-1518186239717-2e90987c3208?q=80&w=1974&auto=format&fit=crop');"></div>
-                    <div class="index-info">
-                        <h3>PG_INTEL</h3>
-                        <p>M.Sc Data Science</p>
-                    </div>
-                </a>
-
                 <a href="projects.html" class="index-card">
                     <div class="index-img" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop');"></div>
                     <div class="index-info">
-                        <h3>REPOSITORIES</h3>
-                        <p>Technical Project Log</p>
+                        <h3>ALL_PROJECTS</h3>
+                        <p>Complete Data Repository</p>
                     </div>
                 </a>
 
-                <a href="#aim" class="index-card">
-                    <div class="index-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop');"></div>
+                <a href="tactics.html" class="index-card">
+                    <div class="index-img" style="background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070&auto=format&fit=crop');"></div>
                     <div class="index-info">
-                        <h3>DOMAIN_AIM</h3>
-                        <p>Football Analytics Vision</p>
+                        <h3>TACTICS_ENGINE</h3>
+                        <p>Structural Intelligence Modeling</p>
+                    </div>
+                </a>
+
+                <a href="analysis.html" class="index-card">
+                    <div class="index-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop');"></div>
+                    <div class="index-info">
+                        <h3>MATCH_ANALYSIS</h3>
+                        <p>Historical Performance Visualization</p>
+                    </div>
+                </a>
+
+                <a href="#contact" class="index-card">
+                    <div class="index-img" style="background-image: url('https://images.unsplash.com/photo-1534536281715-e28d76689b4d?q=80&w=2070&auto=format&fit=crop');"></div>
+                    <div class="index-info">
+                        <h3>COMM_TERMINAL</h3>
+                        <p>Professional Network Links</p>
                     </div>
                 </a>
 
@@ -176,101 +167,147 @@
     </section>
 
     <section id="ug">
+        <i class="fa-solid fa-atom page-visual"></i>
         <div class="reveal">
-            <span class="academy-header">// FOUNDATIONAL_LOGIC</span>
-            <div class="academic-box">
-                <h2 style="font-family: 'Syncopate';">B.SC PHYSICS</h2>
-                <p style="color: var(--accent-cyan); font-family: 'JetBrains Mono'; margin-bottom: 20px;">Mar Thoma College, Thiruvalla | 2022 - 2025</p>
-                <p style="color: #64748b; max-width: 700px;">Developed the analytical framework required to model physical systems. Applied statistical mechanics and calculus to understand deterministic patterns in nature.</p>
-            </div>
+            <h2 style="font-family: 'Syncopate'; margin-bottom: 10px;">UG_ACADEMY: FOUNDATIONAL_LOGIC</h2>
+            <p style="color: var(--accent-cyan); font-family: 'JetBrains Mono';">B.Sc Physics | Mar Thoma College, Thiruvalla</p>
+            <ul class="detail-list">
+                <li><strong>Thermodynamics</strong> Fused core concepts of system entropy with Information Theory for probabilistic modeling.</li>
+                <li><strong>Quantum Mechanics</strong> Deriving the mathematical basis for non-deterministic outcome distributions.</li>
+                <li><strong>Vector Calculus</strong> Provided the geometric foundation required for machine learning gradient algorithms.</li>
+                <li><strong>Experimental Physics</strong> Mastery of high-precision data acquisition and statistical error analysis.</li>
+            </ul>
         </div>
     </section>
 
     <section id="pg">
+        <i class="fa-solid fa-brain page-visual" style="color: var(--accent-cyan);"></i>
         <div class="reveal">
-            <span class="academy-header">// APPLIED_INTELLIGENCE</span>
-            <div class="academic-box" style="border-color: var(--accent-cyan);">
-                <h2 style="font-family: 'Syncopate';">M.SC APPLIED DATA SCIENCE</h2>
-                <p style="color: var(--accent-cyan); font-family: 'JetBrains Mono'; margin-bottom: 20px;">SRM Institute of Science and Technology (SRMIST)</p>
-                <p style="color: #64748b; max-width: 700px;">Advanced specialization in machine learning, classification algorithms, and predictive modeling for large-scale data infrastructures.</p>
-            </div>
+            <h2 style="font-family: 'Syncopate'; margin-bottom: 10px;">PG_INTEL: COMPUTATIONAL_INTELLIGENCE</h2>
+            <p style="color: var(--accent-cyan); font-family: 'JetBrains Mono';">M.Sc Applied Data Science | SRM Institute of Science and Technology</p>
+            <p style="color: var(--text-dim); font-size: 1.2rem; margin-top: 30px; max-width: 800px;">
+                Specializing in the development and deployment of high-performance **machine learning architectures**. Engineering neural network solutions to parse multi-dimensional complexity in real-world technical scenarios.
+            </p>
         </div>
     </section>
 
-    <section id="aim">
+    <section id="tactics-overview">
         <div class="reveal">
-            <h2 style="font-family: 'Syncopate'; margin-bottom: 40px;">STRATEGIC_AIM</h2>
-            <div style="border: 1px solid var(--accent-cyan); padding: 50px; background: rgba(0, 242, 255, 0.01);">
-                <p style="font-size: 1.3rem; line-height: 1.8;">
-                    Bridging technology and the pitch. My vision is to apply <span style="color: var(--accent-cyan);">Computational Data Science</span> to professional football—optimizing performance and tactical transitions for elite clubs.
-                </p>
+            <h2 style="font-family: 'Syncopate'; margin-bottom: 40px;">02 // TACTICAL_DYNAMICS</h2>
+            <div class="tactics-layout">
+                <div class="tactics-info">
+                    <h3 style="color: var(--accent-cyan); margin-bottom: 20px; font-family:'JetBrains Mono';">System Architecture Overview</h3>
+                    <p style="color: var(--text-dim);">My modeling utilizes positional coordinate classification to map formation shifts and high-intensity transition zones. This provides professional clubs with a quantifiable, deterministic edge in tactical dominance.</p>
+                </div>
+                <canvas id="pitch-canvas"></canvas>
             </div>
         </div>
     </section>
 
     <section id="contact">
         <div class="reveal">
-            <h2 style="font-family: 'Syncopate'; margin-bottom: 50px;">COMM_TERMINAL</h2>
-            <div class="contact-grid">
-                <div>
-                    <a href="mailto:jereinsamthomas1009@gmail.com" class="social-link"><i class="fa-solid fa-envelope"></i> GMAIL_LINK</a>
-                    <a href="https://linkedin.com/in/jerein-sam-thomas-46a75a2a7" class="social-link"><i class="fa-brands fa-linkedin"></i> LINKEDIN_PROFILE</a>
-                    <a href="https://www.instagram.com/jerein_sam_thomas" target="_blank" class="social-link"><i class="fa-brands fa-instagram"></i> INSTA_ID: jerein_sam_thomas</a>
-                </div>
-                <div>
-                    <h3 style="font-family: 'JetBrains Mono'; font-size: 0.8rem; margin-bottom: 15px;">LEAVE_A_REVIEW</h3>
-                    <textarea rows="4" style="width:100%; background: var(--glass); border:1px solid rgba(255,255,255,0.1); padding:20px; color:#fff;" placeholder="Professional inquiry..."></textarea>
-                    <button style="background: var(--accent-cyan); border:none; padding:12px 30px; margin-top:15px; font-family:'Syncopate'; cursor:pointer;">SEND_MESSAGE</button>
-                </div>
+            <h2 style="font-family: 'Syncopate'; margin-bottom: 50px;">CONNECT_TERMINAL</h2>
+            <div class="contact-links">
+                <a href="mailto:jereinsamthomas1009@gmail.com"><i class="fa-solid fa-envelope"></i> GMAIL_SYSTEM</a>
+                <a href="https://linkedin.com/in/jerein-sam-thomas-46a75a2a7"><i class="fa-brands fa-linkedin"></i> LINKEDIN_NETWORK</a>
+                <a href="https://github.com/jereinsamthomas"><i class="fa-brands fa-github"></i> GITHUB_REPO</a>
+                <a href="https://www.instagram.com/jerein_sam_thomas" target="_blank"><i class="fa-brands fa-instagram"></i> INSTAGRAM_ID</a>
             </div>
         </div>
     </section>
 
     <footer>
-        &copy; 2026 JEREIN SAM THOMAS // [ PHYS_ADS_SYS ]
+        &copy; 2026 JEREIN SAM THOMAS // [ PHYS_ADS_SYS ] // ENGINEERED FOR COMPLEXITY
     </footer>
 
     <script>
-        // --- Starfield Background ---
-        const canvas = document.getElementById('space-canvas');
-        const ctx = canvas.getContext('2d');
-        let stars = [];
+        // --- 01. Background Particle Engine ---
+        const bgCanvas = document.getElementById('bg-canvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null };
 
-        function initStars() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            stars = [];
-            for(let i=0; i<150; i++) {
-                stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    speed: Math.random() * 0.4 + 0.1
-                });
+        function initBg() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+            particles = [];
+            for(let i=0; i<80; i++) particles.push(new Particle());
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * bgCanvas.width;
+                this.y = Math.random() * bgCanvas.height;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.color = Math.random() > 0.5 ? '#00f2ff' : '#7000ff';
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if(this.x > bgCanvas.width) this.x = 0; if(this.x < 0) this.x = bgCanvas.width;
+                if(this.y > bgCanvas.height) this.y = 0; if(this.y < 0) this.y = bgCanvas.height;
+            }
+            draw() {
+                bgCtx.fillStyle = this.color;
+                bgCtx.beginPath(); bgCtx.arc(this.x, this.y, 1.5, 0, Math.PI*2); bgCtx.fill();
             }
         }
 
-        function animate() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.fillStyle = "white";
-            stars.forEach(s => {
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, 1, 0, Math.PI*2);
-                ctx.fill();
-                s.y -= s.speed;
-                if(s.y < 0) s.y = canvas.height;
-            });
-            requestAnimationFrame(animate);
+        function animateBg() {
+            bgCtx.clearRect(0,0,bgCanvas.width, bgCanvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            connectParticles();
+            requestAnimationFrame(animateBg);
         }
 
-        window.addEventListener('resize', initStars);
-        initStars();
-        animate();
+        function connectParticles() {
+            for(let a=0; a<particles.length; a++){
+                for(let b=a; b<particles.length; b++){
+                    let dx = particles[a].x - particles[b].x;
+                    let dy = particles[a].y - particles[b].y;
+                    let dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 100){
+                        bgCtx.strokeStyle = particles[a].color;
+                        bgCtx.globalAlpha = 1 - (dist/100);
+                        bgCtx.beginPath(); bgCtx.moveTo(particles[a].x, particles[a].y); bgCtx.lineTo(particles[b].x, particles[b].y); bgCtx.stroke();
+                        bgCtx.globalAlpha = 1;
+                    }
+                }
+            }
+        }
+        initBg(); animateBg(); window.addEventListener('resize', initBg);
 
-        // --- Intersection Observer ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
+        // --- 02. Pitch Visual Simulation ---
+        const pitchCanvas = document.getElementById('pitch-canvas');
+        const pCtx = pitchCanvas.getContext('2d');
+        let dataPoints = [];
+
+        function initPitch() {
+            pitchCanvas.width = pitchCanvas.parentElement.offsetWidth;
+            pitchCanvas.height = 450;
+            dataPoints = [];
+            for(let i=0; i<15; i++) dataPoints.push({ x: Math.random() * pitchCanvas.width, y: Math.random() * pitchCanvas.height, targetX: 0, targetY: 0 });
+        }
+
+        function animatePitch() {
+            pCtx.clearRect(0,0,pitchCanvas.width, pitchCanvas.height);
+            dataPoints.forEach(p => {
+                p.x += (p.targetX - p.x) * 0.05; p.y += (p.targetY - p.y) * 0.05;
+                pCtx.fillStyle = '#00f2ff'; pCtx.beginPath(); pCtx.arc(p.x, p.y, 4, 0, Math.PI*2); pCtx.fill();
+                pCtx.strokeStyle = 'rgba(0, 242, 255, 0.2)'; pCtx.beginPath(); pCtx.arc(p.x, p.y, 10, 0, Math.PI*2); pCtx.stroke();
             });
+            requestAnimationFrame(animatePitch);
+        }
+        initPitch(); animatePitch();
+        pitchCanvas.parentElement.addEventListener('mousemove', (e) => {
+            let rect = pitchCanvas.getBoundingClientRect();
+            let mx = e.clientX - rect.left; let my = e.clientY - rect.top;
+            dataPoints.forEach(p => { p.targetX = mx + (Math.random()-0.5)*50; p.targetY = my + (Math.random()-0.5)*50; });
+        });
+
+        // --- 03. Scroll Reveal ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
