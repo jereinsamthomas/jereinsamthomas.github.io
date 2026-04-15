@@ -3,266 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jerein Sam Thomas | Data Intelligence Portfolio</title>
+    <title>Jerein Sam Thomas | Physics-Driven Data Science</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;600&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-dark: #030409;
-            --bg-accent: #0d0614;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-obsidian: #010204;
             --accent-cyan: #00f2ff;
-            --accent-purple: #7000ff;
-            --accent-hot-pink: #ff0055;
-            --card-glass: rgba(255, 255, 255, 0.03);
-            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --accent-violet: #7000ff;
+            --nebula-pink: #ff00cc;
+            --text-silver: #e2e8f0;
+            --glass-white: rgba(255, 255, 255, 0.03);
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Roboto Mono', monospace;
+            background-color: var(--bg-obsidian);
+            color: var(--text-silver);
+            font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* --- Background Animation Layer --- */
-        #bg-canvas {
-            position: fixed;
-            top: 0; left: 0;
+        /* --- Nebula Canvas --- */
+        #nebula-canvas {
+            position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: -1;
-            opacity: 0.4;
+            filter: blur(40px);
+            opacity: 0.6;
         }
 
-        h1, h2, h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: 4px; }
+        /* --- Global Animations --- */
+        .reveal { opacity: 0; transform: translateY(50px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- Navigation --- */
         nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 25px 8%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
+            position: fixed; top: 0; width: 100%;
+            padding: 25px 8%; display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-
-        .nav-logo {
-            font-size: 1.5rem; font-weight: 700; color: #fff; text-decoration: none;
-            background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a {
-            text-decoration: none; color: var(--text-muted);
-            font-size: 0.75rem; letter-spacing: 2px;
-            transition: var(--transition);
-        }
+        .logo { font-family: 'Syncopate'; font-weight: 700; letter-spacing: 5px; color: var(--accent-cyan); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #888; font-size: 0.7rem; font-family: 'JetBrains Mono'; margin-left: 30px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px var(--accent-cyan); }
 
         /* --- Sections --- */
-        section { min-height: 100vh; padding: 120px 10%; position: relative; }
+        section { min-height: 100vh; padding: 120px 10%; position: relative; display: flex; flex-direction: column; justify-content: center; }
 
-        /* --- Hero --- */
-        #hero {
-            display: flex; flex-direction: column; justify-content: center;
-            background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.1) 0%, transparent 50%);
+        /* --- HERO: Space Terminal --- */
+        .hero-title { font-family: 'Syncopate'; font-size: clamp(2rem, 8vw, 5rem); line-height: 1; margin-bottom: 20px; }
+        .glow-text { background: linear-gradient(90deg, #fff, var(--accent-cyan), var(--accent-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200%; animation: glowMove 5s linear infinite; }
+        @keyframes glowMove { 0% { background-position: 0%; } 100% { background-position: 200%; } }
+
+        /* --- PAGE 2: ACADEMIC FOUNDATION (PHYSICS) --- */
+        .physics-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; }
+        .physics-visual { position: relative; border: 1px solid var(--accent-violet); height: 400px; display: flex; justify-content: center; align-items: center; background: rgba(112, 0, 255, 0.02); }
+        .atom { width: 100px; height: 100px; border: 2px solid var(--accent-cyan); border-radius: 50%; position: relative; animation: orbit 4s linear infinite; }
+        @keyframes orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .physics-card { background: var(--glass-white); padding: 30px; border-left: 4px solid var(--accent-violet); margin-top: 20px; }
+
+        /* --- PAGE 3: DATA ARCHITECTURE --- */
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .tech-card {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 40px;
+            transition: var(--transition); position: relative; overflow: hidden;
         }
+        .tech-card:hover { transform: translateY(-15px); border-color: var(--accent-cyan); box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1); }
+        .tech-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent); transform: translateX(-100%); transition: 0.5s; }
+        .tech-card:hover::before { transform: translateX(100%); }
 
-        .hero-pre { color: var(--accent-cyan); font-size: 0.9rem; margin-bottom: 15px; display: block; }
-        
-        .hero-title {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            line-height: 1; margin-bottom: 30px;
-            background: linear-gradient(180deg, #fff 0%, #444 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
+        /* --- PAGE 4: STRATEGIC AIM (FOOTBALL) --- */
+        .roadmap-box { border: 1px dashed var(--accent-cyan); padding: 40px; position: relative; }
+        .roadmap-box h3 { color: var(--accent-cyan); margin-bottom: 20px; }
 
-        .hero-subtitle {
-            font-size: 1.2rem; color: var(--text-muted);
-            max-width: 600px; border-left: 2px solid var(--accent-purple);
-            padding-left: 20px;
-        }
-
-        /* --- Cards & Content --- */
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; margin-top: 50px;
-        }
-
-        .card {
-            background: var(--card-glass);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 4px; padding: 2px;
-            position: relative; overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            border-color: var(--accent-cyan);
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-        }
-
-        .card-inner { padding: 30px; background: var(--bg-dark); height: 100%; }
-
-        .card-img {
-            width: 100%; height: 200px;
-            background-size: cover; background-position: center;
-            filter: grayscale(1) contrast(1.2); transition: var(--transition);
-            margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .card:hover .card-img { filter: grayscale(0) brightness(1.1); }
-
-        /* --- Tactical Engine Visual --- */
-        .tactical-pitch {
-            width: 100%; height: 500px;
-            background: #05070a;
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            border-radius: 8px; position: relative; overflow: hidden;
-        }
-
-        .scan-line {
-            position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(to bottom, transparent, var(--accent-cyan));
-            opacity: 0.3; animation: scan 4s linear infinite;
-        }
-
-        @keyframes scan { 0% { top: -10%; } 100% { top: 110%; } }
-
-        /* --- Skills / Tags --- */
-        .skill-tag {
-            display: inline-block; padding: 6px 12px;
-            font-size: 0.7rem; border: 1px solid rgba(255,255,255,0.2);
-            margin: 0 8px 8px 0; transition: var(--transition);
-        }
-        .skill-tag:hover { background: var(--accent-purple); border-color: var(--accent-purple); color: #fff; }
-
-        /* --- Contact --- */
         .social-links { display: flex; gap: 20px; margin-top: 40px; }
-        .social-btn {
-            width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
-            border: 1px solid rgba(255,255,255,0.1); color: #fff; text-decoration: none;
-            transition: var(--transition); font-size: 1.2rem;
-        }
-        .social-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); transform: rotate(45deg); }
-        .social-btn i { transition: var(--transition); }
-        .social-btn:hover i { transform: rotate(-45deg); }
+        .social-btn { width: 50px; height: 50px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; color: #fff; border-radius: 50%; text-decoration: none; transition: 0.4s; }
+        .social-btn:hover { background: var(--accent-cyan); color: #000; transform: scale(1.1); box-shadow: 0 0 20px var(--accent-cyan); }
 
-        /* --- Scroll Reveal --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            section { padding: 80px 5%; }
-        }
+        footer { text-align: center; padding: 50px; border-top: 1px solid rgba(255,255,255,0.05); font-family: 'JetBrains Mono'; color: #444; font-size: 0.7rem; }
     </style>
 </head>
 <body>
 
-    <canvas id="bg-canvas"></canvas>
+    <canvas id="nebula-canvas"></canvas>
 
-    <nav id="navbar">
-        <a href="#hero" class="nav-logo">JST.DATA</a>
+    <nav>
+        <a href="#home" class="logo">JST.SYS</a>
         <div class="nav-links">
             <a href="projects.html">// PROJECTS</a>
-            <a href="tactics.html">// TACTICS_ENGINE</a>
+            <a href="tactics.html">// TACTICS_ENG</a>
             <a href="analysis.html">// ANALYSIS</a>
             <a href="ISL_Paper_v13.pdf.pdf" target="_blank">// RESEARCH</a>
-            <a href="#contact">// CONNECT</a>
         </div>
     </nav>
 
-    <section id="hero">
-        <span class="hero-pre reveal">INITIALIZING SYSTEM... 100%</span>
-        <h1 class="hero-title reveal">JEREIN<br>SAM THOMAS</h1>
-        <div class="hero-subtitle reveal">
-            MSc Applied Data Science | Specializing in Football Intelligence & Predictive Analytics at SRM University.
+    <section id="home">
+        <div class="reveal">
+            <p style="font-family: 'JetBrains Mono'; color: var(--accent-cyan); margin-bottom: 10px;">[ SYSTEM_IDENTITY_INITIALIZED ]</p>
+            <h1 class="hero-title glow-text">JEREIN<br>SAM THOMAS</h1>
+            <p style="max-width: 500px; color: #888; font-size: 1.2rem;">Applied Data Scientist decoding complex dynamics through the lens of Computational Physics.</p>
         </div>
     </section>
 
-    <section id="about">
+    <section id="physics">
         <div class="reveal">
-            <h2 style="margin-bottom: 40px;">01. MISSION_STATEMENT</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px;">
-                <div>
-                    <p style="color: var(--text-muted); margin-bottom: 20px;">
-                        I translate complex athletic movement into actionable data. My methodology combines a Physics foundation with modern Machine Learning to solve the "unpredictable" nature of sports.
-                    </p>
-                    <div class="tech-skills">
-                        <span class="skill-tag">PYTHON / PANDAS</span>
-                        <span class="skill-tag">SCIKIT-LEARN</span>
-                        <span class="skill-tag">NEURAL NETWORKS</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">TABLEAU</span>
+            <h2 style="font-family: 'Syncopate'; font-size: 2rem; margin-bottom: 50px;">02 / ACADEMIC_ROOTS</h2>
+            <div class="physics-grid">
+                <div class="physics-visual">
+                    <div class="atom"></div>
+                    <p style="position: absolute; bottom: 20px; font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--accent-violet);">MATHEMATICAL_MODEL_v1.0</p>
+                </div>
+                <div class="physics-text">
+                    <h3 style="color: var(--accent-cyan);">B.Sc Physics</h3>
+                    <p style="font-family: 'JetBrains Mono'; margin-bottom: 10px;">Mar Thoma College, Thiruvalla | 2022 — 2025</p>
+                    <p style="color: #aaa; margin-bottom: 20px;">My journey began in the labs of Mar Thoma College, where I studied the laws of the universe. Physics taught me that everything—from a falling object to a football pass—is governed by data-driven patterns.</p>
+                    <div class="physics-card">
+                        <p style="font-size: 0.9rem;"><strong>The Physics Edge in Data Science:</strong><br>
+                        Understanding <em>Thermodynamics</em> helped me grasp Entropy in Information Theory. <em>Classical Mechanics</em> built my logic for tracking player velocity and trajectories in sports analytics.</p>
                     </div>
                 </div>
-                <div style="background: rgba(112, 0, 255, 0.05); border: 1px solid rgba(112, 0, 255, 0.2); padding: 30px;">
-                    <h3 style="font-size: 0.9rem; color: var(--accent-cyan); margin-bottom: 15px;">CURRENT_FOCUS</h3>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">
-                        > Developing Indian Super League (ISL) match outcome predictors.<br>
-                        > Refining automated tactical classification algorithms.<br>
-                        > Exploring passing network centrality in ISL midfields.
-                    </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="data">
+        <div class="reveal">
+            <h2 style="font-family: 'Syncopate'; font-size: 2rem; margin-bottom: 50px;">03 / DATA_ENGINEERING</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <i class="fa-solid fa-brain" style="font-size: 2rem; color: var(--accent-cyan); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 0.9rem; letter-spacing: 2px;">PREDICTIVE MODELING</h3>
+                    <p style="font-size: 0.8rem; color: #777;">Utilizing Scikit-Learn to build classification engines that forecast outcomes with statistical confidence.</p>
+                </div>
+                <div class="tech-card">
+                    <i class="fa-solid fa-chart-line" style="font-size: 2rem; color: var(--accent-violet); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 0.9rem; letter-spacing: 2px;">SPORTS ANALYTICS</h3>
+                    <p style="font-size: 0.8rem; color: #777;">Applying Data Science to football metrics, specifically the ISL, to visualize tactical dominance.</p>
+                </div>
+                <div class="tech-card">
+                    <i class="fa-solid fa-database" style="font-size: 2rem; color: var(--nebula-pink); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 0.9rem; letter-spacing: 2px;">DATA ARCHITECTURE</h3>
+                    <p style="font-size: 0.8rem; color: #777;">Managing high-volume datasets using Python and SQL to ensure data integrity for ML pipelines.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="content">
-        <h2 class="reveal">02. REPOSITORIES</h2>
-        <div class="card-container">
-            <div class="card reveal" onclick="window.location.href='projects.html';">
-                <div class="card-inner">
-                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1518186239717-2e90987c3208?q=80&w=1974&auto=format&fit=crop');"></div>
-                    <h3 style="font-size: 1rem; margin-bottom: 10px;">MASTER_LOG</h3>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Complete repository of data science projects and technical documentation.</p>
-                </div>
+    <section id="mission">
+        <div class="reveal">
+            <h2 style="font-family: 'Syncopate'; font-size: 2rem; margin-bottom: 50px;">04 / STRATEGIC_AIM</h2>
+            <div class="roadmap-box">
+                <p style="margin-bottom: 20px; font-size: 1.1rem;">"My objective is to leverage my **Applied Data Science** mastery to transform the tactical landscape of Indian Football."</p>
+                <h3 style="font-family: 'JetBrains Mono';">// AIM: PROFESSIONAL FOOTBALL ANALYST</h3>
+                <p style="color: #888;">By integrating Physics-based logic and Machine Learning, I aim to provide professional clubs with a competitive edge in scouting, match preparation, and in-game adjustments.</p>
             </div>
-            <div class="card reveal" onclick="window.location.href='tactics.html';">
-                <div class="card-inner">
-                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070&auto=format&fit=crop');"></div>
-                    <h3 style="font-size: 1rem; margin-bottom: 10px;">TACTICS_ENG_v1</h3>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Positional coordinate classification for 40+ formations using Python.</p>
-                </div>
-            </div>
-            <div class="card reveal" onclick="window.open('ISL_Paper_v13.pdf.pdf', '_blank');">
-                <div class="card-inner">
-                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop');"></div>
-                    <h3 style="font-size: 1rem; margin-bottom: 10px;">ISL_RESEARCH</h3>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">International conference paper on match outcome prediction models.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="analysis">
-        <h2 class="reveal" style="margin-bottom: 40px;">03. VISUAL_INTEL</h2>
-        <div class="tactical-pitch">
-            <div class="scan-line"></div>
-            <div style="position: absolute; top: 50%; left: 50%; width: 100%; height: 2px; background: rgba(255,255,255,0.05);"></div>
-            <div style="position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; border: 1px solid rgba(255,255,255,0.05); border-radius: 50%; transform: translate(-50%, -50%);"></div>
             
-            <div class="player p-gk" style="position: absolute; bottom: 5%; left: 49%; width: 10px; height: 10px; background: var(--accent-cyan); border-radius: 50%; box-shadow: 0 0 15px var(--accent-cyan);"></div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="reveal" style="text-align: center;">
-            <h2>04. ESTABLISH_LINK</h2>
-            <p style="color: var(--text-muted); margin-top: 20px;">Open for internship opportunities in Sports Analytics & Data Engineering.</p>
-            <div class="social-links" style="justify-content: center;">
+            <div class="social-links">
                 <a href="mailto:jereinsamthomas1009@gmail.com" class="social-btn"><i class="fa-solid fa-envelope"></i></a>
                 <a href="https://github.com/jereinsamthomas" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a75a2a7" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -270,57 +173,58 @@
         </div>
     </section>
 
-    <footer style="padding: 50px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.7rem; color: #444;">
-        &copy; 2026 JEREIN SAM THOMAS // DATA ARCHITECT // ENCRYPTED
+    <footer>
+        &copy; 2026 JEREIN SAM THOMAS // ENGINEERED IN NEBULA // MAR THOMA ALUMNUS
     </footer>
 
     <script>
-        // --- Background Particle Network ---
-        const canvas = document.getElementById('bg-canvas');
+        // --- Nebula Animation Script ---
+        const canvas = document.getElementById('nebula-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
+        let points = [];
 
-        function initCanvas() {
+        function resize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
 
-        class Particle {
+        class Point {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 150 + 50;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.color = Math.random() > 0.5 ? 'rgba(0, 242, 255, 0.2)' : 'rgba(112, 0, 255, 0.2)';
             }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
             }
             draw() {
-                ctx.fillStyle = 'rgba(0, 242, 255, 0.5)';
+                ctx.fillStyle = this.color;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, 1, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        for (let i = 0; i < 80; i++) particles.push(new Particle());
+        function init() {
+            resize();
+            points = [];
+            for(let i=0; i<15; i++) points.push(new Point());
+        }
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            points.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animate);
         }
 
-        window.addEventListener('resize', initCanvas);
-        initCanvas();
+        window.addEventListener('resize', init);
+        init();
         animate();
 
         // --- Intersection Observer ---
