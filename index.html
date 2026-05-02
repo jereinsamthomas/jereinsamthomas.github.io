@@ -1,513 +1,1077 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Jerein Sam Thomas | Data Scientist & Performance Architect</title>
-
-    
-
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;600&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    
-
-    <style>
-
-        :root {
-
-            --bg-obsidian: #010204;
-
-            --accent-cyan: #00f2ff;
-
-            --accent-purple: #7000ff;
-
-            --text-silver: #cbd5e1;
-
-            --glass: rgba(255, 255, 255, 0.02);
-
-            --transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-
-        }
-
-
-
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
-
-        html { scroll-behavior: smooth; }
-
-        body { background-color: var(--bg-obsidian); color: var(--text-silver); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
-
-
-
-        /* --- Global Particle Canvas --- */
-
-        #global-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
-
-
-
-        /* --- Navigation --- */
-
-        nav {
-
-            position: fixed; top: 0; width: 100%; padding: 30px 8%;
-
-            display: flex; justify-content: space-between; align-items: center;
-
-            z-index: 1000; backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05);
-
-        }
-
-        .logo { font-family: 'Syncopate'; font-weight: 700; color: var(--accent-cyan); text-decoration: none; letter-spacing: 5px; text-shadow: 0 0 20px var(--accent-cyan); }
-
-        .nav-links { display: flex; gap: 30px; }
-
-        .nav-links a { text-decoration: none; color: #666; font-size: 0.75rem; font-family: 'JetBrains Mono'; text-transform: uppercase; transition: var(--transition); }
-
-        .nav-links a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px var(--accent-cyan); }
-
-
-
-        /* --- Hero Section --- */
-
-        #hero { min-height: 100vh; display: flex; align-items: center; justify-content: flex-start; padding: 0 10%; position: relative; overflow: hidden; }
-
-        .hero-terminal { border-left: 2px solid var(--accent-cyan); padding-left: 40px; position: relative; z-index: 2; }
-
-        .system-status { font-family: 'JetBrains Mono'; color: var(--accent-cyan); font-size: 0.8rem; margin-bottom: 20px; letter-spacing: 2px; }
-
-        .hero-title { font-family: 'Syncopate'; font-size: clamp(3rem, 10vw, 6rem); line-height: 0.9; margin-bottom: 20px; color: #fff; }
-
-        .hero-title span { -webkit-text-stroke: 1px var(--accent-cyan); color: transparent; }
-
-        .hero-desc { max-width: 600px; font-size: 1.2rem; line-height: 1.6; color: #888; }
-
-
-
-        /* --- Content Grid --- */
-
-        .index-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
-
-        .index-card { 
-
-            background: var(--glass); border: 1px solid rgba(255,255,255,0.05); 
-
-            overflow: hidden; transition: var(--transition); text-decoration: none; color: inherit;
-
-        }
-
-        .index-card:hover { border-color: var(--accent-cyan); transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
-
-        .card-img { width: 100%; height: 220px; background-size: cover; background-position: center; filter: grayscale(1) brightness(0.7); transition: 0.5s; }
-
-        .index-card:hover .card-img { filter: grayscale(0) brightness(1); }
-
-        .card-body { padding: 30px; background: #05060a; }
-
-        .card-id { font-family: 'JetBrains Mono'; color: var(--accent-cyan); font-size: 0.65rem; margin-bottom: 10px; display: block; }
-
-        .card-title { font-family: 'Syncopate'; font-size: 0.85rem; color: #fff; }
-
-
-
-        /* --- Tactics Engine Visual --- */
-
-        #tactics { background: #030408; padding: 120px 10%; }
-
-        .tactics-container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-
-        #pitch-canvas { 
-
-            width: 100%; height: 500px; background: #000; border: 1px solid rgba(0, 242, 255, 0.2); 
-
-            border-radius: 8px; box-shadow: inset 0 0 50px rgba(0, 242, 255, 0.05);
-
-        }
-
-        .tactics-detail h3 { color: var(--accent-cyan); margin-bottom: 20px; font-family: 'JetBrains Mono'; }
-
-        .tactics-list { list-style: none; }
-
-        .tactics-list li { margin-bottom: 15px; padding-left: 20px; border-left: 1px solid var(--accent-purple); color: #888; font-size: 0.9rem; }
-
-
-
-        /* --- Academic Timeline --- */
-
-        .timeline-box { background: var(--glass); border: 1px solid rgba(255,255,255,0.03); padding: 50px; margin-top: 40px; position: relative; }
-
-        .timeline-box h3 { font-family: 'Syncopate'; font-size: 1.2rem; color: var(--accent-cyan); margin-bottom: 15px; }
-
-        .course-tag { display: inline-block; padding: 5px 12px; border: 1px solid var(--accent-purple); font-size: 0.7rem; font-family: 'JetBrains Mono'; color: var(--accent-purple); margin: 0 10px 10px 0; }
-
-
-
-        /* --- Footer/Contact --- */
-
-        .contact-grid { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 50px; }
-
-        .contact-btn { 
-
-            font-family: 'JetBrains Mono'; text-decoration: none; color: #fff; border-bottom: 1px solid #333; 
-
-            padding-bottom: 5px; transition: 0.3s; font-size: 0.9rem;
-
-        }
-
-        .contact-btn:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); }
-
-
-
-        .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
-
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-
-
-        footer { text-align: center; padding: 100px 10% 40px; font-size: 0.65rem; color: #222; font-family: 'JetBrains Mono'; letter-spacing: 2px; }
-
-
-
-        @media (max-width: 968px) { .tactics-container { grid-template-columns: 1fr; } }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jerein Sam Thomas | Data Scientist & Performance Architect</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@200;300;400;600;700&family=Fira+Code:wght@300;400;500;600&family=Exo+2:ital,wght@0,200;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --void:#02010a;
+  --ion:#00ffe7;
+  --plasma:#b400ff;
+  --nova:#ff3cac;
+  --star:#ffe066;
+  --dust:#a8b8d0;
+  --bright:#e8f0ff;
+  --glass:rgba(255,255,255,0.025);
+  --gb:rgba(255,255,255,0.06);
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--dust);font-family:'Outfit',sans-serif;overflow-x:hidden;cursor:none;}
+
+/* ══════════════════════════════════
+   INTRO OVERLAY
+══════════════════════════════════ */
+#intro{
+  position:fixed;inset:0;z-index:99999;
+  background:#000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;
+  transition:opacity .8s ease,transform .8s ease;
+}
+#intro.exit{opacity:0;transform:scale(1.04);pointer-events:none;}
+#intro-canvas{position:absolute;inset:0;width:100%;height:100%;}
+
+/* scanlines */
+#intro::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 4px);
+  pointer-events:none;
+}
+
+.intro-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0;}
+
+/* BALL */
+.ball-ring{
+  width:110px;height:110px;position:relative;margin-bottom:32px;
+}
+.ball-svg{width:100%;height:100%;animation:ballSpin 2s linear infinite;}
+@keyframes ballSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.ball-glow{
+  position:absolute;inset:-18px;border-radius:50%;
+  border:1px solid rgba(0,255,231,.25);
+  animation:ringPulse 1.4s ease infinite;
+}
+.ball-glow2{
+  position:absolute;inset:-36px;border-radius:50%;
+  border:1px solid rgba(180,0,255,.15);
+  animation:ringPulse 1.4s ease .4s infinite;
+}
+@keyframes ringPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.4);opacity:0}}
+
+/* DATA STREAM beside ball */
+.data-stream{
+  position:absolute;top:50%;left:110%;transform:translateY(-50%);
+  font-family:'Fira Code',monospace;font-size:.55rem;color:var(--ion);
+  opacity:.55;white-space:nowrap;letter-spacing:1px;line-height:1.8;
+}
+
+/* INTRO TITLE */
+.intro-title{
+  font-family:'Orbitron',sans-serif;font-weight:900;
+  font-size:clamp(2rem,6vw,4.2rem);letter-spacing:6px;
+  color:transparent;
+  background:linear-gradient(135deg,#fff 0%,var(--ion) 45%,var(--plasma) 80%,var(--nova) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .8s var(--ease),transform .8s var(--ease);
+  text-align:center;line-height:1;
+  filter:drop-shadow(0 0 20px rgba(0,255,231,.3));
+}
+.intro-title.show{opacity:1;transform:translateY(0);}
+
+.intro-sub{
+  font-family:'Fira Code',monospace;font-size:.75rem;
+  letter-spacing:5px;color:rgba(168,184,208,.55);
+  text-transform:uppercase;margin-top:14px;
+  opacity:0;transition:opacity .8s ease .3s;
+}
+.intro-sub.show{opacity:1;}
+
+/* PROGRESS BAR */
+.intro-bar-wrap{
+  width:min(340px,70vw);height:2px;background:rgba(255,255,255,.06);
+  margin-top:40px;position:relative;overflow:hidden;
+}
+.intro-bar{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--ion),var(--plasma));
+  box-shadow:0 0 12px var(--ion);
+  transition:width .05s linear;
+}
+.intro-bar-label{
+  font-family:'Fira Code',monospace;font-size:.6rem;
+  letter-spacing:3px;color:rgba(168,184,208,.3);
+  margin-top:10px;text-align:center;
+  min-height:1em;
+}
+
+/* STATUS LINES */
+.intro-status{
+  margin-top:24px;display:flex;flex-direction:column;gap:5px;align-items:center;
+}
+.isl{
+  font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:2px;
+  color:rgba(168,184,208,.25);opacity:0;
+  transform:translateX(-10px);
+  transition:opacity .4s ease,transform .4s ease,color .3s;
+}
+.isl.lit{opacity:1;transform:translateX(0);}
+.isl.done{color:var(--ion);}
+
+/* SKIP */
+.intro-skip{
+  position:absolute;bottom:30px;right:36px;z-index:3;
+  font-family:'Fira Code',monospace;font-size:.58rem;
+  letter-spacing:2px;color:rgba(168,184,208,.2);
+  cursor:pointer;transition:.3s;border:none;background:none;
+}
+.intro-skip:hover{color:var(--ion);}
+
+/* flicker FX on body while intro plays */
+body.intro-on{overflow:hidden;}
+
+/* ── CURSOR ── */
+#cd{width:10px;height:10px;background:var(--ion);border-radius:50%;position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 15px var(--ion),0 0 30px rgba(0,255,231,.3);transition:background .25s,box-shadow .25s,transform .1s;}
+#cr{width:38px;height:38px;border:1px solid rgba(0,255,231,.35);border-radius:50%;position:fixed;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
+#cd.hov{background:var(--nova);box-shadow:0 0 20px var(--nova),0 0 40px rgba(255,60,172,.3);transform:translate(-50%,-50%) scale(1.6);}
+#cr.hov{width:64px;height:64px;border-color:rgba(255,60,172,.4);}
+
+/* ── GALAXY CANVAS ── */
+#galaxy{position:fixed;inset:0;z-index:0;}
+
+/* ── GRAIN ── */
+body::after{content:'';position:fixed;inset:0;z-index:1;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");opacity:.28;pointer-events:none;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;width:100%;padding:26px 8%;display:flex;justify-content:space-between;align-items:center;z-index:1000;backdrop-filter:blur(30px) saturate(160%);-webkit-backdrop-filter:blur(30px);border-bottom:1px solid var(--gb);background:rgba(2,1,10,.5);}
+.logo{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;color:var(--ion);text-decoration:none;letter-spacing:5px;position:relative;text-shadow:0 0 20px rgba(0,255,231,.5);}
+.logo::after{content:'';position:absolute;bottom:-5px;left:0;width:100%;height:1px;background:linear-gradient(90deg,var(--ion),transparent);animation:logoPulse 3s ease infinite;}
+@keyframes logoPulse{0%,100%{opacity:.4;width:100%}50%{opacity:1;width:70%}}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{text-decoration:none;color:rgba(168,184,208,.5);font-size:.7rem;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:2px;transition:.4s;position:relative;padding-bottom:4px;}
+.nav-links a::before{content:'./';color:var(--plasma);opacity:0;transition:.3s;font-size:.65rem;}
+.nav-links a:hover::before{opacity:1;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:linear-gradient(90deg,var(--ion),var(--plasma));transition:width .4s var(--ease);}
+.nav-links a:hover{color:var(--bright);}
+.nav-links a:hover::after{width:100%;}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;padding:0 10%;position:relative;overflow:hidden;z-index:2;}
+
+/* HERO NAME — chromatic split, shimmer */
+.hero-name-wrap{position:relative;margin-bottom:30px;}
+.hero-name{
+  font-family:'Orbitron',sans-serif;
+  font-weight:900;
+  font-size:clamp(3.5rem,10vw,7.8rem);
+  line-height:.88;
+  letter-spacing:4px;
+  color:transparent;
+  background:linear-gradient(135deg,#fff 0%,var(--ion) 40%,var(--plasma) 75%,var(--nova) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  position:relative;
+  animation:nameReveal 1.6s var(--ease) forwards;
+  opacity:0;
+  filter:drop-shadow(0 0 30px rgba(0,255,231,.25));
+}
+@keyframes nameReveal{from{opacity:0;transform:translateY(40px) skewX(-3deg)}to{opacity:1;transform:translateY(0) skewX(0)}}
+.hero-name::before{
+  content:attr(data-text);
+  position:absolute;inset:0;
+  font-family:'Orbitron',sans-serif;font-weight:900;
+  font-size:inherit;letter-spacing:inherit;line-height:inherit;
+  background:linear-gradient(135deg,#fff 0%,var(--ion) 40%,var(--plasma) 75%,var(--nova) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:blur(18px);opacity:0;
+  animation:nameGlow 4s ease 1.6s infinite;
+}
+@keyframes nameGlow{0%,100%{opacity:0}50%{opacity:.35}}
+
+/* scanline shimmer across name */
+.hero-name-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 30%,rgba(0,255,231,.18) 50%,transparent 70%);
+  background-size:200% 100%;
+  animation:shimmer 3.5s ease 2s infinite;pointer-events:none;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.hero-sub{
+  font-family:'Exo 2',sans-serif;
+  font-size:clamp(.9rem,2vw,1.3rem);
+  font-style:italic;font-weight:200;
+  color:rgba(168,184,208,.7);
+  letter-spacing:6px;text-transform:uppercase;
+  margin-bottom:10px;
+  animation:subFade 1s var(--ease) .3s forwards;opacity:0;
+}
+@keyframes subFade{from{opacity:0;transform:translateX(-20px)}to{opacity:.7;transform:translateX(0)}}
+
+.hero-terminal{
+  border-left:2px solid transparent;
+  background:linear-gradient(var(--void),var(--void)) padding-box,
+             linear-gradient(180deg,var(--ion),var(--plasma)) border-box;
+  padding-left:48px;position:relative;z-index:2;
+}
+
+.system-status{font-family:'Fira Code',monospace;color:var(--ion);font-size:.78rem;margin-bottom:22px;letter-spacing:3px;display:flex;align-items:center;gap:10px;animation:subFade 1s var(--ease) .1s forwards;opacity:0;}
+.sdot{width:7px;height:7px;background:var(--ion);border-radius:50%;animation:blink 1.5s ease infinite;}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,255,231,.5)}50%{opacity:.4;box-shadow:0 0 0 9px rgba(0,255,231,0)}}
+
+.hero-desc{max-width:560px;font-size:1rem;line-height:1.82;color:var(--dust);font-weight:300;animation:subFade 1s var(--ease) 1.8s forwards;opacity:0;}
+.hero-desc strong{color:var(--ion);font-weight:600;}
+
+.hero-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;}
+.htag{font-family:'Fira Code',monospace;font-size:.63rem;padding:5px 13px;border:1px solid var(--gb);color:var(--plasma);letter-spacing:1.5px;position:relative;overflow:hidden;transition:.4s;opacity:0;animation:tagIn .7s var(--ease) forwards;animation-delay:calc(var(--i,0)*.1s + 2s);}
+@keyframes tagIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.htag::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(180,0,255,.1),transparent);transform:translateX(-100%);transition:.5s;}
+.htag:hover::before{transform:translateX(100%);}
+.htag:hover{border-color:var(--plasma);color:#fff;}
+
+/* scroll cue */
+.scue{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;font-family:'Fira Code',monospace;font-size:.58rem;color:rgba(168,184,208,.22);letter-spacing:3px;animation:bob 2.2s ease infinite;}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(9px)}}
+.sline{width:1px;height:54px;background:linear-gradient(180deg,transparent,var(--ion),transparent);}
+
+/* ── SECTIONS ── */
+section{position:relative;z-index:2;}
+.si{padding:110px 10%;}
+.slabel{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:4px;color:var(--plasma);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.slabel::after{content:'';flex:1;max-width:60px;height:1px;background:var(--plasma);}
+.stitle{font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,4vw,3rem);color:var(--bright);letter-spacing:3px;margin-bottom:54px;line-height:1;font-weight:700;}
+
+/* ── CARDS ── */
+.index-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
+.index-card{background:var(--glass);border:1px solid var(--gb);overflow:hidden;transition:.8s var(--ease);text-decoration:none;color:inherit;position:relative;display:block;}
+.index-card::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(0,255,231,.05),rgba(180,0,255,.05));opacity:0;transition:opacity .5s;}
+.index-card:hover::before{opacity:1;}
+.index-card:hover{border-color:rgba(0,255,231,.3);transform:translateY(-14px);box-shadow:0 40px 80px rgba(0,0,0,.85),0 0 0 1px rgba(0,255,231,.1),inset 0 0 40px rgba(0,255,231,.02);}
+.cimg{width:100%;height:240px;object-fit:cover;display:block;filter:grayscale(.75) brightness(.55) saturate(.8);transition:.7s var(--ease);}
+.index-card:hover .cimg{filter:grayscale(0) brightness(.9) saturate(1.3);}
+.cimg-placeholder{width:100%;height:240px;position:relative;overflow:hidden;}
+.cimg-placeholder canvas{width:100%;height:100%;display:block;}
+.cbody{padding:26px 28px 30px;background:#050609;position:relative;}
+.cid{font-family:'Fira Code',monospace;color:var(--ion);font-size:.6rem;margin-bottom:9px;display:block;letter-spacing:2px;}
+.ctitle{font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--bright);letter-spacing:2px;font-weight:700;}
+.cdesc{font-size:.8rem;color:var(--dust);margin-top:10px;line-height:1.6;font-weight:300;}
+.carrow{position:absolute;right:26px;bottom:26px;color:var(--ion);opacity:0;transform:translateX(-8px);transition:.4s var(--ease);}
+.index-card:hover .carrow{opacity:1;transform:translateX(0);}
+
+/* card overlay bar */
+.card-bar{position:absolute;bottom:0;left:0;width:0%;height:2px;background:linear-gradient(90deg,var(--ion),var(--plasma));transition:width .5s var(--ease);}
+.index-card:hover .card-bar{width:100%;}
+
+/* ── STATS ── */
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gb);border:1px solid var(--gb);margin-top:56px;}
+.sstat{background:var(--void);padding:34px 28px;text-align:center;transition:.4s;position:relative;overflow:hidden;}
+.sstat::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,255,231,.04),transparent);opacity:0;transition:.4s;}
+.sstat:hover::after{opacity:1;}
+.snum{font-family:'Orbitron',sans-serif;font-size:2.6rem;color:var(--ion);line-height:1;display:block;text-shadow:0 0 30px rgba(0,255,231,.35);font-weight:900;}
+.slb{font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:2px;color:rgba(168,184,208,.38);margin-top:7px;display:block;}
+
+/* ── DIVIDER ── */
+.div{display:flex;justify-content:center;padding:0 10%;}
+.div span{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gb),transparent);display:block;}
+
+/* ── ACADEMIC ── */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+@media(max-width:900px){.edu-grid{grid-template-columns:1fr;}}
+.edu-card{background:var(--glass);border:1px solid var(--gb);padding:42px;position:relative;overflow:hidden;transition:.5s;}
+.edu-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0%;background:linear-gradient(180deg,var(--ion),var(--plasma));transition:height .8s var(--ease);}
+.edu-card:hover::before{height:100%;}
+.edu-card::after{content:'';position:absolute;top:-50%;right:-50%;width:120%;height:200%;background:radial-gradient(ellipse,rgba(0,255,231,.025) 0%,transparent 70%);opacity:0;transition:.6s;}
+.edu-card:hover::after{opacity:1;}
+.edu-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Fira Code',monospace;font-size:.62rem;letter-spacing:3px;color:var(--plasma);margin-bottom:18px;}
+.edu-badge::before{content:'//';color:var(--ion);}
+.edu-card h3{font-family:'Orbitron',sans-serif;font-size:1.3rem;letter-spacing:2px;color:var(--bright);margin-bottom:14px;font-weight:700;}
+.edu-year{font-family:'Fira Code',monospace;font-size:.65rem;color:var(--ion);margin-bottom:16px;letter-spacing:2px;}
+.edu-card p{color:var(--dust);font-size:.88rem;line-height:1.8;font-weight:300;margin-bottom:22px;}
+.edu-card .highlight-line{background:rgba(0,255,231,.04);border-left:2px solid var(--ion);padding:10px 16px;font-size:.82rem;color:rgba(168,184,208,.8);margin-bottom:18px;font-style:italic;}
+.tag{display:inline-block;padding:4px 12px;border:1px solid rgba(180,0,255,.3);font-size:.62rem;font-family:'Fira Code',monospace;color:var(--plasma);margin:0 6px 8px 0;transition:.3s;cursor:default;}
+.tag:hover{background:rgba(180,0,255,.08);border-color:var(--plasma);color:#fff;}
+.tag.c{border-color:rgba(0,255,231,.3);color:var(--ion);}
+.tag.c:hover{background:rgba(0,255,231,.06);border-color:var(--ion);color:#fff;}
+
+/* modules list inside edu */
+.module-list{list-style:none;margin-top:20px;}
+.module-list li{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);font-size:.82rem;color:var(--dust);font-weight:300;display:flex;justify-content:space-between;align-items:center;transition:.3s;}
+.module-list li:hover{background:rgba(0,255,231,.03);padding-left:22px;}
+.module-list li span{font-family:'Fira Code',monospace;font-size:.6rem;color:var(--ion);}
+
+/* ── SKILLS ── */
+.skills{margin-top:30px;}
+.skrow{margin-bottom:16px;}
+.skhead{display:flex;justify-content:space-between;margin-bottom:6px;}
+.sknm{font-family:'Fira Code',monospace;font-size:.66rem;letter-spacing:1.5px;color:var(--dust);}
+.skpct{font-family:'Fira Code',monospace;font-size:.66rem;color:var(--ion);}
+.sktrack{height:2px;background:rgba(255,255,255,.05);position:relative;overflow:hidden;}
+.skfill{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--ion),var(--plasma));width:0%;transition:width 1.3s var(--ease);box-shadow:0 0 8px var(--ion);}
+.skfill.go{width:var(--w);}
+
+/* ── TACTICS ── */
+#tactics{background:linear-gradient(180deg,transparent,rgba(13,0,37,.3),transparent);}
+.tactics-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+.pitch-wrap{position:relative;}
+.pitch-wrap::before{content:'FAS-v1 // LIVE';position:absolute;top:14px;left:14px;z-index:5;font-family:'Fira Code',monospace;font-size:.58rem;color:var(--ion);letter-spacing:3px;opacity:.65;}
+.pitch-wrap::after{content:'';position:absolute;inset:-1px;border:1px solid rgba(0,255,231,.12);border-radius:5px;pointer-events:none;}
+#pitch-canvas{width:100%;height:480px;background:#000;border-radius:5px;box-shadow:inset 0 0 60px rgba(0,255,231,.04),0 0 50px rgba(0,0,0,.7);}
+.td h3{font-family:'Orbitron',sans-serif;font-size:1.8rem;letter-spacing:2px;color:var(--bright);margin-bottom:14px;line-height:1;font-weight:700;}
+.td>p{color:var(--dust);font-size:.9rem;line-height:1.82;margin-bottom:32px;font-weight:300;}
+.tlist{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.tlist li{padding:16px 18px;border:1px solid var(--gb);color:var(--dust);font-size:.85rem;line-height:1.6;transition:.4s;position:relative;overflow:hidden;}
+.tlist li::before{content:'';position:absolute;left:0;top:0;width:2px;height:100%;background:linear-gradient(180deg,var(--ion),var(--plasma));transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease);}
+.tlist li:hover::before{transform:scaleY(1);}
+.tlist li:hover{border-color:rgba(0,255,231,.15);background:rgba(0,255,231,.02);padding-left:26px;}
+.tlist li strong{color:var(--ion);font-weight:600;}
+
+/* ── CONTACT GATEWAYS ── */
+.quote-block{border-left:3px solid var(--plasma);padding:28px 38px;background:var(--glass);margin-bottom:52px;position:relative;overflow:hidden;}
+.quote-block::before{content:'"';font-family:'Orbitron',sans-serif;font-size:7rem;color:var(--plasma);opacity:.07;position:absolute;top:-15px;left:18px;line-height:1;}
+.quote-block p{font-size:1.3rem;line-height:1.65;max-width:800px;font-weight:300;color:var(--bright);}
+.quote-block strong{color:var(--ion);font-weight:600;}
+
+.gw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:780px){.gw-grid{grid-template-columns:1fr;}}
+.gw{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px 20px;border:1px solid var(--gb);background:var(--glass);text-decoration:none;position:relative;overflow:hidden;transition:.5s var(--ease);min-height:160px;}
+.gw::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(0,255,231,.05),transparent);transform:translateY(100%);transition:.5s var(--ease);}
+.gw:hover::before{transform:translateY(0);}
+.gw::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--ion),var(--plasma));transition:width .5s var(--ease);}
+.gw:hover::after{width:100%;}
+.gw:hover{border-color:rgba(0,255,231,.25);transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,.7);}
+.gw-icon{font-size:2rem;transition:.4s;}
+.gw:hover .gw-icon{transform:scale(1.15);}
+.gw-label{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:3px;color:var(--dust);text-transform:uppercase;text-align:center;}
+.gw-handle{font-family:'Outfit',sans-serif;font-size:.85rem;color:var(--ion);font-weight:600;text-align:center;}
+.gw-action{font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:2px;color:rgba(168,184,208,.35);text-transform:uppercase;opacity:0;transition:.3s;}
+.gw:hover .gw-action{opacity:1;color:var(--ion);}
+/* gateway colors */
+.gw.gmail .gw-icon{color:#ea4335;filter:drop-shadow(0 0 10px rgba(234,67,53,.4));}
+.gw.linkedin .gw-icon{color:#0077b5;filter:drop-shadow(0 0 10px rgba(0,119,181,.4));}
+.gw.instagram .gw-icon{color:var(--nova);filter:drop-shadow(0 0 10px rgba(255,60,172,.4));}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,255,255,.1);font-family:'Fira Code',monospace;letter-spacing:3px;position:relative;z-index:2;border-top:1px solid var(--gb);}
+.fglow{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--ion),var(--plasma),transparent);margin-bottom:36px;opacity:.25;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(48px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
+.reveal.active{opacity:1;transform:translateY(0);}
+.reveal[data-d="1"]{transition-delay:.1s;}
+.reveal[data-d="2"]{transition-delay:.2s;}
+.reveal[data-d="3"]{transition-delay:.3s;}
+
+/* ── FLOATING ORBS ── */
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:1;filter:blur(80px);opacity:.12;animation:orbDrift 20s ease infinite;}
+.orb1{width:400px;height:400px;background:var(--plasma);top:10%;left:-10%;animation-duration:25s;}
+.orb2{width:300px;height:300px;background:var(--ion);bottom:15%;right:-5%;animation-duration:18s;animation-delay:-8s;}
+.orb3{width:250px;height:250px;background:var(--nova);top:55%;left:55%;animation-duration:22s;animation-delay:-5s;}
+@keyframes orbDrift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-40px) scale(1.1)}66%{transform:translate(-20px,30px) scale(.95)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:968px){
+  .tactics-grid{grid-template-columns:1fr;}
+  .stats-strip{grid-template-columns:repeat(2,1fr);}
+  .si{padding:80px 6%;}
+  #hero{padding:0 6%;}
+  .hero-name{font-size:clamp(3rem,14vw,5.5rem);}
+}
+@media(max-width:600px){
+  nav{padding:18px 5%;}
+  .nav-links{gap:18px;}
+  .stats-strip{grid-template-columns:1fr 1fr;}
+}
+</style>
 </head>
-
 <body>
 
+<!-- ══ INTRO OVERLAY ══ -->
+<div id="intro">
+  <canvas id="intro-canvas"></canvas>
 
+  <div class="intro-center">
+    <div class="ball-ring">
+      <div class="ball-glow"></div>
+      <div class="ball-glow2"></div>
+      <svg class="ball-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="ballbg" cx="38%" cy="32%">
+            <stop offset="0%" stop-color="#1a1a2e"/>
+            <stop offset="100%" stop-color="#050510"/>
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="46" fill="url(#ballbg)" stroke="rgba(0,255,231,.4)" stroke-width="1"/>
+        <polygon points="50,18 59,28 55,41 45,41 41,28" fill="none" stroke="rgba(0,255,231,.6)" stroke-width=".9"/>
+        <polygon points="69,37 77,47 71,57 60,53 59,41" fill="none" stroke="rgba(180,0,255,.55)" stroke-width=".9"/>
+        <polygon points="31,37 41,41 40,53 29,57 23,47" fill="none" stroke="rgba(180,0,255,.55)" stroke-width=".9"/>
+        <polygon points="38,69 46,61 54,61 62,69 56,79" fill="none" stroke="rgba(0,255,231,.6)" stroke-width=".9"/>
+        <circle cx="50" cy="50" r="3.5" fill="var(--ion)" opacity=".7"/>
+      </svg>
+      <div class="data-stream" id="ds"></div>
+    </div>
 
-    <canvas id="global-canvas"></canvas>
+    <h1 class="intro-title" id="ititle">JEREIN SAM THOMAS</h1>
+    <p class="intro-sub" id="isub">DATA SCIENTIST &nbsp;·&nbsp; FOOTBALL ANALYST</p>
 
+    <div class="intro-bar-wrap">
+      <div class="intro-bar" id="ibar"></div>
+    </div>
+    <div class="intro-bar-label" id="iblabel">INITIALISING...</div>
 
+    <div class="intro-status">
+      <span class="isl" id="is0">✓ &nbsp;PHYSICS ENGINE LOADED</span>
+      <span class="isl" id="is1">✓ &nbsp;ISL DATASET CONNECTED</span>
+      <span class="isl" id="is2">✓ &nbsp;ML MODELS COMPILED</span>
+      <span class="isl" id="is3">✓ &nbsp;TACTICAL GRID ONLINE</span>
+      <span class="isl" id="is4">✓ &nbsp;GALAXY RENDER READY</span>
+    </div>
+  </div>
 
-    <nav>
+  <button class="intro-skip" id="iskip">[ SKIP INTRO ]</button>
+</div>
 
-        <a href="#hero" class="logo">JST_INTEL</a>
+<!-- Floating orbs -->
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
 
-        <div class="nav-links">
+<!-- Custom cursor -->
+<div id="cd"></div>
+<div id="cr"></div>
 
-            <a href="projects.html">Projects</a>
+<!-- Galaxy canvas -->
+<canvas id="galaxy"></canvas>
 
-            <a href="tactics.html">Tactics</a>
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#hero" class="logo">JST_INTEL</a>
+  <div class="nav-links">
+    <a href="projects.html">Projects</a>
+    <a href="tactics.html">Tactics</a>
+    <a href="analysis.html">Analysis</a>
+    <a href="ISL_Paper_v13.pdf.pdf" target="_blank">Research</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-            <a href="analysis.html">Analysis</a>
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-terminal">
+    <div class="system-status">
+      <span class="sdot"></span>
+      <span id="typed"></span>
+    </div>
+    <p class="hero-sub">Data Scientist · Analyst · Researcher</p>
+    <div class="hero-name-wrap">
+      <h1 class="hero-name" data-text="JEREIN&#10;SAM THOMAS">JEREIN<br>SAM THOMAS</h1>
+    </div>
+    <p class="hero-desc">
+      Applying the first principles of <strong>Physics</strong> to the complexity of <strong>Data Science</strong>. Engineered for predictive modeling and structural tactical intelligence.
+    </p>
+    <div class="hero-tags">
+      <span class="htag" style="--i:0">PHYSICS_GRAD</span>
+      <span class="htag" style="--i:1">DATA_SCIENTIST</span>
+      <span class="htag" style="--i:2">FOOTBALL_ANALYST</span>
+      <span class="htag" style="--i:3">ISL_RESEARCHER</span>
+      <span class="htag" style="--i:4">SRMIST_DS</span>
+      <span class="htag" style="--i:5">PYTHON_DEV</span>
+    </div>
+  </div>
+  <div class="scue"><span>SCROLL</span><div class="sline"></div></div>
+</section>
 
-            <a href="ISL_Paper_v13.pdf.pdf" target="_blank">Research</a>
+<!-- ══ REPOSITORY ══ -->
+<section id="content">
+  <div class="si">
+    <div class="reveal">
+      <div class="slabel">01 // REPOSITORY_INDEX</div>
+      <div class="stitle">PROJECT ARCHIVE</div>
+    </div>
+    <div class="index-grid">
 
-            <a href="#contact">Contact</a>
-
+      <!-- CARD 1: Project Archive -->
+      <a href="projects.html" class="index-card reveal" data-d="1">
+        <div style="position:relative;overflow:hidden;height:240px;">
+          <img class="cimg" src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=2076&auto=format&fit=crop" alt="Projects" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+          <canvas class="card-bg-canvas" data-theme="code" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,255,231,.04) 50%,#050609 100%);"></div>
+          <div style="position:absolute;top:16px;right:16px;font-family:'Fira Code',monospace;font-size:.55rem;color:var(--ion);letter-spacing:2px;border:1px solid rgba(0,255,231,.2);padding:4px 10px;">PYTHON · ML</div>
         </div>
-
-    </nav>
-
-
-
-    <section id="hero">
-
-        <div class="hero-terminal reveal">
-
-            <div class="system-status">>> SYSTEM_LOAD: SUCCESS [4.16.2026]</div>
-
-            <h1 class="hero-title">JEREIN<br><span>SAM THOMAS</span></h1>
-
-            <p class="hero-desc">
-
-                Applying the first principles of **Physics** to the complexity of **Data Science**. Engineered for predictive modeling and structural tactical intelligence.
-
-            </p>
-
+        <div class="cbody">
+          <span class="cid">ID: REPO_77 · 2024–2025</span>
+          <h3 class="ctitle">PROJECT ARCHIVE</h3>
+          <p class="cdesc">Machine learning pipelines, data engineering, ISL match prediction models and football analytics tools built with Python & Scikit-Learn.</p>
+          <i class="fas fa-arrow-right carrow"></i>
+          <div class="card-bar"></div>
         </div>
+      </a>
 
-    </section>
-
-
-
-    <section id="content" style="padding: 100px 10%;">
-
-        <div class="reveal">
-
-            <h2 style="font-family: 'Syncopate'; margin-bottom: 10px;">01 // REPOSITORY_INDEX</h2>
-
-            <div class="index-grid">
-
-                <a href="projects.html" class="index-card">
-
-                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop');"></div>
-
-                    <div class="card-body">
-
-                        <span class="card-id">ID: REPO_77</span>
-
-                        <h3 class="card-title">PROJECT ARCHIVE</h3>
-
-                    </div>
-
-                </a>
-
-                <a href="tactics.html" class="index-card">
-
-                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070&auto=format&fit=crop');"></div>
-
-                    <div class="card-body">
-
-                        <span class="card-id">ID: TAC_ALPHA</span>
-
-                        <h3 class="card-title">TACTICS ENGINE</h3>
-
-                    </div>
-
-                </a>
-
-                <a href="analysis.html" class="index-card">
-
-                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop');"></div>
-
-                    <div class="card-body">
-
-                        <span class="card-id">ID: DATA_CORE</span>
-
-                        <h3 class="card-title">MATCH ANALYTICS</h3>
-
-                    </div>
-
-                </a>
-
-            </div>
-
+      <!-- CARD 2: Tactics Engine -->
+      <a href="tactics.html" class="index-card reveal" data-d="2">
+        <div style="position:relative;overflow:hidden;height:240px;">
+          <img class="cimg" src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070&auto=format&fit=crop" alt="Tactics" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+          <canvas class="card-bg-canvas" data-theme="tactics" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(180,0,255,.04) 50%,#050609 100%);"></div>
+          <div style="position:absolute;top:16px;right:16px;font-family:'Fira Code',monospace;font-size:.55rem;color:var(--plasma);letter-spacing:2px;border:1px solid rgba(180,0,255,.2);padding:4px 10px;">FAS · v1</div>
         </div>
-
-    </section>
-
-
-
-    <section id="academy" style="padding: 100px 10%;">
-
-        <div class="reveal">
-
-            <h2 style="font-family: 'Syncopate'; margin-bottom: 40px;">02 // ACADEMIC_ARCHITECTURE</h2>
-
-            
-
-            <div class="timeline-box">
-
-                <span class="system-status" style="color: var(--accent-purple);">// B.SC_PHYSICS [MAR_THOMA_COLLEGE]</span>
-
-                <h3>FOUNDATIONAL MECHANICS</h3>
-
-                <p style="color: #666; margin-bottom: 20px;">Leveraging Physics as the root of logic. My UG studies focused on translating chaotic physical environments into deterministic mathematical equations.</p>
-
-                <div class="course-tag">THERMODYNAMICS (ENTROPY MODELING)</div>
-
-                <div class="course-tag">VECTOR CALCULUS</div>
-
-                <div class="course-tag">STATISTICAL MECHANICS</div>
-
-            </div>
-
-
-
-            <div class="timeline-box" style="border-color: var(--accent-cyan);">
-
-                <span class="system-status">// M.SC_APPLIED_DATA_SCIENCE [SRMIST]</span>
-
-                <h3>COMPUTATIONAL INTELLIGENCE</h3>
-
-                <p style="color: #666; margin-bottom: 20px;">Focusing on high-dimensional data classification and neural networks. Engineering Python pipelines to handle and predict match-day variables.</p>
-
-                <div class="course-tag">SCIKIT-LEARN</div>
-
-                <div class="course-tag">PREDICTIVE ANALYTICS</div>
-
-                <div class="course-tag">MACHINE LEARNING OPS</div>
-
-            </div>
-
+        <div class="cbody">
+          <span class="cid">ID: TAC_ALPHA · LIVE</span>
+          <h3 class="ctitle">TACTICS ENGINE</h3>
+          <p class="cdesc">Real-time formation detection, spatial probability mapping, and Voronoi-based pressure heat maps on ISL positional datasets.</p>
+          <i class="fas fa-arrow-right carrow"></i>
+          <div class="card-bar"></div>
         </div>
+      </a>
 
-    </section>
-
-
-
-    <section id="tactics">
-
-        <div class="reveal">
-
-            <h2 style="font-family: 'Syncopate'; margin-bottom: 60px;">03 // TACTICAL_INTELLIGENCE</h2>
-
-            <div class="tactics-container">
-
-                <canvas id="pitch-canvas"></canvas>
-
-                <div class="tactics-detail">
-
-                    <h3>FOOTBALL ANALYSIS SYSTEM (FAS-v1)</h3>
-
-                    <p style="color: #666; margin-bottom: 30px;">
-
-                        My analysis system doesn't just track positions; it tracks **spatial probability**. By utilizing coordinate-based classification, the engine identifies "Defensive Gravity" and "Attacking Corridors."
-
-                    </p>
-
-                    <ul class="tactics-list">
-
-                        <li><strong>Dynamic Formation Mapping:</strong> Detects structural shifts from 4-3-3 to 3-4-3 in real-time.</li>
-
-                        <li><strong>Passing Centrality:</strong> Identifies high-leverage pass nodes within the Indian Super League (ISL) datasets.</li>
-
-                        <li><strong>Pressure Heat-mapping:</strong> Quantifies spatial control using Delaunay Triangulation logic.</li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-
+      <!-- CARD 3: Match Analytics -->
+      <a href="analysis.html" class="index-card reveal" data-d="3">
+        <div style="position:relative;overflow:hidden;height:240px;">
+          <img class="cimg" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Analytics" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+          <canvas class="card-bg-canvas" data-theme="data" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(255,60,172,.04) 50%,#050609 100%);"></div>
+          <div style="position:absolute;top:16px;right:16px;font-family:'Fira Code',monospace;font-size:.55rem;color:var(--nova);letter-spacing:2px;border:1px solid rgba(255,60,172,.2);padding:4px 10px;">ISL · DATA</div>
         </div>
-
-    </section>
-
-
-
-    <section id="contact" style="padding: 120px 10%;">
-
-        <div class="reveal">
-
-            <h2 style="font-family: 'Syncopate'; margin-bottom: 30px;">04 // STRATEGIC_AIM</h2>
-
-            <p style="font-size: 1.5rem; line-height: 1.6; max-width: 800px; margin-bottom: 60px;">
-
-                "To become a professional **Football Analyst** by merging the precision of **Classical Physics** with the predictive power of **Applied Data Science**."
-
-            </p>
-
-            <div class="contact-grid">
-
-                <a href="mailto:jereinsamthomas1009@gmail.com" class="contact-btn">GMAIL_GATEWAY</a>
-
-                <a href="https://linkedin.com/in/jerein-sam-thomas-46a75a2a7" class="contact-btn">LINKEDIN_PROF</a>
-
-                <a href="https://www.instagram.com/jerein_sam_thomas" class="contact-btn">INSTA_ID: jerein_sam_thomas</a>
-
-            </div>
-
+        <div class="cbody">
+          <span class="cid">ID: DATA_CORE · ISL S9</span>
+          <h3 class="ctitle">MATCH ANALYTICS</h3>
+          <p class="cdesc">Deep xG models, passing centrality graphs, defensive gravity metrics and per-match event data dashboards for ISL Season 9 & 10.</p>
+          <i class="fas fa-arrow-right carrow"></i>
+          <div class="card-bar"></div>
         </div>
+      </a>
 
-    </section>
+    </div>
 
+    <div class="stats-strip reveal">
+      <div class="sstat"><span class="snum" data-count="11">0</span><span class="slb">ISL TEAMS ANALYZED</span></div>
+      <div class="sstat"><span class="snum" data-count="5">0</span><span class="slb">ML MODELS BUILT</span></div>
+      <div class="sstat"><span class="snum" data-count="380">0</span><span class="slb">MATCHES PROCESSED</span></div>
+      <div class="sstat"><span class="snum" data-count="92">0</span><span class="slb">% MODEL ACCURACY</span></div>
+    </div>
+  </div>
+</section>
 
+<div class="div"><span></span></div>
 
-    <footer>
+<!-- ══ ACADEMIC ══ -->
+<section id="academy">
+  <div class="si">
+    <div class="reveal">
+      <div class="slabel">02 // ACADEMIC_ARCHITECTURE</div>
+      <div class="stitle">EDUCATIONAL CORE</div>
+    </div>
 
-        &copy; 2026 JEREIN SAM THOMAS // [ PHYS_INTEL_SYSTEMS ] // SRMIST DATA SCIENCE
+    <div class="edu-grid">
 
-    </footer>
+      <!-- UG -->
+      <div class="edu-card reveal" data-d="1">
+        <div class="edu-badge">B.SC PHYSICS — MAR THOMA COLLEGE</div>
+        <h3>FOUNDATIONAL MECHANICS</h3>
+        <div class="edu-year">⌗ 2020 – 2023 · Tiruvalla, Kerala</div>
+        <div class="highlight-line">"Learning to see the universe as equations — the same lens I use to decode football."</div>
+        <p>My undergraduate in Physics built the mental architecture to approach any complex system with mathematical rigour. Every module I studied had a direct analogy to football analytics — entropy maps onto team disorder, wave mechanics mirrors defensive line oscillations, and vector calculus underlies every pass trajectory model I build today.</p>
+        <div class="tag">CLASSICAL MECHANICS</div>
+        <div class="tag">THERMODYNAMICS</div>
+        <div class="tag">ENTROPY MODELING</div>
+        <div class="tag">VECTOR CALCULUS</div>
+        <div class="tag">STATISTICAL MECHANICS</div>
+        <div class="tag">WAVE THEORY</div>
+        <div class="tag">OPTICS</div>
+        <div class="tag">ELECTROMAGNETISM</div>
+        <ul class="module-list">
+          <li>Classical Mechanics &amp; Dynamics <span>CORE</span></li>
+          <li>Statistical Thermodynamics <span>CORE</span></li>
+          <li>Mathematical Physics <span>CORE</span></li>
+          <li>Quantum Mechanics (intro) <span>ELECTIVE</span></li>
+          <li>Nuclear &amp; Particle Physics <span>ELECTIVE</span></li>
+        </ul>
+      </div>
 
+      <!-- PG -->
+      <div class="edu-card reveal" data-d="2" style="border-color:rgba(0,255,231,.1);">
+        <div class="edu-badge" style="color:var(--ion);">M.SC APPLIED DATA SCIENCE — SRMIST</div>
+        <h3>COMPUTATIONAL INTELLIGENCE</h3>
+        <div class="edu-year" style="color:var(--plasma);">⌗ 2023 – 2025 · Chennai, Tamil Nadu</div>
+        <div class="highlight-line" style="border-color:var(--ion);">"Turning Physics intuition into working ML pipelines — bridging two disciplines to solve one problem."</div>
+        <p>At SRM Institute of Science and Technology, I am engineering Python-first predictive systems to classify football formations, model xG chains, and detect tactical transitions in real-time. My PG thesis applies graph-theoretic passing centrality to Indian Super League datasets — a novel methodology cross-referenced in my published ISL research paper (v13).</p>
+        <div class="tag c">SCIKIT-LEARN</div>
+        <div class="tag c">NEURAL NETWORKS</div>
+        <div class="tag c">PREDICTIVE ANALYTICS</div>
+        <div class="tag c">ML OPS</div>
+        <div class="tag c">PANDAS / NUMPY</div>
+        <div class="tag c">MATPLOTLIB / SEABORN</div>
+        <div class="tag c">GRAPH THEORY</div>
+        <div class="tag c">SQL / NoSQL</div>
+        <ul class="module-list">
+          <li>Machine Learning Algorithms <span>CORE</span></li>
+          <li>Deep Learning &amp; CNNs <span>CORE</span></li>
+          <li>Big Data Analytics <span>CORE</span></li>
+          <li>Data Visualization Systems <span>CORE</span></li>
+          <li>Sports Analytics (Research) <span>THESIS</span></li>
+        </ul>
+        <div class="skills" style="margin-top:24px;">
+          <div class="skrow"><div class="skhead"><span class="sknm">PYTHON / SCIKIT-LEARN</span><span class="skpct">92%</span></div><div class="sktrack"><div class="skfill" style="--w:92%"></div></div></div>
+          <div class="skrow"><div class="skhead"><span class="sknm">PREDICTIVE MODELING</span><span class="skpct">86%</span></div><div class="sktrack"><div class="skfill" style="--w:86%"></div></div></div>
+          <div class="skrow"><div class="skhead"><span class="sknm">FOOTBALL / SPATIAL ANALYTICS</span><span class="skpct">88%</span></div><div class="sktrack"><div class="skfill" style="--w:88%"></div></div></div>
+          <div class="skrow"><div class="skhead"><span class="sknm">DATA VISUALIZATION</span><span class="skpct">79%</span></div><div class="sktrack"><div class="skfill" style="--w:79%"></div></div></div>
+          <div class="skrow"><div class="skhead"><span class="sknm">GRAPH THEORY / NETWORKS</span><span class="skpct">74%</span></div><div class="sktrack"><div class="skfill" style="--w:74%"></div></div></div>
+        </div>
+      </div>
 
+    </div>
+  </div>
+</section>
 
-    <script>
+<div class="div"><span></span></div>
 
-        // --- 01. Global Background Canvas ---
+<!-- ══ TACTICS ══ -->
+<section id="tactics">
+  <div class="si">
+    <div class="reveal" style="margin-bottom:54px;">
+      <div class="slabel">03 // TACTICAL_INTELLIGENCE</div>
+      <div class="stitle">FOOTBALL ANALYSIS SYSTEM</div>
+    </div>
+    <div class="tactics-grid">
+      <div class="pitch-wrap reveal">
+        <canvas id="pitch-canvas"></canvas>
+      </div>
+      <div class="td reveal" data-d="2">
+        <div class="slabel" style="margin-bottom:16px;">ACTIVE: FAS-v1 // ISL-S10</div>
+        <h3>SPATIAL PROBABILITY ENGINE</h3>
+        <p>My analysis system doesn't just track positions — it tracks <strong style="color:var(--ion)">spatial probability fields</strong>. By utilizing coordinate-based classification, the engine identifies "Defensive Gravity Wells" and "Attacking Corridors" across 90-minute windows.</p>
+        <ul class="tlist">
+          <li><strong>Dynamic Formation Mapping:</strong> k-means clustering on XY positional data detects live shifts from 4-3-3 → 3-4-3 with ≤3s lag.</li>
+          <li><strong>Passing Centrality:</strong> Graph-theory PageRank identifies high-leverage pass nodes across ISL Season 9 &amp; 10 event streams.</li>
+          <li><strong>Pressure Heat-mapping:</strong> Delaunay Triangulation + Voronoi decomposition quantifies spatial control zones per half.</li>
+          <li><strong>xG Chain Modeling:</strong> Logistic regression on shot context, distance, angle, and preceding-action type for ISL match data.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-        const gCanvas = document.getElementById('global-canvas');
+<div class="div"><span></span></div>
 
-        const gCtx = gCanvas.getContext('2d');
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="si">
+    <div class="reveal">
+      <div class="slabel">04 // STRATEGIC_AIM</div>
+      <div class="stitle">MISSION OBJECTIVE</div>
+      <div class="quote-block">
+        <p>"To become a professional <strong>Football Analyst</strong> by merging the precision of <strong>Classical Physics</strong> with the predictive power of <strong>Applied Data Science</strong>."</p>
+      </div>
 
-        let particles = [];
+      <!-- CLICK GATEWAYS -->
+      <div class="gw-grid">
+        <a href="mailto:jereinsamthomas1009@gmail.com" class="gw gmail">
+          <i class="fab fa-google gw-icon" style="font-size:2.2rem;"></i>
+          <span class="gw-label">GMAIL GATEWAY</span>
+          <span class="gw-handle">jereinsamthomas1009<br>@gmail.com</span>
+          <span class="gw-action">→ OPEN MAIL</span>
+        </a>
+        <a href="https://linkedin.com/in/jerein-sam-thomas-46a75a2a7" target="_blank" class="gw linkedin">
+          <i class="fab fa-linkedin gw-icon"></i>
+          <span class="gw-label">LINKEDIN PROFILE</span>
+          <span class="gw-handle">jerein-sam-thomas<br>-46a75a2a7</span>
+          <span class="gw-action">→ VIEW PROFILE</span>
+        </a>
+        <a href="https://www.instagram.com/jerein_sam_thomas" target="_blank" class="gw instagram">
+          <i class="fab fa-instagram gw-icon"></i>
+          <span class="gw-label">INSTAGRAM</span>
+          <span class="gw-handle">@jerein_sam_thomas</span>
+          <span class="gw-action">→ FOLLOW</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        function initGlobal() {
+<footer>
+  <div class="fglow"></div>
+  &copy; 2026 JEREIN SAM THOMAS &nbsp;//&nbsp; [ PHYS_INTEL_SYSTEMS ] &nbsp;//&nbsp; SRMIST DATA SCIENCE
+</footer>
 
-            gCanvas.width = window.innerWidth; gCanvas.height = window.innerHeight;
+<script>
+/* ── CURSOR ── */
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px';});
+document.querySelectorAll('a,.htag').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cd.classList.add('hov');cr.classList.add('hov');});
+  el.addEventListener('mouseleave',()=>{cd.classList.remove('hov');cr.classList.remove('hov');});
+});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop);})();
 
-            particles = []; for(let i=0; i<100; i++) particles.push({ x: Math.random()*gCanvas.width, y: Math.random()*gCanvas.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5 });
+/* ── TYPED ── */
+const tStr='> SYSTEM_LOAD: SUCCESS [4.16.2026]';
+let ti=0;const tel=document.getElementById('typed');
+const tl=setInterval(()=>{tel.textContent=tStr.slice(0,++ti);if(ti>=tStr.length)clearInterval(tl);},36);
 
-        }
+/* ══ MILKY WAY GALAXY BACKGROUND ══ */
+const gc=document.getElementById('galaxy'),gx=gc.getContext('2d');
+let W,H,gStars=[],dust=[],arms=[];
 
-        function drawGlobal() {
+function randRange(a,b){return a+Math.random()*(b-a);}
+function initGalaxy(){
+  W=gc.width=window.innerWidth;H=gc.height=window.innerHeight;
+  gStars=[];dust=[];arms=[];
+  const cx=W/2,cy=H/2;
+  const R=Math.min(W,H)*0.42;
 
-            gCtx.clearRect(0,0,gCanvas.width, gCanvas.height); gCtx.fillStyle = "#00f2ff";
+  /* core glow stars */
+  for(let i=0;i<80;i++){
+    const a=Math.random()*Math.PI*2,r=Math.random()*R*.15;
+    gStars.push({x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r,r:Math.random()*1.8+.5,o:Math.random()*.9+.1,tw:Math.random()*2+.5,p:Math.random()*Math.PI*2,type:'core'});
+  }
+  /* spiral arms — 3 arms, stochastic offset */
+  for(let arm=0;arm<3;arm++){
+    const armOffset=(arm/3)*Math.PI*2;
+    for(let i=0;i<420;i++){
+      const t=i/420;
+      const angle=armOffset+t*Math.PI*5;
+      const spread=randRange(0,R*.22*(1+t));
+      const baseR=t*R;
+      const nx=cx+Math.cos(angle)*(baseR+spread)+randRange(-R*.04,R*.04);
+      const ny=cy+Math.sin(angle)*(baseR+spread)*0.55+randRange(-R*.04,R*.04);
+      const brightness=1-t*.7;
+      gStars.push({x:nx,y:ny,r:randRange(.3,1.4)*brightness,o:randRange(.3,.95)*brightness,tw:randRange(.5,3),p:Math.random()*Math.PI*2,type:'arm'});
+    }
+  }
+  /* background scatter stars */
+  for(let i=0;i<350;i++){
+    gStars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*.8+.1,o:Math.random()*.45+.05,tw:Math.random()*1.5+.5,p:Math.random()*Math.PI*2,type:'bg'});
+  }
+  /* dust lanes */
+  for(let i=0;i<60;i++){
+    const a=Math.random()*Math.PI*2;
+    const r=randRange(R*.05,R*.7);
+    dust.push({x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r*.55,r:randRange(15,50),o:randRange(.01,.06)});
+  }
+}
 
-            particles.forEach(p => {
+function drawGalaxy(t){
+  gx.clearRect(0,0,W,H);
+  const cx=W/2,cy=H/2;
+  const R=Math.min(W,H)*0.42;
 
-                p.x += p.vx; p.y += p.vy;
+  /* deep space */
+  const bg=gx.createRadialGradient(cx,cy*1.1,0,cx,cy*.9,Math.max(W,H)*.7);
+  bg.addColorStop(0,'#08001f');bg.addColorStop(.25,'#04000e');bg.addColorStop(.55,'#020008');bg.addColorStop(1,'#02010a');
+  gx.fillStyle=bg;gx.fillRect(0,0,W,H);
 
-                if(p.x<0 || p.x>gCanvas.width) p.vx *= -1; if(p.y<0 || p.y>gCanvas.height) p.vy *= -1;
+  /* galactic core */
+  const coreG=gx.createRadialGradient(cx,cy,0,cx,cy,R*.28);
+  coreG.addColorStop(0,'rgba(255,240,200,.22)');
+  coreG.addColorStop(.2,'rgba(200,160,255,.12)');
+  coreG.addColorStop(.5,'rgba(100,60,180,.07)');
+  coreG.addColorStop(1,'transparent');
+  gx.save();gx.translate(cx,cy);gx.scale(1,.55);gx.translate(-cx,-cy);
+  gx.beginPath();gx.arc(cx,cy,R*.28,0,Math.PI*2);gx.fillStyle=coreG;gx.fill();
+  gx.restore();
 
-                gCtx.beginPath(); gCtx.arc(p.x, p.y, 1, 0, Math.PI*2); gCtx.fill();
+  /* mid glow band */
+  const bandG=gx.createRadialGradient(cx,cy,0,cx,cy,R);
+  bandG.addColorStop(0,'rgba(120,80,220,.06)');bandG.addColorStop(.4,'rgba(60,20,140,.04)');bandG.addColorStop(1,'transparent');
+  gx.save();gx.translate(cx,cy);gx.scale(1,.4);gx.translate(-cx,-cy);
+  gx.beginPath();gx.arc(cx,cy,R,0,Math.PI*2);gx.fillStyle=bandG;gx.fill();
+  gx.restore();
 
-            }); requestAnimationFrame(drawGlobal);
+  /* nebula colour puffs */
+  [['rgba(80,0,180,.04)',R*.4,-.3],['rgba(0,200,255,.03)',R*.5,.5],['rgba(255,40,120,.025)',R*.35,1.1]].forEach(([col,rad,ao])=>{
+    gx.save();gx.translate(cx,cy);gx.scale(1,.55);gx.translate(-cx,-cy);
+    const ng=gx.createRadialGradient(cx+Math.cos(ao)*R*.5,cy+Math.sin(ao)*R*.25,0,cx,cy,rad);
+    ng.addColorStop(0,col);ng.addColorStop(1,'transparent');
+    gx.beginPath();gx.arc(cx,cy,rad,0,Math.PI*2);gx.fillStyle=ng;gx.fill();
+    gx.restore();
+  });
 
-        }
+  /* dust lanes */
+  dust.forEach(d=>{
+    gx.save();gx.translate(d.x,d.y);gx.scale(1,.55);gx.translate(-d.x,-d.y);
+    const dg=gx.createRadialGradient(d.x,d.y,0,d.x,d.y,d.r);
+    dg.addColorStop(0,`rgba(5,0,15,${d.o})`);dg.addColorStop(1,'transparent');
+    gx.beginPath();gx.arc(d.x,d.y,d.r,0,Math.PI*2);gx.fillStyle=dg;gx.fill();
+    gx.restore();
+  });
 
-        initGlobal(); drawGlobal();
+  /* stars */
+  gStars.forEach(s=>{
+    const flicker=Math.sin(t/900*s.tw+s.p)*.3+.7;
+    let col='255,255,255';
+    if(s.type==='core') col='255,240,200';
+    else if(s.type==='arm'){
+      const pick=Math.random();
+      col=pick<.33?'180,160,255':pick<.66?'160,210,255':'255,255,255';
+    }
+    gx.beginPath();gx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    gx.fillStyle=`rgba(${col},${(s.o*flicker).toFixed(2)})`;gx.fill();
+    if(s.r>1){gx.beginPath();gx.arc(s.x,s.y,s.r*2.5,0,Math.PI*2);gx.fillStyle=`rgba(${col},${(s.o*flicker*.08).toFixed(3)})`;gx.fill();}
+  });
+}
+initGalaxy();
+(function gLoop(t){drawGalaxy(t);requestAnimationFrame(gLoop);})(0);
 
+/* ── PITCH CANVAS ── */
+const pc=document.getElementById('pitch-canvas'),px=pc.getContext('2d');
+let pdots=[],pball={x:0,y:0};
+function initPitch(){
+  pc.width=pc.parentElement.offsetWidth;pc.height=480;
+  pball.x=pc.width/2;pball.y=pc.height/2;pdots=[];
+  const cols=['#00ffe7','#00ffe7','#00ffe7','#00ffe7','#00ffe7','#00ffe7','#ff3cac','#ff3cac','#ff3cac','#ff3cac','#ff3cac'];
+  for(let i=0;i<11;i++) pdots.push({x:Math.random()*pc.width,y:Math.random()*pc.height,tx:Math.random()*pc.width,ty:Math.random()*pc.height,col:cols[i]});
+}
+function drawPitch(){
+  const pw=pc.width,ph=pc.height;
+  px.fillStyle='#000';px.fillRect(0,0,pw,ph);
+  px.strokeStyle='rgba(0,255,231,.08)';px.lineWidth=1;
+  px.strokeRect(20,20,pw-40,ph-40);
+  px.beginPath();px.moveTo(pw/2,20);px.lineTo(pw/2,ph-20);px.stroke();
+  px.beginPath();px.arc(pw/2,ph/2,55,0,Math.PI*2);px.stroke();
+  px.strokeRect(20,ph/2-70,80,140);px.strokeRect(pw-100,ph/2-70,80,140);
+  px.strokeRect(20,ph/2-35,30,70);px.strokeRect(pw-50,ph/2-35,30,70);
+  px.strokeStyle='rgba(0,255,231,.025)';
+  for(let x=60;x<pw;x+=60){px.beginPath();px.moveTo(x,0);px.lineTo(x,ph);px.stroke();}
+  for(let y=60;y<ph;y+=60){px.beginPath();px.moveTo(0,y);px.lineTo(pw,y);px.stroke();}
+  pdots.forEach((d,i)=>{
+    pdots.forEach((d2,j)=>{
+      if(j<=i)return;
+      const dist=Math.hypot(d.x-d2.x,d.y-d2.y);
+      if(dist<130){px.beginPath();px.moveTo(d.x,d.y);px.lineTo(d2.x,d2.y);const a=(1-dist/130)*.1;px.strokeStyle=d.col===d2.col?`rgba(0,255,231,${a})`:`rgba(255,60,172,${a*.4})`;px.lineWidth=.8;px.stroke();}
+    });
+  });
+  px.beginPath();px.arc(pball.x,pball.y,5,0,Math.PI*2);px.fillStyle='#fff';px.shadowColor='#fff';px.shadowBlur=12;px.fill();px.shadowBlur=0;
+  pdots.forEach(d=>{
+    d.x+=(d.tx-d.x)*.018;d.y+=(d.ty-d.y)*.018;
+    if(Math.abs(d.x-d.tx)<2){d.tx=22+Math.random()*(pw-44);d.ty=22+Math.random()*(ph-44);}
+    px.beginPath();px.ellipse(d.x,d.y+5,5,2.5,0,0,Math.PI*2);px.fillStyle='rgba(0,0,0,.3)';px.fill();
+    px.beginPath();px.arc(d.x,d.y,5,0,Math.PI*2);px.fillStyle=d.col;px.shadowColor=d.col;px.shadowBlur=10;px.fill();px.shadowBlur=0;
+    const ang=Math.atan2(d.ty-d.y,d.tx-d.x);
+    px.beginPath();px.moveTo(d.x+Math.cos(ang)*7,d.y+Math.sin(ang)*7);px.lineTo(d.x+Math.cos(ang)*14,d.y+Math.sin(ang)*14);
+    px.strokeStyle=d.col;px.lineWidth=1.5;px.globalAlpha=.4;px.stroke();px.globalAlpha=1;
+  });
+  const tgt=pdots[Math.floor(Date.now()/2000)%pdots.length];
+  pball.x+=(tgt.x-pball.x)*.004;pball.y+=(tgt.y-pball.y)*.004;
+  requestAnimationFrame(drawPitch);
+}
+initPitch();drawPitch();
 
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('active');
+      e.target.querySelectorAll('.skfill').forEach(b=>b.classList.add('go'));
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-        // --- 02. Tactics Simulation (Boid-inspired) ---
+/* ── COUNTERS ── */
+const cobs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('[data-count]').forEach(el=>{
+      const target=+el.dataset.count;let cur=0;
+      const step=target/60;
+      const ti=setInterval(()=>{
+        cur=Math.min(cur+step,target);
+        el.textContent=Math.floor(cur)+(el.dataset.count==='92'?'%':'+');
+        if(cur>=target)clearInterval(ti);
+      },20);
+    });
+    cobs.unobserve(e.target);
+  });
+},{threshold:.3});
+document.querySelectorAll('.stats-strip').forEach(el=>cobs.observe(el));
 
-        const pCanvas = document.getElementById('pitch-canvas');
+/* ══════════════════════════════════
+   INTRO ANIMATION
+══════════════════════════════════ */
+(function(){
+  const intro=document.getElementById('intro');
+  const ic=document.getElementById('intro-canvas');
+  const ix=ic.getContext('2d');
+  const ibar=document.getElementById('ibar');
+  const iblabel=document.getElementById('iblabel');
+  const ititle=document.getElementById('ititle');
+  const isub=document.getElementById('isub');
+  const dsEl=document.getElementById('ds');
+  const statusEls=[0,1,2,3,4].map(i=>document.getElementById('is'+i));
+  const iskip=document.getElementById('iskip');
 
-        const pCtx = pCanvas.getContext('2d');
+  document.body.classList.add('intro-on');
+  ic.width=window.innerWidth;ic.height=window.innerHeight;
 
-        let dots = [];
+  /* ── INTRO CANVAS: pitch + data particles ── */
+  let iParticles=[];
+  let iPitchLines=[];
+  let iDrawn=0; // 0-1 progress of pitch line drawing
 
-        function initPitch() {
+  function buildIntroPitch(){
+    const W=ic.width,H=ic.height;
+    const cx=W/2,cy=H/2;
+    const pw=Math.min(W*.7,560),ph=Math.min(H*.65,380);
+    const l=cx-pw/2,t=cy-ph/2,r=cx+pw/2,b=cy+ph/2;
+    // define pitch segments as [x1,y1,x2,y2, hue]
+    iPitchLines=[
+      [l,t,r,t,'ion'],[r,t,r,b,'ion'],[r,b,l,b,'ion'],[l,b,l,t,'ion'],
+      [cx,t,cx,b,'plasma'],
+      // penalty box left
+      [l,cy-ph*.22,l+pw*.15,cy-ph*.22,'plasma'],[l+pw*.15,cy-ph*.22,l+pw*.15,cy+ph*.22,'plasma'],[l,cy+ph*.22,l+pw*.15,cy+ph*.22,'plasma'],
+      // penalty box right
+      [r,cy-ph*.22,r-pw*.15,cy-ph*.22,'plasma'],[r-pw*.15,cy-ph*.22,r-pw*.15,cy+ph*.22,'plasma'],[r,cy+ph*.22,r-pw*.15,cy+ph*.22,'plasma'],
+    ];
+  }
+  buildIntroPitch();
 
-            pCanvas.width = pCanvas.parentElement.offsetWidth; pCanvas.height = 500;
+  // spawn data particles
+  function spawnParticle(){
+    const W=ic.width,H=ic.height;
+    iParticles.push({
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-.5)*.6, vy:(Math.random()-.5)*.6,
+      r:Math.random()*.8+.2,
+      o:Math.random()*.5+.2,
+      life:1, decay:Math.random()*.005+.002,
+      col:Math.random()<.5?'0,255,231':'180,0,255'
+    });
+  }
+  for(let i=0;i<120;i++) spawnParticle();
 
-            dots = []; for(let i=0; i<11; i++) dots.push({ x: Math.random()*pCanvas.width, y: Math.random()*pCanvas.height, tx: Math.random()*pCanvas.width, ty: Math.random()*pCanvas.height });
+  // data stream text
+  const dataWords=['xG_MODEL','PASS_NET','FORM_4-3-3','DELAUNAY','VORONOI','KMEANS','ISL_S10','PYTHON3','SKLEARN','ENTROPY','PHYSICS','MOMENTUM','VECTOR','SPATIAL'];
+  let dsIdx=0;
+  setInterval(()=>{ dsEl.textContent=dataWords[dsIdx%dataWords.length]; dsIdx++; },220);
 
-        }
+  /* draw loop */
+  let introT=0;
+  function drawIntro(){
+    if(!intro.parentNode) return;
+    introT++;
+    const W=ic.width,H=ic.height;
+    ix.clearRect(0,0,W,H);
 
-        function drawPitch() {
+    // background
+    const bg=ix.createRadialGradient(W/2,H/2,0,W/2,H/2,Math.max(W,H)*.7);
+    bg.addColorStop(0,'#06001a');bg.addColorStop(.5,'#03000d');bg.addColorStop(1,'#000');
+    ix.fillStyle=bg;ix.fillRect(0,0,W,H);
 
-            pCtx.clearRect(0,0,pCanvas.width, pCanvas.height);
+    // horizontal scan sweep
+    const scanY=(introT*2.2)%H;
+    const scanG=ix.createLinearGradient(0,scanY-40,0,scanY+40);
+    scanG.addColorStop(0,'transparent');scanG.addColorStop(.5,'rgba(0,255,231,.035)');scanG.addColorStop(1,'transparent');
+    ix.fillStyle=scanG;ix.fillRect(0,scanY-40,W,80);
 
-            pCtx.strokeStyle = "rgba(0, 242, 255, 0.1)"; pCtx.strokeRect(20,20,pCanvas.width-40,pCanvas.height-40);
+    // pitch lines drawn progressively
+    const totalSegs=iPitchLines.length;
+    const segsDrawn=Math.floor(iDrawn*totalSegs);
+    const partial=iDrawn*totalSegs-segsDrawn;
+    for(let i=0;i<segsDrawn;i++){
+      const seg=iPitchLines[i];
+      ix.beginPath();ix.moveTo(seg[0],seg[1]);ix.lineTo(seg[2],seg[3]);
+      ix.strokeStyle=seg[4]==='ion'?'rgba(0,255,231,.18)':'rgba(180,0,255,.14)';
+      ix.lineWidth=1;ix.stroke();
+    }
+    if(segsDrawn<totalSegs && iDrawn>0){
+      const seg=iPitchLines[segsDrawn];
+      const px=seg[0]+(seg[2]-seg[0])*partial,py=seg[1]+(seg[3]-seg[1])*partial;
+      ix.beginPath();ix.moveTo(seg[0],seg[1]);ix.lineTo(px,py);
+      ix.strokeStyle=seg[4]==='ion'?'rgba(0,255,231,.18)':'rgba(180,0,255,.14)';
+      ix.lineWidth=1;ix.stroke();
+      // leading dot
+      ix.beginPath();ix.arc(px,py,2,0,Math.PI*2);
+      ix.fillStyle=seg[4]==='ion'?'rgba(0,255,231,.8)':'rgba(180,0,255,.8)';
+      ix.shadowColor=seg[4]==='ion'?'#00ffe7':'#b400ff';ix.shadowBlur=8;ix.fill();ix.shadowBlur=0;
+    }
 
-            dots.forEach((d, i) => {
+    // centre circle
+    if(iDrawn>.6){
+      const prog=Math.min((iDrawn-.6)/.4,1);
+      const cx=W/2,cy=H/2,cr=Math.min(W*.7,560)*.12;
+      ix.beginPath();ix.arc(cx,cy,cr,0,Math.PI*2*prog);
+      ix.strokeStyle='rgba(0,255,231,.15)';ix.lineWidth=1;ix.stroke();
+    }
 
-                d.x += (d.tx - d.x) * 0.02; d.y += (d.ty - d.y) * 0.02;
+    // particles
+    iParticles.forEach((p,i)=>{
+      p.x+=p.vx;p.y+=p.vy;p.life-=p.decay;
+      if(p.life<=0){
+        iParticles[i]={x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,r:Math.random()*.8+.2,o:Math.random()*.5+.2,life:1,decay:Math.random()*.005+.002,col:Math.random()<.5?'0,255,231':'180,0,255'};
+        return;
+      }
+      ix.beginPath();ix.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ix.fillStyle=`rgba(${p.col},${(p.o*p.life).toFixed(2)})`;ix.fill();
+    });
 
-                if(Math.abs(d.x-d.tx) < 1) { d.tx = Math.random()*pCanvas.width; d.ty = Math.random()*pCanvas.height; }
+    // data grid (binary-ish) top right corner
+    ix.font='.5rem "Fira Code",monospace';ix.fillStyle='rgba(0,255,231,.06)';
+    for(let row=0;row<8;row++){
+      for(let col=0;col<16;col++){
+        if(Math.random()>.94) ix.fillText(Math.random()>.5?'1':'0', W-200+col*12, 30+row*14);
+      }
+    }
+    if(intro.parentNode) requestAnimationFrame(drawIntro);
+  }
+  drawIntro();
 
-                pCtx.fillStyle = i === 5 ? "#ff0055" : "#00f2ff"; pCtx.beginPath(); pCtx.arc(d.x, d.y, 4, 0, Math.PI*2); pCtx.fill();
+  /* ── SEQUENCE ── */
+  const labels=['BOOT SEQUENCE INIT...','LOADING PHYSICS ENGINE...','CONNECTING ISL DATABASE...','COMPILING ML MODELS...','RENDERING TACTICAL GRID...','SYSTEM ONLINE'];
+  let progress=0;
+  let phase=0;
+  let done=false;
 
-                // Draw defensive lines
+  function exitIntro(){
+    if(done) return;
+    done=true;
+    ibar.style.width='100%';
+    iblabel.textContent='LAUNCH SEQUENCE COMPLETE';
+    iblabel.style.color='var(--ion)';
+    setTimeout(()=>{
+      intro.classList.add('exit');
+      document.body.classList.remove('intro-on');
+      setTimeout(()=>{ intro.remove(); },900);
+    },400);
+  }
 
-                dots.forEach(d2 => {
+  iskip.addEventListener('click',exitIntro);
 
-                    let dist = Math.sqrt((d.x-d2.x)**2 + (d.y-d2.y)**2);
+  // Step timings (ms)
+  const steps=[
+    {delay:300, action:()=>{ iDrawn=0; animatePitch(); }},
+    {delay:700, action:()=>{ ititle.classList.add('show'); }},
+    {delay:1000, action:()=>{ isub.classList.add('show'); }},
+    {delay:1200, action:()=>{ statusEls[0].classList.add('lit'); setLabel(labels[2]); advBar(25); }},
+    {delay:1700, action:()=>{ statusEls[0].classList.add('done'); statusEls[1].classList.add('lit'); setLabel(labels[3]); advBar(50); }},
+    {delay:2200, action:()=>{ statusEls[1].classList.add('done'); statusEls[2].classList.add('lit'); setLabel(labels[4]); advBar(70); }},
+    {delay:2700, action:()=>{ statusEls[2].classList.add('done'); statusEls[3].classList.add('lit'); setLabel(labels[5]); advBar(88); }},
+    {delay:3100, action:()=>{ statusEls[3].classList.add('done'); statusEls[4].classList.add('lit'); advBar(100); }},
+    {delay:3500, action:()=>{ statusEls[4].classList.add('done'); setLabel('[ ALL SYSTEMS ONLINE ]'); iblabel.style.color='var(--ion)'; }},
+    {delay:4200, action:exitIntro},
+  ];
 
-                    if(dist < 120) { pCtx.beginPath(); pCtx.moveTo(d.x, d.y); pCtx.lineTo(d2.x, d2.y); pCtx.strokeStyle = "rgba(0, 242, 255, 0.05)"; pCtx.stroke(); }
+  function setLabel(t){ iblabel.textContent=t; }
+  function advBar(pct){ ibar.style.transition=`width .6s ease`; ibar.style.width=pct+'%'; }
 
-                });
+  function animatePitch(){
+    let start=null;
+    function step(ts){ if(!start) start=ts; iDrawn=Math.min((ts-start)/1800,1); if(iDrawn<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
 
-            }); requestAnimationFrame(drawPitch);
+  // kickoff sequence
+  setLabel(labels[0]);
+  steps.forEach(s=>setTimeout(s.action,s.delay));
 
-        }
+  window.addEventListener('resize',()=>{ic.width=window.innerWidth;ic.height=window.innerHeight;buildIntroPitch();});
+})();
 
-        initPitch(); drawPitch();
-
-
-
-        // --- 03. Scroll Reveal ---
-
-        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        window.addEventListener('resize', () => { initGlobal(); initPitch(); });
-
-    </script>
-
+window.addEventListener('resize',()=>{initGalaxy();initPitch();});
+</script>
 </body>
-
-</html> 
+</html>
