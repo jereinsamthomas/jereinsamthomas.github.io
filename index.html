@@ -26,120 +26,357 @@ body{background:var(--void);color:var(--dust);font-family:'Outfit',sans-serif;ov
 /* ══════════════════════════════════
    INTRO OVERLAY
 ══════════════════════════════════ */
-#intro{
-  position:fixed;inset:0;z-index:99999;
-  background:#000;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  overflow:hidden;
-  transition:opacity .14s ease,transform .18s ease;
-}
-#intro.exit{opacity:0;transform:scale(2.04);pointer-events:none;}
-#intro-canvas{position:absolute;inset:0;width:200%;height:200%;}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matchday Engine Loading...</title>
+  
+  <!-- Fonts used in the design -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Orbitron:wght@900&display=swap" rel="stylesheet">
 
-/* scanlines */
-#intro::before{
-  content:'';position:absolute;inset:0;z-index:1;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 4px);
-  pointer-events:none;
-}
+  <style>
+    /* ── SYSTEM THEME SETUP ── */
+    :root {
+      --pitch-green: #00ff66;       /* Vibrant neon stadium grass accent */
+      --stadium-glow: #00f3ff;      /* Floodlight cyan */
+      --boot-crimson: #ff0055;      /* "Hov" / active state warning color */
+      --turf-dark: #0a0f0d;         /* Ultra-dark pitch background */
+      --ease: cubic-bezier(0.25, 1, 0.5, 1);
+    }
 
-.intro-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0;}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* BALL */
-.ball-ring{
-  width:200px;height:200px;position:relative;margin-bottom:42px;
-}
-.ball-svg{width:200%;height:200%;animation:ballSpin 4s linear infinite;}
-@keyframes ballSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-.ball-glow{
-  position:absolute;inset:-18px;border-radius:50%;
-  border:1px solid rgba(0,255,231,.25);
-  animation:ringPulse 1.4s ease infinite;
-}
-.ball-glow2{
-  position:absolute;inset:-36px;border-radius:50%;
-  border:1px solid rgba(180,0,255,.15);
-  animation:ringPulse 3.4s ease .9s infinite;
-}
-@keyframes ringPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.4);opacity:0}}
+    body {
+      background-color: var(--turf-dark);
+      color: #fff;
+      font-family: sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-/* DATA STREAM beside ball */
-.data-stream{
-  position:absolute;top:50%;left:110%;transform:translateY(-50%);
-  font-family:'Fira Code',monospace;font-size:.55rem;color:var(--ion);
-  opacity:.55;white-space:nowrap;letter-spacing:1px;line-height:1.8;
-}
+    body.intro-on {
+      overflow: hidden;
+      cursor: none; /* Hide default cursor so custom one shines */
+    }
+    
+    body.intro-on a, 
+    body.intro-on button, 
+    body.intro-on .interactive {
+      cursor: none;
+    }
 
-/* INTRO TITLE */
-.intro-title{
-  font-family:'Orbitron',sans-serif;font-weight:900;
-  font-size:clamp(2rem,6vw,4.2rem);letter-spacing:6px;
-  color:transparent;
-  background:linear-gradient(135deg,#fff 0%,var(--ion) 45%,var(--plasma) 80%,var(--nova) 100%);
-  -webkit-background-clip:text;background-clip:text;
-  opacity:0;transform:translateY(20px);
-  transition:opacity .8s var(--ease),transform .8s var(--ease);
-  text-align:center;line-height:1;
-  filter:drop-shadow(0 0 20px rgba(0,255,231,.3));
-}
-.intro-title.show{opacity:1;transform:translateY(0);}
+    /* ── INTRO CONTAINER ── */
+    .intro-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, rgba(0, 255, 102, 0.05) 0%, var(--turf-dark) 80%);
+      z-index: 999;
+    }
 
-.intro-sub{
-  font-family:'Fira Code',monospace;font-size:.75rem;
-  letter-spacing:5px;color:rgba(168,184,208,.55);
-  text-transform:uppercase;margin-top:14px;
-  opacity:0;transition:opacity .8s ease .3s;
-}
-.intro-sub.show{opacity:1;}
+    /* ── FOOTBALL STRIKER TITLE ── */
+    .intro-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 5.5vw, 3.8rem);
+      letter-spacing: 8px;
+      color: transparent;
+      /* Gradient shifts from pristine white to pitch green, then tactical stadium lighting colors */
+      background: linear-gradient(135deg, #fff 0%, var(--pitch-green) 45%, var(--stadium-glow) 80%, #fff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      opacity: 0;
+      transform: translateY(25px) scale(0.95);
+      transition: opacity 1s var(--ease), transform 1s var(--ease);
+      text-align: center;
+      line-height: 1.1;
+      filter: drop-shadow(0 0 25px rgba(0, 255, 66, 0.25));
+      text-transform: uppercase;
+    }
+    .intro-title.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
 
-/* PROGRESS BAR */
-.intro-bar-wrap{
-  width:min(340px,70vw);height:2px;background:rgba(255,255,255,.06);
-  margin-top:40px;position:relative;overflow:hidden;
-}
-.intro-bar{
-  height:100%;width:0%;
-  background:linear-gradient(90deg,var(--ion),var(--plasma));
-  box-shadow:0 0 12px var(--ion);
-  transition:width .05s linear;
-}
-.intro-bar-label{
-  font-family:'Fira Code',monospace;font-size:.6rem;
-  letter-spacing:3px;color:rgba(168,184,208,.3);
-  margin-top:10px;text-align:center;
-  min-height:1em;
-}
+    .intro-sub {
+      font-family: 'Fira Code', monospace;
+      font-size: .75rem;
+      letter-spacing: 6px;
+      color: rgba(168, 184, 208, 0.6);
+      text-transform: uppercase;
+      margin-top: 16px;
+      opacity: 0;
+      transition: opacity .8s ease .4s;
+    }
+    .intro-sub.show {
+      opacity: 1;
+    }
 
-/* STATUS LINES */
-.intro-status{
-  margin-top:24px;display:flex;flex-direction:column;gap:5px;align-items:center;
-}
-.isl{
-  font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:2px;
-  color:rgba(168,184,208,.25);opacity:0;
-  transform:translateX(-10px);
-  transition:opacity .4s ease,transform .4s ease,color .3s;
-}
-.isl.lit{opacity:1;transform:translateX(0);}
-.isl.done{color:var(--ion);}
+    /* ── PROGRESS BAR (TACTICAL TIMELINE) ── */
+    .intro-bar-wrap {
+      width: min(380px, 75vw);
+      height: 3px;
+      background: rgba(255, 255, 255, 0.05);
+      margin-top: 45px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .intro-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--pitch-green), var(--stadium-glow));
+      box-shadow: 0 0 15px var(--pitch-green);
+      transition: width .05s linear;
+    }
+    .intro-bar-label {
+      font-family: 'Fira Code', monospace;
+      font-size: .6rem;
+      letter-spacing: 3px;
+      color: rgba(0, 255, 102, 0.4);
+      margin-top: 12px;
+      text-align: center;
+      min-height: 1em;
+      text-transform: uppercase;
+    }
 
-/* SKIP */
-.intro-skip{
-  position:absolute;bottom:30px;right:36px;z-index:3;
-  font-family:'Fira Code',monospace;font-size:.58rem;
-  letter-spacing:2px;color:rgba(168,184,208,.2);
-  cursor:pointer;transition:.3s;border:none;background:none;
-}
-.intro-skip:hover{color:var(--ion);}
+    /* ── TACTICAL STATUS LINES ── */
+    .intro-status {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+    }
+    .isl {
+      font-family: 'Fira Code', monospace;
+      font-size: .62rem;
+      letter-spacing: 2px;
+      color: rgba(168, 184, 208, 0.25);
+      opacity: 0;
+      transform: translateX(-15px);
+      transition: opacity .4s ease, transform .4s ease, color .3s;
+    }
+    .isl.lit {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    /* Turns pitch green when tactical check is completed successfully */
+    .isl.done {
+      color: var(--pitch-green);
+      text-shadow: 0 0 8px rgba(0, 255, 66, 0.3);
+    }
 
-/* flicker FX on body while intro plays */
-body.intro-on{overflow:hidden;}
+    /* ── SKIP MATCH INTRO BUTTON ── */
+    .intro-skip {
+      position: absolute;
+      bottom: 35px;
+      right: 40px;
+      z-index: 1002;
+      font-family: 'Fira Code', monospace;
+      font-size: .6rem;
+      letter-spacing: 3px;
+      color: rgba(168, 184, 208, 0.3);
+      cursor: none;
+      border: 1px solid rgba(168, 184, 208, 0.15);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 6px 14px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      transition: all .3s ease;
+    }
+    .intro-skip:hover {
+      color: var(--pitch-green);
+      border-color: var(--pitch-green);
+      background: rgba(0, 255, 66, 0.05);
+      box-shadow: 0 0 10px rgba(0, 255, 66, 0.1);
+    }
 
-/* ── CURSOR ── */
-#cd{width:10px;height:10px;background:var(--ion);border-radius:50%;position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 15px var(--ion),0 0 30px rgba(0,255,231,.3);transition:background .25s,box-shadow .25s,transform .1s;}
-#cr{width:38px;height:38px;border:1px solid rgba(0,255,231,.35);border-radius:50%;position:fixed;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
-#cd.hov{background:var(--nova);box-shadow:0 0 20px var(--nova),0 0 40px rgba(255,60,172,.3);transform:translate(-50%,-50%) scale(1.6);}
-#cr.hov{width:64px;height:64px;border-color:rgba(255,60,172,.4);}
+    /* ── FOOTBALL CUSTOM CURSOR (THE TRACKER) ── */
+    /* #cd acts as the core ball */
+    #cd {
+      width: 12px;
+      height: 12px;
+      background: var(--pitch-green);
+      border-radius: 50%;
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 12px var(--pitch-green), 0 0 25px rgba(0, 255, 66, 0.4);
+      transition: background .25s, box-shadow .25s, transform .1s;
+    }
+    /* #cr acts as the tactical target/player selection wheel around the ball */
+    #cr {
+      width: 44px;
+      height: 44px;
+      border: 1px dashed rgba(0, 243, 255, 0.4); /* Dashed lines resemble strategy drawing boards */
+      border-radius: 50%;
+      position: fixed;
+      z-index: 9998;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width .25s var(--ease), height .25s var(--ease), border-color .25s ease, transform .08s linear;
+    }
+    
+    /* Cursor modifications on hovering over interactive elements (e.g. Skip button) */
+    #cd.hov {
+      background: var(--boot-crimson);
+      box-shadow: 0 0 15px var(--boot-crimson), 0 0 30px rgba(255, 0, 85, 0.5);
+      transform: translate(-50%, -50%) scale(1.4);
+    }
+    #cr.hov {
+      width: 54px;
+      height: 54px;
+      border: 2px solid var(--boot-crimson);
+      animation: spin 4s linear infinite; /* Tactical ring spins when locked on target */
+    }
+
+    @keyframes spin {
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="intro-on">
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cd"></div>
+  <div id="cr"></div>
+
+  <!-- INTRO LAYER -->
+  <div class="intro-container" id="introLayer">
+    <h1 class="intro-title" id="introTitle">Matchday Engine</h1>
+    <div class="intro-sub" id="introSub">Tactical Framework v4.2</div>
+
+    <div class="intro-bar-wrap">
+      <div class="intro-bar" id="progressBar"></div>
+    </div>
+    <div class="intro-bar-label" id="progressLabel">Initializing Engine...</div>
+
+    <div class="intro-status">
+      <div class="isl" id="line1">Scanning Pitch Dimensions...</div>
+      <div class="isl" id="line2">Calibrating VAR Assistant Cameras...</div>
+      <div class="isl" id="line3">Syncing Player Biometrics & Tactics...</div>
+    </div>
+
+    <button class="intro-skip interactive" id="skipBtn">Skip Pre-Match</button>
+  </div>
+
+  <script>
+    // ── CURSOR SCRIPT ──
+    const cd = document.getElementById('cd');
+    const cr = document.getElementById('cr');
+
+    window.addEventListener('mousemove', (e) => {
+      // Smooth immediate tracking for core center ball
+      cd.style.left = e.clientX + 'px';
+      cd.style.top = e.clientY + 'px';
+      
+      // Slight delay feeling logic achieved by standard rendering placement
+      cr.style.left = e.clientX + 'px';
+      cr.style.top = e.clientY + 'px';
+    });
+
+    // Add event listeners to watch out for interactive items to lock targets
+    document.querySelectorAll('.interactive').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cd.classList.add('hov');
+        cr.classList.add('hov');
+      });
+      el.addEventListener('mouseleave', () => {
+        cd.classList.remove('hov');
+        cr.classList.remove('hov');
+      });
+    });
+
+
+    // ── LOADING ANIMATION SIMULATOR ──
+    const progressBar = document.getElementById('progressBar');
+    const progressLabel = document.getElementById('progressLabel');
+    const introTitle = document.getElementById('introTitle');
+    const introSub = document.getElementById('introSub');
+    
+    const lines = [
+      document.getElementById('line1'),
+      document.getElementById('line2'),
+      document.getElementById('line3')
+    ];
+
+    // Reveal titles on load
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => introTitle.classList.add('show'), 200);
+      setTimeout(() => introSub.classList.add('show'), 500);
+      startSimulation();
+    });
+
+    function startSimulation() {
+      let progress = 0;
+      
+      // Control milestones to fire the tactical text adjustments alongside progress
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 4) + 1; // Variable increments for real loader look
+        if (progress > 100) progress = 100;
+
+        progressBar.style.width = progress + '%';
+        progressLabel.innerText = `Simulating Assets... ${progress}%`;
+
+        // Milestone 1: Line 1 Lights Up
+        if (progress >= 15 && progress < 45) {
+          lines[0].classList.add('lit');
+        }
+        // Milestone 2: Line 1 passes, Line 2 Lights up
+        if (progress >= 45 && progress < 75) {
+          lines[0].classList.add('done');
+          lines[1].classList.add('lit');
+        }
+        // Milestone 3: Line 2 passes, Line 3 Lights up
+        if (progress >= 75 && progress < 98) {
+          lines[1].classList.add('done');
+          lines[2].classList.add('lit');
+        }
+        // Milestone 4: Complete
+        if (progress >= 100) {
+          lines[2].classList.add('done');
+          progressLabel.innerText = "Match Ready. Kick Off!";
+          clearInterval(interval);
+          setTimeout(dismissIntro, 800); // Exit animation buffer
+        }
+      }, 80);
+    }
+
+    // Dismiss Sequence
+    function dismissIntro() {
+      const layer = document.getElementById('introLayer');
+      layer.style.transition = 'opacity 0.6s var(--ease), transform 0.6s var(--ease)';
+      layer.style.opacity = '0';
+      layer.style.transform = 'scale(1.05)';
+      
+      setTimeout(() => {
+        layer.remove();
+        // Restore defaults or switch cursor configs here if desired
+        document.body.classList.remove('intro-on');
+      }, 600);
+    }
+
+    // Skip Button Handler
+    document.getElementById('skipBtn').addEventListener('click', dismissIntro);
+  </script>
+</body>
+</html>
 
 /* ── GALAXY CANVAS ── */
 #galaxy{position:fixed;inset:0;z-index:0;}
