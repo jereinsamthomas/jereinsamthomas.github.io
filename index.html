@@ -22,11 +22,8 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--void);color:var(--dust);font-family:'Outfit',sans-serif;overflow-x:hidden;cursor:none;}
-
-/* ══════════════════════════════════
-   INTRO OVERLAY
-══════════════════════════════════ */
-    /* ── SYSTEM THEME SETUP ── */
+ 
+/* ── SYSTEM THEME SETUP ── */
     :root {
       --pitch-green: #00ff66;       /* Vibrant neon stadium grass accent */
       --stadium-glow: #00f3ff;      /* Floodlight cyan */
@@ -364,13 +361,19 @@ body{background:var(--void);color:var(--dust);font-family:'Outfit',sans-serif;ov
   </script>
 </body>
 </html>
-
 /* ── GALAXY CANVAS ── */
 #galaxy{position:fixed;inset:0;z-index:0;}
-
+ 
 /* ── GRAIN ── */
 body::after{content:'';position:fixed;inset:0;z-index:1;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");opacity:.28;pointer-events:none;}
-
+ 
+/* ── CUSTOM CURSOR ── */
+#cd{width:10px;height:10px;background:var(--ion);border-radius:50%;position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--ion),0 0 22px rgba(0,255,231,.35);transition:background .25s,box-shadow .25s,transform .1s;}
+#cr{width:40px;height:40px;border:1px dashed rgba(0,243,255,.35);border-radius:50%;position:fixed;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .25s var(--ease),height .25s var(--ease),border-color .25s,transform .08s linear;}
+#cd.hov{background:var(--nova);box-shadow:0 0 14px var(--nova),0 0 28px rgba(255,60,172,.45);transform:translate(-50%,-50%) scale(1.4);}
+#cr.hov{width:52px;height:52px;border:1.5px solid var(--nova);animation:spin 4s linear infinite;}
+@keyframes spin{100%{transform:translate(-50%,-50%) rotate(360deg)}}
+ 
 /* ── NAV ── */
 nav{position:fixed;top:0;width:100%;padding:26px 8%;display:flex;justify-content:space-between;align-items:center;z-index:1000;backdrop-filter:blur(30px) saturate(160%);-webkit-backdrop-filter:blur(30px);border-bottom:1px solid var(--gb);background:rgba(2,1,10,.5);}
 .logo{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;color:var(--ion);text-decoration:none;letter-spacing:5px;position:relative;text-shadow:0 0 20px rgba(0,255,231,.5);}
@@ -383,41 +386,28 @@ nav{position:fixed;top:0;width:100%;padding:26px 8%;display:flex;justify-content
 .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:linear-gradient(90deg,var(--ion),var(--plasma));transition:width .4s var(--ease);}
 .nav-links a:hover{color:var(--bright);}
 .nav-links a:hover::after{width:100%;}
-
+ 
 /* ── HERO ── */
 #hero{min-height:100vh;display:flex;align-items:center;padding:0 10%;position:relative;overflow:hidden;z-index:2;}
-
-/* HERO NAME — chromatic split, shimmer */
 .hero-name-wrap{position:relative;margin-bottom:30px;}
 .hero-name{
-  font-family:'Orbitron',sans-serif;
-  font-weight:900;
-  font-size:clamp(3.5rem,10vw,7.8rem);
-  line-height:.88;
-  letter-spacing:4px;
+  font-family:'Orbitron',sans-serif;font-weight:900;
+  font-size:clamp(3.5rem,10vw,7.8rem);line-height:.88;letter-spacing:4px;
   color:transparent;
   background:linear-gradient(135deg,#fff 0%,var(--ion) 40%,var(--plasma) 75%,var(--nova) 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  position:relative;
-  animation:nameReveal 1.6s var(--ease) forwards;
-  opacity:0;
+  -webkit-background-clip:text;background-clip:text;
+  position:relative;animation:nameReveal 1.6s var(--ease) forwards;opacity:0;
   filter:drop-shadow(0 0 30px rgba(0,255,231,.25));
 }
 @keyframes nameReveal{from{opacity:0;transform:translateY(40px) skewX(-3deg)}to{opacity:1;transform:translateY(0) skewX(0)}}
 .hero-name::before{
-  content:attr(data-text);
-  position:absolute;inset:0;
-  font-family:'Orbitron',sans-serif;font-weight:900;
-  font-size:inherit;letter-spacing:inherit;line-height:inherit;
+  content:attr(data-text);position:absolute;inset:0;
+  font-family:'Orbitron',sans-serif;font-weight:900;font-size:inherit;letter-spacing:inherit;line-height:inherit;
   background:linear-gradient(135deg,#fff 0%,var(--ion) 40%,var(--plasma) 75%,var(--nova) 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:blur(18px);opacity:0;
-  animation:nameGlow 4s ease 1.6s infinite;
+  filter:blur(18px);opacity:0;animation:nameGlow 4s ease 1.6s infinite;
 }
 @keyframes nameGlow{0%,100%{opacity:0}50%{opacity:.35}}
-
-/* scanline shimmer across name */
 .hero-name-wrap::after{
   content:'';position:absolute;inset:0;
   background:linear-gradient(105deg,transparent 30%,rgba(0,255,231,.18) 50%,transparent 70%);
@@ -425,51 +415,31 @@ nav{position:fixed;top:0;width:100%;padding:26px 8%;display:flex;justify-content
   animation:shimmer 3.5s ease 2s infinite;pointer-events:none;
 }
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
-.hero-sub{
-  font-family:'Exo 2',sans-serif;
-  font-size:clamp(.9rem,2vw,1.3rem);
-  font-style:italic;font-weight:200;
-  color:rgba(168,184,208,.7);
-  letter-spacing:6px;text-transform:uppercase;
-  margin-bottom:10px;
-  animation:subFade 1s var(--ease) .3s forwards;opacity:0;
-}
+.hero-sub{font-family:'Exo 2',sans-serif;font-size:clamp(.9rem,2vw,1.3rem);font-style:italic;font-weight:200;color:rgba(168,184,208,.7);letter-spacing:6px;text-transform:uppercase;margin-bottom:10px;animation:subFade 1s var(--ease) .3s forwards;opacity:0;}
 @keyframes subFade{from{opacity:0;transform:translateX(-20px)}to{opacity:.7;transform:translateX(0)}}
-
-.hero-terminal{
-  border-left:2px solid transparent;
-  background:linear-gradient(var(--void),var(--void)) padding-box,
-             linear-gradient(180deg,var(--ion),var(--plasma)) border-box;
-  padding-left:48px;position:relative;z-index:2;
-}
-
+.hero-terminal{border-left:2px solid transparent;background:linear-gradient(var(--void),var(--void)) padding-box,linear-gradient(180deg,var(--ion),var(--plasma)) border-box;padding-left:48px;position:relative;z-index:2;}
 .system-status{font-family:'Fira Code',monospace;color:var(--ion);font-size:.78rem;margin-bottom:22px;letter-spacing:3px;display:flex;align-items:center;gap:10px;animation:subFade 1s var(--ease) .1s forwards;opacity:0;}
 .sdot{width:7px;height:7px;background:var(--ion);border-radius:50%;animation:blink 1.5s ease infinite;}
 @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,255,231,.5)}50%{opacity:.4;box-shadow:0 0 0 9px rgba(0,255,231,0)}}
-
 .hero-desc{max-width:560px;font-size:1rem;line-height:1.82;color:var(--dust);font-weight:300;animation:subFade 1s var(--ease) 1.8s forwards;opacity:0;}
 .hero-desc strong{color:var(--ion);font-weight:600;}
-
 .hero-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;}
 .htag{font-family:'Fira Code',monospace;font-size:.63rem;padding:5px 13px;border:1px solid var(--gb);color:var(--plasma);letter-spacing:1.5px;position:relative;overflow:hidden;transition:.4s;opacity:0;animation:tagIn .7s var(--ease) forwards;animation-delay:calc(var(--i,0)*.1s + 2s);}
 @keyframes tagIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .htag::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(180,0,255,.1),transparent);transform:translateX(-100%);transition:.5s;}
 .htag:hover::before{transform:translateX(100%);}
 .htag:hover{border-color:var(--plasma);color:#fff;}
-
-/* scroll cue */
 .scue{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;font-family:'Fira Code',monospace;font-size:.58rem;color:rgba(168,184,208,.22);letter-spacing:3px;animation:bob 2.2s ease infinite;}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(9px)}}
 .sline{width:1px;height:54px;background:linear-gradient(180deg,transparent,var(--ion),transparent);}
-
+ 
 /* ── SECTIONS ── */
 section{position:relative;z-index:2;}
 .si{padding:110px 10%;}
 .slabel{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:4px;color:var(--plasma);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
 .slabel::after{content:'';flex:1;max-width:60px;height:1px;background:var(--plasma);}
 .stitle{font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,4vw,3rem);color:var(--bright);letter-spacing:3px;margin-bottom:54px;line-height:1;font-weight:700;}
-
+ 
 /* ── CARDS ── */
 .index-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
 .index-card{background:var(--glass);border:1px solid var(--gb);overflow:hidden;transition:.8s var(--ease);text-decoration:none;color:inherit;position:relative;display:block;}
@@ -478,19 +448,15 @@ section{position:relative;z-index:2;}
 .index-card:hover{border-color:rgba(0,255,231,.3);transform:translateY(-14px);box-shadow:0 40px 80px rgba(0,0,0,.85),0 0 0 1px rgba(0,255,231,.1),inset 0 0 40px rgba(0,255,231,.02);}
 .cimg{width:100%;height:240px;object-fit:cover;display:block;filter:grayscale(.75) brightness(.55) saturate(.8);transition:.7s var(--ease);}
 .index-card:hover .cimg{filter:grayscale(0) brightness(.9) saturate(1.3);}
-.cimg-placeholder{width:100%;height:240px;position:relative;overflow:hidden;}
-.cimg-placeholder canvas{width:100%;height:100%;display:block;}
 .cbody{padding:26px 28px 30px;background:#050609;position:relative;}
 .cid{font-family:'Fira Code',monospace;color:var(--ion);font-size:.6rem;margin-bottom:9px;display:block;letter-spacing:2px;}
 .ctitle{font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--bright);letter-spacing:2px;font-weight:700;}
 .cdesc{font-size:.8rem;color:var(--dust);margin-top:10px;line-height:1.6;font-weight:300;}
 .carrow{position:absolute;right:26px;bottom:26px;color:var(--ion);opacity:0;transform:translateX(-8px);transition:.4s var(--ease);}
 .index-card:hover .carrow{opacity:1;transform:translateX(0);}
-
-/* card overlay bar */
 .card-bar{position:absolute;bottom:0;left:0;width:0%;height:2px;background:linear-gradient(90deg,var(--ion),var(--plasma));transition:width .5s var(--ease);}
 .index-card:hover .card-bar{width:100%;}
-
+ 
 /* ── STATS ── */
 .stats-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gb);border:1px solid var(--gb);margin-top:56px;}
 .sstat{background:var(--void);padding:34px 28px;text-align:center;transition:.4s;position:relative;overflow:hidden;}
@@ -498,11 +464,11 @@ section{position:relative;z-index:2;}
 .sstat:hover::after{opacity:1;}
 .snum{font-family:'Orbitron',sans-serif;font-size:2.6rem;color:var(--ion);line-height:1;display:block;text-shadow:0 0 30px rgba(0,255,231,.35);font-weight:900;}
 .slb{font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:2px;color:rgba(168,184,208,.38);margin-top:7px;display:block;}
-
+ 
 /* ── DIVIDER ── */
 .div{display:flex;justify-content:center;padding:0 10%;}
 .div span{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gb),transparent);display:block;}
-
+ 
 /* ── ACADEMIC ── */
 .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
 @media(max-width:900px){.edu-grid{grid-template-columns:1fr;}}
@@ -521,13 +487,11 @@ section{position:relative;z-index:2;}
 .tag:hover{background:rgba(180,0,255,.08);border-color:var(--plasma);color:#fff;}
 .tag.c{border-color:rgba(0,255,231,.3);color:var(--ion);}
 .tag.c:hover{background:rgba(0,255,231,.06);border-color:var(--ion);color:#fff;}
-
-/* modules list inside edu */
 .module-list{list-style:none;margin-top:20px;}
 .module-list li{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);font-size:.82rem;color:var(--dust);font-weight:300;display:flex;justify-content:space-between;align-items:center;transition:.3s;}
 .module-list li:hover{background:rgba(0,255,231,.03);padding-left:22px;}
 .module-list li span{font-family:'Fira Code',monospace;font-size:.6rem;color:var(--ion);}
-
+ 
 /* ── SKILLS ── */
 .skills{margin-top:30px;}
 .skrow{margin-bottom:16px;}
@@ -537,7 +501,7 @@ section{position:relative;z-index:2;}
 .sktrack{height:2px;background:rgba(255,255,255,.05);position:relative;overflow:hidden;}
 .skfill{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--ion),var(--plasma));width:0%;transition:width 1.3s var(--ease);box-shadow:0 0 8px var(--ion);}
 .skfill.go{width:var(--w);}
-
+ 
 /* ── TACTICS ── */
 #tactics{background:linear-gradient(180deg,transparent,rgba(13,0,37,.3),transparent);}
 .tactics-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
@@ -553,13 +517,12 @@ section{position:relative;z-index:2;}
 .tlist li:hover::before{transform:scaleY(1);}
 .tlist li:hover{border-color:rgba(0,255,231,.15);background:rgba(0,255,231,.02);padding-left:26px;}
 .tlist li strong{color:var(--ion);font-weight:600;}
-
-/* ── CONTACT GATEWAYS ── */
+ 
+/* ── CONTACT ── */
 .quote-block{border-left:3px solid var(--plasma);padding:28px 38px;background:var(--glass);margin-bottom:52px;position:relative;overflow:hidden;}
 .quote-block::before{content:'"';font-family:'Orbitron',sans-serif;font-size:7rem;color:var(--plasma);opacity:.07;position:absolute;top:-15px;left:18px;line-height:1;}
 .quote-block p{font-size:1.3rem;line-height:1.65;max-width:800px;font-weight:300;color:var(--bright);}
 .quote-block strong{color:var(--ion);font-weight:600;}
-
 .gw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 @media(max-width:780px){.gw-grid{grid-template-columns:1fr;}}
 .gw{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px 20px;border:1px solid var(--gb);background:var(--glass);text-decoration:none;position:relative;overflow:hidden;transition:.5s var(--ease);min-height:160px;}
@@ -574,29 +537,28 @@ section{position:relative;z-index:2;}
 .gw-handle{font-family:'Outfit',sans-serif;font-size:.85rem;color:var(--ion);font-weight:600;text-align:center;}
 .gw-action{font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:2px;color:rgba(168,184,208,.35);text-transform:uppercase;opacity:0;transition:.3s;}
 .gw:hover .gw-action{opacity:1;color:var(--ion);}
-/* gateway colors */
 .gw.gmail .gw-icon{color:#ea4335;filter:drop-shadow(0 0 10px rgba(234,67,53,.4));}
 .gw.linkedin .gw-icon{color:#0077b5;filter:drop-shadow(0 0 10px rgba(0,119,181,.4));}
 .gw.instagram .gw-icon{color:var(--nova);filter:drop-shadow(0 0 10px rgba(255,60,172,.4));}
-
+ 
 /* ── FOOTER ── */
 footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,255,255,.1);font-family:'Fira Code',monospace;letter-spacing:3px;position:relative;z-index:2;border-top:1px solid var(--gb);}
 .fglow{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--ion),var(--plasma),transparent);margin-bottom:36px;opacity:.25;}
-
+ 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(48px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
 .reveal.active{opacity:1;transform:translateY(0);}
 .reveal[data-d="1"]{transition-delay:.1s;}
 .reveal[data-d="2"]{transition-delay:.2s;}
 .reveal[data-d="3"]{transition-delay:.3s;}
-
+ 
 /* ── FLOATING ORBS ── */
 .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:1;filter:blur(80px);opacity:.12;animation:orbDrift 20s ease infinite;}
 .orb1{width:400px;height:400px;background:var(--plasma);top:10%;left:-10%;animation-duration:25s;}
 .orb2{width:300px;height:300px;background:var(--ion);bottom:15%;right:-5%;animation-duration:18s;animation-delay:-8s;}
 .orb3{width:250px;height:250px;background:var(--nova);top:55%;left:55%;animation-duration:22s;animation-delay:-5s;}
 @keyframes orbDrift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-40px) scale(1.1)}66%{transform:translate(-20px,30px) scale(.95)}}
-
+ 
 /* ── RESPONSIVE ── */
 @media(max-width:968px){
   .tactics-grid{grid-template-columns:1fr;}
@@ -613,11 +575,11 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
 </style>
 </head>
 <body>
-
+ 
 <!-- ══ INTRO OVERLAY ══ -->
 <div id="intro">
   <canvas id="intro-canvas"></canvas>
-
+ 
   <div class="intro-center">
     <div class="ball-ring">
       <div class="ball-glow"></div>
@@ -638,15 +600,15 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
       </svg>
       <div class="data-stream" id="ds"></div>
     </div>
-
+ 
     <h1 class="intro-title" id="ititle">JEREIN SAM THOMAS</h1>
     <p class="intro-sub" id="isub">DATA SCIENTIST &nbsp;·&nbsp; FOOTBALL ANALYST</p>
-
+ 
     <div class="intro-bar-wrap">
       <div class="intro-bar" id="ibar"></div>
     </div>
     <div class="intro-bar-label" id="iblabel">INITIALISING...</div>
-
+ 
     <div class="intro-status">
       <span class="isl" id="is0">✓ &nbsp;PHYSICS ENGINE LOADED</span>
       <span class="isl" id="is1">✓ &nbsp;ISL DATASET CONNECTED</span>
@@ -655,22 +617,22 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
       <span class="isl" id="is4">✓ &nbsp;GALAXY RENDER READY</span>
     </div>
   </div>
-
+ 
   <button class="intro-skip" id="iskip">[ SKIP INTRO ]</button>
 </div>
-
+ 
 <!-- Floating orbs -->
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
-
+ 
 <!-- Custom cursor -->
 <div id="cd"></div>
 <div id="cr"></div>
-
+ 
 <!-- Galaxy canvas -->
 <canvas id="galaxy"></canvas>
-
+ 
 <!-- ══ NAV ══ -->
 <nav>
   <a href="#hero" class="logo">JST_INTEL</a>
@@ -682,7 +644,7 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
     <a href="#contact">Contact</a>
   </div>
 </nav>
-
+ 
 <!-- ══ HERO ══ -->
 <section id="hero">
   <div class="hero-terminal">
@@ -708,7 +670,7 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
   </div>
   <div class="scue"><span>SCROLL</span><div class="sline"></div></div>
 </section>
-
+ 
 <!-- ══ REPOSITORY ══ -->
 <section id="content">
   <div class="si">
@@ -717,12 +679,10 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
       <div class="stitle">PROJECT ARCHIVE</div>
     </div>
     <div class="index-grid">
-
-      <!-- CARD 1: Project Archive -->
+ 
       <a href="projects.html" class="index-card reveal" data-d="1">
         <div style="position:relative;overflow:hidden;height:240px;">
           <img class="cimg" src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=2076&auto=format&fit=crop" alt="Projects" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
-          <canvas class="card-bg-canvas" data-theme="code" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
           <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,255,231,.04) 50%,#050609 100%);"></div>
           <div style="position:absolute;top:16px;right:16px;font-family:'Fira Code',monospace;font-size:.55rem;color:var(--ion);letter-spacing:2px;border:1px solid rgba(0,255,231,.2);padding:4px 10px;">PYTHON · ML</div>
         </div>
@@ -734,12 +694,10 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
           <div class="card-bar"></div>
         </div>
       </a>
-
-      <!-- CARD 2: Tactics Engine -->
+ 
       <a href="tactics.html" class="index-card reveal" data-d="2">
         <div style="position:relative;overflow:hidden;height:240px;">
           <img class="cimg" src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070&auto=format&fit=crop" alt="Tactics" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
-          <canvas class="card-bg-canvas" data-theme="tactics" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
           <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(180,0,255,.04) 50%,#050609 100%);"></div>
           <div style="position:absolute;top:16px;right:16px;font-family:'Fira Code',monospace;font-size:.55rem;color:var(--plasma);letter-spacing:2px;border:1px solid rgba(180,0,255,.2);padding:4px 10px;">FAS · v1</div>
         </div>
@@ -751,12 +709,10 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
           <div class="card-bar"></div>
         </div>
       </a>
-
-      <!-- CARD 3: Match Analytics -->
+ 
       <a href="analysis.html" class="index-card reveal" data-d="3">
         <div style="position:relative;overflow:hidden;height:240px;">
           <img class="cimg" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Analytics" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
-          <canvas class="card-bg-canvas" data-theme="data" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
           <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(255,60,172,.04) 50%,#050609 100%);"></div>
           <div style="position:absolute;top:16px;right:16px;font-family:'Fira Code',monospace;font-size:.55rem;color:var(--nova);letter-spacing:2px;border:1px solid rgba(255,60,172,.2);padding:4px 10px;">ISL · DATA</div>
         </div>
@@ -768,9 +724,9 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
           <div class="card-bar"></div>
         </div>
       </a>
-
+ 
     </div>
-
+ 
     <div class="stats-strip reveal">
       <div class="sstat"><span class="snum" data-count="11">0</span><span class="slb">ISL TEAMS ANALYZED</span></div>
       <div class="sstat"><span class="snum" data-count="5">0</span><span class="slb">ML MODELS BUILT</span></div>
@@ -779,9 +735,9 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
     </div>
   </div>
 </section>
-
+ 
 <div class="div"><span></span></div>
-
+ 
 <!-- ══ ACADEMIC ══ -->
 <section id="academy">
   <div class="si">
@@ -789,10 +745,9 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
       <div class="slabel">02 // ACADEMIC_ARCHITECTURE</div>
       <div class="stitle">EDUCATIONAL CORE</div>
     </div>
-
+ 
     <div class="edu-grid">
-
-      <!-- UG -->
+ 
       <div class="edu-card reveal" data-d="1">
         <div class="edu-badge">B.SC PHYSICS — MAR THOMA COLLEGE</div>
         <h3>FOUNDATIONAL MECHANICS</h3>
@@ -815,8 +770,7 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
           <li>Nuclear &amp; Particle Physics <span>ELECTIVE</span></li>
         </ul>
       </div>
-
-      <!-- PG -->
+ 
       <div class="edu-card reveal" data-d="2" style="border-color:rgba(0,255,231,.1);">
         <div class="edu-badge" style="color:var(--ion);">M.SC APPLIED DATA SCIENCE — SRMIST</div>
         <h3>COMPUTATIONAL INTELLIGENCE</h3>
@@ -846,13 +800,13 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
           <div class="skrow"><div class="skhead"><span class="sknm">GRAPH THEORY / NETWORKS</span><span class="skpct">74%</span></div><div class="sktrack"><div class="skfill" style="--w:74%"></div></div></div>
         </div>
       </div>
-
+ 
     </div>
   </div>
 </section>
-
+ 
 <div class="div"><span></span></div>
-
+ 
 <!-- ══ TACTICS ══ -->
 <section id="tactics">
   <div class="si">
@@ -878,9 +832,9 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
     </div>
   </div>
 </section>
-
+ 
 <div class="div"><span></span></div>
-
+ 
 <!-- ══ CONTACT ══ -->
 <section id="contact">
   <div class="si">
@@ -890,8 +844,6 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
       <div class="quote-block">
         <p>"To become a professional <strong>Football Analyst</strong> by merging the precision of <strong>Classical Physics</strong> with the predictive power of <strong>Applied Data Science</strong>."</p>
       </div>
-
-      <!-- CLICK GATEWAYS -->
       <div class="gw-grid">
         <a href="mailto:jereinsamthomas1009@gmail.com" class="gw gmail">
           <i class="fab fa-google gw-icon" style="font-size:2.2rem;"></i>
@@ -915,12 +867,12 @@ footer{text-align:center;padding:70px 10% 36px;font-size:.6rem;color:rgba(255,25
     </div>
   </div>
 </section>
-
+ 
 <footer>
   <div class="fglow"></div>
   &copy; 2026 JEREIN SAM THOMAS &nbsp;//&nbsp; [ PHYS_INTEL_SYSTEMS ] &nbsp;//&nbsp; SRMIST DATA SCIENCE
 </footer>
-
+ 
 <script>
 /* ── CURSOR ── */
 const cd=document.getElementById('cd'),cr=document.getElementById('cr');
@@ -931,29 +883,27 @@ document.querySelectorAll('a,.htag').forEach(el=>{
   el.addEventListener('mouseleave',()=>{cd.classList.remove('hov');cr.classList.remove('hov');});
 });
 (function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop);})();
-
+ 
 /* ── TYPED ── */
 const tStr='> SYSTEM_LOAD: SUCCESS [4.16.2026]';
 let ti=0;const tel=document.getElementById('typed');
 const tl=setInterval(()=>{tel.textContent=tStr.slice(0,++ti);if(ti>=tStr.length)clearInterval(tl);},36);
-
+ 
 /* ══ MILKY WAY GALAXY BACKGROUND ══ */
 const gc=document.getElementById('galaxy'),gx=gc.getContext('2d');
 let W,H,gStars=[],dust=[],arms=[];
-
+ 
 function randRange(a,b){return a+Math.random()*(b-a);}
 function initGalaxy(){
   W=gc.width=window.innerWidth;H=gc.height=window.innerHeight;
   gStars=[];dust=[];arms=[];
   const cx=W/2,cy=H/2;
   const R=Math.min(W,H)*0.42;
-
-  /* core glow stars */
+ 
   for(let i=0;i<80;i++){
     const a=Math.random()*Math.PI*2,r=Math.random()*R*.15;
     gStars.push({x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r,r:Math.random()*1.8+.5,o:Math.random()*.9+.1,tw:Math.random()*2+.5,p:Math.random()*Math.PI*2,type:'core'});
   }
-  /* spiral arms — 3 arms, stochastic offset */
   for(let arm=0;arm<3;arm++){
     const armOffset=(arm/3)*Math.PI*2;
     for(let i=0;i<420;i++){
@@ -967,29 +917,25 @@ function initGalaxy(){
       gStars.push({x:nx,y:ny,r:randRange(.3,1.4)*brightness,o:randRange(.3,.95)*brightness,tw:randRange(.5,3),p:Math.random()*Math.PI*2,type:'arm'});
     }
   }
-  /* background scatter stars */
   for(let i=0;i<350;i++){
     gStars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*.8+.1,o:Math.random()*.45+.05,tw:Math.random()*1.5+.5,p:Math.random()*Math.PI*2,type:'bg'});
   }
-  /* dust lanes */
   for(let i=0;i<60;i++){
     const a=Math.random()*Math.PI*2;
     const r=randRange(R*.05,R*.7);
     dust.push({x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r*.55,r:randRange(15,50),o:randRange(.01,.06)});
   }
 }
-
+ 
 function drawGalaxy(t){
   gx.clearRect(0,0,W,H);
   const cx=W/2,cy=H/2;
   const R=Math.min(W,H)*0.42;
-
-  /* deep space */
+ 
   const bg=gx.createRadialGradient(cx,cy*1.1,0,cx,cy*.9,Math.max(W,H)*.7);
   bg.addColorStop(0,'#08001f');bg.addColorStop(.25,'#04000e');bg.addColorStop(.55,'#020008');bg.addColorStop(1,'#02010a');
   gx.fillStyle=bg;gx.fillRect(0,0,W,H);
-
-  /* galactic core */
+ 
   const coreG=gx.createRadialGradient(cx,cy,0,cx,cy,R*.28);
   coreG.addColorStop(0,'rgba(255,240,200,.22)');
   coreG.addColorStop(.2,'rgba(200,160,255,.12)');
@@ -998,15 +944,13 @@ function drawGalaxy(t){
   gx.save();gx.translate(cx,cy);gx.scale(1,.55);gx.translate(-cx,-cy);
   gx.beginPath();gx.arc(cx,cy,R*.28,0,Math.PI*2);gx.fillStyle=coreG;gx.fill();
   gx.restore();
-
-  /* mid glow band */
+ 
   const bandG=gx.createRadialGradient(cx,cy,0,cx,cy,R);
   bandG.addColorStop(0,'rgba(120,80,220,.06)');bandG.addColorStop(.4,'rgba(60,20,140,.04)');bandG.addColorStop(1,'transparent');
   gx.save();gx.translate(cx,cy);gx.scale(1,.4);gx.translate(-cx,-cy);
   gx.beginPath();gx.arc(cx,cy,R,0,Math.PI*2);gx.fillStyle=bandG;gx.fill();
   gx.restore();
-
-  /* nebula colour puffs */
+ 
   [['rgba(80,0,180,.04)',R*.4,-.3],['rgba(0,200,255,.03)',R*.5,.5],['rgba(255,40,120,.025)',R*.35,1.1]].forEach(([col,rad,ao])=>{
     gx.save();gx.translate(cx,cy);gx.scale(1,.55);gx.translate(-cx,-cy);
     const ng=gx.createRadialGradient(cx+Math.cos(ao)*R*.5,cy+Math.sin(ao)*R*.25,0,cx,cy,rad);
@@ -1014,8 +958,7 @@ function drawGalaxy(t){
     gx.beginPath();gx.arc(cx,cy,rad,0,Math.PI*2);gx.fillStyle=ng;gx.fill();
     gx.restore();
   });
-
-  /* dust lanes */
+ 
   dust.forEach(d=>{
     gx.save();gx.translate(d.x,d.y);gx.scale(1,.55);gx.translate(-d.x,-d.y);
     const dg=gx.createRadialGradient(d.x,d.y,0,d.x,d.y,d.r);
@@ -1023,8 +966,7 @@ function drawGalaxy(t){
     gx.beginPath();gx.arc(d.x,d.y,d.r,0,Math.PI*2);gx.fillStyle=dg;gx.fill();
     gx.restore();
   });
-
-  /* stars */
+ 
   gStars.forEach(s=>{
     const flicker=Math.sin(t/900*s.tw+s.p)*.3+.7;
     let col='255,255,255';
@@ -1040,7 +982,7 @@ function drawGalaxy(t){
 }
 initGalaxy();
 (function gLoop(t){drawGalaxy(t);requestAnimationFrame(gLoop);})(0);
-
+ 
 /* ── PITCH CANVAS ── */
 const pc=document.getElementById('pitch-canvas'),px=pc.getContext('2d');
 let pdots=[],pball={x:0,y:0};
@@ -1084,7 +1026,7 @@ function drawPitch(){
   requestAnimationFrame(drawPitch);
 }
 initPitch();drawPitch();
-
+ 
 /* ── SCROLL REVEAL ── */
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
@@ -1095,7 +1037,7 @@ const obs=new IntersectionObserver(entries=>{
   });
 },{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
+ 
 /* ── COUNTERS ── */
 const cobs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
@@ -1113,10 +1055,8 @@ const cobs=new IntersectionObserver(entries=>{
   });
 },{threshold:.3});
 document.querySelectorAll('.stats-strip').forEach(el=>cobs.observe(el));
-
-/* ══════════════════════════════════
-   INTRO ANIMATION
-══════════════════════════════════ */
+ 
+/* ══ INTRO ANIMATION ══ */
 (function(){
   const intro=document.getElementById('intro');
   const ic=document.getElementById('intro-canvas');
@@ -1128,71 +1068,54 @@ document.querySelectorAll('.stats-strip').forEach(el=>cobs.observe(el));
   const dsEl=document.getElementById('ds');
   const statusEls=[0,1,2,3,4].map(i=>document.getElementById('is'+i));
   const iskip=document.getElementById('iskip');
-
+ 
   document.body.classList.add('intro-on');
   ic.width=window.innerWidth;ic.height=window.innerHeight;
-
-  /* ── INTRO CANVAS: pitch + data particles ── */
+ 
   let iParticles=[];
   let iPitchLines=[];
-  let iDrawn=0; // 0-1 progress of pitch line drawing
-
+  let iDrawn=0;
+ 
   function buildIntroPitch(){
     const W=ic.width,H=ic.height;
     const cx=W/2,cy=H/2;
     const pw=Math.min(W*.7,560),ph=Math.min(H*.65,380);
     const l=cx-pw/2,t=cy-ph/2,r=cx+pw/2,b=cy+ph/2;
-    // define pitch segments as [x1,y1,x2,y2, hue]
     iPitchLines=[
       [l,t,r,t,'ion'],[r,t,r,b,'ion'],[r,b,l,b,'ion'],[l,b,l,t,'ion'],
       [cx,t,cx,b,'plasma'],
-      // penalty box left
       [l,cy-ph*.22,l+pw*.15,cy-ph*.22,'plasma'],[l+pw*.15,cy-ph*.22,l+pw*.15,cy+ph*.22,'plasma'],[l,cy+ph*.22,l+pw*.15,cy+ph*.22,'plasma'],
-      // penalty box right
       [r,cy-ph*.22,r-pw*.15,cy-ph*.22,'plasma'],[r-pw*.15,cy-ph*.22,r-pw*.15,cy+ph*.22,'plasma'],[r,cy+ph*.22,r-pw*.15,cy+ph*.22,'plasma'],
     ];
   }
   buildIntroPitch();
-
-  // spawn data particles
+ 
   function spawnParticle(){
     const W=ic.width,H=ic.height;
-    iParticles.push({
-      x:Math.random()*W, y:Math.random()*H,
-      vx:(Math.random()-.5)*.6, vy:(Math.random()-.5)*.6,
-      r:Math.random()*.8+.2,
-      o:Math.random()*.5+.2,
-      life:1, decay:Math.random()*.005+.002,
-      col:Math.random()<.5?'0,255,231':'180,0,255'
-    });
+    iParticles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,r:Math.random()*.8+.2,o:Math.random()*.5+.2,life:1,decay:Math.random()*.005+.002,col:Math.random()<.5?'0,255,231':'180,0,255'});
   }
   for(let i=0;i<120;i++) spawnParticle();
-
-  // data stream text
+ 
   const dataWords=['xG_MODEL','PASS_NET','FORM_4-3-3','DELAUNAY','VORONOI','KMEANS','ISL_S10','PYTHON3','SKLEARN','ENTROPY','PHYSICS','MOMENTUM','VECTOR','SPATIAL'];
   let dsIdx=0;
-  setInterval(()=>{ dsEl.textContent=dataWords[dsIdx%dataWords.length]; dsIdx++; },220);
-
-  /* draw loop */
+  setInterval(()=>{dsEl.textContent=dataWords[dsIdx%dataWords.length];dsIdx++;},220);
+ 
   let introT=0;
   function drawIntro(){
     if(!intro.parentNode) return;
     introT++;
     const W=ic.width,H=ic.height;
     ix.clearRect(0,0,W,H);
-
-    // background
+ 
     const bg=ix.createRadialGradient(W/2,H/2,0,W/2,H/2,Math.max(W,H)*.7);
     bg.addColorStop(0,'#06001a');bg.addColorStop(.5,'#03000d');bg.addColorStop(1,'#000');
     ix.fillStyle=bg;ix.fillRect(0,0,W,H);
-
-    // horizontal scan sweep
+ 
     const scanY=(introT*2.2)%H;
     const scanG=ix.createLinearGradient(0,scanY-40,0,scanY+40);
     scanG.addColorStop(0,'transparent');scanG.addColorStop(.5,'rgba(0,255,231,.035)');scanG.addColorStop(1,'transparent');
     ix.fillStyle=scanG;ix.fillRect(0,scanY-40,W,80);
-
-    // pitch lines drawn progressively
+ 
     const totalSegs=iPitchLines.length;
     const segsDrawn=Math.floor(iDrawn*totalSegs);
     const partial=iDrawn*totalSegs-segsDrawn;
@@ -1204,25 +1127,22 @@ document.querySelectorAll('.stats-strip').forEach(el=>cobs.observe(el));
     }
     if(segsDrawn<totalSegs && iDrawn>0){
       const seg=iPitchLines[segsDrawn];
-      const px=seg[0]+(seg[2]-seg[0])*partial,py=seg[1]+(seg[3]-seg[1])*partial;
-      ix.beginPath();ix.moveTo(seg[0],seg[1]);ix.lineTo(px,py);
+      const ppx=seg[0]+(seg[2]-seg[0])*partial,ppy=seg[1]+(seg[3]-seg[1])*partial;
+      ix.beginPath();ix.moveTo(seg[0],seg[1]);ix.lineTo(ppx,ppy);
       ix.strokeStyle=seg[4]==='ion'?'rgba(0,255,231,.18)':'rgba(180,0,255,.14)';
       ix.lineWidth=1;ix.stroke();
-      // leading dot
-      ix.beginPath();ix.arc(px,py,2,0,Math.PI*2);
+      ix.beginPath();ix.arc(ppx,ppy,2,0,Math.PI*2);
       ix.fillStyle=seg[4]==='ion'?'rgba(0,255,231,.8)':'rgba(180,0,255,.8)';
       ix.shadowColor=seg[4]==='ion'?'#00ffe7':'#b400ff';ix.shadowBlur=8;ix.fill();ix.shadowBlur=0;
     }
-
-    // centre circle
+ 
     if(iDrawn>.6){
       const prog=Math.min((iDrawn-.6)/.4,1);
       const cx=W/2,cy=H/2,cr=Math.min(W*.7,560)*.12;
       ix.beginPath();ix.arc(cx,cy,cr,0,Math.PI*2*prog);
       ix.strokeStyle='rgba(0,255,231,.15)';ix.lineWidth=1;ix.stroke();
     }
-
-    // particles
+ 
     iParticles.forEach((p,i)=>{
       p.x+=p.vx;p.y+=p.vy;p.life-=p.decay;
       if(p.life<=0){
@@ -1232,24 +1152,20 @@ document.querySelectorAll('.stats-strip').forEach(el=>cobs.observe(el));
       ix.beginPath();ix.arc(p.x,p.y,p.r,0,Math.PI*2);
       ix.fillStyle=`rgba(${p.col},${(p.o*p.life).toFixed(2)})`;ix.fill();
     });
-
-    // data grid (binary-ish) top right corner
+ 
     ix.font='.5rem "Fira Code",monospace';ix.fillStyle='rgba(0,255,231,.06)';
     for(let row=0;row<8;row++){
       for(let col=0;col<16;col++){
-        if(Math.random()>.94) ix.fillText(Math.random()>.5?'1':'0', W-200+col*12, 30+row*14);
+        if(Math.random()>.94) ix.fillText(Math.random()>.5?'1':'0',W-200+col*12,30+row*14);
       }
     }
     if(intro.parentNode) requestAnimationFrame(drawIntro);
   }
   drawIntro();
-
-  /* ── SEQUENCE ── */
+ 
   const labels=['BOOT SEQUENCE INIT...','LOADING PHYSICS ENGINE...','CONNECTING ISL DATABASE...','COMPILING ML MODELS...','RENDERING TACTICAL GRID...','SYSTEM ONLINE'];
-  let progress=0;
-  let phase=0;
   let done=false;
-
+ 
   function exitIntro(){
     if(done) return;
     done=true;
@@ -1259,43 +1175,42 @@ document.querySelectorAll('.stats-strip').forEach(el=>cobs.observe(el));
     setTimeout(()=>{
       intro.classList.add('exit');
       document.body.classList.remove('intro-on');
-      setTimeout(()=>{ intro.remove(); },900);
+      setTimeout(()=>{intro.remove();},900);
     },400);
   }
-
+ 
   iskip.addEventListener('click',exitIntro);
-
-  // Step timings (ms)
-  const steps=[
-    {delay:300, action:()=>{ iDrawn=0; animatePitch(); }},
-    {delay:700, action:()=>{ ititle.classList.add('show'); }},
-    {delay:1000, action:()=>{ isub.classList.add('show'); }},
-    {delay:1200, action:()=>{ statusEls[0].classList.add('lit'); setLabel(labels[2]); advBar(25); }},
-    {delay:1700, action:()=>{ statusEls[0].classList.add('done'); statusEls[1].classList.add('lit'); setLabel(labels[3]); advBar(50); }},
-    {delay:2200, action:()=>{ statusEls[1].classList.add('done'); statusEls[2].classList.add('lit'); setLabel(labels[4]); advBar(70); }},
-    {delay:2700, action:()=>{ statusEls[2].classList.add('done'); statusEls[3].classList.add('lit'); setLabel(labels[5]); advBar(88); }},
-    {delay:3100, action:()=>{ statusEls[3].classList.add('done'); statusEls[4].classList.add('lit'); advBar(100); }},
-    {delay:3500, action:()=>{ statusEls[4].classList.add('done'); setLabel('[ ALL SYSTEMS ONLINE ]'); iblabel.style.color='var(--ion)'; }},
-    {delay:4200, action:exitIntro},
-  ];
-
-  function setLabel(t){ iblabel.textContent=t; }
-  function advBar(pct){ ibar.style.transition=`width .6s ease`; ibar.style.width=pct+'%'; }
-
+ 
+  function setLabel(t){iblabel.textContent=t;}
+  function advBar(pct){ibar.style.transition='width .6s ease';ibar.style.width=pct+'%';}
+ 
   function animatePitch(){
     let start=null;
-    function step(ts){ if(!start) start=ts; iDrawn=Math.min((ts-start)/1800,1); if(iDrawn<1) requestAnimationFrame(step); }
+    function step(ts){if(!start) start=ts;iDrawn=Math.min((ts-start)/1800,1);if(iDrawn<1) requestAnimationFrame(step);}
     requestAnimationFrame(step);
   }
-
-  // kickoff sequence
+ 
+  const steps=[
+    {delay:300,action:()=>{iDrawn=0;animatePitch();}},
+    {delay:700,action:()=>{ititle.classList.add('show');}},
+    {delay:1000,action:()=>{isub.classList.add('show');}},
+    {delay:1200,action:()=>{statusEls[0].classList.add('lit');setLabel(labels[2]);advBar(25);}},
+    {delay:1700,action:()=>{statusEls[0].classList.add('done');statusEls[1].classList.add('lit');setLabel(labels[3]);advBar(50);}},
+    {delay:2200,action:()=>{statusEls[1].classList.add('done');statusEls[2].classList.add('lit');setLabel(labels[4]);advBar(70);}},
+    {delay:2700,action:()=>{statusEls[2].classList.add('done');statusEls[3].classList.add('lit');setLabel(labels[5]);advBar(88);}},
+    {delay:3100,action:()=>{statusEls[3].classList.add('done');statusEls[4].classList.add('lit');advBar(100);}},
+    {delay:3500,action:()=>{statusEls[4].classList.add('done');setLabel('[ ALL SYSTEMS ONLINE ]');iblabel.style.color='var(--ion)';}},
+    {delay:4200,action:exitIntro},
+  ];
+ 
   setLabel(labels[0]);
   steps.forEach(s=>setTimeout(s.action,s.delay));
-
+ 
   window.addEventListener('resize',()=>{ic.width=window.innerWidth;ic.height=window.innerHeight;buildIntroPitch();});
 })();
-
+ 
 window.addEventListener('resize',()=>{initGalaxy();initPitch();});
 </script>
 </body>
 </html>
+ 
