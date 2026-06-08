@@ -1,277 +1,1005 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jerein Sam Thomas | Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jerein Sam Thomas | Physics & Performance Architect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght=200;300;400;600;700&family=Fira+Code:wght=300;400;500;600&family=Exo+2:ital,wght=0,200;0,400;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --void: #02010a;
+      --ion: #00ffe7;
+      --plasma: #b400ff;
+      --nova: #ff3cac;
+      --star: #ffe066;
+      --dust: #a8b8d0;
+      --bright: #e8f0ff;
+      --glass: rgba(255, 255, 255, 0.02);
+      --gb: rgba(255, 255, 255, 0.06);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--void); color: var(--dust); font-family: 'Outfit', sans-serif; overflow-x: hidden; }
     
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    /* ── INTRO OVERLAY ── */
+    #intro { position: fixed; inset: 0; z-index: 2000; background: #000; display: flex; align-items: center; justify-content: center; transition: opacity .9s var(--ease), transform 3.9s var(--ease); }
+    #intro.exit { opacity: 0; transform: scale(1.05); pointer-events: none; }
+    #intro-canvas { position: absolute; inset: 0; z-index: 1; }
+    .intro-center { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; max-width: 600px; padding: 0 20px; }
     
-    <style>
-        :root {
-            --bg-deep: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --accent-primary: #00f5d4; /* Cyber Cyan */
-            --accent-secondary: #7209b7; /* Deep Purple */
-            --text-dim: #a0a0a0;
-            --text-bright: #ffffff;
-        }
+    .ball-ring { position: relative; width: 110px; height: 110px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; }
+    .ball-svg { width: 100%; height: 100%; animation: ballSpin 16s linear infinite; }
+    .ball-glow { position: absolute; inset: -5px; border-radius: 50%; box-shadow: 0 0 35px rgba(0, 255, 231, 0.25); animation: pulse 2.5s ease infinite; }
+    .data-stream { position: absolute; bottom: -22px; font-family: 'Fira Code', monospace; font-size: 0.58rem; color: var(--ion); letter-spacing: 1px; white-space: nowrap; text-shadow: 0 0 8px rgba(0,255,231,0.6); }
+    
+    .intro-title { font-family: 'Orbitron', sans-serif; font-size: clamp(1.4rem, 4vw, 2.4rem); font-weight: 900; letter-spacing: 6px; color: #fff; margin-bottom: 8px; text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+    .intro-sub { font-family: 'Fira Code', monospace; font-size: 0.65rem; color: rgba(168, 184, 208, 0.6); letter-spacing: 3px; margin-bottom: 32px; text-transform: uppercase; }
+    .intro-sub span { color: var(--ion); }
+    
+    .intro-bar-wrap { width: 280px; height: 2px; background: rgba(255, 255, 255, 0.05); position: relative; margin-bottom: 12px; overflow: hidden; }
+    .intro-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--ion), var(--plasma)); box-shadow: 0 0 10px var(--ion); }
+    .intro-bar-label { font-family: 'Fira Code', monospace; font-size: 0.58rem; color: rgba(168, 184, 208, 0.4); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; min-height: 15px; }
+    
+    .intro-status { display: flex; flex-direction: column; gap: 6px; min-height: 100px; text-align: left; width: 280px; }
+    .isl { font-family: 'Fira Code', monospace; font-size: 0.58rem; letter-spacing: 1.5px; color: rgba(168, 184, 208, 0.15); transform: translateX(-8px); opacity: 0; transition: all 0.4s var(--ease); display: flex; justify-content: space-between; }
+    .isl.lit { opacity: 1; transform: translateX(0); color: rgba(168, 184, 208, 0.5); }
+    .isl.done { color: var(--ion); text-shadow: 0 0 8px rgba(0, 255, 231, 0.3); }
+    .isl .status-val { color: var(--plasma); }
+    .isl.done .status-val { color: var(--star); }
+    
+    .intro-skip { position: absolute; bottom: 40px; right: 40px; z-index: 3; font-family: 'Fira Code', monospace; font-size: 0.6rem; color: rgba(168, 184, 208, 0.3); background: transparent; border: 1px solid rgba(168, 184, 208, 0.15); padding: 6px 16px; letter-spacing: 2px; transition: all 0.3s; cursor: pointer; }
+    .intro-skip:hover { color: var(--ion); border-color: var(--ion); background: rgba(0, 255, 231, 0.03); }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ── NAV ── */
+    body.intro-on { overflow: hidden; }
+    body.intro-on, body.intro-on a, body.intro-on button { cursor: none; }
 
-        body {
-            background-color: var(--bg-deep);
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(114, 9, 183, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(0, 245, 212, 0.1) 0%, transparent 40%);
-            color: var(--text-bright);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
+    /* ── GRAIN EFFECT ── */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+      opacity: .25; pointer-events: none;
+    }
 
-        /* --- Animated Background Particles --- */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.3;
-            z-index: -1;
-            animation: moveBackground 100s linear infinite;
-        }
+    /* ── TRACKING CURSORS ── */
+    #cd { width: 8px; height: 8px; background: var(--ion); border-radius: 50%; position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 10px var(--ion), 0 0 20px rgba(0,255,231,.4); transition: background .2s, box-shadow .2s, transform .1s; top: -100px; left: -100px; }
+    #cr { width: 36px; height: 36px; border: 1px dashed rgba(0,243,255,.3); border-radius: 50%; position: fixed; z-index: 9998; pointer-events: none; transform: translate(-50%, -50%); transition: width .2s var(--ease), height .2s var(--ease), border-color .2s, transform .05s linear; top: -100px; left: -100px; }
+    #cd.hov { background: var(--nova); box-shadow: 0 0 12px var(--nova), 0 0 24px rgba(255,60,172,.5); transform: translate(-50%, -50%) scale(1.3); }
+    #cr.hov { width: 48px; height: 48px; border: 1.5px solid var(--nova); animation: spin 3s linear infinite; }
+    
+    @keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg) } }
+    @keyframes ballSpin { 100% { transform: rotate(360deg) } }
+    @keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.03); } }
 
-        @keyframes moveBackground {
-            from { background-position: 0 0; }
-            to { background-position: 1000px 1000px; }
-        }
+    nav { position: fixed; top: 0; width: 100%; padding: 24px 8%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--gb); background: rgba(2,1,10,.6); }
+    .logo { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 900; color: var(--ion); text-decoration: none; letter-spacing: 4px; position: relative; text-shadow: 0 0 15px rgba(0,255,231,.4); }
+    .logo::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, var(--ion), transparent); animation: logoPulse 4s ease infinite; }
+    @keyframes logoPulse { 0%, 100% { opacity: .3; width: 100% } 50% { opacity: 0.9; width: 60% } }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { text-decoration: none; color: rgba(168,184,208,.6); font-size: .68rem; font-family: 'Fira Code', monospace; text-transform: uppercase; letter-spacing: 1.5px; transition: .3s; position: relative; padding-bottom: 4px; }
+    .nav-links a::before { content: '→ '; color: var(--plasma); opacity: 0; margin-right: 2px; transition: .2s; }
+    .nav-links a:hover::before { opacity: 1; }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: linear-gradient(90deg, var(--ion), var(--plasma)); transition: width .3s var(--ease); }
+    .nav-links a:hover { color: var(--bright); }
+    .nav-links a:hover::after { width: 100%; }
 
-        /* --- Navigation --- */
-        nav {
-            position: fixed; top: 0; width: 100%;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(20px);
-            padding: 20px 8%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-            border-bottom: 1px solid var(--glass-border);
-        }
+    /* ── HERO ── */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding: 0 10%; position: relative; overflow: hidden; z-index: 2; }
+    .hero-container { position: relative; z-index: 5; margin-top: 40px; }
+    .hero-name-wrap { position: relative; margin-bottom: 24px; }
+    .hero-name {
+      font-family: 'Orbitron', sans-serif; font-weight: 900;
+      font-size: clamp(2.8rem, 8vw, 6.5rem); line-height: .9; letter-spacing: 2px;
+      color: transparent; background: linear-gradient(135deg, #fff 10%, var(--ion) 45%, var(--plasma) 80%, var(--nova) 100%);
+      -webkit-background-clip: text; background-clip: text; position: relative; animation: nameReveal 1.4s var(--ease) forwards;
+      filter: drop-shadow(0 0 25px rgba(0,255,231,.15));
+    }
+    @keyframes nameReveal { from { opacity: 0; transform: translateY(30px) } to { opacity: 1; transform: translateY(0) } }
+    .hero-sub { font-family: 'Exo 2', sans-serif; font-size: clamp(.85rem, 1.8vw, 1.2rem); font-style: italic; font-weight: 300; color: var(--ion); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 8px; animation: subFade 1s var(--ease) .2s forwards; opacity: 0; text-shadow: 0 0 10px rgba(0,255,231,0.3); }
+    @keyframes subFade { from { opacity: 0; transform: translateX(-15px) } to { opacity: 1; transform: translateX(0) } }
+    
+    .hero-terminal { border-left: 2px solid transparent; background: linear-gradient(var(--void), var(--void)) padding-box, linear-gradient(180deg, var(--ion), var(--plasma)) border-box; padding-left: 36px; position: relative; z-index: 2; max-width: 750px; }
+    .system-status { font-family: 'Fira Code', monospace; color: rgba(168,184,208,0.7); font-size: .72rem; margin-bottom: 16px; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; }
+    .sdot { width: 6px; height: 6px; background: var(--ion); border-radius: 50%; animation: blink 1.5s ease infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,231,.6) } 50% { opacity: .3; box-shadow: 0 0 0 8px rgba(0,255,231,0) } }
+    .hero-desc { font-size: .95rem; line-height: 1.75; color: var(--dust); font-weight: 300; min-height: 75px; font-family: 'Outfit', sans-serif; }
+    
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+    .htag { font-family: 'Fira Code', monospace; font-size: .6rem; padding: 4px 10px; border: 1px solid var(--gb); color: var(--plasma); letter-spacing: 1px; transition: .3s; opacity: 0; animation: tagIn .6s var(--ease) forwards; }
+    @keyframes tagIn { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: translateY(0) } }
+    .htag:hover { border-color: var(--ion); color: #fff; background: rgba(0,255,231,0.02); }
+    
+    .scue { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; font-family: 'Fira Code', monospace; font-size: .55rem; color: rgba(168,184,208,.25); letter-spacing: 2px; animation: bob 2s ease infinite; }
+    @keyframes bob { 0%, 100% { transform: translateX(-50%) translateY(0) } 50% { transform: translateX(-50%) translateY(6px) } }
+    .sline { width: 1px; height: 45px; background: linear-gradient(180deg, transparent, var(--ion), transparent); }
 
-        .nav-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(0, 245, 212, 0.5);
-        }
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 2; }
+    .si { padding: 90px 10%; }
+    .slabel { font-family: 'Fira Code', monospace; font-size: .65rem; letter-spacing: 3px; color: var(--plasma); margin-bottom: 8px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; }
+    .slabel::after { content: ''; flex: 1; max-width: 50px; height: 1px; background: var(--plasma); }
+    .stitle { font-family: 'Orbitron', sans-serif; font-size: clamp(1.6rem, 3.5vw, 2.6rem); color: var(--bright); letter-spacing: 2px; margin-bottom: 48px; line-height: 1.1; font-weight: 700; }
 
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-primary);
-        }
+    /* ── ACADEMIC MATRIX ── */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    @media(max-width:960px){ .edu-grid { grid-template-columns: 1fr; } }
+    .edu-card { background: rgba(5,6,9,0.4); border: 1px solid var(--gb); padding: 36px; position: relative; overflow: hidden; transition: border-color .4s; }
+    .edu-card::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0%; background: linear-gradient(180deg, var(--ion), var(--plasma)); transition: height .6s var(--ease); }
+    .edu-card:hover::before { height: 100%; }
+    .edu-card:hover { border-color: rgba(0,255,231,0.2); }
+    
+    .edu-badge { display: inline-flex; align-items: center; gap: 6px; font-family: 'Fira Code', monospace; font-size: .6rem; letter-spacing: 2px; color: var(--plasma); margin-bottom: 14px; text-transform: uppercase; }
+    .edu-badge::before { content: '//'; color: var(--ion); }
+    .edu-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.25rem; letter-spacing: 1px; color: var(--bright); margin-bottom: 6px; font-weight: 700; }
+    .edu-inst { font-size: .85rem; color: rgba(168,184,208,0.6); margin-bottom: 6px; }
+    .edu-year { font-family: 'Fira Code', monospace; font-size: .65rem; color: var(--ion); margin-bottom: 18px; letter-spacing: 1px; }
+    
+    .highlight-line { background: rgba(0,255,231,.02); border-left: 2px solid var(--ion); padding: 12px 16px; font-size: .82rem; color: rgba(168,184,208,.85); margin-bottom: 20px; font-style: italic; line-height: 1.5; }
+    .sub-headers { font-family: 'Orbitron', sans-serif; font-size: 0.72rem; color: var(--bright); letter-spacing: 2px; text-transform: uppercase; margin: 18px 0 10px 0; display: flex; align-items: center; gap: 8px; }
+    .sub-headers::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
 
-        /* --- Header Section --- */
-        .page-header {
-            text-align: center;
-            padding: 160px 10% 60px;
-            animation: fadeInDown 1s ease-out;
-        }
+    .tag { display: inline-block; padding: 3px 10px; border: 1px solid rgba(180,0,255,.25); font-size: .58rem; font-family: 'Fira Code', monospace; color: var(--plasma); margin: 0 4px 6px 0; text-transform: uppercase; transition: 0.2s; }
+    .tag.c { border-color: rgba(0,255,231,.25); color: var(--ion); }
+    .tag:hover { background: rgba(255,255,255,0.03); color: #fff; }
 
-        .page-header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            background: linear-gradient(90deg, #fff, var(--accent-primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-        }
+    /* ── DOMAIN SEGREGATION MODULES ── */
+    .domain-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
+    @media(max-width:960px){ .domain-container { grid-template-columns: 1fr; } }
+    .domain-card { background: rgba(4,5,8,0.6); border: 1px solid var(--gb); padding: 32px; position: relative; overflow: hidden; transition: 0.4s var(--ease); }
+    .domain-card:hover { transform: translateY(-6px); border-color: rgba(180,0,255,0.25); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+    .domain-icon { font-size: 2.2rem; color: var(--ion); margin-bottom: 20px; display: block; filter: drop-shadow(0 0 10px rgba(0,255,231,0.2)); }
+    .domain-card.physics :hover .domain-icon { color: var(--ion); }
+    .domain-card.ds .domain-icon { color: var(--plasma); filter: drop-shadow(0 0 10px rgba(180,0,255,0.2)); }
+    .domain-card.football .domain-icon { color: var(--nova); filter: drop-shadow(0 0 10px rgba(255,60,172,0.2)); }
+    .domain-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.15rem; color: var(--bright); margin-bottom: 12px; letter-spacing: 1px; }
+    .domain-card p { font-size: 0.85rem; line-height: 1.6; color: var(--dust); margin-bottom: 18px; font-weight: 300; }
+    .domain-list { list-style: none; font-family: 'Fira Code', monospace; font-size: 0.68rem; color: rgba(168,184,208,0.7); }
+    .domain-list li { margin-bottom: 8px; display: flex; align-items: flex-start; gap: 6px; }
+    .domain-list li::before { content: '▪'; color: var(--ion); }
+    .domain-card.ds .domain-list li::before { content: '▪'; color: var(--plasma); }
+    .domain-card.football .domain-list li::before { content: '▪'; color: var(--nova); }
 
-        .page-header p {
-            color: var(--text-dim);
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
+    /* ── CAPABILITIES SKILLS ── */
+    .skrow { margin-bottom: 18px; }
+    .skhead { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .sknm { font-family: 'Fira Code', monospace; font-size: .65rem; letter-spacing: 1px; color: rgba(168,184,208,0.8); }
+    .skpct { font-family: 'Fira Code', monospace; font-size: .65rem; color: var(--ion); }
+    .sktrack { height: 2px; background: rgba(255,255,255,.05); position: relative; overflow: hidden; }
+    .skfill { position: absolute; top: 0; left: 0; height: 100%; background: linear-gradient(90deg, var(--ion), var(--plasma)); width: 0%; transition: width 1.5s var(--ease); box-shadow: 0 0 8px var(--ion); }
 
-        /* --- Grid & Cards --- */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            padding: 0 10% 100px;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
+    /* ── ANALYTICAL PIPELINES / PORTFOLIO IMAGE STYLING ── */
+    .index-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .index-card { background: rgba(5,6,9,0.5); border: 1px solid var(--gb); overflow: hidden; transition: .5s var(--ease); text-decoration: none; color: inherit; position: relative; display: block; }
+    .index-card:hover { border-color: rgba(0,255,231,.25); transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,.8); }
+    
+    .cimg { 
+      width: 100%; 
+      height: 180px; 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      position: relative; 
+      border-bottom: 1px solid var(--gb); 
+      transition: .5s var(--ease);
+    }
+    .cimg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 1, 10, 0.4) 0%, rgba(255, 60, 172, 0.15) 50%, rgba(0, 255, 231, 0.25) 100%);
+      mix-blend-mode: multiply;
+      transition: opacity 0.5s var(--ease);
+      z-index: 1;
+    }
+    .cimg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(2, 1, 10, 0.55);
+      transition: background 0.5s var(--ease);
+      z-index: 1;
+    }
+    .index-card:hover .cimg::after {
+      background: rgba(2, 1, 10, 0.2);
+    }
+    .cimg i { 
+      font-size: 2.6rem; 
+      color: rgba(0, 255, 231, 0.4); 
+      position: relative;
+      z-index: 2;
+      transition: .5s var(--ease); 
+      text-shadow: 0 4px 10px rgba(0,0,0,0.9);
+    }
+    .index-card:hover .cimg i { 
+      color: var(--ion); 
+      transform: scale(1.08); 
+      filter: drop-shadow(0 0 15px rgba(0,255,231,0.6)); 
+    }
+    
+    .cbody { padding: 24px; background: #040508; position: relative; z-index: 2; }
+    .cid { font-family: 'Fira Code', monospace; color: var(--plasma); font-size: .58rem; margin-bottom: 6px; display: block; letter-spacing: 1.5px; }
+    .ctitle { font-family: 'Orbitron', sans-serif; font-size: .95rem; color: var(--bright); font-weight: 700; }
+    .cdesc { font-size: .82rem; color: var(--dust); margin-top: 8px; line-height: 1.6; font-weight: 300; }
+    .carrow { position: absolute; right: 24px; bottom: 24px; color: var(--ion); opacity: 0; transform: translateX(-6px); transition: .3s var(--ease); font-size: 0.8rem; }
+    .index-card:hover .carrow { opacity: 1; transform: translateX(0); }
+    .card-bar { position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, var(--ion), var(--plasma)); transition: width .4s var(--ease); }
+    .index-card:hover .card-bar { width: 100%; }
 
-        .project-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 40px;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
+    .stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gb); border: 1px solid var(--gb); margin-top: 48px; }
+    @media(max-width: 768px) { .stats-strip { grid-template-columns: repeat(2, 1fr); } }
+    .sstat { background: var(--void); padding: 28px 20px; text-align: center; }
+    .snum { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; color: var(--ion); line-height: 1; display: block; text-shadow: 0 0 20px rgba(0,255,231,.25); font-weight: 900; }
+    .slb { font-family: 'Fira Code', monospace; font-size: .55rem; letter-spacing: 1.5px; color: rgba(168,184,208,.4); margin-top: 6px; display: block; text-transform: uppercase; }
 
-        /* Glow effect on hover */
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-primary);
-            box-shadow: 0 20px 40px rgba(0, 245, 212, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-        }
+    /* ── HIGH ATMOSPHERIC 11v11 PITCH SYSTEM ── */
+    #tactics { background: linear-gradient(180deg, transparent, rgba(9, 2, 22, 0.4), transparent); }
+    .tactics-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 54px; align-items: center; }
+    @media(max-width: 1150px) { .tactics-grid { grid-template-columns: 1fr; gap: 36px; } }
+    .pitch-wrap { position: relative; border-radius: 6px; overflow: hidden; border: 1px solid var(--gb); box-shadow: 0 25px 60px rgba(0,0,0,0.6); }
+    .pitch-wrap::before { content: 'LIVE KINETIC SPACE // ADVANCED VECTOR MATRIX ENGINE'; position: absolute; top: 12px; left: 14px; z-index: 5; font-family: 'Fira Code', monospace; font-size: .55rem; color: var(--ion); letter-spacing: 2px; background: rgba(0,0,0,0.75); padding: 4px 10px; border: 1px solid rgba(0,255,231,0.2); }
+    #pitch-canvas { width: 100%; height: 520px; background: #010402; display: block; }
+    .td h3 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; letter-spacing: 1px; color: var(--bright); margin-bottom: 12px; font-weight: 700; }
+    .td>p { color: var(--dust); font-size: .88rem; line-height: 1.7; margin-bottom: 24px; font-weight: 300; }
+    .tlist { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .tlist li { padding: 14px 16px; border: 1px solid var(--gb); background: rgba(5,6,9,0.3); color: var(--dust); font-size: .82rem; line-height: 1.6; transition: .3s; }
+    .tlist li:hover { border-color: rgba(0,255,231,.2); background: rgba(0,255,231,.01); padding-left: 22px; }
+    .tlist li strong { color: var(--ion); font-weight: 600; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 1px; display: block; margin-bottom: 2px; }
 
-        .project-card::after {
-            content: "";
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: 0.5s;
-        }
-        .project-card:hover::after { left: 100%; }
+    /* ── NETWORKING ── */
+    .quote-block { border-left: 2px solid var(--plasma); padding: 24px 32px; background: var(--glass); margin-bottom: 44px; }
+    .quote-block p { font-size: 1.15rem; line-height: 1.6; max-width: 750px; font-weight: 300; color: var(--bright); font-style: italic; }
+    .gw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media(max-width:780px){ .gw-grid { grid-template-columns: 1fr; } }
+    .gw { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 28px 16px; border: 1px solid var(--gb); background: var(--glass); text-decoration: none; transition: .4s var(--ease); min-height: 140px; }
+    .gw:hover { border-color: rgba(0,255,231,.2); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,.6); }
+    .gw-icon { font-size: 1.6rem; transition: .3s; }
+    .gw-label { font-family: 'Fira Code', monospace; font-size: .6rem; letter-spacing: 2px; color: rgba(168,184,208,0.5); text-transform: uppercase; }
+    .gw-handle { font-family: 'Outfit', sans-serif; font-size: .85rem; color: var(--ion); font-weight: 600; }
+    .gw-action { font-family: 'Fira Code', monospace; font-size: .55rem; letter-spacing: 1px; color: rgba(168,184,208,.25); text-transform: uppercase; opacity: 0; transition: .3s; }
+    .gw:hover .gw-action { opacity: 1; color: var(--ion); }
+    .gw.gmail .gw-icon { color: #ea4335; }
+    .gw.linkedin .gw-icon { color: #0077b5; }
+    .gw.instagram .gw-icon { color: var(--nova); }
 
-        .project-card h2 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--accent-primary);
-            font-family: 'Orbitron', sans-serif;
-        }
+    /* ── FOOTER ── */
+    footer { text-align: center; padding: 60px 10% 32px; font-size: .58rem; color: rgba(255,255,255,.1); font-family: 'Fira Code', monospace; letter-spacing: 2px; border-top: 1px solid var(--gb); }
+    .fglow { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--ion), var(--plasma), transparent); margin-bottom: 28px; opacity: .2; }
 
-        .project-card p {
-            font-size: 0.95rem;
-            color: var(--text-dim);
-            margin-bottom: 30px;
-            flex-grow: 1;
-        }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
 
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 30px;
-        }
+    .orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 1; filter: blur(90px); opacity: .06; animation: orbDrift 25s ease infinite; }
+    .orb1 { width: 450px; height: 450px; background: var(--plasma); top: 5%; left: -15%; }
+    .orb2 { width: 350px; height: 350px; background: var(--ion); bottom: 10%; right: -8%; }
+    @keyframes orbDrift { 0%, 100% { transform: translate(0,0) scale(1) } 50% { transform: translate(40px,-30px) scale(1.08) } }
 
-        .tech-tag {
-            background: rgba(0, 245, 212, 0.05);
-            color: var(--accent-primary);
-            padding: 4px 12px;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: 1px solid rgba(0, 245, 212, 0.2);
-        }
-
-        .btn-view {
-            text-align: center;
-            padding: 12px 25px;
-            background: var(--accent-primary);
-            color: var(--bg-deep);
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 245, 212, 0.3);
-        }
-
-        .btn-view:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 245, 212, 0.5);
-            background: #fff;
-        }
-
-        /* --- Animations --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .projects-grid { grid-template-columns: 1fr; padding: 0 5% 80px; }
-            .nav-links { display: none; } /* Mobile menu would go here */
-        }
-    </style>
+    #galaxy { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  </style>
 </head>
-<body>
+<body class="intro-on">
 
-    <nav>
-        <a href="index.html" class="nav-logo">JST<span style="color:white">.</span></a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="projects.html" class="active">Projects</a>
-            <a href="tactics.html">Tactical Analyser</a>
-            <a href="analysis.html">Match Analyzer</a>
-            <a href="index.html#contact">Contact</a>
-        </div>
-    </nav>
+  <div id="cd"></div>
+  <div id="cr"></div>
 
-    <div class="page-header">
-        <h1>PROJECT PORTFOLIO</h1>
-        <p>Blending High-Performance Computing with the Beautiful Game.</p>
+  <!-- ── LOADING SCREEN ENGINE OVERLAY ── -->
+  <div id="intro">
+    <canvas id="intro-canvas"></canvas>
+    <div class="intro-center">
+      <div class="ball-ring">
+        <div class="ball-glow"></div>
+        <svg class="ball-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="ballbg" cx="38%" cy="32%">
+              <stop offset="0%" stop-color="#111126"/>
+              <stop offset="100%" stop-color="#020208"/>
+            </radialGradient>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="url(#ballbg)" stroke="rgba(0,255,231,.35)" stroke-width="1"/>
+          <polygon points="50,16 60,27 56,41 44,41 40,27" fill="none" stroke="rgba(0,255,231,.6)" stroke-width="0.8"/>
+          <polygon points="69,35 78,46 71,58 59,53 56,41" fill="none" stroke="rgba(180,0,255,.5)" stroke-width="0.8"/>
+          <polygon points="31,35 44,41 41,53 29,58 22,46" fill="none" stroke="rgba(180,0,255,.5)" stroke-width="0.8"/>
+          <polygon points="37,70 46,61 54,61 63,70 50,81" fill="none" stroke="rgba(0,255,231,.5)" stroke-width="0.8"/>
+          <circle cx="50" cy="50" r="2.5" fill="var(--ion)"/>
+        </svg>
+        <div class="data-stream" id="ds">MATRIX STATUS // INITIALIZING</div>
+      </div>
+      <h1 class="intro-title">JEREIN SAM THOMAS</h1>
+      <p class="intro-sub">PHYSICS DATA ANALYST &nbsp;·&nbsp; <span>PERFORMANCE ARCHITECT</span></p>
+      <div class="intro-bar-wrap">
+        <div class="intro-bar" id="ibar"></div>
+      </div>
+      <div class="intro-bar-label" id="iblabel">INITIALISING MATRIX...</div>
+      
+      <div class="intro-status">
+        <div class="isl" id="is0"><span>✓ KINETIC MECHANICS</span><span class="status-val">[OK]</span></div>
+        <div class="isl" id="is1"><span>✓ CALC_VECTOR_FIELDS</span><span class="status-val">[COMPILING]</span></div>
+        <div class="isl" id="is2"><span>✓ OPTIMISE_xG_METRICS</span><span class="status-val">[PENDING]</span></div>
+        <div class="isl" id="is3"><span>✓ SPATIAL_TURF_11v11</span><span class="status-val">[OFFLINE]</span></div>
+      </div>
     </div>
+    <button class="intro-skip" id="iskip">[ OVERRIDE INTRO ]</button>
+  </div>
 
-    <div class="projects-grid">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <canvas id="galaxy"></canvas>
+
+  <nav>
+    <a href="#hero" class="logo">JST_INTEL</a>
+    <div class="nav-links">
+      <a href="projects.html">Projects</a>
+      <a href="tactics.html">Tactics</a> 
+      <a href="analysis.html">Analysis</a>
+      <a href="#academic">Academic Matrix</a>
+      <a href="#domains">Core Domains</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO SECTION ── -->
+  <section id="hero">
+    <div class="hero-container">
+      <p class="hero-sub">Physics Graduate &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; Football Analyst</p>
+      <div class="hero-name-wrap">
+        <h1 class="hero-name">JEREIN SAM<br>THOMAS</h1>
+      </div>
+      <div class="hero-terminal">
+        <div class="system-status">
+          <span class="sdot"></span>
+          <span>SYSTEM_READY // PIPELINE_TRANSFORMATION_ONLINE</span>
+        </div>
+        <p class="hero-desc" id="hero-typing-target"></p>
+        <div class="hero-tags">
+          <span class="htag">#CLASSICAL_MECHANICS</span>
+          <span class="htag">#STATISTICAL_PHYSICS</span>
+          <span class="htag">#MACHINE_LEARNING</span>
+          <span class="htag">#SPATIAL_TRACKING</span>
+          <span class="htag">#TOTTENHAM_HOTSPUR_ANALYTICS</span>
+        </div>
+      </div>
+    </div>
+    <div class="scue">
+      <span>INITIALIZE MATRIX EXPLORATION</span>
+      <div class="sline"></div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 1: EDUCATIONAL PIPELINES ── -->
+  <section id="academic" class="si reveal">
+    <span class="slabel">FOUNDATION STACK</span>
+    <h2 class="stitle">EDUCATIONAL ACQUISITION</h2>
+    <div class="edu-grid">
+      
+      <!-- Undergraduate Degree -->
+      <div class="edu-card">
+        <span class="edu-badge">Phase 01 // Fundamental Physical Systems</span>
+        <h3>B.Sc Physics</h3>
+        <div class="edu-inst">Mar Thoma College, Thiruvalla (Mahatma Gandhi University)</div>
+        <div class="edu-year">2022 — 2025</div>
+        <p>Built a rigorous framework for studying physical realities, processing multidimensional observations, and isolating structural variables from raw mechanical phenomena.</p>
         
-        <div class="project-card">
-            <div style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 1rem;"><i class="fas fa-microchip"></i></div>
-            <h2>TACTICS OS</h2>
-            <p>A professional-grade interactive football analysis suite. Features dynamic formation builders, playing style evaluations, and a real-time 2D movement visualization engine.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">HTML5 Canvas</span>
-                <span class="tech-tag">Real-time Viz</span>
-            </div>
-            <a href="tactics.html" class="btn-view">Launch Engine</a>
+        <div class="highlight-line">
+          Isolating core environmental variables, defining mathematical laws of motion, and testing structural hypotheses.
         </div>
+        
+        <div class="sub-headers">Physics Core Subsystems Parsed</div>
+        <span class="tag c">Classical Mechanics</span><span class="tag c">Statistical Physics</span><span class="tag c">Mathematical Physics</span><span class="tag c">Computational Physics</span><span class="tag c">Quantum Mechanics</span><span class="tag c">Astrophysics</span>
+        
+        <div class="sub-headers">Mathematical Infrastructure Developed</div>
+        <span class="tag">Calculus</span><span class="tag">Vector Analysis</span><span class="tag">Linear Algebra</span><span class="tag">Differential Equations</span><span class="tag">Probability & Statistics</span>
+      </div>
 
-        <div class="project-card">
-            <div style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 1rem;"><i class="fas fa-chart-line"></i></div>
-            <h2>ISL Prediction Model</h2>
-            <p>Research paper analyzing 1,100+ matches using Logistic Regression. Achieved 82.4% accuracy in forecasting tactical outcomes across 37 unique variables.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Scikit-Learn</span>
-                <span class="tech-tag">Data Mining</span>
-            </div>
-            <a href="ISL_Paper_v13.pdf.pdf" target="_blank" class="btn-view">View Research</a>
+      <!-- Postgraduate Degree -->
+      <div class="edu-card">
+        <span class="edu-badge">Phase 02 // Advanced Computational Systems</span>
+        <h3>M.Sc Applied Data Science</h3>
+        <div class="edu-inst">SRM Institute of Science and Technology, Kattankulathur</div>
+        <div class="edu-year">2025 — PRESENT</div>
+        <p>Translating traditional physical observations and mathematical models into real-time computational code blocks, AI algorithms, and spatial analytics pipelines.</p>
+        
+        <div class="highlight-line">
+          Engineering structural machine learning systems to decode behavioral and tracking parameters across data matrices.
         </div>
+        
+        <div class="sub-headers">Programming & Core Development Stacks</div>
+        <span class="tag c">Python</span><span class="tag c">SQL Database</span><span class="tag c">R Programming</span><span class="tag c">Machine Learning Stacks</span><span class="tag c">Deep Learning Matrix</span>
+        
+        <div class="sub-headers">Advanced Analytics Vectors</div>
+        <span class="tag">Supervised Classification</span><span class="tag">Unsupervised Clustering</span><span class="tag">Predictive Analytics</span><span class="tag">Computer Vision Tracking</span>
+      </div>
+      
+    </div>
+  </section>
 
-        <div class="project-card">
-            <div style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 1rem;"><i class="fas fa-eye"></i></div>
-            <h2>Mask-RCNN Segmentation</h2>
-            <p>Computer Vision pipeline for precise object detection. Implemented deep learning architecture to perform instance-level segmentation on complex datasets.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">PyTorch</span>
-                <span class="tech-tag">Computer Vision</span>
-                <span class="tech-tag">Deep Learning</span>
-            </div>
-            <a href="#" class="btn-view">System Specs</a>
+  <!-- ── SECTION 2: SEPARATED CORE DOMAINS ── -->
+  <section id="domains" class="si reveal">
+    <span class="slabel">STRUCTURAL BREAKDOWN</span>
+    <h2 class="stitle">THE ANALYTICAL SPECTRUM</h2>
+    <p style="max-width: 700px; font-size: 0.95rem; line-height: 1.7; margin-bottom: 40px; font-weight: 300;">
+      Decoding performance demands isolating empirical physics models, scaling them with data science techniques, and executing them within tactical football spaces.
+    </p>
+    
+    <div class="domain-container">
+      <!-- Domain 1: Physics -->
+      <div class="domain-card physics">
+        <i class="fa-solid fa-atom domain-icon"></i>
+        <h3>🔬 1. Physics Domain</h3>
+        <p>Treating the environment as a continuous kinetic ecosystem. Applying foundational scientific formulas to measure object movement and environmental factors across space and time.</p>
+        <ul class="domain-list">
+          <li><strong>Kinematics & Dynamics:</strong> Calculating trajectories, ball aerodynamics, and sprinting acceleration indices.</li>
+          <li><strong>Statistical Mechanics:</strong> Evaluating system entropy and measuring structure stability under fatigue variables.</li>
+          <li><strong>Vector Fields:</strong> Mapping player body positioning and direction velocity as real-time vector paths.</li>
+        </ul>
+      </div>
+
+      <!-- Domain 2: Data Science -->
+      <div class="domain-card ds">
+        <i class="fa-solid fa-brain domain-icon"></i>
+        <h3>🤖 2. Data Science Domain</h3>
+        <p>Providing the pipeline infrastructure to scale calculations. Transforming high-frequency tracking strings into structural arrays to generate predictive patterns.</p>
+        <ul class="domain-list">
+          <li><strong>Pipeline Architecture:</strong> Ingesting coordinate points (25 frames/sec) via Python and optimized SQL matrices.</li>
+          <li><strong>Predictive Analytics:</strong> Utilizing models (XGBoost, Random Forest) to calculate probability vectors.</li>
+          <li><strong>Spatial Clustering:</strong> Deploying K-Means arrays and Computer Vision to isolate behavioral patterns.</li>
+        </ul>
+      </div>
+
+      <!-- Domain 3: Football Analysis -->
+      <div class="domain-card football">
+        <i class="fa-solid fa-ranking-star domain-icon"></i>
+        <h3>⚽ 3. Football Analytics</h3>
+        <p>Applying scientific logic and data science insights to match performance contexts. Transforming data columns into real-time tactical advantages on the turf.</p>
+        <ul class="domain-list">
+          <li><strong>Expected Goals Mechanics:</strong> Constructing physics-inspired models utilizing goal distance angles and defensive positioning metrics.</li>
+          <li><strong>Graph Theory Matrices:</strong> Modeling players as active network nodes to pinpoint ball progression choke-points.</li>
+          <li><strong>Topological Optimization:</strong> Computing dynamic coordinate grids to track territorial custody over the turf.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CAPABILITIES VECTOR ARRAY ── -->
+  <section id="skills" class="si reveal">
+    <span class="slabel">TECHNICAL CORE ARRAY</span>
+    <h2 class="stitle">CAPABILITIES SPECTRA</h2>
+    <div class="edu-grid">
+      
+      <div class="edu-card">
+        <span class="edu-badge">Core Capability 01</span>
+        <h3>Scientific Computation Architecture</h3>
+        <p>Analytical foundations tuned for complex calculation execution, feature engineering, and predictive processing.</p>
+        <div class="skills-box">
+          <div class="skrow">
+            <div class="skhead"><span class="sknm">Mathematical Modeling & Statistical Testing</span><span class="skpct">92%</span></div>
+            <div class="sktrack"><div class="skfill" data-w="92%"></div></div>
+          </div>
+          <div class="skrow">
+            <div class="skhead"><span class="sknm">Supervised Machine Learning / Classification Stacks</span><span class="skpct">88%</span></div>
+            <div class="sktrack"><div class="skfill" data-w="88%"></div></div>
+          </div>
+          <div class="skrow">
+            <div class="skhead"><span class="sknm">Data Processing Pipelines & Manipulation</span><span class="skpct">85%</span></div>
+            <div class="sktrack"><div class="skfill" data-w="85%"></div></div>
+          </div>
         </div>
+      </div>
+
+      <div class="edu-card">
+        <span class="edu-badge">Core Capability 02</span>
+        <h3>Spatial Performance Engineering</h3>
+        <p>Translating spatial coordinate feeds into tracking maps, value formulas, and strategic performance reviews.</p>
+        <div class="skills-box">
+          <div class="skrow">
+            <div class="skhead"><span class="sknm">Spatial-Temporal Coordinate Tracking Analytics</span><span class="skpct">90%</span></div>
+            <div class="sktrack"><div class="skfill" data-w="90%"></div></div>
+          </div>
+          <div class="skrow">
+            <div class="skhead"><span class="sknm">Expected Goals (xG) Shot Probability Modeling</span><span class="skpct">86%</span></div>
+            <div class="sktrack"><div class="skfill" data-w="86%"></div></div>
+          </div>
+          <div class="skrow">
+            <div class="skhead"><span class="sknm">Computer Vision Object Detection Frameworks</span><span class="skpct">80%</span></div>
+            <div class="sktrack"><div class="skfill" data-w="80%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── DEPLOYMENTS SECTION ── -->
+  <section id="projects" class="si reveal">
+    <span class="slabel">DEPLOYED REPOSITORIES</span>
+    <h2 class="stitle">PREDICTIVE & METRIC SYSTEMS</h2>
+    <div class="index-grid">
+      
+      <!-- MODULE_01 IMAGE CARD LINKS TO Standalone Tactics Page -->
+      <a href="tactics.html" class="index-card">
+        <div class="cimg" style="background-image: url('module1.jpg');">
+          <i class="fa-solid fa-network-wired"></i>
+        </div>
+        <div class="cbody">
+          <span class="cid">DEPLOYMENT_01 // SYSTEM</span>
+          <h3 class="ctitle">Asymmetric Attack Matrix Engine</h3>
+          <p class="cdesc">Constructed an analytical framework mapping positional passing networks to calculate tracking changes across build-up sequences.</p>
+          <i class="fa-solid fa-arrow-right carrow"></i>
+          <div class="card-bar"></div>
+        </div>
+      </a>
+
+      <!-- MODULE_02 IMAGE CARD LINKS TO Standalone Analysis Page -->
+      <a href="analysis.html" class="index-card">
+        <div class="cimg" style="background-image: url('module2.jpg');">
+          <i class="fa-solid fa-bullseye"></i>
+        </div>
+        <div class="cbody">
+          <span class="cid">DEPLOYMENT_02 // PIPELINE</span>
+          <h3 class="ctitle">Physics-Informed Expected Goals Engine</h3>
+          <p class="cdesc">Developed a mathematical algorithm mapping conversion chances by testing ball trajectory arcs, body velocities, and defensive box occupancy scores.</p>
+          <i class="fa-solid fa-arrow-right carrow"></i>
+          <div class="card-bar"></div>
+        </div>
+      </a>
+
+      <!-- MODULE_03 IMAGE CARD LINKS TO Standalone Projects Page -->
+      <a href="projects.html" class="index-card">
+        <div class="cimg" style="background-image: url('module3.jpg');">
+          <i class="fa-solid fa-gauge-high"></i>
+        </div>
+        <div class="cbody">
+          <span class="cid">DEPLOYMENT_03 // ARCHITECTURE</span>
+          <h3 class="ctitle">Kinetic Vector Acceleration Core</h3>
+          <p class="cdesc">Ingested frame-by-frame player coordinate streams to monitor work-rate drops, high-intensity sprint metrics, and systemic physical output thresholds.</p>
+          <i class="fa-solid fa-arrow-right carrow"></i>
+          <div class="card-bar"></div>
+        </div>
+      </a>
 
     </div>
 
+    <div class="stats-strip">
+      <div class="sstat"><span class="snum" data-val="150">0</span><span class="slb">MATCH CLUSTERS FILTERED</span></div>
+      <div class="sstat"><span class="snum" data-val="92">0</span><span class="slb">ALGORITHMIC ACCURACY %</span></div>
+      <div class="sstat"><span class="snum" data-val="18">0</span><span class="slb">PHYSICS FEATURE ENGINES</span></div>
+      <div class="sstat"><span class="snum" data-val="45">0</span><span class="slb">TACTICAL INSIGHT ARRAYS</span></div>
+    </div>
+  </section>
+
+  <!-- ── FOOTBALL TACTICAL FIELD SIMULATOR LAYER ── -->
+  <section id="tactical-field-preview" class="si reveal">
+    <div class="tactics-grid">
+      <div class="pitch-wrap">
+        <canvas id="pitch-canvas"></canvas>
+      </div>
+      <div class="td">
+        <span class="slabel">PREVIEW INTERFACE</span>
+        <h3>11 vs 11 Positional Simulator</h3>
+        <p>Merging the laws of <strong>Classical Kinematics</strong> with <strong>Spatial Machine Learning Algorithms</strong>. This dashboard simulates a complete 22-player framework tracking across coordinate vectors in real time.</p>
+        <ul class="tlist">
+          <li>
+            <strong>Tottenham Hotspur Tactical Blueprint:</strong> 
+            Models an asymmetric framework showing wide passing channels stretching a structural defensive block.
+          </li>
+          <li>
+            <strong>11 vs 11 Live Computational Tracking:</strong> 
+            Processes 22 independent positional matrices simultaneously, calculating real-time coordinate coordinates ($X, Y$) and directional shifts.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECURE CONNECTIONS ── -->
+  <section id="contact" class="si reveal">
+    <div class="quote-block">
+      <p>"When you ground data science within the absolute realities of physical tracking data, every football formation becomes a calculable mathematical equation."</p>
+    </div>
+    <span class="slabel">SECURE METRIC PROTOCOLS</span>
+    <h2 class="stitle">ESTABLISH TRANSMISSIONS</h2>
+    <div class="gw-grid">
+      <a href="mailto:jerein.sam.thomas@gmail.com" class="gw gmail">
+        <i class="fa-solid fa-envelope gw-icon"></i>
+        <span class="gw-label">Secure Mail</span>
+        <span class="gw-handle">jerein.sam.thomas@gmail.com</span>
+        <span class="gw-action">Open Comms Frame</span>
+      </a>
+      <a href="#" target="_blank" class="gw linkedin">
+        <i class="fa-brands fa-linkedin-in gw-icon"></i>
+        <span class="gw-label">Professional Core</span>
+        <span class="gw-handle">LinkedIn Grid</span>
+        <span class="gw-action">Initialize Identity Exchange</span>
+      </a>
+      <a href="https://instagram.com/jerein_sam" target="_blank" class="gw instagram">
+        <i class="fa-brands fa-instagram gw-icon"></i>
+        <span class="gw-label">Visual Interface</span>
+        <span class="gw-handle">@jerein_sam</span>
+        <span class="gw-action">Ping Stream Feed</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fglow"></div>
+    <span>© 2026 JEREIN SAM THOMAS // SCIENTIFIC ANALYSIS DRIVEN BY EXPERIMENTAL DATA MATRIX PRINCIPLES</span>
+  </footer>
+
+  <!-- ── ENGINES & SCRIPTS ── -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 1. TRACKING MOUSE CURSORS
+      const cd = document.getElementById('cd');
+      const cr = document.getElementById('cr');
+      
+      document.addEventListener('mousemove', (e) => {
+        cd.style.left = e.clientX + 'px';
+        cd.style.top = e.clientY + 'px';
+        setTimeout(() => {
+          cr.style.left = e.clientX + 'px';
+          cr.style.top = e.clientY + 'px';
+        }, 25);
+      });
+
+      document.querySelectorAll('a, button, .index-card, .gw').forEach(el => {
+        el.addEventListener('mouseenter', () => { cd.classList.add('hov'); cr.classList.add('hov'); });
+        el.addEventListener('mouseleave', () => { cd.classList.remove('hov'); cr.classList.remove('hov'); });
+      });
+
+      // 2. LOG LOADING SYSTEM
+      const ds = document.getElementById('ds');
+      const logMatrix = [
+        "xG_Calculated: 0.76", "Vector_X_Pos: 84.1", "Vector_Y_Pos: 36.2", 
+        "Velocity_Index: 7.2m/s", "High_Press_Trigger: Activated", "Passing_Field: [0.45, -0.12]"
+      ];
+      const streamInterval = setInterval(() => {
+        const item = logMatrix[Math.floor(Math.random() * logMatrix.length)];
+        ds.innerText = `${item} // DELTA_V: ${(Math.random() * 5).toFixed(2)}`;
+      }, 90);
+
+      const statusLabels = [
+        "ISOLATING LAWS OF NATURE AND MODELING PHYSICS SYSTEMS...",
+        "COMPILING SPATIAL MULTIVARIATE ALGORITHMS...",
+        "DECOUPLED EXPECTED GOALS PARAMETERS AND TESTING ANGLES...",
+        "INITIALIZING 11v11 KINETIC VISUALIZER MODEL...",
+        "SYSTEM REBOOT PROTOCOL SUCCESSFUL."
+      ];
+
+      const ibar = document.getElementById('ibar');
+      const iblabel = document.getElementById('iblabel');
+      let progress = 0;
+      let statusStep = 0;
+
+      const loadingTicker = setInterval(() => {
+        progress += Math.floor(Math.random() * 6) + 2;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(loadingTicker);
+          clearInterval(streamInterval);
+          iblabel.innerText = statusLabels[4];
+          setTimeout(terminateIntro, 500);
+        } else {
+          ibar.style.width = progress + '%';
+          
+          let currentStep = Math.floor(progress / 25);
+          if(currentStep < 4) {
+            iblabel.innerText = statusLabels[currentStep];
+          }
+
+          if (progress > (statusStep + 1) * 23 && statusStep <= 3) {
+            const el = document.getElementById(`is${statusStep}`);
+            if(el) {
+              el.classList.add('lit', 'done');
+              el.querySelector('.status-val').innerText = "[OK]";
+            }
+            statusStep++;
+            
+            const nextEl = document.getElementById(`is${statusStep}`);
+            if(nextEl) {
+              nextEl.classList.add('lit');
+              nextEl.querySelector('.status-val').innerText = "[COMPILING]";
+            }
+          }
+        }
+      }, 60);
+
+      function terminateIntro() {
+        const intro = document.getElementById('intro');
+        if(!intro.classList.contains('exit')) {
+          intro.classList.add('exit');
+          document.body.classList.remove('intro-on');
+          setTimeout(() => {
+            intro.style.display = 'none';
+            triggerHeroType();
+            triggerStatsRun();
+          }, 900);
+        }
+      }
+      document.getElementById('iskip').addEventListener('click', terminateIntro);
+
+      // 3. COSMIC PARTICLES BACKGROUND
+      const galCanvas = document.getElementById('galaxy');
+      const gctx = galCanvas.getContext('2d');
+      let stars = [];
+
+      function sizeCanvas() {
+        galCanvas.width = window.innerWidth;
+        galCanvas.height = window.innerHeight;
+      }
+      sizeCanvas();
+      window.addEventListener('resize', sizeCanvas);
+
+      for (let i = 0; i < 65; i++) {
+        stars.push({
+          x: Math.random() * galCanvas.width,
+          y: Math.random() * galCanvas.height,
+          size: Math.random() * 1.3 + 0.3,
+          speed: Math.random() * 0.12 + 0.04
+        });
+      }
+
+      function animateGalaxy() {
+        gctx.clearRect(0, 0, galCanvas.width, galCanvas.height);
+        gctx.fillStyle = "rgba(0, 255, 231, 0.3)";
+        stars.forEach(s => {
+          gctx.beginPath();
+          gctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+          gctx.fill();
+          s.y -= s.speed;
+          if (s.y < 0) s.y = galCanvas.height;
+        });
+        requestAnimationFrame(animateGalaxy);
+      }
+      animateGalaxy();
+
+      // 4. HERO SECTION PROFILE PRINTER
+      function triggerHeroType() {
+        const target = document.getElementById('hero-typing-target');
+        const biographyStr = "Evolving a rigorous foundational background in empirical Physics into scalable Machine Learning pipelines. Specializing in breaking down high-frequency tracking records, analyzing coordinate datasets, and structuring predictive models to extract tactical clarity across tactical spaces.";
+        let charIndex = 0;
+        
+        function typeWriter() {
+          if (charIndex < biographyStr.length) {
+            target.innerHTML += biographyStr.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriter, 12);
+          }
+        }
+        typeWriter();
+      }
+
+      // 5. OBSERVER SCROLL INITIATOR
+      const elementsToReveal = document.querySelectorAll('.reveal');
+      const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.classList.add('active');
+            if(entry.target.id === 'skills') triggerSkillsProcess();
+          }
+        });
+      }, { threshold: 0.1 });
+      elementsToReveal.forEach(item => scrollObserver.observe(item));
+
+      // 6. NUMERICAL TRACKING REGRESSION TIMER
+      function triggerStatsRun() {
+        document.querySelectorAll('.snum').forEach(counter => {
+          const limit = parseInt(counter.getAttribute('data-val'));
+          let currentScore = 0;
+          const jumpStep = limit / 30;
+          const runClock = setInterval(() => {
+            currentScore += jumpStep;
+            if(currentScore >= limit) {
+              counter.innerText = limit;
+              clearInterval(runClock);
+            } else {
+              counter.innerText = Math.floor(currentScore);
+            }
+          }, 30);
+        });
+      }
+
+      // 7. CAPABILITIES SPEC MATRIX FILL
+      function triggerSkillsProcess() {
+        document.querySelectorAll('.skfill').forEach(bar => {
+          bar.style.width = bar.getAttribute('data-w') + '%';
+        });
+      }
+
+      // 8. HIGH ATMOSPHERIC 11 vs 11 FIELD ENGINE SIMULATOR
+      const pitchField = document.getElementById('pitch-canvas');
+      const pctx = pitchField.getContext('2d');
+      let matchNodes = [];
+      let football = { x: 0, y: 0, targetX: 0, targetY: 0, speed: 0.08, holderIdx: 10 };
+      let celebrationRipple = 0;
+
+      function buildTacticalEnvironment() {
+        pitchField.width = pitchField.parentElement.clientWidth;
+        pitchField.height = 500;
+        
+        matchNodes = [];
+        const w = pitchField.width;
+        const h = pitchField.height;
+
+        const teamA = [
+          { x: w * 0.08, y: h * 0.5,  role: "GK",  vx: 0,     vy: 0,     c: "#a8b8d0" },
+          { x: w * 0.32, y: h * 0.3,  role: "LCB", vx: 0.04,  vy: -0.03, c: "#00ffe7" },
+          { x: w * 0.32, y: h * 0.7,  role: "RCB", vx: -0.03, vy: 0.04,  c: "#00ffe7" },
+          { x: w * 0.42, y: h * 0.15, role: "LB",  vx: 0.08,  vy: 0.02,  c: "#00ffe7" },
+          { x: w * 0.42, y: h * 0.85, role: "RB",  vx: 0.06,  vy: -0.03, c: "#00ffe7" },
+          { x: w * 0.52, y: h * 0.5,  role: "DM",  vx: 0.10,  vy: -0.05, c: "#00ffe7" },
+          { x: w * 0.62, y: h * 0.30, role: "LCM", vx: 0.12,  vy: 0.04,  c: "#00ffe7" },
+          { x: w * 0.62, y: h * 0.70, role: "RCM", vx: -0.04, vy: 0.10,  c: "#00ffe7" },
+          { x: w * 0.78, y: h * 0.22, role: "LW",  vx: 0.06,  vy: 0.12,  c: "#ff3cac" },
+          { x: w * 0.78, y: h * 0.78, role: "RW",  vx: -0.08, vy: -0.12, c: "#ff3cac" },
+          { x: w * 0.85, y: h * 0.5,  role: "ST",  vx: 0.15,  vy: 0.06,  c: "#ff3cac" }
+        ];
+
+        const teamB = [
+          { x: w * 0.94, y: h * 0.5,  role: "DGK", vx: 0,     vy: 0,     c: "#a8b8d0" },
+          { x: w * 0.78, y: h * 0.36, role: "DCB1",vx: 0.03,  vy: -0.04, c: "#1b254b" },
+          { x: w * 0.78, y: h * 0.64, role: "DCB2",vx: -0.04, vy: 0.03,  c: "#1b254b" },
+          { x: w * 0.76, y: h * 0.18, role: "DLB", vx: 0.06,  vy: 0.04,  c: "#1b254b" },
+          { x: w * 0.76, y: h * 0.82, role: "DRB", vx: -0.05, vy: -0.04, c: "#1b254b" },
+          { x: w * 0.66, y: h * 0.38, role: "DCM1",vx: 0.08,  vy: -0.03, c: "#1b254b" },
+          { x: w * 0.66, y: h * 0.62, role: "DCM2",vx: -0.03, vy: 0.08,  c: "#1b254b" },
+          { x: w * 0.60, y: h * 0.24, role: "DLM", vx: 0.04,  vy: 0.06,  c: "#1b254b" },
+          { x: w * 0.60, y: h * 0.76, role: "DRM", vx: -0.06, vy: -0.04, c: "#1b254b" },
+          { x: w * 0.50, y: h * 0.36, role: "DST1",vx: 0.07,  vy: 0.03,  c: "#1b254b" },
+          { x: w * 0.50, y: h * 0.64, role: "DST2",vx: -0.04, vy: -0.08, c: "#1b254b" }
+        ];
+
+        matchNodes = [...teamA, ...teamB];
+        football.x = matchNodes[football.holderIdx].x;
+        football.y = matchNodes[football.holderIdx].y;
+      }
+      buildTacticalEnvironment();
+      window.addEventListener('resize', buildTacticalEnvironment);
+
+      function runTacticalEngine() {
+        pctx.clearRect(0, 0, pitchField.width, pitchField.height);
+        const w = pitchField.width;
+        const h = pitchField.height;
+        
+        pctx.strokeStyle = 'rgba(0, 255, 231, 0.06)';
+        pctx.lineWidth = 1.5;
+        pctx.strokeRect(30, 30, w - 60, h - 60); // Touchlines
+        
+        pctx.beginPath();
+        pctx.moveTo(w / 2, 30); pctx.lineTo(w / 2, h - 30);
+        pctx.stroke();
+
+        pctx.beginPath();
+        pctx.arc(w / 2, h / 2, 60, 0, Math.PI * 2);
+        pctx.stroke();
+        pctx.fillStyle = 'rgba(0, 255, 231, 0.2)';
+        pctx.beginPath(); pctx.arc(w / 2, h / 2, 3, 0, Math.PI * 2); pctx.fill();
+
+        pctx.strokeRect(30, h/2 - 120, 75, 240);
+        pctx.strokeRect(30, h/2 - 50, 25, 100);
+        
+        pctx.strokeRect(w - 105, h/2 - 120, 75, 240);
+        pctx.strokeRect(w - 55, h/2 - 50, 25, 100);
+
+        pctx.beginPath(); pctx.arc(105, h/2, 40, -Math.PI*0.3, Math.PI*0.3); pctx.stroke();
+        pctx.beginPath(); pctx.arc(w - 105, h/2, 40, Math.PI*0.7, Math.PI*1.3); pctx.stroke();
+
+        const flagOffsets = [[30,30],[w-30,30],[30,h-30],[w-30,h-30]];
+        pctx.fillStyle = 'rgba(0, 255, 231, 0.1)';
+        flagOffsets.forEach(f => {
+          pctx.beginPath(); pctx.arc(f[0], f[1], 8, 0, Math.PI*2); pctx.stroke();
+        });
+
+        pctx.strokeStyle = 'rgba(232, 240, 255, 0.4)';
+        pctx.lineWidth = 3;
+        pctx.strokeRect(12, h/2 - 35, 18, 70);
+        pctx.strokeRect(w - 30, h/2 - 35, 18, 70);
+
+        pctx.strokeStyle = 'rgba(180, 0, 255, 0.12)';
+        pctx.setLineDash([2, 3]);
+        pctx.beginPath();
+        for (let i = 0; i < 11; i++) {
+          for (let j = i + 1; j < 11; j++) {
+            let spaceDist = Math.hypot(matchNodes[i].x - matchNodes[j].x, matchNodes[i].y - matchNodes[j].y);
+            if (spaceDist < w * 0.25) {
+              pctx.moveTo(matchNodes[i].x, matchNodes[i].y); pctx.lineTo(matchNodes[j].x, matchNodes[j].y);
+            }
+          }
+        }
+        pctx.stroke();
+        pctx.setLineDash([]);
+
+        matchNodes.forEach((node, idx) => {
+          pctx.fillStyle = node.c;
+          
+          if(idx >= 11 && node.c === "#1b254b") {
+            pctx.strokeStyle = "rgba(180,0,255,0.4)";
+            pctx.lineWidth = 1;
+            pctx.beginPath(); pctx.arc(node.x, node.y, 5.5, 0, Math.PI * 2); pctx.fill(); pctx.stroke();
+          } else {
+            pctx.shadowColor = node.c; pctx.shadowBlur = idx < 11 ? 6 : 0;
+            pctx.beginPath(); pctx.arc(node.x, node.y, 5, 0, Math.PI * 2); pctx.fill();
+            pctx.shadowBlur = 0;
+          }
+
+          pctx.fillStyle = "rgba(168,184,208,0.45)";
+          pctx.font = "8px 'Fira Code', monospace";
+          pctx.fillText(`${node.role}`, node.x + 8, node.y - 3);
+
+          node.x += node.vx; node.y += node.vy;
+          
+          if (idx < 11) {
+            if (node.x < 45 || node.x > w * 0.90) node.vx *= -1;
+            if (node.y < 45 || node.y > h - 45) node.vy *= -1;
+          } else {
+            if (node.x < w * 0.45 || node.x > w * 0.93) node.vx *= -1;
+            if (node.y < 45 || node.y > h - 45) node.vy *= -1;
+          }
+        });
+
+        if (football.holderIdx !== null) {
+          football.x = matchNodes[football.holderIdx].x;
+          football.y = matchNodes[football.holderIdx].y;
+          
+          if (Math.random() < 0.015) {
+            let randomTarget = Math.floor(Math.random() * 11);
+            if (randomTarget !== football.holderIdx) {
+              football.targetX = matchNodes[randomTarget].x;
+              football.targetY = matchNodes[randomTarget].y;
+              football.holderIdx = null;
+              if (randomTarget === 10 && football.x > w * 0.7) {
+                football.targetX = w - 24;
+                football.targetY = h / 2 + (Math.random() * 40 - 20);
+              }
+            }
+          }
+        } else {
+          let deltaX = football.targetX - football.x;
+          let deltaY = football.targetY - football.y;
+          let distance = Math.hypot(deltaX, deltaY);
+
+          if (distance < 8) {
+            if (football.targetX >= w - 26) {
+              celebrationRipple = 1;
+              football.holderIdx = 0;
+            } else {
+              let minDistance = Infinity;
+              let targetPlayerIdx = 10;
+              for (let i = 0; i < 11; i++) {
+                let d = Math.hypot(matchNodes[i].x - football.x, matchNodes[i].y - football.y);
+                if (d < minDistance) { minDistance = d; targetPlayerIdx = i; }
+              }
+              football.holderIdx = targetPlayerIdx;
+            }
+          } else {
+            football.x += (deltaX / distance) * 9;
+            football.y += (deltaY / distance) * 9;
+          }
+        }
+
+        pctx.fillStyle = "#ffffff";
+        pctx.shadowColor = "#ffffff"; pctx.shadowBlur = 10;
+        pctx.beginPath(); pctx.arc(football.x, football.y, 4.5, 0, Math.PI * 2); pctx.fill();
+        pctx.shadowBlur = 0;
+
+        if (celebrationRipple > 0) {
+          pctx.strokeStyle = `rgba(0, 255, 231, ${1 - celebrationRipple})`;
+          pctx.lineWidth = 3;
+          pctx.beginPath();
+          pctx.arc(w - 24, h / 2, celebrationRipple * 140, 0, Math.PI * 2);
+          pctx.stroke();
+          celebrationRipple += 0.04;
+          if (celebrationRipple > 1) celebrationRipple = 0;
+        }
+
+        requestAnimationFrame(runTacticalEngine);
+      }
+      runTacticalEngine();
+    });
+  </script>
 </body>
 </html>
