@@ -56,7 +56,24 @@
     /* ── NAV ── */
     body.intro-on { overflow: hidden; }
     body.intro-on, body.intro-on a, body.intro-on button { cursor: none; }
+</div> <!-- This closes your loading screen overlay -->
 
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <canvas id="galaxy"></canvas>
+
+  <nav>
+    <a href="#hero" class="logo">JST_INTEL</a>
+    <div class="nav-links">
+      <a href="#academic">Academic Matrix</a>
+      <a href="#domains">Core Domains</a>
+      <a href="#skills">Capabilities</a>
+      <a href="#projects">Deployments</a>
+      <!-- LINE 151: CHANGE THIS FROM "#tactics" TO YOUR PATH -->
+      <a href="tactics.html">Tactics</a> 
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
     /* ── GRAIN EFFECT ── */
     body::after {
       content: ''; position: fixed; inset: 0; z-index: 1;
