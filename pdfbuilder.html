@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocIntel — Enterprise AI Document Intelligence Platform</title>
+<meta name="description" content="Transform any photo, handwritten note or scanned form into a structured, print-ready document in seconds. Powered by Tesseract OCR and GPT-4o.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0b0e18;
+  --ink-2: #3a3e52;
+  --ink-3: #7a7f99;
+  --ink-4: #b0b4c8;
+  --surface: #ffffff;
+  --surface-2: #f4f5fa;
+  --surface-3: #eceef7;
+  --accent: #2a3af5;
+  --accent-2: #4a5af7;
+  --accent-light: #e8eaff;
+  --accent-dark: #1929d8;
+  --teal: #0d9e75;
+  --teal-light: #dff5ee;
+  --amber: #c47d10;
+  --amber-light: #fef3dc;
+  --coral: #d85530;
+  --coral-light: #fbeee9;
+  --purple: #7c4dff;
+  --purple-light: #f0ebff;
+  --border: rgba(11,14,24,0.09);
+  --border-md: rgba(11,14,24,0.15);
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --shadow-sm: 0 1px 4px rgba(11,14,24,0.07);
+  --shadow: 0 2px 12px rgba(11,14,24,0.08), 0 1px 3px rgba(11,14,24,0.05);
+  --shadow-lg: 0 8px 32px rgba(11,14,24,0.1), 0 2px 8px rgba(11,14,24,0.06);
+  --shadow-xl: 0 20px 60px rgba(11,14,24,0.13), 0 4px 16px rgba(11,14,24,0.07);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========= NAV ========= */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  height: 62px;
+  display: flex; align-items: center;
+  padding: 0 48px;
+  gap: 40px;
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 19px;
+  letter-spacing: -0.6px;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 9px;
+  flex-shrink: 0;
+}
+.logo-mark {
+  width: 28px; height: 28px;
+  background: var(--accent);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+}
+.logo-mark svg { width: 16px; height: 16px; }
+.nav-mid {
+  display: flex; align-items: center; gap: 6px;
+  list-style: none; flex: 1;
+}
+.nav-mid a {
+  font-size: 13.5px; font-weight: 500;
+  color: var(--ink-2); text-decoration: none;
+  padding: 5px 12px; border-radius: 7px;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-mid a:hover { background: var(--surface-2); color: var(--ink); }
+.nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.nav-btn-ghost {
+  font-size: 13.5px; font-weight: 500;
+  color: var(--ink-2); text-decoration: none;
+  padding: 7px 16px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border-md);
+  transition: all 0.15s;
+}
+.nav-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.nav-btn-solid {
+  font-size: 13.5px; font-weight: 600;
+  color: #fff; text-decoration: none;
+  padding: 7px 18px; border-radius: var(--radius-sm);
+  background: var(--accent);
+  display: flex; align-items: center; gap: 6px;
+  transition: background 0.15s, transform 0.1s;
+}
+.nav-btn-solid:hover { background: var(--accent-dark); transform: translateY(-1px); }
+.nav-url {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--ink-3);
+  padding: 4px 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+}
+
+/* ========= HERO ========= */
+.hero-wrap {
+  max-width: 1240px; margin: 0 auto;
+  padding: 88px 48px 72px;
+  display: grid; grid-template-columns: 1fr 520px;
+  gap: 72px; align-items: center;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent-light); color: var(--accent);
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 99px;
+  margin-bottom: 26px;
+  border: 1px solid rgba(42,58,245,0.18);
+}
+.badge-live { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 56px; font-weight: 800;
+  line-height: 1.04; letter-spacing: -2.5px;
+  color: var(--ink); margin-bottom: 22px;
+}
+.h1-accent { color: var(--accent); }
+.h1-sub {
+  font-size: 17.5px; color: var(--ink-2);
+  line-height: 1.7; max-width: 500px;
+  margin-bottom: 38px;
+}
+.hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+.btn-lg {
+  padding: 13px 26px; border-radius: var(--radius);
+  font-size: 15px; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.15s;
+}
+.btn-primary-lg { background: var(--accent); color: #fff; }
+.btn-primary-lg:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(42,58,245,0.3); }
+.btn-ghost-lg { background: transparent; color: var(--ink-2); border: 1px solid var(--border-md); }
+.btn-ghost-lg:hover { border-color: var(--accent); color: var(--accent); }
+.hero-trust {
+  display: flex; align-items: center; gap: 20px;
+  font-size: 13px; color: var(--ink-3);
+}
+.trust-item { display: flex; align-items: center; gap: 6px; }
+.trust-dot { width: 5px; height: 5px; background: var(--teal); border-radius: 50%; }
+
+/* ---- HERO TERMINAL ---- */
+.hero-terminal {
+  background: #0f1120;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  font-family: 'Courier New', monospace;
+}
+.term-bar {
+  background: #1a1d30;
+  padding: 11px 16px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.term-dot { width: 10px; height: 10px; border-radius: 50%; }
+.term-dot-r { background: #ff5f57; }
+.term-dot-y { background: #febc2e; }
+.term-dot-g { background: #28c840; }
+.term-url {
+  margin-left: auto; font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  font-family: 'Courier New', monospace;
+}
+.term-body { padding: 18px 20px; font-size: 12px; line-height: 1.9; }
+.t-comment { color: #4a5280; }
+.t-key { color: #7c8bff; }
+.t-str { color: #a8e6b4; }
+.t-num { color: #f9c95c; }
+.t-op { color: #ff7eb3; }
+.t-url { color: #62c9ff; }
+.t-white { color: rgba(255,255,255,0.85); }
+.t-dim { color: rgba(255,255,255,0.35); }
+.term-response {
+  background: #0a0d1a;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 14px 20px; font-size: 12px; line-height: 1.9;
+}
+.t-success { color: #28c840; font-weight: 700; }
+.t-label { color: rgba(255,255,255,0.4); }
+.t-val { color: #a8e6b4; }
+
+/* ========= STATS ========= */
+.stats-band {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+  padding: 28px 48px;
+  display: flex; justify-content: center;
+  gap: 0;
+}
+.stat-cell {
+  flex: 1; max-width: 220px;
+  text-align: center;
+  padding: 0 32px;
+  position: relative;
+}
+.stat-cell + .stat-cell::before {
+  content: ''; position: absolute; left: 0; top: 10%; bottom: 10%;
+  width: 1px; background: var(--border);
+}
+.stat-n {
+  font-family: 'Syne', sans-serif;
+  font-size: 34px; font-weight: 800;
+  letter-spacing: -1.5px; color: var(--ink);
+  display: block;
+}
+.stat-n sup { font-size: 18px; vertical-align: super; }
+.stat-l { font-size: 13px; color: var(--ink-3); margin-top: 3px; display: block; }
+
+/* ========= SECTION COMMONS ========= */
+.section { padding: 96px 48px; }
+.section-inner { max-width: 1240px; margin: 0 auto; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 18px;
+}
+.eyebrow-line { width: 20px; height: 2px; background: var(--accent); border-radius: 1px; }
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 42px; font-weight: 800;
+  letter-spacing: -1.8px; line-height: 1.1;
+  color: var(--ink); margin-bottom: 16px;
+}
+.section-lead {
+  font-size: 17px; color: var(--ink-2); line-height: 1.72;
+  max-width: 600px; margin-bottom: 64px;
+}
+
+/* ========= FEATURES – main grid ========= */
+.feat-section { background: var(--surface-2); }
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Large feature card */
+.fc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 30px 26px;
+  display: flex; flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative; overflow: hidden;
+}
+.fc:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+
+/* Accent stripe top */
+.fc::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--stripe-color, var(--accent));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.fc:hover::before { opacity: 1; }
+
+.fc-span2 { grid-column: span 2; }
+
+.fc-icon-wrap {
+  width: 46px; height: 46px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px; flex-shrink: 0;
+}
+.fi-blue   { background: var(--accent-light); }
+.fi-teal   { background: var(--teal-light); }
+.fi-coral  { background: var(--coral-light); }
+.fi-amber  { background: var(--amber-light); }
+.fi-purple { background: var(--purple-light); }
+
+.fc-eyebrow {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-4);
+  margin-bottom: 6px;
+}
+.fc h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 19px; font-weight: 700;
+  letter-spacing: -0.4px; color: var(--ink);
+  margin-bottom: 10px; line-height: 1.25;
+}
+.fc p {
+  font-size: 14px; color: var(--ink-2);
+  line-height: 1.7; flex: 1;
+}
+.fc-meta {
+  margin-top: 20px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+}
+.fc-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.fc-tag {
+  font-size: 11px; font-weight: 600;
+  padding: 3px 9px; border-radius: 6px;
+  background: var(--surface-2); color: var(--ink-3);
+  border: 1px solid var(--border);
+}
+.fc-metric {
+  font-size: 12px; font-weight: 600;
+  color: var(--ink-2);
+  display: flex; align-items: center; gap: 5px;
+  white-space: nowrap;
+}
+.fc-metric-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+}
+
+/* ---- Inline demo in wide card ---- */
+.fc-demo {
+  margin-top: 18px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 11.5px; line-height: 1.85;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.fc-demo-col { display: flex; flex-direction: column; gap: 2px; }
+.fc-demo-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--ink-4); margin-bottom: 6px;
+}
+.fc-demo-noisy { color: var(--ink-3); }
+.fc-demo-noisy .hl { color: var(--coral); font-weight: 700; }
+.fc-demo-clean .ok { color: var(--teal); font-weight: 700; }
+.fc-demo-clean { color: var(--ink-2); }
+.fc-demo-arrow {
+  align-self: center; justify-self: center;
+  font-size: 22px; color: var(--accent);
+  display: flex; align-items: center;
+}
+
+/* Wide ocr card spans full width at top */
+.fc-wide { grid-column: 1 / -1; flex-direction: row; gap: 32px; align-items: flex-start; }
+.fc-wide .fc-left { flex: 0 0 auto; max-width: 380px; }
+.fc-wide .fc-right { flex: 1; min-width: 0; }
+
+/* ---- Accuracy meter ---- */
+.accuracy-bar-wrap { margin-top: 16px; }
+.acc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.acc-label { font-size: 12px; color: var(--ink-2); width: 120px; flex-shrink: 0; }
+.acc-track {
+  flex: 1; height: 8px;
+  background: var(--surface-3);
+  border-radius: 99px; overflow: hidden;
+}
+.acc-fill {
+  height: 100%; border-radius: 99px;
+  background: var(--accent);
+  transition: width 1.2s cubic-bezier(.22,1,.36,1);
+}
+.acc-fill.teal { background: var(--teal); }
+.acc-fill.amber { background: var(--amber); }
+.acc-pct { font-size: 12px; font-weight: 700; color: var(--ink-2); width: 36px; text-align: right; }
+
+/* ---- CORS / response table in card ---- */
+.mini-table { width: 100%; font-size: 12px; border-collapse: collapse; margin-top: 12px; }
+.mini-table tr { border-bottom: 1px solid var(--border); }
+.mini-table tr:last-child { border-bottom: none; }
+.mini-table td { padding: 8px 4px; }
+.mini-table td:first-child { color: var(--ink-3); width: 50%; }
+.mini-table td:last-child { font-family: 'Courier New', monospace; color: var(--accent); font-size: 11px; }
+.resp-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 8px; border-radius: 6px;
+}
+.resp-200 { background: var(--teal-light); color: var(--teal); }
+.resp-400 { background: var(--amber-light); color: var(--amber); }
+.resp-500 { background: var(--coral-light); color: var(--coral); }
+
+/* ========= PIPELINE ========= */
+.pipe-section { background: var(--ink); }
+.pipe-section h2 { color: #fff; }
+.pipe-section .eyebrow { color: #7c8bff; }
+.pipe-section .eyebrow-line { background: #7c8bff; }
+.pipe-section .section-lead { color: rgba(255,255,255,0.5); max-width: 640px; }
+.pipe-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; margin-top: 60px; position: relative;
+}
+.pipe-row::before {
+  content: ''; position: absolute;
+  top: 30px; left: 12.5%; right: 12.5%;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  z-index: 0;
+}
+.pipe-step {
+  text-align: center; padding: 0 24px;
+  position: relative; z-index: 1;
+}
+.pipe-num {
+  width: 60px; height: 60px; border-radius: 50%;
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 22px;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+.pn1 { background: var(--accent); color: #fff; border-color: var(--accent); }
+.pn2 { background: #3d4ff0; color: #fff; border-color: #3d4ff0; }
+.pn3 { background: #1a9e7a; color: #fff; border-color: #1a9e7a; }
+.pn4 { background: var(--teal); color: #fff; border-color: var(--teal); }
+.pipe-step h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: #fff; margin-bottom: 10px;
+}
+.pipe-step p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.65; }
+.pipe-detail {
+  margin-top: 10px; font-size: 11px; font-weight: 600;
+  font-family: 'Courier New', monospace;
+  color: #7c8bff; background: rgba(42,58,245,0.12);
+  padding: 3px 10px; border-radius: 6px;
+  display: inline-block;
+}
+
+/* ========= API DOCS ========= */
+.api-section { background: #0a0d1a; }
+.api-section h2 { color: #fff; }
+.api-section .eyebrow { color: #7c8bff; }
+.api-section .eyebrow-line { background: #7c8bff; }
+.api-section .section-lead { color: rgba(255,255,255,0.45); }
+.api-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
+.api-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.api-card:hover { border-color: rgba(42,58,245,0.5); }
+.api-card-header {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 20px 22px; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.api-method {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.06em;
+  padding: 5px 11px; border-radius: 7px;
+  font-family: 'Courier New', monospace;
+  flex-shrink: 0; margin-top: 2px;
+}
+.m-post { background: rgba(42,58,245,0.25); color: #8b9bff; }
+.api-path {
+  font-family: 'Courier New', monospace;
+  font-size: 14px; font-weight: 700; color: #7c8bff;
+  margin-bottom: 5px; word-break: break-all;
+}
+.api-tagline { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.55; }
+.api-params { padding: 14px 22px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.api-params-title {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25);
+  margin-bottom: 10px;
+}
+.param-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 7px; }
+.param-name { font-family: 'Courier New', monospace; font-size: 12px; color: #c5ccff; font-weight: 700; flex-shrink: 0; }
+.param-type { font-family: 'Courier New', monospace; font-size: 11px; color: rgba(255,255,255,0.3); flex-shrink: 0; }
+.param-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+.api-response { padding: 14px 22px; }
+.api-resp-title {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25);
+  margin-bottom: 10px;
+}
+.api-resp-code {
+  background: rgba(0,0,0,0.3);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-family: 'Courier New', monospace;
+  font-size: 11.5px; line-height: 1.8;
+}
+
+/* ========= DATA MODELS ========= */
+.models-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 60px; }
+.model-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.model-head {
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  padding: 13px 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.model-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; padding: 3px 8px; border-radius: 5px;
+  background: var(--accent-light); color: var(--accent);
+}
+.model-name-code {
+  font-family: 'Courier New', monospace;
+  font-size: 14px; font-weight: 700; color: var(--ink);
+}
+.field-row {
+  display: grid;
+  grid-template-columns: 150px 90px 1fr;
+  gap: 10px; padding: 11px 20px;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline; font-size: 13px;
+}
+.field-row:last-child { border-bottom: none; }
+.f-name { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 700; }
+.f-type { font-family: 'Courier New', monospace; color: var(--teal); font-size: 11.5px; }
+.f-desc { color: var(--ink-3); font-size: 12.5px; }
+
+/* ========= CTA ========= */
+.cta-wrap {
+  background: var(--ink);
+  padding: 100px 48px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-glow {
+  position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse, rgba(42,58,245,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.cta-wrap h2 { color: #fff; font-size: 46px; margin-bottom: 18px; }
+.cta-wrap p { color: rgba(255,255,255,0.55); font-size: 18px; margin-bottom: 42px; line-height: 1.7; }
+.cta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.btn-cta-white {
+  background: #fff; color: var(--accent);
+  padding: 14px 32px; border-radius: var(--radius);
+  font-size: 15px; font-weight: 700;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-cta-white:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+.btn-cta-ghost {
+  background: transparent; color: #fff;
+  padding: 14px 32px; border-radius: var(--radius);
+  font-size: 15px; font-weight: 500;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: all 0.15s;
+}
+.btn-cta-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.07); }
+.cta-install {
+  margin-top: 38px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 16px 24px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px; color: rgba(255,255,255,0.5);
+  display: inline-flex; align-items: center; gap: 16px;
+}
+.cta-install .cmd { color: rgba(255,255,255,0.85); }
+.cta-install .prompt { color: #7c8bff; }
+
+/* ========= FOOTER ========= */
+footer {
+  background: #070910;
+  padding: 36px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 800;
+  color: rgba(255,255,255,0.7);
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-url {
+  font-family: 'Courier New', monospace;
+  font-size: 12px; color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.06);
+  padding: 4px 10px; border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+footer nav { display: flex; gap: 24px; }
+footer nav a {
+  font-size: 13px; color: rgba(255,255,255,0.35);
+  text-decoration: none; transition: color 0.15s;
+}
+footer nav a:hover { color: rgba(255,255,255,0.75); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.22); }
+
+/* ========= RESPONSIVE ========= */
+@media (max-width: 1050px) {
+  .feat-grid { grid-template-columns: 1fr 1fr; }
+  .fc-span2 { grid-column: span 1; }
+  .fc-wide { flex-direction: column; }
+  .fc-wide .fc-left { max-width: 100%; }
+  .api-grid { grid-template-columns: 1fr; }
+  .pipe-row { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .pipe-row::before { display: none; }
+}
+@media (max-width: 860px) {
+  .hero-wrap { grid-template-columns: 1fr; gap: 52px; padding: 60px 24px 52px; }
+  h1 { font-size: 40px; letter-spacing: -1.8px; }
+  h2 { font-size: 32px; }
+  nav { padding: 0 24px; }
+  .nav-url { display: none; }
+  .section { padding: 68px 24px; }
+  .stats-band { padding: 24px; gap: 0; flex-wrap: wrap; }
+  .stat-cell { min-width: 50%; padding: 16px; }
+  .models-grid { grid-template-columns: 1fr; }
+  .cta-wrap { padding: 68px 24px; }
+  footer { padding: 28px 24px; }
+}
+@media (max-width: 620px) {
+  .nav-mid { display: none; }
+  .feat-grid { grid-template-columns: 1fr; }
+  .pipe-row { grid-template-columns: 1fr; gap: 28px; }
+  h1 { font-size: 34px; }
+  h2 { font-size: 28px; }
+  .fc-wide { flex-direction: column; }
+  .fc-demo { grid-template-columns: 1fr; }
+}
+
+/* ========= ANIMATION ========= */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .fade-up.in { opacity: 1; transform: none; }
+  .fade-up-d1 { transition-delay: 0.08s; }
+  .fade-up-d2 { transition-delay: 0.16s; }
+  .fade-up-d3 { transition-delay: 0.24s; }
+  .fade-up-d4 { transition-delay: 0.32s; }
+}
+
+.ico { width: 22px; height: 22px; flex-shrink: 0; }
+.ico path, .ico rect, .ico circle, .ico polyline, .ico line, .ico polygon {
+  fill: none; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 4h4M3 8h8M3 12h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="13" cy="4" r="1.5" fill="#fff"/>
+      </svg>
+    </div>
+    DocIntel
+  </a>
+  <ul class="nav-mid">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#api">API Docs</a></li>
+    <li><a href="#models">Schemas</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-url">docintel.io</span>
+    <a href="#" class="nav-btn-ghost">Sign in</a>
+    <a href="#cta" class="nav-btn-solid">
+      <svg class="ico" style="width:14px;height:14px" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6" stroke="currentColor"/><polyline points="8 6 2 12 8 18" stroke="currentColor"/></svg>
+      Start free
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <div>
+    <div class="hero-badge">
+      <span class="badge-live"></span>
+      v2.1 · Tesseract 5 + GPT-4o
+    </div>
+    <h1>
+      Document<br>intelligence,<br><span class="h1-accent">fully automated.</span>
+    </h1>
+    <p class="h1-sub">
+      Point DocIntel at any photo, handwritten note, or scanned form. OCR reads it. AI structures it. A print-ready PDF ships in under 3 seconds — no parsing code, no manual cleanup.
+    </p>
+    <div class="hero-actions">
+      <a href="#api" class="btn-lg btn-primary-lg">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6" stroke="currentColor"/><polyline points="8 6 2 12 8 18" stroke="currentColor"/></svg>
+        View API docs
+      </a>
+      <a href="#features" class="btn-lg btn-ghost-lg">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor"/><polyline points="12 8 12 12 14 14" stroke="currentColor"/></svg>
+        Explore features
+      </a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><span class="trust-dot"></span> No vendor lock-in</div>
+      <div class="trust-item"><span class="trust-dot"></span> Self-hostable</div>
+      <div class="trust-item"><span class="trust-dot"></span> Open API</div>
+    </div>
+  </div>
+
+  <div class="hero-terminal fade-up">
+    <div class="term-bar">
+      <span class="term-dot term-dot-r"></span>
+      <span class="term-dot term-dot-y"></span>
+      <span class="term-dot term-dot-g"></span>
+      <span class="term-url">POST https://api.docintel.io/v1/analyze-photo-to-pdf</span>
+    </div>
+    <div class="term-body">
+      <div class="t-comment"># Upload photo → structured PDF in one call</div>
+      <div>&nbsp;</div>
+      <div>
+        <span class="t-op">curl</span>
+        <span class="t-white"> -X POST </span>
+        <span class="t-url">https://api.docintel.io/v1/analyze-photo-to-pdf</span>
+      </div>
+      <div>
+        <span class="t-white">&nbsp; -H </span>
+        <span class="t-str">"Authorization: Bearer $DOCINTEL_KEY"</span>
+      </div>
+      <div>
+        <span class="t-white">&nbsp; -F </span>
+        <span class="t-str">"file=@intake_form.jpg"</span>
+      </div>
+      <div>
+        <span class="t-white">&nbsp; -F </span>
+        <span class="t-str">"topic=Patient Registry"</span>
+      </div>
+      <div>
+        <span class="t-white">&nbsp; -F </span>
+        <span class="t-str">"compact_mode=true"</span>
+      </div>
+      <div>
+        <span class="t-white">&nbsp; -F </span>
+        <span class="t-str">"remove_duplicates=true"</span>
+      </div>
+    </div>
+    <div class="term-response">
+      <div><span class="t-success">200 OK</span> <span class="t-dim">· 1.8s · application/json</span></div>
+      <div>&nbsp;</div>
+      <div><span class="t-dim">{</span></div>
+      <div>&nbsp; <span class="t-key">"status"</span><span class="t-dim">:</span> <span class="t-str">"success"</span><span class="t-dim">,</span></div>
+      <div>&nbsp; <span class="t-key">"records_extracted"</span><span class="t-dim">:</span> <span class="t-num">24</span><span class="t-dim">,</span></div>
+      <div>&nbsp; <span class="t-key">"duplicates_removed"</span><span class="t-dim">:</span> <span class="t-num">3</span><span class="t-dim">,</span></div>
+      <div>&nbsp; <span class="t-key">"pdf_file"</span><span class="t-dim">:</span> <span class="t-str">"ocr_processed_report.pdf"</span></div>
+      <div><span class="t-dim">}</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stat-cell">
+    <span class="stat-n">98<sup>%</sup></span>
+    <span class="stat-l">OCR accuracy on clean scans</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-n">&lt;3s</span>
+    <span class="stat-l">Average end-to-end latency</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-n">2</span>
+    <span class="stat-l">API endpoints, full pipeline</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-n">A4</span>
+    <span class="stat-l">Print-ready PDF output</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-n">0</span>
+    <span class="stat-l">Custom parsing code needed</span>
+  </div>
+</div>
+
+<!-- =========================================================
+     FEATURES
+========================================================= -->
+<section class="section feat-section" id="features">
+  <div class="section-inner">
+    <p class="eyebrow"><span class="eyebrow-line"></span> Platform capabilities</p>
+    <h2>Every layer of the<br>document pipeline, built in.</h2>
+    <p class="section-lead">
+      From raw pixels to structured records to a branded PDF — DocIntel handles every stage. No glue code. No third-party middleware. One API, one response.
+    </p>
+
+    <div class="feat-grid">
+
+      <!-- CARD 1: OCR — wide, spans all 3 columns -->
+      <div class="fc fc-wide fade-up" style="--stripe-color: var(--accent);">
+        <div class="fc-left">
+          <div class="fc-icon-wrap fi-blue">
+            <svg class="ico" viewBox="0 0 24 24" style="stroke:var(--accent)" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M7 7h3M14 7h3M7 12h10M7 17h7" />
+            </svg>
+          </div>
+          <div class="fc-eyebrow">Stage 1 · Image ingestion</div>
+          <h3>Tesseract OCR — multi-format, multi-language</h3>
+          <p>
+            Tesseract v5's LSTM engine reads printed text, handwriting, stamps, and mixed-layout documents.
+            It handles skewed, rotated, low-resolution, and faded images without pre-processing — PIL normalises the image automatically before the OCR pass.
+          </p>
+          <div class="fc-meta">
+            <div class="fc-tags">
+              <span class="fc-tag">Tesseract 5 LSTM</span>
+              <span class="fc-tag">PIL preprocessing</span>
+              <span class="fc-tag">JPEG · PNG · WEBP · TIFF</span>
+              <span class="fc-tag">100+ languages</span>
+            </div>
+          </div>
+        </div>
+        <div class="fc-right">
+          <div class="fc-eyebrow" style="margin-bottom:10px;">Live OCR correction demo</div>
+          <div class="fc-demo">
+            <div class="fc-demo-col">
+              <div class="fc-demo-label">Raw OCR output</div>
+              <div class="fc-demo-noisy">J<span class="hl">0</span>hn Sm<span class="hl">1</span>th</div>
+              <div class="fc-demo-noisy">14 E<span class="hl">I</span>m Str<span class="hl">33</span>t</div>
+              <div class="fc-demo-noisy">B<span class="hl">0</span>st<span class="hl">0</span>n MA <span class="hl">0</span>21<span class="hl">O</span>1</div>
+              <div class="fc-demo-noisy" style="margin-top:10px;">Mar<span class="hl">1</span>a Gar<span class="hl">c1</span>a</div>
+              <div class="fc-demo-noisy">7 <span class="hl">0</span>ak Av<span class="hl">3</span></div>
+              <div class="fc-demo-noisy">M<span class="hl">1</span>am<span class="hl">1</span> FL 33<span class="hl">1O</span>1</div>
+            </div>
+            <div class="fc-demo-arrow">→</div>
+            <div class="fc-demo-col">
+              <div class="fc-demo-label">AI-corrected records</div>
+              <div class="fc-demo-clean"><span class="ok">✓</span> John Smith</div>
+              <div class="fc-demo-clean">&nbsp;&nbsp;14 Elm Street</div>
+              <div class="fc-demo-clean">&nbsp;&nbsp;Boston MA 02101</div>
+              <div class="fc-demo-clean" style="margin-top:10px;"><span class="ok">✓</span> Maria Garcia</div>
+              <div class="fc-demo-clean">&nbsp;&nbsp;7 Oak Avenue</div>
+              <div class="fc-demo-clean">&nbsp;&nbsp;Miami FL 33101</div>
+            </div>
+          </div>
+          <div class="accuracy-bar-wrap" style="margin-top:18px;">
+            <div class="acc-row">
+              <span class="acc-label">Printed text</span>
+              <div class="acc-track"><div class="acc-fill" style="width:98%"></div></div>
+              <span class="acc-pct">98%</span>
+            </div>
+            <div class="acc-row">
+              <span class="acc-label">Handwriting</span>
+              <div class="acc-track"><div class="acc-fill teal" style="width:84%"></div></div>
+              <span class="acc-pct">84%</span>
+            </div>
+            <div class="acc-row">
+              <span class="acc-label">Mixed layouts</span>
+              <div class="acc-track"><div class="acc-fill amber" style="width:91%"></div></div>
+              <span class="acc-pct">91%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: AI structuring -->
+      <div class="fc fade-up fade-up-d1" style="--stripe-color: var(--teal);">
+        <div class="fc-icon-wrap fi-teal">
+          <svg class="ico" viewBox="0 0 24 24" style="stroke:var(--teal)" aria-hidden="true">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="fc-eyebrow">Stage 2 · AI parsing</div>
+        <h3>GPT-4o-mini structures messy OCR into clean JSON</h3>
+        <p>
+          The raw OCR text — typos, line breaks, merged tokens and all — is sent to GPT-4o-mini with a precision prompt.
+          It returns a validated JSON array of <code style="font-size:12px;background:var(--surface-2);padding:1px 5px;border-radius:4px">{ name, address }</code> objects, filling gaps with placeholder tags rather than silently dropping records.
+        </p>
+        <div class="fc-meta">
+          <div class="fc-tags">
+            <span class="fc-tag">GPT-4o-mini</span>
+            <span class="fc-tag">JSON mode</span>
+            <span class="fc-tag">Graceful fallback</span>
+          </div>
+          <div class="fc-metric">
+            <span class="fc-metric-dot" style="background:var(--teal)"></span>
+            ~180ms AI parse
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: PDF generation -->
+      <div class="fc fade-up fade-up-d2" style="--stripe-color: var(--coral);">
+        <div class="fc-icon-wrap fi-coral">
+          <svg class="ico" viewBox="0 0 24 24" style="stroke:var(--coral)" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="14" y2="17"/>
+          </svg>
+        </div>
+        <div class="fc-eyebrow">Stage 4 · Document output</div>
+        <h3>Premium A4 PDF — print-ready, branded, configurable</h3>
+        <p>
+          pdfkit renders an HTML template with a blue accent card system, executive summary box, and configurable layout — compact 2-column or standard single-column.
+          Text alignment, sort order, and deduplication are all API parameters.
+        </p>
+        <div class="fc-meta">
+          <div class="fc-tags">
+            <span class="fc-tag">pdfkit</span>
+            <span class="fc-tag">A4 · Letter</span>
+            <span class="fc-tag">Compact mode</span>
+            <span class="fc-tag">Page-break aware</span>
+          </div>
+          <div class="fc-metric">
+            <span class="fc-metric-dot" style="background:var(--coral)"></span>
+            ~220ms render
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4: Data cleaning — spans 2 cols -->
+      <div class="fc fc-span2 fade-up fade-up-d1" style="--stripe-color: var(--amber);">
+        <div class="fc-icon-wrap fi-amber">
+          <svg class="ico" viewBox="0 0 24 24" style="stroke:var(--amber)" aria-hidden="true">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+          </svg>
+        </div>
+        <div class="fc-eyebrow">Stage 3 · Data pipeline</div>
+        <h3>Sorting, deduplication, and layout control — server-side</h3>
+        <p>
+          Every record set passes through a shared cleaning layer before any file is rendered.
+          Deduplication uses a case-normalised tuple key on <code style="font-size:12px;background:var(--surface-2);padding:1px 5px;border-radius:4px">(name, address)</code> — catching duplicates even if capitalization differs.
+          Sorting runs A→Z or Z→A on the cleaned name field. All three operations are optional and toggled per request.
+        </p>
+        <table class="mini-table">
+          <tr><td>Sort order</td><td>?sort_order=asc | desc</td></tr>
+          <tr><td>Deduplication</td><td>?remove_duplicates=true</td></tr>
+          <tr><td>Card layout</td><td>?compact_mode=true | false</td></tr>
+          <tr><td>Text alignment</td><td>?text_alignment=left | center | right | justify</td></tr>
+        </table>
+        <div class="fc-meta">
+          <div class="fc-tags">
+            <span class="fc-tag">O(n) dedup</span>
+            <span class="fc-tag">Stable sort</span>
+            <span class="fc-tag">4 layout params</span>
+          </div>
+          <div class="fc-metric">
+            <span class="fc-metric-dot" style="background:var(--amber)"></span>
+            Zero extra latency
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 5: API / CORS -->
+      <div class="fc fade-up fade-up-d2" style="--stripe-color: var(--accent);">
+        <div class="fc-icon-wrap fi-blue">
+          <svg class="ico" viewBox="0 0 24 24" style="stroke:var(--accent)" aria-hidden="true">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <div class="fc-eyebrow">Infrastructure</div>
+        <h3>FastAPI — async, typed, self-documenting</h3>
+        <p>
+          Every endpoint is async, CORS-enabled for all origins, and validated by Pydantic.
+          FastAPI auto-generates an OpenAPI spec at <code style="font-size:12px;background:var(--surface-2);padding:1px 5px;border-radius:4px">/docs</code> — no extra tooling needed to explore or test the API.
+        </p>
+        <div class="fc-meta">
+          <div class="fc-tags">
+            <span class="fc-tag">FastAPI</span>
+            <span class="fc-tag">Uvicorn ASGI</span>
+            <span class="fc-tag">OpenAPI /docs</span>
+            <span class="fc-tag">Pydantic v2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 6: Excel output -->
+      <div class="fc fade-up fade-up-d3" style="--stripe-color: var(--teal);">
+        <div class="fc-icon-wrap fi-teal">
+          <svg class="ico" viewBox="0 0 24 24" style="stroke:var(--teal)" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18M3 15h18M9 3v18"/>
+          </svg>
+        </div>
+        <div class="fc-eyebrow">Output format</div>
+        <h3>Styled Excel workbooks via openpyxl — ready to extend</h3>
+        <p>
+          openpyxl is already wired into the stack with <code style="font-size:12px;background:var(--surface-2);padding:1px 5px;border-radius:4px">Font</code>, <code style="font-size:12px;background:var(--surface-2);padding:1px 5px;border-radius:4px">PatternFill</code>, <code style="font-size:12px;background:var(--surface-2);padding:1px 5px;border-radius:4px">Border</code>, and <code style="font-size:12px;background:var(--surface-2);padding:1px 5px;border-radius:4px">Alignment</code> imported.
+          Adding an XLSX export endpoint requires only a few lines — the data pipeline, record model, and cleaning logic are fully shared.
+        </p>
+        <div class="fc-meta">
+          <div class="fc-tags">
+            <span class="fc-tag">openpyxl</span>
+            <span class="fc-tag">Multi-sheet</span>
+            <span class="fc-tag">Styled cells</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 7: Error handling / responses -->
+      <div class="fc fade-up fade-up-d1" style="--stripe-color: var(--purple);">
+        <div class="fc-icon-wrap fi-purple">
+          <svg class="ico" viewBox="0 0 24 24" style="stroke:var(--purple)" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="fc-eyebrow">Reliability</div>
+        <h3>Structured errors, graceful fallbacks, zero silent failures</h3>
+        <p>
+          Every failure path raises a typed HTTP exception with a clear <code style="font-size:12px;background:var(--surface-2);padding:1px 5px;border-radius:4px">detail</code> message.
+          If OCR finds no text, a 400 is returned immediately. If the AI key is absent, the pipeline falls back to a line-pair parser — you always get a document, never a silent empty file.
+        </p>
+        <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+          <span class="resp-badge resp-200">200 Success</span>
+          <span class="resp-badge resp-400">400 Bad input</span>
+          <span class="resp-badge resp-500">500 Pipeline error</span>
+        </div>
+        <div class="fc-meta">
+          <div class="fc-tags">
+            <span class="fc-tag">HTTPException</span>
+            <span class="fc-tag">OCR fallback</span>
+            <span class="fc-tag">No silent errors</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 8: Image support -->
+      <div class="fc fade-up fade-up-d2" style="--stripe-color: var(--coral);">
+        <div class="fc-icon-wrap fi-coral">
+          <svg class="ico" viewBox="0 0 24 24" style="stroke:var(--coral)" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+        <div class="fc-eyebrow">Input formats</div>
+        <h3>Any image format PIL supports — JPEG, PNG, TIFF, WEBP</h3>
+        <p>
+          The <code style="font-size:12px;background:var(--surface-2);padding:1px 5px;border-radius:4px">UploadFile</code> handler accepts any PIL-compatible image. The bytes are opened directly in memory — no temp file writes, no disk I/O overhead. Multi-page TIFF and multi-frame images are handled by Tesseract's native page segmentation.
+        </p>
+        <div class="fc-meta">
+          <div class="fc-tags">
+            <span class="fc-tag">JPEG · PNG</span>
+            <span class="fc-tag">TIFF · WEBP</span>
+            <span class="fc-tag">In-memory</span>
+            <span class="fc-tag">No disk write</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /feat-grid -->
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="section pipe-section" id="pipeline">
+  <div class="section-inner">
+    <p class="eyebrow"><span class="eyebrow-line" style="background:#7c8bff"></span> How it works</p>
+    <h2>Four stages,<br>one clean document.</h2>
+    <p class="section-lead">
+      Every call to <code style="font-size:14px;background:rgba(255,255,255,0.08);padding:2px 8px;border-radius:5px">/analyze-photo-to-pdf</code> travels the same deterministic pipeline. If the AI key is missing at stage 2, a line-pair fallback kicks in automatically — so you never get an empty response.
+    </p>
+    <div class="pipe-row fade-up">
+      <div class="pipe-step">
+        <div class="pipe-num pn1">1</div>
+        <h4>Upload &amp; OCR</h4>
+        <p>PIL opens the image from memory. Tesseract v5 LSTM extracts all readable text, returning a raw string regardless of layout complexity.</p>
+        <span class="pipe-detail">pytesseract · PIL</span>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num pn2">2</div>
+        <h4>AI structuring</h4>
+        <p>GPT-4o-mini receives a precision prompt with the OCR text and returns a validated JSON array of <code style="font-size:11px">{ name, address }</code> objects — typos corrected.</p>
+        <span class="pipe-detail">gpt-4o-mini · JSON mode</span>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num pn3">3</div>
+        <h4>Clean &amp; sort</h4>
+        <p>Records pass through the shared pipeline layer: deduplication by normalised key, optional A→Z or Z→A sort, and Pydantic validation of each field.</p>
+        <span class="pipe-detail">process_data_cleaning()</span>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num pn4">4</div>
+        <h4>Render &amp; return</h4>
+        <p>pdfkit renders the branded HTML template to an A4 PDF. The filename and metadata are returned in the JSON response body.</p>
+        <span class="pipe-detail">pdfkit · wkhtmltopdf</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- API DOCS -->
+<section class="section api-section" id="api">
+  <div class="section-inner">
+    <p class="eyebrow"><span class="eyebrow-line"></span> API reference</p>
+    <h2>Two endpoints.<br>Full pipeline.</h2>
+    <p class="section-lead">
+      Both accept multipart form data or JSON. Both return structured JSON with the output filename. Base URL: <code style="font-size:13px;background:rgba(255,255,255,0.08);padding:2px 8px;border-radius:5px">https://api.docintel.io/v1</code>
+    </p>
+
+    <div class="api-grid fade-up">
+
+      <div class="api-card">
+        <div class="api-card-header">
+          <span class="api-method m-post">POST</span>
+          <div>
+            <div class="api-path">/analyze-photo-to-pdf</div>
+            <div class="api-tagline">Flagship endpoint. Accepts a photo, runs the full OCR → AI → clean → PDF pipeline, and returns the output filename plus metadata.</div>
+          </div>
+        </div>
+        <div class="api-params">
+          <div class="api-params-title">Parameters (multipart/form-data)</div>
+          <div class="param-row">
+            <span class="param-name">file</span>
+            <span class="param-type">UploadFile</span>
+            <span class="param-desc">Image file. JPEG, PNG, TIFF, WEBP, or any PIL-compatible format.</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">topic</span>
+            <span class="param-type">string</span>
+            <span class="param-desc">Document subject label shown in the PDF header and used in the AI prompt context.</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">compact_mode</span>
+            <span class="param-type">bool</span>
+            <span class="param-desc">When <code style="font-size:11px">true</code>, switches to a two-column card layout to fit more records per page.</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">text_alignment</span>
+            <span class="param-type">string</span>
+            <span class="param-desc">Card text alignment: <code style="font-size:11px">left</code> (default) · <code style="font-size:11px">center</code> · <code style="font-size:11px">right</code> · <code style="font-size:11px">justify</code></span>
+          </div>
+        </div>
+        <div class="api-response">
+          <div class="api-resp-title">Response 200</div>
+          <div class="api-resp-code">
+            <span style="color:#7c8bff">"status"</span><span style="color:rgba(255,255,255,0.3)">:</span> <span style="color:#a8e6b4">"success"</span><span style="color:rgba(255,255,255,0.3)">,</span><br>
+            <span style="color:#7c8bff">"records_extracted_count"</span><span style="color:rgba(255,255,255,0.3)">:</span> <span style="color:#f9c95c">24</span><span style="color:rgba(255,255,255,0.3)">,</span><br>
+            <span style="color:#7c8bff">"ocr_text_discovered"</span><span style="color:rgba(255,255,255,0.3)">:</span> <span style="color:#a8e6b4">"J0hn Sm1th..."</span><span style="color:rgba(255,255,255,0.3)">,</span><br>
+            <span style="color:#7c8bff">"pdf_file"</span><span style="color:rgba(255,255,255,0.3)">:</span> <span style="color:#a8e6b4">"ocr_processed_report.pdf"</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="api-card">
+        <div class="api-card-header">
+          <span class="api-method m-post">POST</span>
+          <div>
+            <div class="api-path">/generate-premium-pdf</div>
+            <div class="api-tagline">Direct PDF generation from pre-structured data. Use when records are already clean and you only need a formatted document.</div>
+          </div>
+        </div>
+        <div class="api-params">
+          <div class="api-params-title">Body (application/json — DataPayload)</div>
+          <div class="param-row">
+            <span class="param-name">topic</span>
+            <span class="param-type">string</span>
+            <span class="param-desc">Document subject label for the PDF header.</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">records</span>
+            <span class="param-type">Record[]</span>
+            <span class="param-desc">Array of <code style="font-size:11px">{ name?, address? }</code> objects. Both fields optional.</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">sort_order</span>
+            <span class="param-type">string?</span>
+            <span class="param-desc">Sort before rendering: <code style="font-size:11px">"asc"</code> or <code style="font-size:11px">"desc"</code>. Omit to preserve input order.</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">remove_duplicates</span>
+            <span class="param-type">bool</span>
+            <span class="param-desc">Deduplicate records by (name, address) tuple before rendering.</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">compact_mode</span>
+            <span class="param-type">bool</span>
+            <span class="param-desc">Two-column card layout for high-density output.</span>
+          </div>
+        </div>
+        <div class="api-response">
+          <div class="api-resp-title">Response 200</div>
+          <div class="api-resp-code">
+            <span style="color:#7c8bff">"status"</span><span style="color:rgba(255,255,255,0.3)">:</span> <span style="color:#a8e6b4">"success"</span><span style="color:rgba(255,255,255,0.3)">,</span><br>
+            <span style="color:#7c8bff">"file"</span><span style="color:rgba(255,255,255,0.3)">:</span> <span style="color:#a8e6b4">"ocr_processed_report.pdf"</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DATA MODELS -->
+<section class="section" id="models">
+  <div class="section-inner">
+    <p class="eyebrow"><span class="eyebrow-line"></span> Pydantic schemas</p>
+    <h2>Two models. Fully validated.</h2>
+    <p class="section-lead">
+      All request bodies are validated at the framework layer by Pydantic v2. Both fields in <code style="background:var(--surface-2);padding:2px 7px;border-radius:5px;font-size:14px">Record</code> are optional — the rendering layer substitutes safe fallbacks so malformed data never crashes the pipeline.
+    </p>
+    <div class="models-grid fade-up">
+      <div class="model-card">
+        <div class="model-head">
+          <span class="model-badge">BaseModel</span>
+          <span class="model-name-code">Record</span>
+        </div>
+        <div class="field-row"><span class="f-name">name</span><span class="f-type">str | None</span><span class="f-desc">Rendered as "Unknown" when absent</span></div>
+        <div class="field-row"><span class="f-name">address</span><span class="f-type">str | None</span><span class="f-desc">Rendered as "N/A" when absent</span></div>
+      </div>
+      <div class="model-card">
+        <div class="model-head">
+          <span class="model-badge">BaseModel</span>
+          <span class="model-name-code">DataPayload</span>
+        </div>
+        <div class="field-row"><span class="f-name">topic</span><span class="f-type">str</span><span class="f-desc">PDF header label + AI prompt context</span></div>
+        <div class="field-row"><span class="f-name">records</span><span class="f-type">List[Record]</span><span class="f-desc">Input record set, pre-structured</span></div>
+        <div class="field-row"><span class="f-name">sort_order</span><span class="f-type">str | None</span><span class="f-desc">"asc" · "desc" · null (preserve order)</span></div>
+        <div class="field-row"><span class="f-name">remove_duplicates</span><span class="f-type">bool = False</span><span class="f-desc">Case-normalised (name, address) key dedup</span></div>
+        <div class="field-row"><span class="f-name">compact_mode</span><span class="f-type">bool = False</span><span class="f-desc">Two-column card layout</span></div>
+        <div class="field-row"><span class="f-name">text_alignment</span><span class="f-type">str = "left"</span><span class="f-desc">left · center · right · justify</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-wrap" id="cta">
+  <div class="cta-glow"></div>
+  <div class="cta-inner fade-up">
+    <p style="font-size:11.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;">Self-hostable · MIT license</p>
+    <h2>Start extracting<br>documents today.</h2>
+    <p>Set your <code style="background:rgba(255,255,255,0.1);padding:2px 8px;border-radius:5px">OPENAI_API_KEY</code>, install dependencies, and your document intelligence API is live in under two minutes.</p>
+    <div class="cta-btns">
+      <a href="#api" class="btn-cta-white">
+        <svg class="ico" style="width:15px;height:15px;stroke:var(--accent)" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6" stroke="currentColor"/><polyline points="8 6 2 12 8 18" stroke="currentColor"/></svg>
+        Read the API docs
+      </a>
+      <a href="#features" class="btn-cta-ghost">
+        <svg class="ico" style="width:15px;height:15px" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor"/></svg>
+        Explore features
+      </a>
+    </div>
+    <div class="cta-install">
+      <span style="color:rgba(255,255,255,0.25)">quick start</span>
+      <span class="prompt">$</span>
+      <span class="cmd">pip install fastapi uvicorn pdfkit pillow pytesseract openai openpyxl</span>
+    </div>
+    <div style="margin-top:14px;font-size:12px;color:rgba(255,255,255,0.28);">then: <code style="font-family:'Courier New',monospace">uvicorn main:app --host 0.0.0.0 --port 8000 --reload</code></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:24px;height:24px;border-radius:6px;">
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 4h4M3 8h8M3 12h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="13" cy="4" r="1.5" fill="#fff"/>
+      </svg>
+    </div>
+    DocIntel
+    <span class="footer-url">docintel.io</span>
+  </div>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#pipeline">Pipeline</a>
+    <a href="#api">API</a>
+    <a href="#models">Schemas</a>
+  </nav>
+  <span class="footer-copy">© 2025 DocIntel · Enterprise AI Document &amp; OCR Suite</span>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 70);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// Animate accuracy bars on first visible
+const barIo = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.acc-fill').forEach(bar => {
+        const w = bar.style.width; bar.style.width = '0';
+        requestAnimationFrame(() => setTimeout(() => bar.style.width = w, 50));
+      });
+      barIo.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.accuracy-bar-wrap').forEach(el => barIo.observe(el));
+</script>
+</body>
+</html>
