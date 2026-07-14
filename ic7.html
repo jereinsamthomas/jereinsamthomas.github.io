@@ -593,9 +593,79 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   .hamburger{display:flex;}
   .tactical-pitch-overlay { display: none; }
 }
+
+/* ============================= GLOBAL STARFIELD (whole-site ambient animation) ============================= */
+.starfield{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.star{position:absolute;background:#ffffff;border-radius:50%;box-shadow:0 0 4px rgba(255,255,255,0.65);will-change:transform,opacity;}
+@keyframes starTwinkle{0%,100%{opacity:var(--s-min,0.15);}50%{opacity:1;}}
+@keyframes starDrift{from{transform:translate3d(0,0,0);}to{transform:translate3d(var(--s-dx,0px), var(--s-dy,-30px),0);}}
+
+/* ============================= HIGHLIGHT OF THE DAY / NEWS ============================= */
+.highlight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.highlight-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.highlight-grid{grid-template-columns:1fr;}}
+.highlight-card{overflow:hidden;transition:all .3s ease;}
+.highlight-card:hover{border-color:var(--red);transform:translateY(-4px);}
+.highlight-media{aspect-ratio:16/10;background-size:cover;background-position:center;background-color:var(--bg-elevated-2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);}
+.hl-noimg{font-family:var(--font-display);font-size:22px;color:var(--red-dim);letter-spacing:.05em;}
+.highlight-body{padding:20px 22px 24px;}
+.highlight-date{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);}
+.highlight-body h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:18px;margin:8px 0 8px;letter-spacing:.01em;}
+.highlight-body p{font-size:13.5px;color:var(--ink-dim);}
+.highlight-empty{display:none;font-family:var(--font-mono);font-size:13px;color:var(--ink-faint);padding:30px;border:1px dashed var(--line-strong);text-align:center;}
+
+/* ============================= ADMIN ENTRY + LOGIN / PANEL MODAL ============================= */
+.admin-entry{font-family:var(--font-mono);font-size:12px;color:var(--ink-faint);background:none;border:none;cursor:pointer;letter-spacing:.05em;text-transform:uppercase;transition:color .2s ease;padding:0;}
+.admin-entry:hover{color:var(--red);}
+
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(3,3,5,0.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:24px;
+}
+.modal-overlay[hidden]{display:none;}
+.modal-card{
+  position:relative;width:100%;max-width:460px;max-height:88vh;overflow-y:auto;
+  padding:36px 30px 30px;background:var(--bg-elevated-2);border:1px solid var(--line-strong);
+  box-shadow:0 40px 80px -20px var(--shadow);
+}
+.modal-close{
+  position:absolute;top:14px;right:14px;width:32px;height:32px;border:1px solid var(--line);
+  background:transparent;color:var(--ink-dim);font-size:20px;line-height:1;
+  display:flex;align-items:center;justify-content:center;transition:all .2s ease;
+}
+.modal-close:hover{color:var(--red);border-color:var(--red);}
+.admin-badge{display:inline-block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;color:var(--red);border:1px solid var(--line-strong);padding:4px 10px;margin-bottom:16px;}
+.admin-view h3{font-family:var(--font-display);text-transform:uppercase;font-size:24px;font-weight:400;margin-bottom:8px;}
+.admin-sub{font-size:13.5px;color:var(--ink-dim);margin-bottom:20px;}
+.admin-error{font-size:12.5px;color:var(--red-bright);margin:-6px 0 14px;}
+.admin-success{font-size:12.5px;color:var(--green-live);margin:-6px 0 14px;}
+.admin-link{display:block;margin-top:14px;font-family:var(--font-mono);font-size:12px;color:var(--ink-faint);text-decoration:underline;text-underline-offset:3px;background:none;border:none;cursor:pointer;padding:0;}
+.admin-link:hover{color:var(--red);}
+.admin-panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:12px;}
+.admin-form{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;margin-bottom:20px;}
+.admin-form-actions{display:flex;gap:10px;}
+.admin-list{display:flex;flex-direction:column;gap:10px;margin-bottom:22px;max-height:220px;overflow-y:auto;}
+.admin-list-item{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--line);}
+.admin-list-thumb{width:44px;height:44px;flex:none;background-size:cover;background-position:center;background-color:var(--bg-elevated);}
+.admin-list-info{flex:1;min-width:0;}
+.admin-list-info b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.admin-list-info span{font-size:11px;color:var(--ink-faint);font-family:var(--font-mono);}
+.admin-list-actions{display:flex;gap:6px;flex:none;}
+.admin-list-actions button{font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;padding:6px 10px;border:1px solid var(--line-strong);color:var(--ink-dim);background:none;cursor:pointer;transition:all .2s ease;}
+.admin-list-actions button:hover{border-color:var(--red);color:var(--red);}
+.admin-pw-change{border-top:1px solid var(--line);padding-top:16px;}
+.admin-pw-change summary{cursor:pointer;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:14px;}
+.admin-storage-note{font-size:11.5px;color:var(--ink-faint);margin-top:16px;line-height:1.5;}
+
+@media (prefers-reduced-motion: reduce){
+  .star, .particle, .hero-logo-container{animation:none !important;}
+}
 </style>
 </head>
 <body>
+
+<div class="starfield" id="starfield" aria-hidden="true"></div>
 
 <!-- ============================= HEADER ============================= -->
 <header class="site-header" id="siteHeader">
@@ -608,8 +678,9 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
       <a href="#about">About</a>
       <a href="#activities">Activities</a>
       <a href="#live">Live</a>
+      <a href="#highlights">News</a>
       <a href="#schedule">Schedule</a>
-      <a href="#teams">Teams</a>
+      <a href="#teams">Squads</a>
       <a href="#players">Players</a>
       <a href="#leaderboard">Table</a>
       <a href="#gallery">Gallery</a>
@@ -622,6 +693,9 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
       <a class="icon-btn" data-wa-contact href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1zm4.44-6.07c-.24-.12-1.43-.7-1.65-.79-.22-.08-.38-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.35-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.42-.55-.42-.14 0-.3-.02-.46-.02-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
       </a>
+      <button class="icon-btn" id="adminOpenBtn" aria-label="Admin login" title="Admin login">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4.5" y="10" width="15" height="10" rx="1.5"/><path d="M8 10V7a4 4 0 018 0v3"/><circle cx="12" cy="14.5" r="1.4" fill="currentColor" stroke="none"/></svg>
+      </button>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path id="hbPath" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
@@ -762,6 +836,17 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
         <span class="team">Coastal Kings</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============================= HIGHLIGHT OF THE DAY / NEWS ============================= -->
+<section class="section" id="highlights">
+  <div class="wrap">
+    <div class="eyebrow reveal">Clan News</div>
+    <h2 class="section-title reveal">Highlight Of The Day</h2>
+    <p class="section-lede reveal">Match reports, moments and announcements — kept fresh by the IC7 admin team.</p>
+    <div class="highlight-grid" id="highlightGrid"></div>
+    <p class="highlight-empty" id="highlightEmpty">No highlights yet — check back soon.</p>
   </div>
 </section>
 
@@ -1015,6 +1100,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     </div>
     <div class="footer-bottom">
       <span>© 2026 IC7 Iconic Sevens. All rights reserved.</span>
+      <button class="admin-entry" id="adminEntryBtn" type="button">Admin Login</button>
       <span>Made for the turf — Kerala 🏆</span>
     </div>
   </div>
@@ -1024,12 +1110,80 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1z"/></svg>
 </a>
 
+<!-- ============================= ADMIN LOGIN / PANEL MODAL ============================= -->
+<div class="modal-overlay" id="adminModalOverlay" hidden>
+  <div class="modal-card glass" id="adminModalCard" role="dialog" aria-modal="true" aria-label="Admin login">
+    <button class="modal-close" id="adminModalClose" type="button" aria-label="Close">&times;</button>
+    <div class="admin-badge">ADMIN</div>
+
+    <!-- Login -->
+    <div class="admin-view" data-view="login">
+      <h3>Admin Login</h3>
+      <p class="admin-sub">Enter the admin password to manage the Highlight Of The Day news posts.</p>
+      <div class="field"><label for="loginPwInput">Password</label><input type="password" id="loginPwInput" autocomplete="current-password"></div>
+      <div class="admin-error" id="loginError" hidden>Incorrect password.</div>
+      <button class="btn btn-red" id="loginSubmitBtn" type="button">Log In</button>
+      <button class="admin-link" id="showForgotBtn" type="button">Forgot password?</button>
+    </div>
+
+    <!-- Forgot / reset -->
+    <div class="admin-view" data-view="forgot" hidden>
+      <h3>Reset Password</h3>
+      <p class="admin-sub">Enter the recovery code set by the site owner, plus a new password.</p>
+      <div class="field"><label for="recoveryCodeInput">Recovery Code</label><input type="text" inputmode="numeric" id="recoveryCodeInput"></div>
+      <div class="field"><label for="newPwInput">New Password</label><input type="password" id="newPwInput" autocomplete="new-password"></div>
+      <div class="field"><label for="newPwConfirmInput">Confirm New Password</label><input type="password" id="newPwConfirmInput" autocomplete="new-password"></div>
+      <div class="admin-error" id="forgotError" hidden></div>
+      <div class="admin-success" id="forgotSuccess" hidden>Password updated — you can log in now.</div>
+      <button class="btn btn-red" id="resetSubmitBtn" type="button">Reset Password</button>
+      <button class="admin-link" id="backToLoginBtn" type="button">Back to login</button>
+    </div>
+
+    <!-- Admin panel -->
+    <div class="admin-view" data-view="panel" hidden>
+      <div class="admin-panel-head">
+        <h3>Manage Highlights</h3>
+        <button class="admin-link" id="logoutBtn" type="button">Log out</button>
+      </div>
+
+      <form class="admin-form" id="highlightForm">
+        <input type="hidden" id="hlEditId">
+        <div class="field"><label for="hlTitle">Title</label><input type="text" id="hlTitle" required></div>
+        <div class="field-row">
+          <div class="field"><label for="hlDate">Date</label><input type="date" id="hlDate" required></div>
+          <div class="field"><label for="hlImage">Photo</label><input type="file" accept="image/*" id="hlImage"></div>
+        </div>
+        <div class="field"><label for="hlBody">Story</label><textarea id="hlBody" rows="3" required></textarea></div>
+        <div class="admin-form-actions">
+          <button type="submit" class="btn btn-red">Save Highlight</button>
+          <button type="button" class="btn btn-outline" id="hlCancelEdit" hidden>Cancel Edit</button>
+        </div>
+      </form>
+
+      <div class="admin-list" id="adminHighlightList"></div>
+
+      <details class="admin-pw-change">
+        <summary>Change admin password</summary>
+        <div class="field"><label for="changePwInput">New Password</label><input type="password" id="changePwInput" autocomplete="new-password"></div>
+        <div class="field"><label for="changePwConfirmInput">Confirm New Password</label><input type="password" id="changePwConfirmInput" autocomplete="new-password"></div>
+        <div class="admin-error" id="changePwMsg" hidden></div>
+        <button class="btn btn-outline" id="changePwBtn" type="button">Update Password</button>
+      </details>
+
+      <p class="admin-storage-note" id="storageNote"></p>
+    </div>
+
+  </div>
+</div>
+
 <script>
 /* ======================= CLUB CONFIG — EDIT THESE ======================= */
 const CLUB_WHATSAPP        = "919999999999";   // main club WhatsApp number
 const CLUB_ADMIN1_WHATSAPP = "919999999999";   // admin 1 WhatsApp number
 const CLUB_ADMIN2_WHATSAPP = "919888888888";   // admin 2 WhatsApp number
 const CLUB_INSTAGRAM       = "ic7iconicsevens"; // Instagram handle, no @
+const DEFAULT_ADMIN_PASSWORD = "IC7Admin@2026"; // first admin password — change this before publishing. Once anyone logs in, it upgrades to a stored hash and this line stops being read.
+const ADMIN_RECOVERY_CODE    = "778899";        // secret numeric code — the ONLY way to reset a forgotten admin password. Change this before publishing and keep it private.
 /* ========================================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1065,6 +1219,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Global starfield — small white dots twinkling/drifting across the whole page
+  const starHost = document.getElementById('starfield');
+  const starCount = window.innerWidth < 700 ? 60 : 130;
+  for(let i=0; i<starCount; i++){
+    const star = document.createElement('span');
+    star.className = 'star';
+    const size = 1 + Math.random()*1.8;
+    star.style.width = size+'px';
+    star.style.height = size+'px';
+    star.style.left = (Math.random()*100)+'%';
+    star.style.top = (Math.random()*100)+'%';
+    star.style.setProperty('--s-min', (0.1 + Math.random()*0.25).toFixed(2));
+    star.style.setProperty('--s-dx', (Math.random()*30-15).toFixed(1)+'px');
+    star.style.setProperty('--s-dy', (-(20+Math.random()*40)).toFixed(1)+'px');
+    const twinkleDur = (2 + Math.random()*4).toFixed(1);
+    const driftDur = (18 + Math.random()*22).toFixed(1);
+    const twinkleDelay = (-Math.random()*10).toFixed(1);
+    const driftDelay = (-Math.random()*10).toFixed(1);
+    star.style.animation = `starTwinkle ${twinkleDur}s ease-in-out infinite, starDrift ${driftDur}s ease-in-out infinite alternate`;
+    star.style.animationDelay = `${twinkleDelay}s, ${driftDelay}s`;
+    starHost.appendChild(star);
+  }
 
   // High velocity tactical telemetry particle generator
   const particleHost = document.getElementById('heroParticles');
@@ -1116,6 +1293,277 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+/* =====================================================================
+   HIGHLIGHT OF THE DAY — public news feed + no-code admin panel.
+
+   This is a static, no-backend site, so "saving" means saving into the
+   admin's own browser (localStorage). That's perfect for a single admin
+   updating from their own phone/laptop. It does NOT sync across every
+   visitor's device — there's no server to sync through. If you outgrow
+   that and want every visitor, on any device, to see the same live feed,
+   you'd need a small backend (a database + a couple of API routes) —
+   ask and I can help you wire one up.
+   ===================================================================== */
+(function(){
+
+  // ---- storage helper: real localStorage when available, in-memory fallback otherwise ----
+  let useMemory = false;
+  try{
+    localStorage.setItem('__ic7_probe__','1');
+    localStorage.removeItem('__ic7_probe__');
+  }catch(e){ useMemory = true; }
+  const memoryStore = {};
+  const Store = {
+    get(key, fallback){
+      if(useMemory) return (key in memoryStore) ? memoryStore[key] : fallback;
+      try{
+        const raw = localStorage.getItem(key);
+        return raw === null ? fallback : JSON.parse(raw);
+      }catch(e){ return fallback; }
+    },
+    set(key, value){
+      if(useMemory){ memoryStore[key] = value; return true; }
+      try{ localStorage.setItem(key, JSON.stringify(value)); return true; }
+      catch(e){ memoryStore[key] = value; useMemory = true; return false; }
+    }
+  };
+
+  async function sha256(text){
+    const enc = new TextEncoder().encode(text);
+    const buf = await crypto.subtle.digest('SHA-256', enc);
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+
+  function escapeHtml(str){
+    return String(str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function formatDate(iso){
+    if(!iso) return '';
+    const d = new Date(iso + 'T00:00:00');
+    if(isNaN(d)) return iso;
+    return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+  }
+
+  // Compress an uploaded photo client-side before it goes into storage, so a
+  // handful of posts don't blow past the browser's storage quota.
+  function compressImage(file, maxWidth){
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+          const scale = Math.min(1, maxWidth / img.width);
+          const w = Math.round(img.width * scale);
+          const h = Math.round(img.height * scale);
+          const canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          resolve(canvas.toDataURL('image/jpeg', 0.72));
+        };
+        img.onerror = reject;
+        img.src = reader.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  const SEED_HIGHLIGHTS = [
+    { id:'seed1', title:'Semi-Final Thriller At Green Turf', date:'2026-07-10', body:'IC7 came from behind twice to edge Coastal Kings 3–2 and book a final spot. Sachin\'s 58th-minute winner sent the sideline into chaos.', image:'' },
+    { id:'seed2', title:'Juniors Academy Registrations Now Open', date:'2026-07-05', body:'Free weekend coaching sessions for kids across the district start this month. Message any admin on WhatsApp to reserve a spot.', image:'' }
+  ];
+
+  function getHighlights(){ return Store.get('ic7_highlights', SEED_HIGHLIGHTS); }
+  function saveHighlights(list){ Store.set('ic7_highlights', list); }
+
+  function renderHighlights(){
+    const grid = document.getElementById('highlightGrid');
+    const empty = document.getElementById('highlightEmpty');
+    if(!grid) return;
+    const items = getHighlights().slice().sort((a,b) => (b.date||'').localeCompare(a.date||''));
+    grid.innerHTML = '';
+    empty.style.display = items.length ? 'none' : 'block';
+    items.forEach(h => {
+      const card = document.createElement('article');
+      card.className = 'highlight-card glass';
+      const mediaStyle = h.image ? ` style="background-image:url('${h.image}')"` : '';
+      card.innerHTML = `
+        <div class="highlight-media"${mediaStyle}>${h.image ? '' : '<span class="hl-noimg">IC7</span>'}</div>
+        <div class="highlight-body">
+          <span class="highlight-date">${escapeHtml(formatDate(h.date))}</span>
+          <h3>${escapeHtml(h.title)}</h3>
+          <p>${escapeHtml(h.body)}</p>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  function renderAdminList(){
+    const list = document.getElementById('adminHighlightList');
+    if(!list) return;
+    const items = getHighlights().slice().sort((a,b) => (b.date||'').localeCompare(a.date||''));
+    list.innerHTML = '';
+    items.forEach(h => {
+      const row = document.createElement('div');
+      row.className = 'admin-list-item';
+      const thumbStyle = h.image ? `background-image:url('${h.image}')` : '';
+      row.innerHTML = `
+        <div class="admin-list-thumb" style="${thumbStyle}"></div>
+        <div class="admin-list-info"><b>${escapeHtml(h.title)}</b><span>${escapeHtml(formatDate(h.date))}</span></div>
+        <div class="admin-list-actions">
+          <button type="button" data-edit="${h.id}">Edit</button>
+          <button type="button" data-delete="${h.id}">Delete</button>
+        </div>`;
+      list.appendChild(row);
+    });
+    list.querySelectorAll('[data-edit]').forEach(btn => btn.addEventListener('click', () => loadHighlightIntoForm(btn.dataset.edit)));
+    list.querySelectorAll('[data-delete]').forEach(btn => btn.addEventListener('click', () => {
+      if(!confirm('Delete this highlight?')) return;
+      saveHighlights(getHighlights().filter(h => h.id !== btn.dataset.delete));
+      renderAdminList(); renderHighlights();
+    }));
+  }
+
+  function loadHighlightIntoForm(id){
+    const h = getHighlights().find(x => x.id === id);
+    if(!h) return;
+    document.getElementById('hlEditId').value = h.id;
+    document.getElementById('hlTitle').value = h.title;
+    document.getElementById('hlDate').value = h.date;
+    document.getElementById('hlBody').value = h.body;
+    document.getElementById('hlCancelEdit').hidden = false;
+  }
+
+  function resetHighlightForm(){
+    document.getElementById('highlightForm').reset();
+    document.getElementById('hlEditId').value = '';
+    document.getElementById('hlDate').value = new Date().toISOString().slice(0,10);
+    document.getElementById('hlCancelEdit').hidden = true;
+  }
+
+  // ---- admin auth ----
+  async function getAdminHash(){
+    let hash = Store.get('ic7_admin_pw_hash', null);
+    if(!hash){
+      hash = await sha256(DEFAULT_ADMIN_PASSWORD);
+      Store.set('ic7_admin_pw_hash', hash);
+    }
+    return hash;
+  }
+
+  let isLoggedIn = false;
+
+  function showView(name){
+    document.querySelectorAll('.admin-view').forEach(v => v.hidden = v.dataset.view !== name);
+  }
+
+  function openModal(){
+    document.getElementById('adminModalOverlay').hidden = false;
+    showView(isLoggedIn ? 'panel' : 'login');
+    if(isLoggedIn){ renderAdminList(); } else { document.getElementById('loginPwInput').focus(); }
+    const note = document.getElementById('storageNote');
+    if(note){
+      note.textContent = useMemory
+        ? "Preview mode: this environment can't save browser data right now, so changes here will reset on reload. Once hosted on your own site, changes save permanently in the visitor's browser."
+        : "Changes save in this browser only (no backend). For every visitor on every device to see updates automatically, you'd need a small backend added later.";
+    }
+  }
+  function closeModal(){
+    document.getElementById('adminModalOverlay').hidden = true;
+    document.getElementById('loginError').hidden = true;
+    document.getElementById('loginPwInput').value = '';
+  }
+
+  document.getElementById('adminEntryBtn').addEventListener('click', openModal);
+  document.getElementById('adminModalClose').addEventListener('click', closeModal);
+  document.getElementById('adminModalOverlay').addEventListener('click', (e) => { if(e.target.id === 'adminModalOverlay') closeModal(); });
+
+  document.getElementById('showForgotBtn').addEventListener('click', () => showView('forgot'));
+  document.getElementById('backToLoginBtn').addEventListener('click', () => showView('login'));
+
+  document.getElementById('loginSubmitBtn').addEventListener('click', async () => {
+    const pw = document.getElementById('loginPwInput').value;
+    const hash = await getAdminHash();
+    const errBox = document.getElementById('loginError');
+    if(await sha256(pw) === hash){
+      isLoggedIn = true;
+      errBox.hidden = true;
+      resetHighlightForm();
+      renderAdminList();
+      showView('panel');
+    }else{
+      errBox.textContent = 'Incorrect password.';
+      errBox.hidden = false;
+    }
+  });
+  document.getElementById('loginPwInput').addEventListener('keydown', (e) => { if(e.key === 'Enter') document.getElementById('loginSubmitBtn').click(); });
+
+  document.getElementById('resetSubmitBtn').addEventListener('click', async () => {
+    const code = document.getElementById('recoveryCodeInput').value.trim();
+    const pw1 = document.getElementById('newPwInput').value;
+    const pw2 = document.getElementById('newPwConfirmInput').value;
+    const err = document.getElementById('forgotError');
+    const ok = document.getElementById('forgotSuccess');
+    err.hidden = true; ok.hidden = true;
+    if(code !== ADMIN_RECOVERY_CODE){ err.textContent = 'Recovery code is incorrect.'; err.hidden = false; return; }
+    if(pw1.length < 6){ err.textContent = 'New password must be at least 6 characters.'; err.hidden = false; return; }
+    if(pw1 !== pw2){ err.textContent = 'Passwords do not match.'; err.hidden = false; return; }
+    Store.set('ic7_admin_pw_hash', await sha256(pw1));
+    ok.hidden = false;
+    document.getElementById('recoveryCodeInput').value = '';
+    document.getElementById('newPwInput').value = '';
+    document.getElementById('newPwConfirmInput').value = '';
+    setTimeout(() => showView('login'), 1200);
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', () => { isLoggedIn = false; closeModal(); });
+
+  document.getElementById('changePwBtn').addEventListener('click', async () => {
+    const pw1 = document.getElementById('changePwInput').value;
+    const pw2 = document.getElementById('changePwConfirmInput').value;
+    const msg = document.getElementById('changePwMsg');
+    msg.hidden = true;
+    if(pw1.length < 6){ msg.textContent = 'New password must be at least 6 characters.'; msg.hidden = false; return; }
+    if(pw1 !== pw2){ msg.textContent = 'Passwords do not match.'; msg.hidden = false; return; }
+    Store.set('ic7_admin_pw_hash', await sha256(pw1));
+    msg.style.color = 'var(--green-live)';
+    msg.textContent = 'Password updated.';
+    msg.hidden = false;
+    document.getElementById('changePwInput').value = '';
+    document.getElementById('changePwConfirmInput').value = '';
+  });
+
+  document.getElementById('hlCancelEdit').addEventListener('click', resetHighlightForm);
+
+  document.getElementById('highlightForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('hlEditId').value || (Date.now().toString(36) + Math.random().toString(36).slice(2,7));
+    const title = document.getElementById('hlTitle').value.trim();
+    const date = document.getElementById('hlDate').value;
+    const body = document.getElementById('hlBody').value.trim();
+    const fileInput = document.getElementById('hlImage');
+    const list = getHighlights();
+    const existing = list.find(h => h.id === id);
+    let image = existing ? existing.image : '';
+    if(fileInput.files && fileInput.files[0]){
+      try{ image = await compressImage(fileInput.files[0], 1000); }
+      catch(e){ /* keep previous image if compression fails */ }
+    }
+    const record = { id, title, date, body, image };
+    const next = existing ? list.map(h => h.id === id ? record : h) : [...list, record];
+    saveHighlights(next);
+    resetHighlightForm();
+    renderAdminList();
+    renderHighlights();
+  });
+
+  // init
+  resetHighlightForm();
+  renderHighlights();
+
+})();
 </script>
 </body>
 </html>
