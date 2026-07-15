@@ -679,6 +679,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
       <a href="#activities">Activities</a>
       <a href="#live">Live</a>
       <a href="#highlights">News</a>
+      <a href="#tournament" id="navTournamentLink" hidden>Tournament</a>
       <a href="#schedule">Schedule</a>
       <a href="#teams">Squads</a>
       <a href="#players">Players</a>
@@ -742,7 +743,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
       <span class="sub-header">CLAN MAGAZINE</span>
     </h1>
 
-    <p class="hero-tagline">A heavy-hitting Kerala sevens football clan built on turf, trust and tactical domination. We play hard, train metrics, and scale the circuit match by match.</p>
+    <p class="hero-tagline" id="heroTagline">A heavy-hitting Kerala sevens football clan built on turf, trust and tactical domination. We play hard, train metrics, and scale the circuit match by match.</p>
     
     <div class="hero-actions">
       <a href="#register" class="btn btn-red">
@@ -752,10 +753,10 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
       <a href="#schedule" class="btn btn-outline">View Fixtures</a>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat"><b>2020</b><span>Founded</span></div>
-      <div class="hero-stat"><b>60+</b><span>Active Squad</span></div>
-      <div class="hero-stat"><b>140+</b><span>Matches Hit</span></div>
-      <div class="hero-stat"><b>12</b><span>Trophies</span></div>
+      <div class="hero-stat"><b id="heroStatFounded">2020</b><span>Founded</span></div>
+      <div class="hero-stat"><b id="heroStatSquad">60+</b><span>Active Squad</span></div>
+      <div class="hero-stat"><b id="heroStatMatches">140+</b><span>Matches Hit</span></div>
+      <div class="hero-stat"><b id="heroStatTrophies">12</b><span>Trophies</span></div>
     </div>
   </div>
 
@@ -771,16 +772,16 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     <div class="reveal">
       <div class="eyebrow">About The Clan</div>
       <h2 class="section-title">Where the turf<br>becomes family.</h2>
-      <div class="about-copy">
-        <p><b>IC7 Iconic Sevens</b> started in 2020 as a handful of friends renting a turf on weekends across Kerala. Sevens football — fast, seven-a-side, no room to hide — turned that habit into a clan with a name, a crest and a reputation.</p>
-        <p>Today we're a full-fledged football community: a senior squad that competes on the Kerala sevens circuit, a reserve side sharpening the next players, and a junior academy for kids who just want to kick a ball properly for the first time.</p>
-        <p>On the turf we play to win. Off it, IC7 is about showing up for each other — match day, training day, or just another evening at the ground.</p>
+      <div class="about-copy" id="aboutCopy">
+        <p id="aboutP1"><b>IC7 Iconic Sevens</b> started in 2020 as a handful of friends renting a turf on weekends across Kerala. Sevens football — fast, seven-a-side, no room to hide — turned that habit into a clan with a name, a crest and a reputation.</p>
+        <p id="aboutP2">Today we're a full-fledged football community: a senior squad that competes on the Kerala sevens circuit, a reserve side sharpening the next players, and a junior academy for kids who just want to kick a ball properly for the first time.</p>
+        <p id="aboutP3">On the turf we play to win. Off it, IC7 is about showing up for each other — match day, training day, or just another evening at the ground.</p>
       </div>
       <div class="stat-row">
-        <div class="stat-card glass"><b>3</b><span>Squads</span></div>
-        <div class="stat-card glass"><b>12</b><span>Trophies</span></div>
-        <div class="stat-card glass"><b>60+</b><span>Players</span></div>
-        <div class="stat-card glass"><b>7</b><span>Districts</span></div>
+        <div class="stat-card glass"><b id="aboutStatSquads">3</b><span>Squads</span></div>
+        <div class="stat-card glass"><b id="aboutStatTrophies">12</b><span>Trophies</span></div>
+        <div class="stat-card glass"><b id="aboutStatPlayers">60+</b><span>Players</span></div>
+        <div class="stat-card glass"><b id="aboutStatDistricts">7</b><span>Districts</span></div>
       </div>
     </div>
   </div>
@@ -792,28 +793,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     <div class="eyebrow reveal">What We Do</div>
     <h2 class="section-title reveal">Clan Activities</h2>
     <p class="section-lede reveal">Every week, on the turf and in the community — this is the IC7 routine.</p>
-    <div class="activity-grid">
-      <div class="activity-card glass reveal">
-        <div class="activity-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg></div>
-        <h3>Turf Training</h3>
-        <p>Tue, Thu &amp; Sat sessions focused on fitness, passing drills and sevens-specific tactics.</p>
-      </div>
-      <div class="activity-card glass reveal">
-        <div class="activity-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.9 6.26L21 9.27l-4.5 4.38L17.8 21 12 17.77 6.2 21l1.3-7.35L3 9.27l6.1-1.01L12 2z"/></svg></div>
-        <h3>Sevens Circuit</h3>
-        <p>Competing across the Malabar Gold Cup, district turf leagues and invitational sevens.</p>
-      </div>
-      <div class="activity-card glass reveal">
-        <div class="activity-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="18" cy="8.5" r="2.4"/><path d="M15.7 14.2c2.7.3 4.8 2.3 4.8 5.3"/></svg></div>
-        <h3>Community Camps</h3>
-        <p>Free coaching camps for local kids, growing sevens culture across the neighbourhood.</p>
-      </div>
-      <div class="activity-card glass reveal">
-        <div class="activity-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7l16-3M4 7v11l16 3V4M4 7l8 2.4 8-2.4"/></svg></div>
-        <h3>Challenge Matches</h3>
-        <p>Open turf friendlies against neighbouring clans, hosted almost every single weekend.</p>
-      </div>
-    </div>
+    <div class="activity-grid" id="activityGrid"></div>
   </div>
 </section>
 
@@ -822,18 +802,18 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   <div class="wrap">
     <div class="eyebrow reveal">Right Now</div>
     <h2 class="section-title reveal">Live Tournament Updates</h2>
-    <div class="live-panel glass reveal">
-      <span class="live-badge"><span class="dot"></span>LIVE</span>
+    <div class="live-panel glass reveal" id="livePanel">
+      <span class="live-badge" id="liveBadge"><span class="dot"></span><span id="liveBadgeText">LIVE</span></span>
       <div class="live-mid">
-        <h3>Malabar Gold Cup 2026 — Semi Final</h3>
-        <p>Kicked off 6:45 PM · Green Turf Arena, Kozhikode</p>
+        <h3 id="liveTitle">Malabar Gold Cup 2026 — Semi Final</h3>
+        <p id="liveStatus">Kicked off 6:45 PM · Green Turf Arena, Kozhikode</p>
       </div>
       <div class="live-score">
-        <span class="team">IC7 Sevens</span>
-        <span class="score">3</span>
+        <span class="team" id="liveTeamA">IC7 Sevens</span>
+        <span class="score" id="liveScoreA">3</span>
         <span class="sep">—</span>
-        <span class="score">2</span>
-        <span class="team">Coastal Kings</span>
+        <span class="score" id="liveScoreB">2</span>
+        <span class="team" id="liveTeamB">Coastal Kings</span>
       </div>
     </div>
   </div>
@@ -850,38 +830,46 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   </div>
 </section>
 
+<!-- ============================= TOURNAMENT REGISTRATION ============================= -->
+<section class="section" id="tournament" style="background:var(--bg-elevated);" hidden>
+  <div class="wrap">
+    <div class="eyebrow reveal">Open Registration</div>
+    <h2 class="section-title reveal" id="tournamentName">Tournament</h2>
+    <p class="section-lede reveal" id="tournamentDesc"></p>
+    <div class="tournament-wrap">
+      <div class="tournament-info glass reveal" id="tournamentBanner">
+        <div class="tournament-meta">
+          <div><span>Entry Fee</span><b id="tournamentFee">—</b></div>
+          <div><span>Deadline</span><b id="tournamentDeadline">—</b></div>
+          <div><span>Venue</span><b id="tournamentVenue">—</b></div>
+        </div>
+      </div>
+      <form class="form-card glass reveal" id="tournamentForm">
+        <div class="field"><label for="trName">Team / Player Name</label><input type="text" id="trName" required></div>
+        <div class="field-row">
+          <div class="field"><label for="trPhone">WhatsApp Number</label><input type="tel" id="trPhone" required></div>
+          <div class="field"><label for="trCategory">Category</label>
+            <select id="trCategory">
+              <option>Open</option>
+              <option>Corporate</option>
+              <option>Under-16</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label for="trMessage">Message (optional)</label><textarea id="trMessage" rows="3" placeholder="Squad size, availability, anything else..."></textarea></div>
+        <button type="submit" class="btn btn-red form-submit">Submit Registration</button>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- ============================= SCHEDULE ============================= -->
 <section class="section" id="schedule" style="background:var(--bg-elevated);">
   <div class="wrap">
     <div class="eyebrow reveal">Fixtures</div>
     <h2 class="section-title reveal">Match Schedule</h2>
     <p class="section-lede reveal">Upcoming sevens fixtures for the IC7 senior squad.</p>
-    <div class="schedule-list">
-      <div class="fixture glass reveal">
-        <div class="fx-date"><b>18</b><span>Jul</span></div>
-        <div class="fx-teams">IC7 vs Coastal Kings<small>Malabar Gold Cup · Final</small></div>
-        <div class="fx-venue">Green Turf Arena<br>Kozhikode</div>
-        <div class="fx-status">7:00 PM</div>
-      </div>
-      <div class="fixture glass reveal">
-        <div class="fx-date"><b>25</b><span>Jul</span></div>
-        <div class="fx-teams">IC7 vs Riverside FC<small>District Sevens League</small></div>
-        <div class="fx-venue">Riverside Turf<br>Malappuram</div>
-        <div class="fx-status">6:30 PM</div>
-      </div>
-      <div class="fixture glass reveal">
-        <div class="fx-date"><b>02</b><span>Aug</span></div>
-        <div class="fx-teams">IC7 vs Harbour United<small>Friendly Challenge</small></div>
-        <div class="fx-venue">Beach Road Turf<br>Kochi</div>
-        <div class="fx-status">5:00 PM</div>
-      </div>
-      <div class="fixture glass reveal">
-        <div class="fx-date"><b>09</b><span>Aug</span></div>
-        <div class="fx-teams">IC7 vs Highland Sevens<small>Invitational Cup · Group Stage</small></div>
-        <div class="fx-venue">Highland Grounds<br>Wayanad</div>
-        <div class="fx-status">4:30 PM</div>
-      </div>
-    </div>
+    <div class="schedule-list" id="scheduleList"></div>
   </div>
 </section>
 
@@ -891,32 +879,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     <div class="eyebrow reveal">Our Squads</div>
     <h2 class="section-title reveal">Teams</h2>
     <p class="section-lede reveal">Three squads, one crest — IC7 fields players at every level.</p>
-    <div class="team-grid">
-      <div class="team-card glass reveal">
-        <div class="team-top">
-          <div class="team-crest-replacement">SR</div>
-          <h3>IC7 Senior XI</h3>
-          <p>Our first team on the sevens circuit. Captained by Arjun Menon.</p>
-        </div>
-        <div class="team-meta"><div><b>18</b>Players</div><div><b>9</b>Trophies</div><div><b>A</b>Division</div></div>
-      </div>
-      <div class="team-card glass reveal">
-        <div class="team-top">
-          <div class="team-crest-replacement">TT</div>
-          <h3>IC7 Turf Titans</h3>
-          <p>Reserve squad sharpening the next generation of starters.</p>
-        </div>
-        <div class="team-meta"><div><b>16</b>Players</div><div><b>3</b>Trophies</div><div><b>B</b>Division</div></div>
-      </div>
-      <div class="team-card glass reveal">
-        <div class="team-top">
-          <div class="team-crest-replacement">JR</div>
-          <h3>IC7 Juniors</h3>
-          <p>Our academy side — under-16 players learning the IC7 way.</p>
-        </div>
-        <div class="team-meta"><div><b>20</b>Players</div><div><b>2</b>Trophies</div><div><b>U16</b>Age</div></div>
-      </div>
-    </div>
+    <div class="team-grid" id="teamGrid"></div>
   </div>
 </section>
 
@@ -926,32 +889,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     <div class="eyebrow reveal">The Squad</div>
     <h2 class="section-title reveal">Player Profiles</h2>
     <p class="section-lede reveal">A few of the faces leading IC7 on the turf this season.</p>
-    <div class="player-grid">
-      <div class="player-card glass reveal">
-        <div class="player-avatar">AM<span class="num">7</span></div>
-        <div class="player-info"><h4>Arjun Menon</h4><div class="pos">Captain · Midfielder</div><div class="tag">Reads the game, runs the tempo.</div></div>
-      </div>
-      <div class="player-card glass reveal">
-        <div class="player-avatar">SN<span class="num">9</span></div>
-        <div class="player-info"><h4>Sachin Nair</h4><div class="pos">Striker</div><div class="tag">Top scorer, two seasons running.</div></div>
-      </div>
-      <div class="player-card glass reveal">
-        <div class="player-avatar">RK<span class="num">1</span></div>
-        <div class="player-info"><h4>Rahul Kutty</h4><div class="pos">Goalkeeper</div><div class="tag">Wall at the back, calm under pressure.</div></div>
-      </div>
-      <div class="player-card glass reveal">
-        <div class="player-avatar">VP<span class="num">4</span></div>
-        <div class="player-info"><h4>Vishnu P.</h4><div class="pos">Defender</div><div class="tag">Nothing gets past him twice.</div></div>
-      </div>
-      <div class="player-card glass reveal">
-        <div class="player-avatar">FM<span class="num">11</span></div>
-        <div class="player-info"><h4>Fahad Muhsin</h4><div class="pos">Winger</div><div class="tag">Turf's fastest, ask any defender.</div></div>
-      </div>
-      <div class="player-card glass reveal">
-        <div class="player-avatar">JT<span class="num">5</span></div>
-        <div class="player-info"><h4>Jithin Thomas</h4><div class="pos">Midfielder</div><div class="tag">Engine room, box to box all game.</div></div>
-      </div>
-    </div>
+    <div class="player-grid" id="playerGrid"></div>
   </div>
 </section>
 
@@ -964,7 +902,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     <div class="board-wrap reveal">
       <table class="board">
         <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>Pts</th></tr></thead>
-        <tbody>
+        <tbody id="leaderboardBody">
           <tr class="lead"><td class="rank">01</td><td class="team-name">IC7 Iconic Sevens</td><td>10</td><td>8</td><td>1</td><td>1</td><td class="pts">25</td></tr>
           <tr><td class="rank">02</td><td class="team-name">Coastal Kings</td><td>10</td><td>7</td><td>1</td><td>2</td><td class="pts">22</td></tr>
           <tr><td class="rank">03</td><td class="team-name">Riverside FC</td><td>10</td><td>6</td><td>2</td><td>2</td><td class="pts">20</td></tr>
@@ -982,15 +920,8 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     <div class="eyebrow reveal">Moments</div>
     <h2 class="section-title reveal">Gallery</h2>
     <p class="section-lede reveal">Snapshots from the turf. Swap these tiles with your own match-day photos.</p>
-    <div class="gallery-grid">
-      <div class="gallery-tile glass reveal"><div class="gt-bg" style="background:linear-gradient(155deg, rgba(230,30,37,0.22), var(--bg-elevated-2));"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="color:var(--red);"><circle cx="12" cy="12" r="9"/><path d="M12 3v6l4 2"/></svg></div><div class="gt-overlay"><span>Trophy Lift · 2025</span></div></div>
-      <div class="gallery-tile glass reveal"><div class="gt-bg" style="background:linear-gradient(155deg, rgba(230,30,37,0.14), var(--pitch));"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="color:var(--red);"><path d="M12 2l2.9 6.26L21 9.27l-4.5 4.38L17.8 21 12 17.77 6.2 21l1.3-7.35L3 9.27l6.1-1.01L12 2z"/></svg></div><div class="gt-overlay"><span>Final Whistle</span></div></div>
-      <div class="gallery-tile glass reveal"><div class="gt-bg" style="background:linear-gradient(155deg, rgba(230,30,37,0.2), var(--bg-elevated-2));"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="color:var(--red);"><circle cx="9" cy="7" r="3"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="8" r="2.2"/><path d="M14.8 14.3c2.6.3 4.6 2.2 4.6 5.1"/></svg></div><div class="gt-overlay"><span>Squad Day</span></div></div>
-      <div class="gallery-tile glass reveal"><div class="gt-bg" style="background:linear-gradient(155deg, rgba(230,30,37,0.14), var(--pitch));"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="color:var(--red);"><path d="M4 7l16-3M4 7v11l16 3V4M4 7l8 2.4 8-2.4"/></svg></div><div class="gt-overlay"><span>Sevens Kickoff</span></div></div>
-      <div class="gallery-tile glass reveal"><div class="gt-bg" style="background:linear-gradient(155deg, rgba(230,30,37,0.22), var(--bg-elevated-2));"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="color:var(--red);"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="12" cy="12" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg></div><div class="gt-overlay"><span>Behind The Scenes</span></div></div>
-      <div class="gallery-tile glass reveal"><div class="gt-bg" style="background:linear-gradient(155deg, rgba(230,30,37,0.14), var(--pitch));"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="color:var(--red);"><path d="M3 21c3-6 6-8 9-8s6 2 9 8"/><circle cx="12" cy="7" r="4"/></svg></div><div class="gt-overlay"><span>Training Ground</span></div></div>
-    </div>
-    <p class="gallery-note">📸 Add real match photos — replace each .gt-bg block with an &lt;img&gt; tag.</p>
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <p class="gallery-note">📸 Add real match photos from the admin dashboard — Gallery tab.</p>
   </div>
 </section>
 
@@ -1088,13 +1019,13 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
           <a class="icon-btn" data-wa-admin1 href="#" target="_blank" rel="noopener" aria-label="Admin WhatsApp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1z"/></svg>
           </a>
-          <div><b>Admin — Arjun</b><span>WhatsApp</span></div>
+          <div><b id="footerAdmin1Name">Admin — Arjun</b><span>WhatsApp</span></div>
         </div>
         <div class="contact-card glass">
           <a class="icon-btn" data-wa-admin2 href="#" target="_blank" rel="noopener" aria-label="Admin WhatsApp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1z"/></svg>
           </a>
-          <div><b>Admin — Sachin</b><span>WhatsApp</span></div>
+          <div><b id="footerAdmin2Name">Admin — Sachin</b><span>WhatsApp</span></div>
         </div>
       </div>
     </div>
@@ -1114,12 +1045,12 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
 <div class="modal-overlay" id="adminModalOverlay" hidden>
   <div class="modal-card glass" id="adminModalCard" role="dialog" aria-modal="true" aria-label="Admin login">
     <button class="modal-close" id="adminModalClose" type="button" aria-label="Close">&times;</button>
-    <div class="admin-badge">ADMIN</div>
 
     <!-- Login -->
     <div class="admin-view" data-view="login">
+      <div class="admin-badge">ADMIN</div>
       <h3>Admin Login</h3>
-      <p class="admin-sub">Enter the admin password to manage the Highlight Of The Day news posts.</p>
+      <p class="admin-sub">Enter the admin password to open the dashboard.</p>
       <div class="field"><label for="loginPwInput">Password</label><input type="password" id="loginPwInput" autocomplete="current-password"></div>
       <div class="admin-error" id="loginError" hidden>Incorrect password.</div>
       <button class="btn btn-red" id="loginSubmitBtn" type="button">Log In</button>
@@ -1128,6 +1059,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
 
     <!-- Forgot / reset -->
     <div class="admin-view" data-view="forgot" hidden>
+      <div class="admin-badge">ADMIN</div>
       <h3>Reset Password</h3>
       <p class="admin-sub">Enter the recovery code set by the site owner, plus a new password.</p>
       <div class="field"><label for="recoveryCodeInput">Recovery Code</label><input type="text" inputmode="numeric" id="recoveryCodeInput"></div>
@@ -1138,41 +1070,241 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
       <button class="btn btn-red" id="resetSubmitBtn" type="button">Reset Password</button>
       <button class="admin-link" id="backToLoginBtn" type="button">Back to login</button>
     </div>
+  </div>
+</div>
 
-    <!-- Admin panel -->
-    <div class="admin-view" data-view="panel" hidden>
-      <div class="admin-panel-head">
-        <h3>Manage Highlights</h3>
-        <button class="admin-link" id="logoutBtn" type="button">Log out</button>
-      </div>
-
-      <form class="admin-form" id="highlightForm">
-        <input type="hidden" id="hlEditId">
-        <div class="field"><label for="hlTitle">Title</label><input type="text" id="hlTitle" required></div>
-        <div class="field-row">
-          <div class="field"><label for="hlDate">Date</label><input type="date" id="hlDate" required></div>
-          <div class="field"><label for="hlImage">Photo</label><input type="file" accept="image/*" id="hlImage"></div>
-        </div>
-        <div class="field"><label for="hlBody">Story</label><textarea id="hlBody" rows="3" required></textarea></div>
-        <div class="admin-form-actions">
-          <button type="submit" class="btn btn-red">Save Highlight</button>
-          <button type="button" class="btn btn-outline" id="hlCancelEdit" hidden>Cancel Edit</button>
-        </div>
-      </form>
-
-      <div class="admin-list" id="adminHighlightList"></div>
-
-      <details class="admin-pw-change">
-        <summary>Change admin password</summary>
-        <div class="field"><label for="changePwInput">New Password</label><input type="password" id="changePwInput" autocomplete="new-password"></div>
-        <div class="field"><label for="changePwConfirmInput">Confirm New Password</label><input type="password" id="changePwConfirmInput" autocomplete="new-password"></div>
-        <div class="admin-error" id="changePwMsg" hidden></div>
-        <button class="btn btn-outline" id="changePwBtn" type="button">Update Password</button>
-      </details>
-
-      <p class="admin-storage-note" id="storageNote"></p>
+<!-- ============================= ADMIN DASHBOARD ============================= -->
+<div class="modal-overlay" id="dashOverlay" hidden>
+  <div class="dashboard-card glass" id="dashCard" role="dialog" aria-modal="true" aria-label="Admin dashboard">
+    <button class="modal-close" id="dashClose" type="button" aria-label="Close">&times;</button>
+    <div class="dash-head">
+      <div class="admin-badge">ADMIN DASHBOARD</div>
+      <button class="admin-link" id="logoutBtn" type="button">Log out</button>
     </div>
+    <div class="dash-body">
+      <nav class="dash-tabs" id="dashTabs">
+        <button class="dash-tab active" data-tab="contact" type="button">Contact</button>
+        <button class="dash-tab" data-tab="hero" type="button">Hero &amp; About</button>
+        <button class="dash-tab" data-tab="live" type="button">Live Match</button>
+        <button class="dash-tab" data-tab="news" type="button">News</button>
+        <button class="dash-tab" data-tab="tournament" type="button">Tournament</button>
+        <button class="dash-tab" data-tab="schedule" type="button">Schedule</button>
+        <button class="dash-tab" data-tab="teams" type="button">Teams</button>
+        <button class="dash-tab" data-tab="players" type="button">Players</button>
+        <button class="dash-tab" data-tab="leaderboard" type="button">Table</button>
+        <button class="dash-tab" data-tab="gallery" type="button">Gallery</button>
+        <button class="dash-tab" data-tab="activities" type="button">Activities</button>
+        <button class="dash-tab" data-tab="password" type="button">Password</button>
+      </nav>
 
+      <div class="dash-panels">
+
+        <!-- CONTACT -->
+        <section class="dash-panel" data-panel="contact">
+          <h3>Site &amp; Contact</h3>
+          <p class="admin-sub">These numbers drive every WhatsApp button and link on the site.</p>
+          <form class="admin-form" id="contactForm">
+            <div class="field"><label for="ct_whatsappMain">Main Club WhatsApp (registrations)</label><input type="tel" id="ct_whatsappMain" required></div>
+            <div class="field-row">
+              <div class="field"><label for="ct_whatsappAdmin1Name">Admin 1 Name</label><input type="text" id="ct_whatsappAdmin1Name"></div>
+              <div class="field"><label for="ct_whatsappAdmin1">Admin 1 WhatsApp</label><input type="tel" id="ct_whatsappAdmin1"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="ct_whatsappAdmin2Name">Admin 2 Name</label><input type="text" id="ct_whatsappAdmin2Name"></div>
+              <div class="field"><label for="ct_whatsappAdmin2">Admin 2 WhatsApp</label><input type="tel" id="ct_whatsappAdmin2"></div>
+            </div>
+            <div class="field"><label for="ct_instagram">Instagram Handle (no @)</label><input type="text" id="ct_instagram"></div>
+            <button type="submit" class="btn btn-red">Save Contact Info</button>
+            <span class="admin-success" id="contactSavedMsg" hidden>Saved.</span>
+          </form>
+        </section>
+
+        <!-- HERO & ABOUT -->
+        <section class="dash-panel" data-panel="hero" hidden>
+          <h3>Hero &amp; About</h3>
+          <p class="admin-sub">The headline tagline, stat counters, and About story.</p>
+          <form class="admin-form" id="heroForm">
+            <div class="field"><label for="he_tagline">Hero Tagline</label><textarea id="he_tagline" rows="2"></textarea></div>
+            <div class="field-row">
+              <div class="field"><label for="he_founded">Founded Year</label><input type="text" id="he_founded"></div>
+              <div class="field"><label for="he_squad">Active Squad</label><input type="text" id="he_squad"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="he_matches">Matches Hit</label><input type="text" id="he_matches"></div>
+              <div class="field"><label for="he_trophies">Trophies</label><input type="text" id="he_trophies"></div>
+            </div>
+            <div class="field"><label for="he_p1">About — Paragraph 1</label><textarea id="he_p1" rows="2"></textarea></div>
+            <div class="field"><label for="he_p2">About — Paragraph 2</label><textarea id="he_p2" rows="2"></textarea></div>
+            <div class="field"><label for="he_p3">About — Paragraph 3</label><textarea id="he_p3" rows="2"></textarea></div>
+            <div class="field-row">
+              <div class="field"><label for="he_aboutSquads">Squads</label><input type="text" id="he_aboutSquads"></div>
+              <div class="field"><label for="he_aboutTrophies">Trophies (About)</label><input type="text" id="he_aboutTrophies"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="he_aboutPlayers">Players</label><input type="text" id="he_aboutPlayers"></div>
+              <div class="field"><label for="he_aboutDistricts">Districts</label><input type="text" id="he_aboutDistricts"></div>
+            </div>
+            <button type="submit" class="btn btn-red">Save Hero &amp; About</button>
+            <span class="admin-success" id="heroSavedMsg" hidden>Saved.</span>
+          </form>
+        </section>
+
+        <!-- LIVE MATCH -->
+        <section class="dash-panel" data-panel="live" hidden>
+          <h3>Live Match Panel</h3>
+          <p class="admin-sub">Powers the "Live Tournament Updates" panel on the homepage.</p>
+          <form class="admin-form" id="liveForm">
+            <label class="admin-checkbox"><input type="checkbox" id="lv_active"> Show as LIVE right now</label>
+            <div class="field"><label for="lv_title">Match Title</label><input type="text" id="lv_title"></div>
+            <div class="field"><label for="lv_status">Status Line</label><input type="text" id="lv_status" placeholder="Kicked off 6:45 PM · Green Turf Arena"></div>
+            <div class="field-row">
+              <div class="field"><label for="lv_teamA">Team A</label><input type="text" id="lv_teamA"></div>
+              <div class="field"><label for="lv_scoreA">Score A</label><input type="text" id="lv_scoreA"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="lv_teamB">Team B</label><input type="text" id="lv_teamB"></div>
+              <div class="field"><label for="lv_scoreB">Score B</label><input type="text" id="lv_scoreB"></div>
+            </div>
+            <button type="submit" class="btn btn-red">Save Live Match</button>
+            <span class="admin-success" id="liveSavedMsg" hidden>Saved.</span>
+          </form>
+        </section>
+
+        <!-- NEWS / HIGHLIGHTS -->
+        <section class="dash-panel" data-panel="news" hidden>
+          <h3>Highlight Of The Day</h3>
+          <p class="admin-sub">Posts shown in the public News section.</p>
+          <form class="admin-form" id="highlightForm">
+            <input type="hidden" id="hlEditId">
+            <div class="field"><label for="hlTitle">Title</label><input type="text" id="hlTitle" required></div>
+            <div class="field-row">
+              <div class="field"><label for="hlDate">Date</label><input type="date" id="hlDate" required></div>
+              <div class="field"><label for="hlImage">Photo</label><input type="file" accept="image/*" id="hlImage"></div>
+            </div>
+            <div class="field"><label for="hlBody">Story</label><textarea id="hlBody" rows="3" required></textarea></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Highlight</button>
+              <button type="button" class="btn btn-outline" id="hlCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminHighlightList"></div>
+        </section>
+
+        <!-- TOURNAMENT -->
+        <section class="dash-panel" data-panel="tournament" hidden>
+          <h3>Tournament Registration</h3>
+          <p class="admin-sub">Publishes an open-registration section on the homepage and collects entries below.</p>
+          <form class="admin-form" id="tournamentSettingsForm">
+            <label class="admin-checkbox"><input type="checkbox" id="tn_active"> Show tournament registration section on the site</label>
+            <div class="field"><label for="tn_name">Tournament Name</label><input type="text" id="tn_name"></div>
+            <div class="field"><label for="tn_desc">Short Description</label><textarea id="tn_desc" rows="2"></textarea></div>
+            <div class="field-row">
+              <div class="field"><label for="tn_fee">Entry Fee</label><input type="text" id="tn_fee" placeholder="₹2,000 per team"></div>
+              <div class="field"><label for="tn_deadline">Deadline</label><input type="date" id="tn_deadline"></div>
+            </div>
+            <div class="field"><label for="tn_venue">Venue</label><input type="text" id="tn_venue"></div>
+            <button type="submit" class="btn btn-red">Save Tournament</button>
+            <span class="admin-success" id="tournamentSavedMsg" hidden>Saved.</span>
+          </form>
+
+          <div class="admin-panel-head" style="margin-top:26px;">
+            <h3 style="font-size:18px;">Registrations Received</h3>
+            <button class="admin-link" id="exportRegsBtn" type="button">Download CSV</button>
+          </div>
+          <div class="admin-list" id="adminRegList"></div>
+        </section>
+
+        <!-- SCHEDULE -->
+        <section class="dash-panel" data-panel="schedule" hidden>
+          <h3>Match Schedule</h3>
+          <form class="admin-form" id="fixtureForm">
+            <div id="fixtureFormFields"></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Fixture</button>
+              <button type="button" class="btn btn-outline" id="fixtureCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminFixtureList"></div>
+        </section>
+
+        <!-- TEAMS -->
+        <section class="dash-panel" data-panel="teams" hidden>
+          <h3>Teams / Squads</h3>
+          <form class="admin-form" id="teamForm">
+            <div id="teamFormFields"></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Team</button>
+              <button type="button" class="btn btn-outline" id="teamCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminTeamList"></div>
+        </section>
+
+        <!-- PLAYERS -->
+        <section class="dash-panel" data-panel="players" hidden>
+          <h3>Player Profiles</h3>
+          <form class="admin-form" id="playerForm">
+            <div id="playerFormFields"></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Player</button>
+              <button type="button" class="btn btn-outline" id="playerCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminPlayerList"></div>
+        </section>
+
+        <!-- LEADERBOARD -->
+        <section class="dash-panel" data-panel="leaderboard" hidden>
+          <h3>Leaderboard</h3>
+          <p class="admin-sub">Rows are shown in the order you add them — put the top team first.</p>
+          <form class="admin-form" id="leaderboardForm">
+            <div id="leaderboardFormFields"></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Row</button>
+              <button type="button" class="btn btn-outline" id="leaderboardCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminLeaderboardList"></div>
+        </section>
+
+        <!-- GALLERY -->
+        <section class="dash-panel" data-panel="gallery" hidden>
+          <h3>Gallery</h3>
+          <form class="admin-form" id="galleryForm">
+            <div id="galleryFormFields"></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Photo</button>
+              <button type="button" class="btn btn-outline" id="galleryCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminGalleryList"></div>
+        </section>
+
+        <!-- ACTIVITIES -->
+        <section class="dash-panel" data-panel="activities" hidden>
+          <h3>Clan Activities</h3>
+          <form class="admin-form" id="activityForm">
+            <div id="activityFormFields"></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Activity</button>
+              <button type="button" class="btn btn-outline" id="activityCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminActivityList"></div>
+        </section>
+
+        <!-- PASSWORD -->
+        <section class="dash-panel" data-panel="password" hidden>
+          <h3>Change Admin Password</h3>
+          <div class="field"><label for="changePwInput">New Password</label><input type="password" id="changePwInput" autocomplete="new-password"></div>
+          <div class="field"><label for="changePwConfirmInput">Confirm New Password</label><input type="password" id="changePwConfirmInput" autocomplete="new-password"></div>
+          <div class="admin-error" id="changePwMsg" hidden></div>
+          <button class="btn btn-outline" id="changePwBtn" type="button">Update Password</button>
+          <p class="admin-storage-note" id="storageNote"></p>
+        </section>
+
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1472,15 +1604,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function openModal(){
+    if(isLoggedIn){ openDashboard(); return; }
     document.getElementById('adminModalOverlay').hidden = false;
-    showView(isLoggedIn ? 'panel' : 'login');
-    if(isLoggedIn){ renderAdminList(); } else { document.getElementById('loginPwInput').focus(); }
-    const note = document.getElementById('storageNote');
-    if(note){
-      note.textContent = useMemory
-        ? "Preview mode: this environment can't save browser data right now, so changes here will reset on reload. Once hosted on your own site, changes save permanently in the visitor's browser."
-        : "Changes save in this browser only (no backend). For every visitor on every device to see updates automatically, you'd need a small backend added later.";
-    }
+    showView('login');
+    document.getElementById('loginPwInput').focus();
   }
   function closeModal(){
     document.getElementById('adminModalOverlay').hidden = true;
@@ -1488,9 +1615,33 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('loginPwInput').value = '';
   }
 
+  function openDashboard(){
+    document.getElementById('adminModalOverlay').hidden = true;
+    document.getElementById('dashOverlay').hidden = false;
+    renderAdminList();
+    const note = document.getElementById('storageNote');
+    if(note){
+      note.textContent = useMemory
+        ? "Preview mode: this environment can't save browser data right now, so changes here will reset on reload. Once hosted on your own site, changes save permanently in the visitor's browser."
+        : "Changes save in this browser only (no backend). For every visitor on every device to see updates automatically, you'd need a small backend added later.";
+    }
+  }
+  function closeDashboard(){
+    document.getElementById('dashOverlay').hidden = true;
+  }
+
   document.getElementById('adminEntryBtn').addEventListener('click', openModal);
   document.getElementById('adminModalClose').addEventListener('click', closeModal);
   document.getElementById('adminModalOverlay').addEventListener('click', (e) => { if(e.target.id === 'adminModalOverlay') closeModal(); });
+  document.getElementById('dashClose').addEventListener('click', closeDashboard);
+  document.getElementById('dashOverlay').addEventListener('click', (e) => { if(e.target.id === 'dashOverlay') closeDashboard(); });
+
+  document.getElementById('dashTabs').addEventListener('click', (e) => {
+    const btn = e.target.closest('.dash-tab');
+    if(!btn) return;
+    document.querySelectorAll('.dash-tab').forEach(t => t.classList.toggle('active', t === btn));
+    document.querySelectorAll('.dash-panel').forEach(p => p.hidden = p.dataset.panel !== btn.dataset.tab);
+  });
 
   document.getElementById('showForgotBtn').addEventListener('click', () => showView('forgot'));
   document.getElementById('backToLoginBtn').addEventListener('click', () => showView('login'));
@@ -1504,8 +1655,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isLoggedIn = true;
         errBox.hidden = true;
         resetHighlightForm();
-        renderAdminList();
-        showView('panel');
+        openDashboard();
       }else{
         errBox.textContent = 'Incorrect password.';
         errBox.hidden = false;
@@ -1540,7 +1690,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  document.getElementById('logoutBtn').addEventListener('click', () => { isLoggedIn = false; closeModal(); });
+  document.getElementById('logoutBtn').addEventListener('click', () => { isLoggedIn = false; closeDashboard(); });
 
   document.getElementById('changePwBtn').addEventListener('click', async () => {
     const pw1 = document.getElementById('changePwInput').value;
