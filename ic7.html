@@ -702,6 +702,13 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
 .dash-panels{flex:1;overflow-y:auto;padding:26px 30px 40px;min-width:0;}
 .dash-panel h3{font-family:var(--font-display);text-transform:uppercase;font-size:22px;font-weight:400;margin-bottom:6px;}
 .dash-panel .admin-form{border:none;padding:0;margin-bottom:20px;}
+
+.tour-select-row{margin-bottom:14px;}
+.tour-select-row select{width:100%;max-width:320px;padding:12px 14px;border:1px solid var(--line);background:var(--bg-elevated);color:var(--ink);font-size:14px;}
+.tour-table-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.tour-table-tab{padding:8px 16px;font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--line-strong);color:var(--ink-dim);background:none;cursor:pointer;transition:all .2s ease;}
+.tour-table-tab:hover{color:var(--ink);}
+.tour-table-tab.active{color:#fff;background:var(--red);border-color:var(--red);}
 /* ============================= CRITERIA & RULES ============================= */
 .rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 @media(max-width:860px){.rules-grid{grid-template-columns:1fr;}}
@@ -723,16 +730,39 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   color:#fff;background:var(--red);padding:6px 12px;
 }
 .wh-track{display:flex;transition:transform .6s ease;}
-.wh-slide{flex:0 0 100%;display:grid;grid-template-columns:.9fr 1.1fr;min-height:260px;}
+.wh-slide{flex:0 0 100%;display:grid;grid-template-columns:.9fr 1.1fr;min-height:380px;}
 @media(max-width:760px){.wh-slide{grid-template-columns:1fr;min-height:auto;}}
-.wh-media{background-size:cover;background-position:center;background-color:var(--bg-elevated-2);display:flex;align-items:center;justify-content:center;min-height:200px;}
-.wh-text{padding:34px 36px;display:flex;flex-direction:column;justify-content:center;}
+.wh-media{background-size:cover;background-position:center;background-color:var(--bg-elevated-2);display:flex;align-items:center;justify-content:center;min-height:300px;}
+.wh-text{padding:44px 46px;display:flex;flex-direction:column;justify-content:center;}
 .wh-date{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
-.wh-text h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:clamp(20px,2.4vw,28px);letter-spacing:.01em;margin-bottom:10px;}
-.wh-text p{font-size:14px;color:var(--ink-dim);max-width:520px;}
+.wh-text h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:clamp(24px,2.8vw,34px);letter-spacing:.01em;margin-bottom:14px;}
+.wh-text p{font-size:15px;color:var(--ink-dim);max-width:560px;}
 .wh-dots{position:absolute;bottom:14px;right:16px;z-index:2;display:flex;gap:7px;}
 .wh-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);border:none;padding:0;cursor:pointer;transition:all .2s ease;}
 .wh-dot.active{background:var(--red-bright);width:20px;border-radius:4px;}
+
+/* ============================= MAJOR TEAM TOURS ============================= */
+.tours-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.tours-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.tours-grid{grid-template-columns:1fr;}}
+.tour-card{padding:28px 24px;display:block;transition:all .25s ease;}
+.tour-card:hover{border-color:var(--red);background:rgba(255,255,255,0.04);transform:translateY(-4px);}
+.tour-card .tour-teams{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.tour-card h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:19px;letter-spacing:.02em;margin-bottom:10px;}
+.tour-card p{font-size:13.5px;color:var(--ink-dim);margin-bottom:16px;}
+.tour-card .tour-link{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:6px;}
+.tour-card .tour-link svg{width:14px;height:14px;}
+.tour-card:hover .tour-link{color:var(--red-bright);}
+
+/* ============================= UPCOMING TOURNAMENTS TICKER ============================= */
+.ut-section{overflow:hidden;background:var(--pitch);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;}
+.ut-track{display:flex;align-items:center;gap:56px;white-space:nowrap;width:max-content;animation:utScroll 28s linear infinite;}
+.ut-item{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-dim);}
+.ut-item b{color:var(--red-bright);}
+.ut-item .ut-dot{width:5px;height:5px;border-radius:50%;background:var(--red);flex:none;}
+@keyframes utScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion: reduce){.ut-track{animation:none;}}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
 </head>
@@ -755,7 +785,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
       <a href="tournament-registration.html" id="navTournamentLink" class="nav-cta" hidden>Tournament Reg</a>
       <a href="#schedule">Schedule</a>
       <a href="#teams">Squads</a>
-      <a href="#players">Players</a>
+      <a href="#majorTours">Tours</a>
       <a href="#leaderboard">Table</a>
       <a href="#gallery">Gallery</a>
       <a href="#rules">Rules</a>
@@ -873,6 +903,11 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   </div>
 </section>
 
+<!-- ============================= UPCOMING TOURNAMENTS (moving ticker) ============================= -->
+<section class="ut-section" id="upcomingTours">
+  <div class="ut-track" id="utTrack"></div>
+</section>
+
 <!-- ============================= ACTIVITIES ============================= -->
 <section class="section" id="activities" style="background:var(--bg-elevated);">
   <div class="wrap">
@@ -947,13 +982,13 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   </div>
 </section>
 
-<!-- ============================= PLAYERS ============================= -->
-<section class="section" id="players" style="background:var(--bg-elevated);">
+<!-- ============================= MAJOR TEAM TOURS ============================= -->
+<section class="section" id="majorTours" style="background:var(--bg-elevated);">
   <div class="wrap">
-    <div class="eyebrow reveal">The Squad</div>
-    <h2 class="section-title reveal">Player Profiles</h2>
-    <p class="section-lede reveal">A few of the faces leading IC7 on the pitch this season.</p>
-    <div class="player-grid" id="playerGrid"></div>
+    <div class="eyebrow reveal">Competitions</div>
+    <h2 class="section-title reveal">Our Major Team Tours</h2>
+    <p class="section-lede reveal">Standings, top scorers, top assists and golden glove — tracked for every IC7 tournament.</p>
+    <div class="tours-grid" id="toursGrid"></div>
   </div>
 </section>
 
@@ -1094,7 +1129,6 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
       <div>
         <h5>Clan</h5>
         <ul>
-          <li><a href="#players">Players</a></li>
           <li><a href="#leaderboard">Leaderboard</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#register">Register</a></li>
@@ -1177,7 +1211,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
         <button class="dash-tab" data-tab="tournament" type="button">Tournament</button>
         <button class="dash-tab" data-tab="schedule" type="button">Schedule</button>
         <button class="dash-tab" data-tab="teams" type="button">Teams</button>
-        <button class="dash-tab" data-tab="players" type="button">Players</button>
+        <button class="dash-tab" data-tab="tours" type="button">Major Tours</button>
         <button class="dash-tab" data-tab="leaderboard" type="button">Table</button>
         <button class="dash-tab" data-tab="gallery" type="button">Gallery</button>
         <button class="dash-tab" data-tab="activities" type="button">Activities</button>
@@ -1338,17 +1372,303 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
           <div class="admin-list" id="adminTeamList"></div>
         </section>
 
-        <!-- PLAYERS -->
-        <section class="dash-panel" data-panel="players" hidden>
-          <h3>Player Profiles</h3>
-          <form class="admin-form" id="playerForm">
-            <div id="playerFormFields"></div>
-            <div class="admin-form-actions">
-              <button type="submit" class="btn btn-red">Save Player</button>
-              <button type="button" class="btn btn-outline" id="playerCancelEdit" hidden>Cancel Edit</button>
+        <!-- MAJOR TOURS -->
+        <section class="dash-panel" data-panel="tours" hidden>
+          <h3>Major Team Tours</h3>
+          <p class="admin-sub">Edit each tournament's name, team count and blurb. These power the cards on the homepage and the title of each tournament's page.</p>
+          <form class="admin-form" id="toursMetaForm">
+            <div class="field-row">
+              <div class="field"><label for="mt_intimate-cup_name">Intimate Cup — Name</label><input type="text" id="mt_intimate-cup_name"></div>
+              <div class="field"><label for="mt_intimate-cup_teams">Intimate Cup — Teams</label><input type="text" id="mt_intimate-cup_teams"></div>
             </div>
+            <div class="field"><label for="mt_intimate-cup_desc">Intimate Cup — Short Description</label><textarea id="mt_intimate-cup_desc" rows="2"></textarea></div>
+            <div class="field-row">
+              <div class="field"><label for="mt_evolution-cup_name">Evolution Cup — Name</label><input type="text" id="mt_evolution-cup_name"></div>
+              <div class="field"><label for="mt_evolution-cup_teams">Evolution Cup — Teams</label><input type="text" id="mt_evolution-cup_teams"></div>
+            </div>
+            <div class="field"><label for="mt_evolution-cup_desc">Evolution Cup — Short Description</label><textarea id="mt_evolution-cup_desc" rows="2"></textarea></div>
+            <div class="field-row">
+              <div class="field"><label for="mt_districto-cup_name">Districto Cup — Name</label><input type="text" id="mt_districto-cup_name"></div>
+              <div class="field"><label for="mt_districto-cup_teams">Districto Cup — Teams</label><input type="text" id="mt_districto-cup_teams"></div>
+            </div>
+            <div class="field"><label for="mt_districto-cup_desc">Districto Cup — Short Description</label><textarea id="mt_districto-cup_desc" rows="2"></textarea></div>
+            <div class="field-row">
+              <div class="field"><label for="mt_coopa-duo_name">Coopa'd Duo — Name</label><input type="text" id="mt_coopa-duo_name"></div>
+              <div class="field"><label for="mt_coopa-duo_teams">Coopa'd Duo — Teams</label><input type="text" id="mt_coopa-duo_teams"></div>
+            </div>
+            <div class="field"><label for="mt_coopa-duo_desc">Coopa'd Duo — Short Description</label><textarea id="mt_coopa-duo_desc" rows="2"></textarea></div>
+            <div class="field-row">
+              <div class="field"><label for="mt_world-cup_name">World Cup — Name</label><input type="text" id="mt_world-cup_name"></div>
+              <div class="field"><label for="mt_world-cup_teams">World Cup — Teams</label><input type="text" id="mt_world-cup_teams"></div>
+            </div>
+            <div class="field"><label for="mt_world-cup_desc">World Cup — Short Description</label><textarea id="mt_world-cup_desc" rows="2"></textarea></div>
+            <div class="field-row">
+              <div class="field"><label for="mt_club-world-cup_name">Club World Cup — Name</label><input type="text" id="mt_club-world-cup_name"></div>
+              <div class="field"><label for="mt_club-world-cup_teams">Club World Cup — Teams</label><input type="text" id="mt_club-world-cup_teams"></div>
+            </div>
+            <div class="field"><label for="mt_club-world-cup_desc">Club World Cup — Short Description</label><textarea id="mt_club-world-cup_desc" rows="2"></textarea></div>
+            <button type="submit" class="btn btn-red">Save Tournament Info</button>
+            <span class="admin-success" id="toursMetaSavedMsg" hidden>Saved.</span>
           </form>
-          <div class="admin-list" id="adminPlayerList"></div>
+
+          <h3 style="margin-top:8px;">Tournament Stats</h3>
+          <p class="admin-sub">Pick a tournament and a table, then add rows. Each table shows 5 columns on the tournament's page (Rank + 4 fields below).</p>
+          <div class="tour-select-row">
+            <select id="tourStatsSelect">
+              <option value="intimate-cup">Intimate Cup</option>
+              <option value="evolution-cup">Evolution Cup</option>
+              <option value="districto-cup">Districto Cup</option>
+              <option value="coopa-duo">Coopa'd Duo</option>
+              <option value="world-cup">World Cup</option>
+              <option value="club-world-cup">Club World Cup</option>
+            </select>
+          </div>
+          <div class="tour-table-tabs">
+              <button type="button" class="tour-table-tab active" data-table="standings">Standings</button>
+              <button type="button" class="tour-table-tab" data-table="scorers">Top Scorers</button>
+              <button type="button" class="tour-table-tab" data-table="assists">Top Assists</button>
+              <button type="button" class="tour-table-tab" data-table="glove">Golden Glove</button>
+          </div>
+            <div class="tour-stat-block" data-tour="intimate-cup" data-table="standings">
+              <form class="admin-form" id="tf_intimate-cup_standings">
+                <div id="tff_intimate-cup_standings"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_intimate-cup_standingsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_intimate-cup_standings"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="intimate-cup" data-table="scorers" hidden>
+              <form class="admin-form" id="tf_intimate-cup_scorers">
+                <div id="tff_intimate-cup_scorers"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_intimate-cup_scorersCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_intimate-cup_scorers"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="intimate-cup" data-table="assists" hidden>
+              <form class="admin-form" id="tf_intimate-cup_assists">
+                <div id="tff_intimate-cup_assists"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_intimate-cup_assistsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_intimate-cup_assists"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="intimate-cup" data-table="glove" hidden>
+              <form class="admin-form" id="tf_intimate-cup_glove">
+                <div id="tff_intimate-cup_glove"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_intimate-cup_gloveCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_intimate-cup_glove"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="evolution-cup" data-table="standings" hidden>
+              <form class="admin-form" id="tf_evolution-cup_standings">
+                <div id="tff_evolution-cup_standings"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_evolution-cup_standingsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_evolution-cup_standings"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="evolution-cup" data-table="scorers" hidden>
+              <form class="admin-form" id="tf_evolution-cup_scorers">
+                <div id="tff_evolution-cup_scorers"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_evolution-cup_scorersCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_evolution-cup_scorers"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="evolution-cup" data-table="assists" hidden>
+              <form class="admin-form" id="tf_evolution-cup_assists">
+                <div id="tff_evolution-cup_assists"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_evolution-cup_assistsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_evolution-cup_assists"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="evolution-cup" data-table="glove" hidden>
+              <form class="admin-form" id="tf_evolution-cup_glove">
+                <div id="tff_evolution-cup_glove"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_evolution-cup_gloveCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_evolution-cup_glove"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="districto-cup" data-table="standings" hidden>
+              <form class="admin-form" id="tf_districto-cup_standings">
+                <div id="tff_districto-cup_standings"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_districto-cup_standingsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_districto-cup_standings"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="districto-cup" data-table="scorers" hidden>
+              <form class="admin-form" id="tf_districto-cup_scorers">
+                <div id="tff_districto-cup_scorers"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_districto-cup_scorersCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_districto-cup_scorers"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="districto-cup" data-table="assists" hidden>
+              <form class="admin-form" id="tf_districto-cup_assists">
+                <div id="tff_districto-cup_assists"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_districto-cup_assistsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_districto-cup_assists"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="districto-cup" data-table="glove" hidden>
+              <form class="admin-form" id="tf_districto-cup_glove">
+                <div id="tff_districto-cup_glove"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_districto-cup_gloveCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_districto-cup_glove"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="coopa-duo" data-table="standings" hidden>
+              <form class="admin-form" id="tf_coopa-duo_standings">
+                <div id="tff_coopa-duo_standings"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_coopa-duo_standingsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_coopa-duo_standings"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="coopa-duo" data-table="scorers" hidden>
+              <form class="admin-form" id="tf_coopa-duo_scorers">
+                <div id="tff_coopa-duo_scorers"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_coopa-duo_scorersCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_coopa-duo_scorers"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="coopa-duo" data-table="assists" hidden>
+              <form class="admin-form" id="tf_coopa-duo_assists">
+                <div id="tff_coopa-duo_assists"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_coopa-duo_assistsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_coopa-duo_assists"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="coopa-duo" data-table="glove" hidden>
+              <form class="admin-form" id="tf_coopa-duo_glove">
+                <div id="tff_coopa-duo_glove"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_coopa-duo_gloveCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_coopa-duo_glove"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="world-cup" data-table="standings" hidden>
+              <form class="admin-form" id="tf_world-cup_standings">
+                <div id="tff_world-cup_standings"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_world-cup_standingsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_world-cup_standings"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="world-cup" data-table="scorers" hidden>
+              <form class="admin-form" id="tf_world-cup_scorers">
+                <div id="tff_world-cup_scorers"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_world-cup_scorersCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_world-cup_scorers"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="world-cup" data-table="assists" hidden>
+              <form class="admin-form" id="tf_world-cup_assists">
+                <div id="tff_world-cup_assists"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_world-cup_assistsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_world-cup_assists"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="world-cup" data-table="glove" hidden>
+              <form class="admin-form" id="tf_world-cup_glove">
+                <div id="tff_world-cup_glove"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_world-cup_gloveCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_world-cup_glove"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="club-world-cup" data-table="standings" hidden>
+              <form class="admin-form" id="tf_club-world-cup_standings">
+                <div id="tff_club-world-cup_standings"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_club-world-cup_standingsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_club-world-cup_standings"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="club-world-cup" data-table="scorers" hidden>
+              <form class="admin-form" id="tf_club-world-cup_scorers">
+                <div id="tff_club-world-cup_scorers"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_club-world-cup_scorersCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_club-world-cup_scorers"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="club-world-cup" data-table="assists" hidden>
+              <form class="admin-form" id="tf_club-world-cup_assists">
+                <div id="tff_club-world-cup_assists"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_club-world-cup_assistsCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_club-world-cup_assists"></div>
+            </div>
+            <div class="tour-stat-block" data-tour="club-world-cup" data-table="glove" hidden>
+              <form class="admin-form" id="tf_club-world-cup_glove">
+                <div id="tff_club-world-cup_glove"></div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn-red">Save Row</button>
+                  <button type="button" class="btn btn-outline" id="t_club-world-cup_gloveCancelEdit" hidden>Cancel Edit</button>
+                </div>
+              </form>
+              <div class="admin-list" id="tal_club-world-cup_glove"></div>
+            </div>
         </section>
 
         <!-- LEADERBOARD -->
@@ -1421,124 +1741,6 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
 </div>
 
 <script>
-/* ======================= CLUB CONFIG — EDIT THESE ======================= */
-const CLUB_WHATSAPP        = "919999999999";   // main club WhatsApp number
-const CLUB_ADMIN1_WHATSAPP = "919999999999";   // admin 1 WhatsApp number
-const CLUB_ADMIN2_WHATSAPP = "919888888888";   // admin 2 WhatsApp number
-const CLUB_INSTAGRAM       = "ic7iconicsevens"; // Instagram handle, no @
-const DEFAULT_ADMIN_PASSWORD = "IC7Admin@2026"; // first admin password — change this before publishing. Once anyone logs in, it upgrades to a stored hash and this line stops being read.
-const ADMIN_RECOVERY_CODE    = "778899";        // secret numeric code — the ONLY way to reset a forgotten admin password. Change this before publishing and keep it private.
-/* ========================================================================= */
-
-document.addEventListener('DOMContentLoaded', () => {
-
-  // Wire up WhatsApp / Instagram links from config
-  // WhatsApp / Instagram links are wired dynamically from admin-editable contact
-  // settings (see IC7CMS below in the page) — this just re-applies them after
-  // the DOM is ready, falling back to the CLUB_CONFIG defaults if nothing's
-  // been saved by an admin yet.
-  if(window.IC7CMS){ window.IC7CMS.applyContactSettings(); }
-
-  // Header scroll state
-  const header = document.getElementById('siteHeader');
-  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
-  onScroll();
-  window.addEventListener('scroll', onScroll, {passive:true});
-
-  // Mobile nav toggle
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-  });
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-
-  // Reveal on scroll
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('in-view');
-        io.unobserve(entry.target);
-      }
-    });
-  }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // Global starfield — small white dots twinkling/drifting across the whole page
-  const starHost = document.getElementById('starfield');
-  const starCount = window.innerWidth < 700 ? 60 : 130;
-  for(let i=0; i<starCount; i++){
-    const star = document.createElement('span');
-    star.className = 'star';
-    const size = 1 + Math.random()*1.8;
-    star.style.width = size+'px';
-    star.style.height = size+'px';
-    star.style.left = (Math.random()*100)+'%';
-    star.style.top = (Math.random()*100)+'%';
-    star.style.setProperty('--s-min', (0.1 + Math.random()*0.25).toFixed(2));
-    star.style.setProperty('--s-dx', (Math.random()*30-15).toFixed(1)+'px');
-    star.style.setProperty('--s-dy', (-(20+Math.random()*40)).toFixed(1)+'px');
-    const twinkleDur = (2 + Math.random()*4).toFixed(1);
-    const driftDur = (18 + Math.random()*22).toFixed(1);
-    const twinkleDelay = (-Math.random()*10).toFixed(1);
-    const driftDelay = (-Math.random()*10).toFixed(1);
-    star.style.animation = `starTwinkle ${twinkleDur}s ease-in-out infinite, starDrift ${driftDur}s ease-in-out infinite alternate`;
-    star.style.animationDelay = `${twinkleDelay}s, ${driftDelay}s`;
-    starHost.appendChild(star);
-  }
-
-  // High velocity tactical telemetry particle generator
-  const particleHost = document.getElementById('heroParticles');
-  const streamCount = window.innerWidth < 700 ? 30 : 70;
-  
-  for(let i=0; i<streamCount; i++){
-    const particle = document.createElement('span');
-    particle.className = 'particle';
-    const size = 1 + Math.random()*2;
-    particle.style.width = size+'px';
-    particle.style.height = size+'px';
-    particle.style.left = Math.random()*100+'%';
-    particle.style.animationDuration = (5 + Math.random()*7)+'s';
-    particle.style.animationDelay = (-Math.random()*12)+'s';
-    particleHost.appendChild(particle);
-  }
-
-  // LED ticker content
-  const tickerItems = [
-    "IC7 Coin Cup 2026 — Semi Final Live Now",
-    "IC7 3 – 2 Coastal Kings, 62'",
-    "Next Fixture: IC7 vs Coastal Kings · 18 Jul, 7:00 PM",
-    "IC7 tops the Kerala eFootball League table",
-    "Coin Tour registration is open — free entry",
-  ];
-  const track = document.getElementById('tickerTrack');
-  const buildTicker = () => tickerItems.map(t => `<span><span class="ticker-dot"></span>${t}</span>`).join('');
-  track.innerHTML = buildTicker() + buildTicker();
-
-  // Registration form -> WhatsApp
-  const form = document.getElementById('regForm');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('regName').value.trim();
-    const age = document.getElementById('regAge').value.trim();
-    const phone = document.getElementById('regPhone').value.trim();
-    const position = document.getElementById('regPosition').value;
-    const msg = document.getElementById('regMsg').value.trim();
-
-    let text = `Hi IC7! I'd like to register for the clan via the Magazine portal.\n\n`;
-    text += `Name: ${name}\n`;
-    text += `Age: ${age}\n`;
-    text += `WhatsApp: ${phone}\n`;
-    text += `Preferred Position: ${position}\n`;
-    if(msg) text += `Message: ${msg}\n`;
-
-    const mainNumber = (window.IC7CMS && window.IC7CMS.getContactSettings().whatsappMain) || CLUB_WHATSAPP;
-    const url = `https://wa.me/${mainNumber}?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
-  });
-
-});
-
 /* =====================================================================
    HIGHLIGHT OF THE DAY — public news feed + no-code admin panel.
 
@@ -1703,7 +1905,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 620);
         }
       }
-      function start(){ whTimer = setInterval(advance, 2000); }
+      function start(){ whTimer = setInterval(advance, 5000); }
       function stop(){ if(whTimer){ clearInterval(whTimer); whTimer = null; } }
       start();
       if(carousel){
@@ -1812,6 +2014,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('adminModalOverlay').addEventListener('click', (e) => { if(e.target.id === 'adminModalOverlay') closeModal(); });
   document.getElementById('dashClose').addEventListener('click', closeDashboard);
   document.getElementById('dashOverlay').addEventListener('click', (e) => { if(e.target.id === 'dashOverlay') closeDashboard(); });
+
+  // Arriving from another page's "Admin Login" link (e.g. tournament-registration.html)
+  if(new URLSearchParams(window.location.search).get('admin') === '1'){
+    openModal();
+    history.replaceState(null, '', window.location.pathname + window.location.hash);
+  }
 
   document.getElementById('dashTabs').addEventListener('click', (e) => {
     const btn = e.target.closest('.dash-tab');
@@ -2077,25 +2285,26 @@ document.addEventListener('DOMContentLoaded', () => {
   createCrudSection({
     storeKey: 'ic7_teams',
     seed: [
-      { id:'tm1', code:'SR', name:'IC7 Elite Squad', description:'Our first team on the eFootball circuit. Captained by Arjun Menon.', players:'18', trophies:'9', division:'A' },
-      { id:'tm2', code:'TT', name:'IC7 Reserve Squad', description:'The next tier of players, grinding coin tournaments and pushing for a starting spot.', players:'16', trophies:'3', division:'B' },
-      { id:'tm3', code:'JR', name:'IC7 Rookies', description:'Our entry squad — newer players learning the IC7 standard before moving up.', players:'20', trophies:'2', division:'Rookie' }
+      { id:'tm1', code:'SR', name:'IC7 Elite Squad', description:'Our first team on the eFootball circuit. Captained by Arjun Menon.', players:'18', trophies:'9', division:'A', logo:'' },
+      { id:'tm2', code:'TT', name:'IC7 Reserve Squad', description:'The next tier of players, grinding coin tournaments and pushing for a starting spot.', players:'16', trophies:'3', division:'B', logo:'' },
+      { id:'tm3', code:'JR', name:'IC7 Rookies', description:'Our entry squad — newer players learning the IC7 standard before moving up.', players:'20', trophies:'2', division:'Rookie', logo:'' }
     ],
     fields: [
-      { id:'code', label:'Badge Code (2-3 letters)', type:'text', required:true },
+      { id:'code', label:'Badge Code (2-3 letters, used if no logo)', type:'text', required:true },
       { id:'name', label:'Team Name', type:'text', required:true },
+      { id:'logo', label:'Team Logo (optional)', type:'file', maxWidth:400 },
       { id:'description', label:'Description', type:'textarea' },
       { id:'players', label:'Player Count', type:'text' },
       { id:'trophies', label:'Trophies', type:'text' },
       { id:'division', label:'Division / Age Group', type:'text' }
     ],
     formId:'teamForm', formFieldsId:'teamFormFields', idPrefix:'team', adminListId:'adminTeamList',
-    publicContainerId:'teamGrid',
+    publicContainerId:'teamGrid', thumbField:'logo',
     titleField: it => it.name,
     subtitleField: it => `${it.players || 0} players`,
     publicRender: it => `<div class="team-card glass reveal in-view">
       <div class="team-top">
-        <div class="team-crest-replacement">${escapeHtml(it.code)}</div>
+        <div class="team-crest-replacement"${it.logo ? ` style="background-image:url('${it.logo}');background-size:cover;background-position:center;"` : ''}>${it.logo ? '' : escapeHtml(it.code)}</div>
         <h3>${escapeHtml(it.name)}</h3>
         <p>${escapeHtml(it.description)}</p>
       </div>
@@ -2103,33 +2312,129 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>`
   });
 
-  // ---- Players ----
-  createCrudSection({
-    storeKey: 'ic7_players',
-    seed: [
-      { id:'pl1', initials:'AM', number:'7', name:'Arjun Menon', position:'Captain · Midfielder', tag:'Reads the game, runs the tempo.' },
-      { id:'pl2', initials:'SN', number:'9', name:'Sachin Nair', position:'Striker', tag:'Top scorer, two seasons running.' },
-      { id:'pl3', initials:'RK', number:'1', name:'Rahul Kutty', position:'Goalkeeper', tag:'Wall at the back, calm under pressure.' },
-      { id:'pl4', initials:'VP', number:'4', name:'Vishnu P.', position:'Defender', tag:'Nothing gets past him twice.' },
-      { id:'pl5', initials:'FM', number:'11', name:'Fahad Muhsin', position:'Winger', tag:"Fastest on the wing, ask any defender." },
-      { id:'pl6', initials:'JT', number:'5', name:'Jithin Thomas', position:'Midfielder', tag:'Engine room, box to box all game.' }
-    ],
-    fields: [
-      { id:'name', label:'Full Name', type:'text', required:true },
-      { id:'initials', label:'Initials (for avatar)', type:'text' },
-      { id:'number', label:'Jersey Number', type:'text' },
-      { id:'position', label:'Position', type:'text' },
-      { id:'tag', label:'One-line Note', type:'text' }
-    ],
-    formId:'playerForm', formFieldsId:'playerFormFields', idPrefix:'player', adminListId:'adminPlayerList',
-    publicContainerId:'playerGrid',
-    titleField: it => it.name,
-    subtitleField: it => it.position,
-    publicRender: it => `<div class="player-card glass reveal in-view">
-      <div class="player-avatar">${escapeHtml(it.initials)}<span class="num">${escapeHtml(it.number)}</span></div>
-      <div class="player-info"><h4>${escapeHtml(it.name)}</h4><div class="pos">${escapeHtml(it.position)}</div><div class="tag">${escapeHtml(it.tag)}</div></div>
-    </div>`
+  // ---- Major Team Tours (public cards, ticker, and per-tournament stat tables) ----
+  const MAJOR_TOURS = [
+    { id:'intimate-cup', name:'Intimate Cup', teams:'14 Teams', desc:'IC7\'s flagship knockout competition — the one everyone circles on the calendar.', page:'tour-intimate-cup.html' },
+    { id:'evolution-cup', name:'Evolution Cup', teams:'10 Teams', desc:'A season-long league format that tests squad depth over knockout nerves.', page:'tour-evolution-cup.html' },
+    { id:'districto-cup', name:'Districto Cup', teams:'10 Teams', desc:'Regional pride on the line, district by district across Kerala.', page:'tour-districto-cup.html' },
+    { id:'coopa-duo', name:"Coopa'd Duo", teams:'10 Teams', desc:'Paired-squad format — double the coordination, double the pressure.', page:'tour-coopa-duo.html' },
+    { id:'world-cup', name:'World Cup', teams:'8 Teams', desc:'IC7\'s biggest stage. Eight squads, one clan World Cup.', page:'tour-world-cup.html' },
+    { id:'club-world-cup', name:'Club World Cup', teams:'8 Teams', desc:'Champions of every other competition settle it here.', page:'tour-club-world-cup.html' }
+  ];
+
+  function getToursMeta(){
+    const stored = Store.get('ic7_major_tours', {});
+    const merged = {};
+    MAJOR_TOURS.forEach(t => {
+      merged[t.id] = Object.assign({ name:t.name, teams:t.teams, desc:t.desc }, stored[t.id] || {});
+    });
+    return merged;
+  }
+
+  function renderToursGrid(){
+    const host = document.getElementById('toursGrid');
+    if(!host) return;
+    const meta = getToursMeta();
+    host.innerHTML = MAJOR_TOURS.map(t => {
+      const m = meta[t.id];
+      return `<a href="${t.page}" class="tour-card glass reveal in-view">
+        <div class="tour-teams">${escapeHtml(m.teams)}</div>
+        <h3>${escapeHtml(m.name)}</h3>
+        <p>${escapeHtml(m.desc)}</p>
+        <span class="tour-link">View Tournament <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>`;
+    }).join('');
+  }
+
+  function renderUpcomingTicker(){
+    const host = document.getElementById('utTrack');
+    if(!host) return;
+    const meta = getToursMeta();
+    const items = MAJOR_TOURS.map(t => `<span class="ut-item"><span class="ut-dot"></span>Upcoming: <b>${escapeHtml(meta[t.id].name)}</b> — ${escapeHtml(meta[t.id].teams)}</span>`).join('');
+    host.innerHTML = items + items;
+  }
+
+  const toursMetaForm = document.getElementById('toursMetaForm');
+  if(toursMetaForm){
+    const meta0 = getToursMeta();
+    MAJOR_TOURS.forEach(t => {
+      const nameEl = document.getElementById(`mt_${t.id}_name`);
+      const teamsEl = document.getElementById(`mt_${t.id}_teams`);
+      const descEl = document.getElementById(`mt_${t.id}_desc`);
+      if(nameEl) nameEl.value = meta0[t.id].name;
+      if(teamsEl) teamsEl.value = meta0[t.id].teams;
+      if(descEl) descEl.value = meta0[t.id].desc;
+    });
+    toursMetaForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = {};
+      MAJOR_TOURS.forEach(t => {
+        data[t.id] = {
+          name: (document.getElementById(`mt_${t.id}_name`).value || '').trim() || t.name,
+          teams: (document.getElementById(`mt_${t.id}_teams`).value || '').trim() || t.teams,
+          desc: (document.getElementById(`mt_${t.id}_desc`).value || '').trim()
+        };
+      });
+      Store.set('ic7_major_tours', data);
+      renderToursGrid();
+      renderUpcomingTicker();
+      const msg = document.getElementById('toursMetaSavedMsg');
+      if(msg){ msg.hidden = false; setTimeout(() => msg.hidden = true, 2000); }
+    });
+  }
+  renderToursGrid();
+  renderUpcomingTicker();
+
+  // Each tournament tracks 4 tables, 5 columns each (Rank + 4 fields below)
+  const STAT_TABLE_DEFS = [
+    { key:'standings',
+      fields:[ {id:'team', label:'Team', type:'text', required:true}, {id:'played', label:'Played', type:'text'}, {id:'won', label:'Won', type:'text'}, {id:'points', label:'Points', type:'text'} ],
+      titleField: it => it.team, subtitleField: it => `${it.points||0} pts` },
+    { key:'scorers',
+      fields:[ {id:'player', label:'Player', type:'text', required:true}, {id:'team', label:'Team', type:'text'}, {id:'goals', label:'Goals', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
+      titleField: it => it.player, subtitleField: it => `${it.goals||0} goals` },
+    { key:'assists',
+      fields:[ {id:'player', label:'Player', type:'text', required:true}, {id:'team', label:'Team', type:'text'}, {id:'assists', label:'Assists', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
+      titleField: it => it.player, subtitleField: it => `${it.assists||0} assists` },
+    { key:'glove',
+      fields:[ {id:'player', label:'Goalkeeper', type:'text', required:true}, {id:'team', label:'Team', type:'text'}, {id:'cleanSheets', label:'Clean Sheets', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
+      titleField: it => it.player, subtitleField: it => `${it.cleanSheets||0} clean sheets` }
+  ];
+
+  MAJOR_TOURS.forEach(t => {
+    STAT_TABLE_DEFS.forEach(def => {
+      createCrudSection({
+        storeKey: `ic7_tour_${t.id}_${def.key}`,
+        seed: [],
+        fields: def.fields,
+        formId: `tf_${t.id}_${def.key}`, formFieldsId: `tff_${t.id}_${def.key}`,
+        idPrefix: `t_${t.id}_${def.key}`, adminListId: `tal_${t.id}_${def.key}`,
+        publicContainerId: null,
+        titleField: def.titleField, subtitleField: def.subtitleField,
+        publicRender: () => ''
+      });
+    });
   });
+
+  // Tournament stats tab/selector wiring
+  const tourSelect = document.getElementById('tourStatsSelect');
+  const tourTableTabs = document.querySelectorAll('.tour-table-tab');
+  function showTourStatBlock(){
+    if(!tourSelect) return;
+    const tid = tourSelect.value;
+    const activeTab = document.querySelector('.tour-table-tab.active');
+    const key = activeTab ? activeTab.dataset.table : 'standings';
+    document.querySelectorAll('.tour-stat-block').forEach(b => {
+      b.hidden = !(b.dataset.tour === tid && b.dataset.table === key);
+    });
+  }
+  if(tourSelect){
+    tourSelect.addEventListener('change', showTourStatBlock);
+    tourTableTabs.forEach(btn => btn.addEventListener('click', () => {
+      tourTableTabs.forEach(b => b.classList.toggle('active', b === btn));
+      showTourStatBlock();
+    }));
+  }
 
   // ---- Leaderboard ----
   createCrudSection({
@@ -2437,6 +2742,125 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 })();
+
+
+/* ======================= CLUB CONFIG — EDIT THESE ======================= */
+const CLUB_WHATSAPP        = "919999999999";   // main club WhatsApp number
+const CLUB_ADMIN1_WHATSAPP = "919999999999";   // admin 1 WhatsApp number
+const CLUB_ADMIN2_WHATSAPP = "919888888888";   // admin 2 WhatsApp number
+const CLUB_INSTAGRAM       = "ic7iconicsevens"; // Instagram handle, no @
+const DEFAULT_ADMIN_PASSWORD = "IC7Admin@2026"; // first admin password — change this before publishing. Once anyone logs in, it upgrades to a stored hash and this line stops being read.
+const ADMIN_RECOVERY_CODE    = "778899";        // secret numeric code — the ONLY way to reset a forgotten admin password. Change this before publishing and keep it private.
+/* ========================================================================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Wire up WhatsApp / Instagram links from config
+  // WhatsApp / Instagram links are wired dynamically from admin-editable contact
+  // settings (see IC7CMS below in the page) — this just re-applies them after
+  // the DOM is ready, falling back to the CLUB_CONFIG defaults if nothing's
+  // been saved by an admin yet.
+  if(window.IC7CMS){ window.IC7CMS.applyContactSettings(); }
+
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Mobile nav toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Global starfield — small white dots twinkling/drifting across the whole page
+  const starHost = document.getElementById('starfield');
+  const starCount = window.innerWidth < 700 ? 60 : 130;
+  for(let i=0; i<starCount; i++){
+    const star = document.createElement('span');
+    star.className = 'star';
+    const size = 1 + Math.random()*1.8;
+    star.style.width = size+'px';
+    star.style.height = size+'px';
+    star.style.left = (Math.random()*100)+'%';
+    star.style.top = (Math.random()*100)+'%';
+    star.style.setProperty('--s-min', (0.1 + Math.random()*0.25).toFixed(2));
+    star.style.setProperty('--s-dx', (Math.random()*30-15).toFixed(1)+'px');
+    star.style.setProperty('--s-dy', (-(20+Math.random()*40)).toFixed(1)+'px');
+    const twinkleDur = (2 + Math.random()*4).toFixed(1);
+    const driftDur = (18 + Math.random()*22).toFixed(1);
+    const twinkleDelay = (-Math.random()*10).toFixed(1);
+    const driftDelay = (-Math.random()*10).toFixed(1);
+    star.style.animation = `starTwinkle ${twinkleDur}s ease-in-out infinite, starDrift ${driftDur}s ease-in-out infinite alternate`;
+    star.style.animationDelay = `${twinkleDelay}s, ${driftDelay}s`;
+    starHost.appendChild(star);
+  }
+
+  // High velocity tactical telemetry particle generator
+  const particleHost = document.getElementById('heroParticles');
+  const streamCount = window.innerWidth < 700 ? 30 : 70;
+  
+  for(let i=0; i<streamCount; i++){
+    const particle = document.createElement('span');
+    particle.className = 'particle';
+    const size = 1 + Math.random()*2;
+    particle.style.width = size+'px';
+    particle.style.height = size+'px';
+    particle.style.left = Math.random()*100+'%';
+    particle.style.animationDuration = (5 + Math.random()*7)+'s';
+    particle.style.animationDelay = (-Math.random()*12)+'s';
+    particleHost.appendChild(particle);
+  }
+
+  // LED ticker content
+  const tickerItems = [
+    "IC7 Coin Cup 2026 — Semi Final Live Now",
+    "IC7 3 – 2 Coastal Kings, 62'",
+    "Next Fixture: IC7 vs Coastal Kings · 18 Jul, 7:00 PM",
+    "IC7 tops the Kerala eFootball League table",
+    "Coin Tour registration is open — free entry",
+  ];
+  const track = document.getElementById('tickerTrack');
+  const buildTicker = () => tickerItems.map(t => `<span><span class="ticker-dot"></span>${t}</span>`).join('');
+  track.innerHTML = buildTicker() + buildTicker();
+
+  // Registration form -> WhatsApp
+  const form = document.getElementById('regForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('regName').value.trim();
+    const age = document.getElementById('regAge').value.trim();
+    const phone = document.getElementById('regPhone').value.trim();
+    const position = document.getElementById('regPosition').value;
+    const msg = document.getElementById('regMsg').value.trim();
+
+    let text = `Hi IC7! I'd like to register for the clan via the Magazine portal.\n\n`;
+    text += `Name: ${name}\n`;
+    text += `Age: ${age}\n`;
+    text += `WhatsApp: ${phone}\n`;
+    text += `Preferred Position: ${position}\n`;
+    if(msg) text += `Message: ${msg}\n`;
+
+    const mainNumber = (window.IC7CMS && window.IC7CMS.getContactSettings().whatsappMain) || CLUB_WHATSAPP;
+    const url = `https://wa.me/${mainNumber}?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  });
+
+});
 </script>
 </body>
 </html>
