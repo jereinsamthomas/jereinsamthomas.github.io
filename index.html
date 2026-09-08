@@ -1,482 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jerein Sam Thomas | Physics & Performance Architect</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght=200;300;400;600;700&family=Fira Code:wght@300;400;500;600&family=Exo+2:ital,wght@0,200;0,400;0,700;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --void: #02010a;
-      --ion: #00ffe7;
-      --plasma: #b400ff;
-      --nova: #ff3cac;
-      --star: #ffe066;
-      --dust: #a8b8d0;
-      --bright: #e8f0ff;
-      --glass: rgba(255,255,255,0.02);
-      --gb: rgba(255,255,255,0.06);
-      --ease: cubic-bezier(0.16,1,0.3,1);
-    }
-    *{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{background:var(--void);color:var(--dust);font-family:'Outfit',sans-serif;overflow-x:hidden;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jerein Sam Thomas | Physics & Football Analytics Architect</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@200;300;400;600;700&family=Fira+Code:wght@300;400;500;600&family=Exo+2:ital,wght@0,200;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+:root{
+  --void:#02010a; --ion:#00ffe7; --plasma:#b400ff; --nova:#ff3cac; --star:#ffe066;
+  --pitch:#00c46a; --dust:#a8b8d0; --bright:#e8f0ff; --glass:rgba(255,255,255,.02);
+  --gb:rgba(255,255,255,.06); --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--dust);font-family:'Outfit',sans-serif;overflow-x:hidden;}
+body.intro-on{overflow:hidden;}
 
-    /* ── INTRO OVERLAY ── */
-    #intro{position:fixed;inset:0;z-index:2000;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .9s var(--ease),transform 3.9s var(--ease);}
-    #intro.exit{opacity:0;transform:scale(1.05);pointer-events:none;}
-    #intro-canvas{position:absolute;inset:0;z-index:1;}
-    .intro-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;width:100%;max-width:600px;padding:0 20px;}
-    .ball-ring{position:relative;width:110px;height:110px;margin-bottom:24px;display:flex;align-items:center;justify-content:center;}
-    .ball-svg{width:100%;height:100%;animation:ballSpin 16s linear infinite;}
-    .ball-glow{position:absolute;inset:-5px;border-radius:50%;box-shadow:0 0 35px rgba(0,255,231,0.25);animation:pulseBall 2.5s ease infinite;}
-    .data-stream{position:absolute;bottom:-22px;font-family:'Fira Code',monospace;font-size:0.58rem;color:var(--ion);letter-spacing:1px;white-space:nowrap;text-shadow:0 0 8px rgba(0,255,231,0.6);}
-    .intro-title{font-family:'Orbitron',sans-serif;font-size:clamp(1.4rem,4vw,2.4rem);font-weight:900;letter-spacing:6px;color:#fff;margin-bottom:8px;text-shadow:0 0 20px rgba(255,255,255,0.2);}
-    .intro-sub{font-family:'Fira Code',monospace;font-size:0.65rem;color:rgba(168,184,208,0.6);letter-spacing:3px;margin-bottom:32px;text-transform:uppercase;}
-    .intro-sub span{color:var(--ion);}
-    .intro-bar-wrap{width:280px;height:2px;background:rgba(255,255,255,0.05);position:relative;margin-bottom:12px;overflow:hidden;}
-    .intro-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--ion),var(--plasma));box-shadow:0 0 10px var(--ion);}
-    .intro-bar-label{font-family:'Fira Code',monospace;font-size:0.58rem;color:rgba(168,184,208,0.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;min-height:15px;}
-    .intro-status{display:flex;flex-direction:column;gap:6px;min-height:100px;text-align:left;width:280px;}
-    .isl{font-family:'Fira Code',monospace;font-size:0.58rem;letter-spacing:1.5px;color:rgba(168,184,208,0.15);transform:translateX(-8px);opacity:0;transition:all 0.4s var(--ease);display:flex;justify-content:space-between;}
-    .isl.lit{opacity:1;transform:translateX(0);color:rgba(168,184,208,0.5);}
-    .isl.done{color:var(--ion);text-shadow:0 0 8px rgba(0,255,231,0.3);}
-    .isl .status-val{color:var(--plasma);}
-    .isl.done .status-val{color:var(--star);}
-    .intro-skip{position:absolute;bottom:40px;right:40px;z-index:3;font-family:'Fira Code',monospace;font-size:0.6rem;color:rgba(168,184,208,0.3);background:transparent;border:1px solid rgba(168,184,208,0.15);padding:6px 16px;letter-spacing:2px;transition:all 0.3s;cursor:pointer;}
-    .intro-skip:hover{color:var(--ion);border-color:var(--ion);background:rgba(0,255,231,0.03);}
-    body.intro-on{overflow:hidden;}
+/* grain */
+body::after{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");opacity:.22;}
 
-    /* ── GRAIN ── */
-    body::after{content:'';position:fixed;inset:0;z-index:1;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");opacity:.25;pointer-events:none;}
+/* ══════════ INTRO ══════════ */
+#intro{position:fixed;inset:0;z-index:2000;background:radial-gradient(ellipse at 50% 40%,#0a0520 0%,#02010a 65%);
+  display:flex;align-items:center;justify-content:center;transition:opacity .9s var(--ease),transform 1.2s var(--ease);}
+#intro.exit{opacity:0;transform:scale(1.06);pointer-events:none;}
+#intro-3d{position:absolute;inset:0;z-index:1;}
+.intro-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 20px;}
+.photo-orbit{position:relative;width:190px;height:190px;margin-bottom:34px;}
+.photo-core{position:absolute;inset:16px;border-radius:50%;overflow:hidden;
+  border:2px solid rgba(0,255,231,.5);
+  box-shadow:0 0 40px rgba(0,255,231,.35),0 0 90px rgba(180,0,255,.25),inset 0 0 30px rgba(0,0,0,.4);
+  animation:photoIn 1.2s var(--ease) both;}
+.photo-core img{width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.05);}
+.photo-scan{position:absolute;inset:16px;border-radius:50%;overflow:hidden;pointer-events:none;}
+.photo-scan::before{content:'';position:absolute;left:0;right:0;height:34%;top:-40%;
+  background:linear-gradient(180deg,transparent,rgba(0,255,231,.35),transparent);
+  animation:scan 2.4s linear infinite;}
+@keyframes scan{to{top:130%;}}
+.orbit-ring{position:absolute;inset:0;border-radius:50%;animation:spin360 14s linear infinite;}
+.orbit-ring svg{width:100%;height:100%;}
+.orbit-dot{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--ion);
+  box-shadow:0 0 12px var(--ion),0 0 24px rgba(0,255,231,.6);top:-4px;left:50%;transform:translateX(-50%);}
+.orbit-ring.r2{inset:6px;animation-duration:9s;animation-direction:reverse;}
+.orbit-ring.r2 .orbit-dot{background:var(--nova);box-shadow:0 0 12px var(--nova),0 0 24px rgba(255,60,172,.6);width:7px;height:7px;}
+.orbit-ring.r3{inset:-10px;border:1px dashed rgba(180,0,255,.35);animation-duration:22s;}
+@keyframes spin360{to{transform:rotate(360deg);}}
+@keyframes photoIn{from{opacity:0;transform:scale(.6);filter:blur(14px);}to{opacity:1;transform:scale(1);filter:blur(0);}}
+.intro-title{font-family:'Orbitron';font-size:clamp(1.3rem,3.6vw,2.1rem);font-weight:900;letter-spacing:6px;color:#fff;
+  margin-bottom:6px;text-shadow:0 0 24px rgba(0,255,231,.35);animation:riseIn 1s var(--ease) .3s both;}
+.intro-sub{font-family:'Fira Code';font-size:.66rem;color:rgba(168,184,208,.65);letter-spacing:3px;margin-bottom:30px;
+  text-transform:uppercase;animation:riseIn 1s var(--ease) .45s both;}
+.intro-sub span{color:var(--pitch);}
+@keyframes riseIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.intro-bar-wrap{width:290px;height:2px;background:rgba(255,255,255,.06);position:relative;margin-bottom:12px;overflow:hidden;}
+.intro-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--pitch),var(--ion),var(--plasma));
+  box-shadow:0 0 12px var(--ion);transition:width .5s var(--ease);}
+.intro-bar-label{font-family:'Fira Code';font-size:.58rem;color:rgba(168,184,208,.45);letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;min-height:15px;}
+.intro-status{display:flex;flex-direction:column;gap:6px;min-height:110px;text-align:left;width:290px;}
+.isl{font-family:'Fira Code';font-size:.58rem;letter-spacing:1.5px;color:rgba(168,184,208,.15);transform:translateX(-8px);opacity:0;transition:all .4s var(--ease);display:flex;justify-content:space-between;}
+.isl.lit{opacity:1;transform:translateX(0);color:rgba(168,184,208,.55);}
+.isl.done{color:var(--ion);text-shadow:0 0 8px rgba(0,255,231,.3);}
+.isl .status-val{color:var(--plasma);}
+.isl.done .status-val{color:var(--star);}
+.intro-skip{position:absolute;bottom:38px;right:40px;z-index:3;font-family:'Fira Code';font-size:.6rem;color:rgba(168,184,208,.35);
+  background:transparent;border:1px solid rgba(168,184,208,.15);padding:6px 16px;letter-spacing:2px;transition:.3s;cursor:pointer;}
+.intro-skip:hover{color:var(--ion);border-color:var(--ion);background:rgba(0,255,231,.03);}
 
-    /* ── CURSORS ── */
-    #cd{width:8px;height:8px;background:var(--ion);border-radius:50%;position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--ion),0 0 20px rgba(0,255,231,.4);transition:background .2s,box-shadow .2s,transform .1s;top:-100px;left:-100px;}
-    #cr{width:36px;height:36px;border:1px dashed rgba(0,243,255,.3);border-radius:50%;position:fixed;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s var(--ease),height .2s var(--ease),border-color .2s,transform .05s linear;top:-100px;left:-100px;}
-    #cd.hov{background:var(--nova);box-shadow:0 0 12px var(--nova),0 0 24px rgba(255,60,172,.5);transform:translate(-50%,-50%) scale(1.3);}
-    #cr.hov{width:48px;height:48px;border:1.5px solid var(--nova);animation:spin 3s linear infinite;}
+/* cursors */
+#cd{width:8px;height:8px;background:var(--ion);border-radius:50%;position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);
+  box-shadow:0 0 10px var(--ion),0 0 20px rgba(0,255,231,.4);top:-100px;left:-100px;transition:background .2s,box-shadow .2s;}
+#cr{width:36px;height:36px;border:1px dashed rgba(0,255,231,.3);border-radius:50%;position:fixed;z-index:9998;pointer-events:none;
+  transform:translate(-50%,-50%);transition:width .2s var(--ease),height .2s var(--ease),border-color .2s;top:-100px;left:-100px;}
+#cd.hov{background:var(--nova);box-shadow:0 0 12px var(--nova),0 0 24px rgba(255,60,172,.5);}
+#cr.hov{width:50px;height:50px;border:1.5px solid var(--nova);}
 
-    /* ── ANIMATED BG CANVAS ── */
-    #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+/* 3D bg */
+#bg3d{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
-    /* ── NAV ── */
-    nav{position:fixed;top:0;width:100%;padding:0 6%;display:flex;justify-content:space-between;align-items:center;z-index:1000;backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--gb);background:rgba(2,1,10,.6);height:64px;}
-    .logo{font-family:'Orbitron',sans-serif;font-size:1.05rem;font-weight:900;color:var(--ion);text-decoration:none;letter-spacing:4px;position:relative;text-shadow:0 0 15px rgba(0,255,231,.4);}
-    .logo::after{content:'';position:absolute;bottom:-4px;left:0;width:100%;height:1px;background:linear-gradient(90deg,var(--ion),transparent);animation:logoPulse 4s ease infinite;}
+/* nav */
+nav{position:fixed;top:0;width:100%;padding:0 6%;display:flex;justify-content:space-between;align-items:center;z-index:1000;
+  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--gb);
+  background:rgba(2,1,10,.6);height:64px;}
+.logo{font-family:'Orbitron';font-size:1.05rem;font-weight:900;color:var(--ion);text-decoration:none;letter-spacing:4px;position:relative;text-shadow:0 0 15px rgba(0,255,231,.4);}
+.logo::after{content:'';position:absolute;bottom:-4px;left:0;width:100%;height:1px;background:linear-gradient(90deg,var(--ion),transparent);}
+.nav-links{display:flex;align-items:center;height:100%;}
+.nav-item{position:relative;height:100%;display:flex;align-items:center;}
+.nav-item>a,.nav-item>.nav-btn{text-decoration:none;color:rgba(168,184,208,.6);font-size:.68rem;font-family:'Fira Code';text-transform:uppercase;
+  letter-spacing:1.5px;transition:.3s;position:relative;padding:0 14px;height:100%;display:flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;}
+.nav-item>a:hover,.nav-item>.nav-btn:hover{color:var(--bright);}
+.nav-item>a::after,.nav-item>.nav-btn::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--ion),var(--plasma));transition:width .3s var(--ease);}
+.nav-item>a:hover::after,.nav-item>.nav-btn:hover::after{width:100%;}
+.nav-arrow{font-size:.5rem;transition:transform .5s var(--ease);color:var(--plasma);}
+.nav-item:hover .nav-arrow{transform:rotate(180deg);}
+.dropdown{position:absolute;top:100%;left:0;min-width:330px;background:rgba(4,3,15,.97);border:1px solid rgba(0,255,231,.12);
+  opacity:0;visibility:hidden;transform:translateY(10px);transition:all .3s var(--ease);z-index:2000;overflow:hidden;}
+.dropdown::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:linear-gradient(180deg,var(--pitch),var(--ion),var(--plasma));transition:height .5s var(--ease);}
+.nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+.nav-item:hover .dropdown::before{height:100%;}
+.dropdown-header{padding:14px 20px 10px;font-family:'Fira Code';font-size:.55rem;letter-spacing:3px;color:rgba(0,255,231,.4);text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.04);}
+.dropdown-item{display:flex;align-items:center;gap:14px;padding:14px 20px;text-decoration:none;color:var(--dust);transition:.25s var(--ease);position:relative;overflow:hidden;}
+.dropdown-item::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,255,231,.05),transparent);transform:translateX(-100%);transition:transform .3s var(--ease);}
+.dropdown-item:hover::before{transform:translateX(0);}
+.dropdown-item:hover{color:var(--bright);padding-left:26px;}
+.dropdown-item+.dropdown-item{border-top:1px solid rgba(255,255,255,.03);}
+.di-icon{width:34px;height:34px;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;transition:.25s;}
+.dropdown-item:hover .di-icon{border-color:rgba(0,255,231,.3);color:var(--ion);}
+.di-name{font-family:'Orbitron';font-size:.65rem;letter-spacing:1px;color:var(--bright);margin-bottom:3px;}
+.di-desc{font-family:'Fira Code';font-size:.55rem;color:rgba(168,184,208,.4);letter-spacing:.5px;}
+.di-ext{font-family:'Fira Code';font-size:.5rem;color:rgba(0,255,231,.3);align-self:center;letter-spacing:1px;}
+.dropdown-github{display:flex;align-items:center;gap:8px;padding:12px 20px;border-top:1px solid rgba(255,255,255,.06);
+  font-family:'Fira Code';font-size:.6rem;color:rgba(168,184,208,.3);text-decoration:none;transition:.25s;letter-spacing:1px;}
+.dropdown-github:hover{color:var(--ion);}
 
-    .nav-links{display:flex;gap:0;align-items:center;height:100%;}
-    .nav-item{position:relative;height:100%;display:flex;align-items:center;}
-    .nav-item > a,.nav-item > .nav-btn{text-decoration:none;color:rgba(168,184,208,.6);font-size:.68rem;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1.5px;transition:.3s;position:relative;padding:0 14px;height:100%;display:flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;}
-    .nav-item > a::before,.nav-item > .nav-btn::before{content:'→ ';color:var(--plasma);opacity:0;margin-right:2px;transition:.2s;}
-    .nav-item > a:hover::before,.nav-item > .nav-btn:hover::before{opacity:1;}
-    .nav-item > a:hover,.nav-item > .nav-btn:hover{color:var(--bright);}
-    .nav-item > a::after,.nav-item > .nav-btn::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--ion),var(--plasma));transition:width .3s var(--ease);}
-    .nav-item > a:hover::after,.nav-item > .nav-btn:hover::after{width:100%;}
+/* hero */
+#hero{min-height:100vh;display:flex;align-items:center;padding:100px 8% 60px;position:relative;overflow:hidden;z-index:2;}
+.hero-wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center;width:100%;max-width:1300px;margin:0 auto;}
+@media(max-width:960px){.hero-wrap{grid-template-columns:1fr;}}
+.hero-sub{font-family:'Exo 2';font-size:clamp(.8rem,1.6vw,1.05rem);font-style:italic;font-weight:300;color:var(--ion);
+  letter-spacing:5px;text-transform:uppercase;margin-bottom:10px;opacity:0;animation:subFade 1s var(--ease) .2s forwards;}
+@keyframes subFade{from{opacity:0;transform:translateX(-15px);}to{opacity:1;transform:translateX(0);}}
+.hero-name{font-family:'Orbitron';font-weight:900;font-size:clamp(2.6rem,7vw,5.6rem);line-height:.92;letter-spacing:2px;color:transparent;
+  background:linear-gradient(135deg,#fff 10%,var(--ion) 45%,var(--plasma) 80%,var(--nova) 100%);
+  -webkit-background-clip:text;background-clip:text;animation:nameReveal 1.3s var(--ease) forwards;
+  filter:drop-shadow(0 0 25px rgba(0,255,231,.15));}
+.hero-name .hl{color:transparent;background:linear-gradient(90deg,var(--pitch),var(--ion));-webkit-background-clip:text;background-clip:text;}
+@keyframes nameReveal{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.hero-terminal{border-left:2px solid transparent;margin-top:26px;padding-left:28px;max-width:640px;
+  background:linear-gradient(var(--void),var(--void)) padding-box,linear-gradient(180deg,var(--pitch),var(--ion),var(--plasma)) border-box;}
+.system-status{font-family:'Fira Code';color:rgba(168,184,208,.7);font-size:.7rem;margin-bottom:14px;letter-spacing:2px;display:flex;align-items:center;gap:10px;}
+.sdot{width:6px;height:6px;background:var(--pitch);border-radius:50%;animation:blink 1.5s ease infinite;}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,255,231,.6);}50%{opacity:.3;box-shadow:0 0 0 8px rgba(0,255,231,0);}}
+.hero-desc{font-size:.95rem;line-height:1.75;font-weight:300;min-height:75px;}
+.hero-desc .kw{color:var(--pitch);font-weight:600;}
+.hero-desc .cur{display:inline-block;width:8px;height:1em;background:var(--ion);vertical-align:-2px;animation:blink 1s steps(1) infinite;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;}
+.htag{font-family:'Fira Code';font-size:.6rem;padding:4px 10px;border:1px solid var(--gb);color:var(--plasma);letter-spacing:1px;transition:.3s;opacity:0;animation:tagIn .6s var(--ease) forwards;cursor:default;}
+.htag:hover{border-color:var(--ion);color:#fff;background:rgba(0,255,231,.04);transform:translateY(-2px);}
+@keyframes tagIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.hero-cta{display:flex;gap:14px;margin-top:30px;}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Fira Code';font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
+  padding:12px 22px;text-decoration:none;transition:.3s var(--ease);position:relative;overflow:hidden;}
+.btn-solid{color:#02110b;background:linear-gradient(90deg,var(--pitch),var(--ion));border:none;font-weight:600;
+  box-shadow:0 0 20px rgba(0,255,231,.25);}
+.btn-solid:hover{box-shadow:0 0 34px rgba(0,255,231,.5);transform:translateY(-2px);}
+.btn-ghost{color:var(--dust);border:1px solid var(--gb);}
+.btn-ghost:hover{border-color:var(--nova);color:var(--nova);transform:translateY(-2px);}
+/* hero photo card */
+.hero-photo-zone{position:relative;display:flex;justify-content:center;perspective:1200px;}
+.hero-card{position:relative;width:min(340px,80vw);transform-style:preserve-3d;transition:transform .15s ease-out;}
+.hero-card-frame{position:relative;padding:12px;background:linear-gradient(145deg,rgba(0,255,231,.14),rgba(180,0,255,.12));
+  clip-path:polygon(0 4%,4% 0,100% 0,100% 96%,96% 100%,0 100%);}
+.hero-card-inner{position:relative;overflow:hidden;background:#050310;}
+.hero-card-inner img{width:100%;display:block;filter:saturate(1.12) contrast(1.06);transform:scale(1.02);transition:transform .8s var(--ease);}
+.hero-card:hover .hero-card-inner img{transform:scale(1.09);}
+.hero-card-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(2,1,10,.85));}
+.hero-card-meta{position:absolute;bottom:0;left:0;right:0;padding:18px;z-index:2;}
+.hero-card-meta .n{font-family:'Orbitron';font-size:.9rem;color:#fff;letter-spacing:2px;}
+.hero-card-meta .r{font-family:'Fira Code';font-size:.58rem;color:var(--pitch);letter-spacing:2px;margin-top:4px;}
+.hero-card-badge{position:absolute;top:-12px;right:-12px;z-index:3;background:#050310;border:1px solid rgba(0,255,231,.4);
+  font-family:'Fira Code';font-size:.55rem;color:var(--ion);padding:7px 12px;letter-spacing:2px;animation:badgeFloat 3.5s ease-in-out infinite;}
+@keyframes badgeFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.corner{position:absolute;width:20px;height:20px;border:2px solid var(--ion);z-index:3;opacity:.8;}
+.corner.tl{top:-6px;left:-6px;border-right:none;border-bottom:none;}
+.corner.br{bottom:-6px;right:-6px;border-left:none;border-top:none;}
+.scue{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-family:'Fira Code';font-size:.55rem;color:rgba(168,184,208,.25);letter-spacing:2px;animation:bob 2s ease infinite;z-index:5;}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+.sline{width:1px;height:45px;background:linear-gradient(180deg,transparent,var(--ion),transparent);}
 
-    /* dropdown arrow */
-    .nav-arrow{font-size:.5rem;transition:transform .6s var(--ease);color:var(--plasma);}
-    .nav-item:hover .nav-arrow{transform:rotate(180deg);}
+/* sections */
+section{position:relative;z-index:2;}
+.si{padding:90px 10%;}
+.slabel{font-family:'Fira Code';font-size:.65rem;letter-spacing:3px;color:var(--plasma);margin-bottom:8px;display:flex;align-items:center;gap:12px;text-transform:uppercase;}
+.slabel::after{content:'';flex:1;max-width:50px;height:1px;background:var(--plasma);}
+.stitle{font-family:'Orbitron';font-size:clamp(1.6rem,3.5vw,2.6rem);color:var(--bright);letter-spacing:2px;margin-bottom:48px;line-height:1.1;font-weight:700;}
+.stitle em{font-style:normal;color:var(--pitch);}
 
-    /* ── DROPDOWN ── */
-    .dropdown{
-      position:absolute;top:100%;left:0;min-width:320px;
-      background:rgba(4,3,15,.97);border:1px solid rgba(0,255,231,.12);
-      opacity:0;visibility:hidden;transform:translateY(8px);
-      transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s;
-      z-index:2000;overflow:hidden;
-    }
-    .dropdown::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:linear-gradient(180deg,var(--ion),var(--plasma));transition:height .5s var(--ease);}
-    .nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
-    .nav-item:hover .dropdown::before{height:100%;}
+/* domain cards */
+.domain-container{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px;}
+@media(max-width:960px){.domain-container{grid-template-columns:1fr;}}
+.domain-card{background:rgba(4,5,8,.6);border:1px solid var(--gb);padding:32px;position:relative;overflow:hidden;transition:.4s var(--ease);}
+.domain-card::before{content:'';position:absolute;top:-60%;left:-60%;width:120%;height:120%;
+  background:radial-gradient(circle,rgba(0,255,231,.07),transparent 60%);opacity:0;transition:opacity .5s;}
+.domain-card:hover::before{opacity:1;}
+.domain-card:hover{transform:translateY(-8px);border-color:rgba(0,255,231,.25);box-shadow:0 24px 50px rgba(0,0,0,.6);}
+.domain-icon{font-size:2.2rem;color:var(--ion);margin-bottom:20px;display:inline-block;filter:drop-shadow(0 0 10px rgba(0,255,231,.2));transition:transform .5s var(--ease);}
+.domain-card:hover .domain-icon{transform:rotate(-8deg) scale(1.15);}
+.domain-card.football .domain-icon{color:var(--pitch);filter:drop-shadow(0 0 10px rgba(0,196,106,.3));}
+.domain-card h3{font-family:'Orbitron';font-size:1.15rem;color:var(--bright);margin-bottom:12px;letter-spacing:1px;}
+.domain-card p{font-size:.85rem;line-height:1.6;margin-bottom:18px;font-weight:300;}
+.domain-list{list-style:none;font-family:'Fira Code';font-size:.68rem;color:rgba(168,184,208,.7);}
+.domain-list li{margin-bottom:8px;display:flex;gap:6px;}
+.domain-list li::before{content:'▪';color:var(--ion);}
+.domain-card.football .domain-list li::before{color:var(--pitch);}
 
-    .dropdown-header{padding:14px 20px 10px;font-family:'Fira Code',monospace;font-size:.55rem;letter-spacing:3px;color:rgba(0,255,231,.4);text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.04);}
-    .dropdown-item{display:flex;align-items:center;gap:14px;padding:14px 20px;text-decoration:none;color:var(--dust);transition:.25s var(--ease);position:relative;overflow:hidden;}
-    .dropdown-item::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,255,231,.04),transparent);transform:translateX(-100%);transition:transform .3s var(--ease);}
-    .dropdown-item:hover::before{transform:translateX(0);}
-    .dropdown-item:hover{color:var(--bright);padding-left:26px;}
-    .dropdown-item + .dropdown-item{border-top:1px solid rgba(255,255,255,.03);}
+/* ═══ FOOTBALL LAB ═══ */
+#lab{background:linear-gradient(180deg,transparent,rgba(0,60,35,.06) 20%,rgba(0,60,35,.06) 80%,transparent);}
+.lab-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:stretch;}
+@media(max-width:960px){.lab-grid{grid-template-columns:1fr;}}
+.pitch-wrap{position:relative;border:1px solid rgba(0,196,106,.25);background:rgba(0,20,12,.35);padding:22px;overflow:hidden;}
+.pitch-wrap::before{content:'LIVE TRACKING // OPTA-STYLE FEED';position:absolute;top:10px;left:14px;font-family:'Fira Code';
+  font-size:.52rem;letter-spacing:2px;color:rgba(0,196,106,.55);z-index:2;}
+.live-dot{position:absolute;top:12px;right:14px;width:7px;height:7px;border-radius:50%;background:#ff4757;animation:blink 1.2s ease infinite;z-index:2;}
+.pitch-svg{width:100%;height:auto;display:block;}
+.pstat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.pstat{border:1px solid var(--gb);background:rgba(4,5,8,.55);padding:20px;position:relative;overflow:hidden;transition:.35s;}
+.pstat:hover{border-color:rgba(0,196,106,.35);transform:translateY(-4px);}
+.pstat .pv{font-family:'Orbitron';font-size:1.7rem;font-weight:700;color:var(--bright);}
+.pstat .pv span{color:var(--pitch);}
+.pstat .pl{font-family:'Fira Code';font-size:.56rem;letter-spacing:2px;color:rgba(168,184,208,.5);text-transform:uppercase;margin-top:6px;}
+.xg-chart{margin-top:16px;border:1px solid var(--gb);background:rgba(4,5,8,.55);padding:22px;}
+.xg-chart h4{font-family:'Fira Code';font-size:.6rem;letter-spacing:2px;color:rgba(0,196,106,.7);text-transform:uppercase;margin-bottom:16px;}
+.xg-row{margin-bottom:14px;}
+.xg-head{display:flex;justify-content:space-between;font-family:'Fira Code';font-size:.58rem;color:rgba(168,184,208,.6);margin-bottom:5px;}
+.xg-head b{color:var(--bright);}
+.xg-track{height:8px;background:rgba(255,255,255,.05);position:relative;overflow:hidden;}
+.xg-fill{position:absolute;top:0;left:0;height:100%;width:0;background:linear-gradient(90deg,var(--pitch),var(--ion));
+  box-shadow:0 0 10px rgba(0,196,106,.5);transition:width 1.4s var(--ease);}
 
-    .di-icon{width:34px;height:34px;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;transition:.25s;}
-    .dropdown-item:hover .di-icon{border-color:rgba(0,255,231,.3);color:var(--ion);}
-    .di-info{flex:1;}
-    .di-name{font-family:'Orbitron',sans-serif;font-size:.65rem;letter-spacing:1px;color:var(--bright);margin-bottom:3px;}
-    .di-desc{font-family:'Fira Code',monospace;font-size:.55rem;color:rgba(168,184,208,.4);letter-spacing:.5px;}
-    .dropdown-item.ic7-link:hover .di-icon{border-color:var(--nova);color:var(--nova);}
-    .di-ext{font-family:'Fira Code',monospace;font-size:.5rem;color:rgba(0,255,231,.3);align-self:center;letter-spacing:1px;}
+/* project cards */
+.index-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:24px;}
+.index-card{background:rgba(5,6,9,.5);border:1px solid var(--gb);overflow:hidden;transition:.5s var(--ease);text-decoration:none;color:inherit;position:relative;display:block;}
+.index-card::after{content:'';position:absolute;top:0;left:-80%;width:60%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(0,255,231,.06),transparent);transform:skewX(-20deg);transition:left .6s var(--ease);pointer-events:none;}
+.index-card:hover::after{left:130%;}
+.index-card:hover{border-color:rgba(0,255,231,.25);transform:translateY(-8px);box-shadow:0 30px 60px rgba(0,0,0,.8);}
+.cimg{width:100%;height:170px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;position:relative;border-bottom:1px solid var(--gb);transition:.5s var(--ease);overflow:hidden;}
+.cimg::after{content:'';position:absolute;inset:0;background:rgba(2,1,10,.55);transition:background .5s;}
+.index-card:hover .cimg::after{background:rgba(2,1,10,.2);}
+.cimg i{font-size:2.4rem;color:rgba(0,255,231,.4);position:relative;z-index:2;transition:.5s var(--ease);}
+.index-card:hover .cimg i{transform:scale(1.12) rotate(-6deg);filter:drop-shadow(0 0 16px rgba(0,255,231,.6));color:var(--ion);}
+.cbody{padding:22px;background:#040508;position:relative;z-index:2;}
+.ctag{display:inline-block;font-family:'Fira Code';font-size:.55rem;letter-spacing:1px;color:var(--plasma);border:1px solid rgba(180,0,255,.2);padding:3px 8px;margin-bottom:12px;text-transform:uppercase;}
+.ctag.g{color:var(--pitch);border-color:rgba(0,196,106,.25);}
+.cbody h3{font-family:'Orbitron';font-size:.95rem;color:var(--bright);margin-bottom:8px;letter-spacing:1px;}
+.cbody p{font-size:.78rem;line-height:1.6;color:rgba(168,184,208,.65);font-weight:300;}
+.cfoot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--gb);font-family:'Fira Code';font-size:.6rem;}
+.cfoot-lang{color:var(--ion);}
+.cfoot-link{color:rgba(168,184,208,.3);transition:.2s;}
+.index-card:hover .cfoot-link{color:var(--ion);}
 
-    /* GitHub link in dropdown */
-    .dropdown-github{display:flex;align-items:center;gap:8px;padding:12px 20px;border-top:1px solid rgba(255,255,255,.06);font-family:'Fira Code',monospace;font-size:.6rem;color:rgba(168,184,208,.3);text-decoration:none;transition:.25s;letter-spacing:1px;}
-    .dropdown-github:hover{color:var(--ion);}
-    .dropdown-github i{font-size:1rem;}
+/* skills */
+.skrow{margin-bottom:18px;}
+.skhead{display:flex;justify-content:space-between;margin-bottom:6px;}
+.sknm{font-family:'Fira Code';font-size:.65rem;letter-spacing:1px;color:rgba(168,184,208,.8);}
+.skpct{font-family:'Fira Code';font-size:.65rem;color:var(--ion);}
+.sktrack{height:2px;background:rgba(255,255,255,.05);position:relative;overflow:hidden;}
+.skfill{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--pitch),var(--ion),var(--plasma));width:0%;transition:width 1.5s var(--ease);box-shadow:0 0 8px var(--ion);}
+.sub-headers{font-family:'Orbitron';font-size:.72rem;color:var(--bright);letter-spacing:2px;text-transform:uppercase;margin:18px 0 12px;display:flex;align-items:center;gap:8px;}
+.sub-headers::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
 
-    /* ── HERO ── */
-    #hero{min-height:100vh;display:flex;align-items:center;padding:0 10%;position:relative;overflow:hidden;z-index:2;}
-    .hero-container{position:relative;z-index:5;margin-top:40px;}
-    .hero-name-wrap{position:relative;margin-bottom:24px;}
-    .hero-name{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2.8rem,8vw,6.5rem);line-height:.9;letter-spacing:2px;color:transparent;background:linear-gradient(135deg,#fff 10%,var(--ion) 45%,var(--plasma) 80%,var(--nova) 100%);-webkit-background-clip:text;background-clip:text;position:relative;animation:nameReveal 1.4s var(--ease) forwards;filter:drop-shadow(0 0 25px rgba(0,255,231,.15));}
-    .hero-sub{font-family:'Exo 2',sans-serif;font-size:clamp(.85rem,1.8vw,1.2rem);font-style:italic;font-weight:300;color:var(--ion);letter-spacing:5px;text-transform:uppercase;margin-bottom:8px;animation:subFade 1s var(--ease) .2s forwards;opacity:0;text-shadow:0 0 10px rgba(0,255,231,0.3);}
-    .hero-terminal{border-left:2px solid transparent;background:linear-gradient(var(--void),var(--void)) padding-box,linear-gradient(180deg,var(--ion),var(--plasma)) border-box;padding-left:36px;position:relative;z-index:2;max-width:750px;}
-    .system-status{font-family:'Fira Code',monospace;color:rgba(168,184,208,0.7);font-size:.72rem;margin-bottom:16px;letter-spacing:2px;display:flex;align-items:center;gap:10px;}
-    .sdot{width:6px;height:6px;background:var(--ion);border-radius:50%;animation:blink 1.5s ease infinite;}
-    .hero-desc{font-size:.95rem;line-height:1.75;color:var(--dust);font-weight:300;min-height:75px;font-family:'Outfit',sans-serif;}
-    .hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;}
-    .htag{font-family:'Fira Code',monospace;font-size:.6rem;padding:4px 10px;border:1px solid var(--gb);color:var(--plasma);letter-spacing:1px;transition:.3s;opacity:0;animation:tagIn .6s var(--ease) forwards;}
-    .htag:hover{border-color:var(--ion);color:#fff;background:rgba(0,255,231,0.02);}
-    .scue{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'Fira Code',monospace;font-size:.55rem;color:rgba(168,184,208,.25);letter-spacing:2px;animation:bob 2s ease infinite;}
-    .sline{width:1px;height:45px;background:linear-gradient(180deg,transparent,var(--ion),transparent);}
+/* edu */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+@media(max-width:960px){.edu-grid{grid-template-columns:1fr;}}
+.edu-card{background:rgba(5,6,9,.4);border:1px solid var(--gb);padding:36px;position:relative;overflow:hidden;transition:border-color .4s;}
+.edu-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:linear-gradient(180deg,var(--pitch),var(--ion),var(--plasma));transition:height .6s var(--ease);}
+.edu-card:hover::before{height:100%;}
+.edu-card:hover{border-color:rgba(0,255,231,.2);}
+.edu-badge{display:inline-flex;gap:6px;font-family:'Fira Code';font-size:.6rem;letter-spacing:2px;color:var(--plasma);margin-bottom:14px;text-transform:uppercase;}
+.edu-badge::before{content:'//';color:var(--ion);}
+.edu-card h3{font-family:'Orbitron';font-size:1.25rem;letter-spacing:1px;color:var(--bright);margin-bottom:6px;font-weight:700;}
+.edu-inst{font-size:.85rem;color:rgba(168,184,208,.6);margin-bottom:6px;}
+.edu-year{font-family:'Fira Code';font-size:.65rem;color:var(--ion);margin-bottom:18px;letter-spacing:1px;}
+.highlight-line{background:rgba(0,196,106,.04);border-left:2px solid var(--pitch);padding:12px 16px;font-size:.82rem;color:rgba(168,184,208,.85);margin-bottom:20px;font-style:italic;line-height:1.5;}
+.tag{display:inline-block;padding:3px 10px;border:1px solid rgba(180,0,255,.25);font-size:.58rem;font-family:'Fira Code';color:var(--plasma);margin:0 4px 6px 0;text-transform:uppercase;transition:.2s;}
+.tag.c{border-color:rgba(0,255,231,.25);color:var(--ion);}
+.tag.g{border-color:rgba(0,196,106,.3);color:var(--pitch);}
+.tag:hover{background:rgba(255,255,255,.03);color:#fff;}
 
-    /* ── SECTIONS ── */
-    section{position:relative;z-index:2;}
-    .si{padding:90px 10%;}
-    .slabel{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:3px;color:var(--plasma);margin-bottom:8px;display:flex;align-items:center;gap:12px;text-transform:uppercase;}
-    .slabel::after{content:'';flex:1;max-width:50px;height:1px;background:var(--plasma);}
-    .stitle{font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,3.5vw,2.6rem);color:var(--bright);letter-spacing:2px;margin-bottom:48px;line-height:1.1;font-weight:700;}
+/* footer */
+footer{position:relative;z-index:2;padding:40px 10%;border-top:1px solid var(--gb);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.foot-logo{font-family:'Orbitron';font-size:.8rem;color:var(--ion);letter-spacing:4px;}
+.foot-copy{font-family:'Fira Code';font-size:.58rem;color:rgba(168,184,208,.3);letter-spacing:1px;}
+.foot-links{display:flex;gap:16px;}
+.foot-links a{color:rgba(168,184,208,.3);font-size:1rem;transition:.2s;text-decoration:none;}
+.foot-links a:hover{color:var(--ion);}
 
-    /* ── DOMAIN CARDS ── */
-    .domain-container{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px;}
-    @media(max-width:960px){.domain-container{grid-template-columns:1fr;}}
-    .domain-card{background:rgba(4,5,8,0.6);border:1px solid var(--gb);padding:32px;position:relative;overflow:hidden;transition:0.4s var(--ease);}
-    .domain-card:hover{transform:translateY(-6px);border-color:rgba(180,0,255,0.25);box-shadow:0 20px 40px rgba(0,0,0,0.5);}
-    .domain-icon{font-size:2.2rem;color:var(--ion);margin-bottom:20px;display:block;filter:drop-shadow(0 0 10px rgba(0,255,231,0.2));}
-    .domain-card.ds .domain-icon{color:var(--plasma);filter:drop-shadow(0 0 10px rgba(180,0,255,0.2));}
-    .domain-card.football .domain-icon{color:var(--nova);filter:drop-shadow(0 0 10px rgba(255,60,172,0.2));}
-    .domain-card h3{font-family:'Orbitron',sans-serif;font-size:1.15rem;color:var(--bright);margin-bottom:12px;letter-spacing:1px;}
-    .domain-card p{font-size:0.85rem;line-height:1.6;color:var(--dust);margin-bottom:18px;font-weight:300;}
-    .domain-list{list-style:none;font-family:'Fira Code',monospace;font-size:0.68rem;color:rgba(168,184,208,0.7);}
-    .domain-list li{margin-bottom:8px;display:flex;align-items:flex-start;gap:6px;}
-    .domain-list li::before{content:'▪';color:var(--ion);}
-    .domain-card.ds .domain-list li::before{color:var(--plasma);}
-    .domain-card.football .domain-list li::before{color:var(--nova);}
-
-    /* ── PROJECT CARDS ── */
-    .index-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
-    .index-card{background:rgba(5,6,9,0.5);border:1px solid var(--gb);overflow:hidden;transition:.5s var(--ease);text-decoration:none;color:inherit;position:relative;display:block;}
-    .index-card:hover{border-color:rgba(0,255,231,.25);transform:translateY(-8px);box-shadow:0 30px 60px rgba(0,0,0,.8);}
-    .cimg{width:100%;height:180px;background-size:cover;background-position:center;background-repeat:no-repeat;display:flex;align-items:center;justify-content:center;position:relative;border-bottom:1px solid var(--gb);transition:.5s var(--ease);}
-    .cimg::after{content:'';position:absolute;inset:0;background:rgba(2,1,10,.55);transition:background .5s var(--ease);}
-    .index-card:hover .cimg::after{background:rgba(2,1,10,.2);}
-    .cimg i{font-size:2.6rem;color:rgba(0,255,231,.4);position:relative;z-index:2;transition:.5s var(--ease);text-shadow:0 4px 10px rgba(0,0,0,0.9);}
-    .index-card:hover .cimg i{color:var(--ion);transform:scale(1.08);filter:drop-shadow(0 0 15px rgba(0,255,231,0.6));}
-    .cbody{padding:24px;background:#040508;position:relative;z-index:2;}
-    .ctag{display:inline-block;font-family:'Fira Code',monospace;font-size:.55rem;letter-spacing:1px;color:var(--plasma);border:1px solid rgba(180,0,255,.2);padding:3px 8px;margin-bottom:12px;text-transform:uppercase;}
-    .cbody h3{font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--bright);margin-bottom:8px;letter-spacing:1px;}
-    .cbody p{font-size:.78rem;line-height:1.6;color:rgba(168,184,208,.65);font-weight:300;}
-    .cfoot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--gb);font-family:'Fira Code',monospace;font-size:.6rem;}
-    .cfoot-lang{color:var(--ion);}
-    .cfoot-link{color:rgba(168,184,208,.3);transition:.2s;}
-    .index-card:hover .cfoot-link{color:var(--ion);}
-
-    /* ── SKILLS ── */
-    .skrow{margin-bottom:18px;}
-    .skhead{display:flex;justify-content:space-between;margin-bottom:6px;}
-    .sknm{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:1px;color:rgba(168,184,208,0.8);}
-    .skpct{font-family:'Fira Code',monospace;font-size:.65rem;color:var(--ion);}
-    .sktrack{height:2px;background:rgba(255,255,255,.05);position:relative;overflow:hidden;}
-    .skfill{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--ion),var(--plasma));width:0%;transition:width 1.5s var(--ease);box-shadow:0 0 8px var(--ion);}
-
-    /* ── EDU ── */
-    .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
-    @media(max-width:960px){.edu-grid{grid-template-columns:1fr;}}
-    .edu-card{background:rgba(5,6,9,0.4);border:1px solid var(--gb);padding:36px;position:relative;overflow:hidden;transition:border-color .4s;}
-    .edu-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:0%;background:linear-gradient(180deg,var(--ion),var(--plasma));transition:height .6s var(--ease);}
-    .edu-card:hover::before{height:100%;}
-    .edu-card:hover{border-color:rgba(0,255,231,0.2);}
-    .edu-badge{display:inline-flex;align-items:center;gap:6px;font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:2px;color:var(--plasma);margin-bottom:14px;text-transform:uppercase;}
-    .edu-badge::before{content:'//';color:var(--ion);}
-    .edu-card h3{font-family:'Orbitron',sans-serif;font-size:1.25rem;letter-spacing:1px;color:var(--bright);margin-bottom:6px;font-weight:700;}
-    .edu-inst{font-size:.85rem;color:rgba(168,184,208,0.6);margin-bottom:6px;}
-    .edu-year{font-family:'Fira Code',monospace;font-size:.65rem;color:var(--ion);margin-bottom:18px;letter-spacing:1px;}
-    .highlight-line{background:rgba(0,255,231,.02);border-left:2px solid var(--ion);padding:12px 16px;font-size:.82rem;color:rgba(168,184,208,.85);margin-bottom:20px;font-style:italic;line-height:1.5;}
-    .tag{display:inline-block;padding:3px 10px;border:1px solid rgba(180,0,255,.25);font-size:.58rem;font-family:'Fira Code',monospace;color:var(--plasma);margin:0 4px 6px 0;text-transform:uppercase;transition:0.2s;}
-    .tag.c{border-color:rgba(0,255,231,.25);color:var(--ion);}
-    .tag:hover{background:rgba(255,255,255,0.03);color:#fff;}
-    .sub-headers{font-family:'Orbitron',sans-serif;font-size:0.72rem;color:var(--bright);letter-spacing:2px;text-transform:uppercase;margin:18px 0 10px 0;display:flex;align-items:center;gap:8px;}
-    .sub-headers::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.05);}
-
-    /* ── FOOTER ── */
-    footer{position:relative;z-index:2;padding:40px 10%;border-top:1px solid var(--gb);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-    .foot-logo{font-family:'Orbitron',sans-serif;font-size:.8rem;color:var(--ion);letter-spacing:4px;}
-    .foot-copy{font-family:'Fira Code',monospace;font-size:.58rem;color:rgba(168,184,208,.3);letter-spacing:1px;}
-    .foot-links{display:flex;gap:16px;}
-    .foot-links a{color:rgba(168,184,208,.3);font-size:1rem;transition:.2s;text-decoration:none;}
-    .foot-links a:hover{color:var(--ion);}
-
-    /* ── KEYFRAMES ── */
-    @keyframes spin{100%{transform:translate(-50%,-50%) rotate(360deg)}}
-    @keyframes ballSpin{100%{transform:rotate(360deg)}}
-    @keyframes pulseBall{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.6;transform:scale(1.03)}}
-    @keyframes logoPulse{0%,100%{opacity:.3;width:100%}50%{opacity:.9;width:60%}}
-    @keyframes nameReveal{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes subFade{from{opacity:0;transform:translateX(-15px)}to{opacity:1;transform:translateX(0)}}
-    @keyframes tagIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-    @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,255,231,.6)}50%{opacity:.3;box-shadow:0 0 0 8px rgba(0,255,231,0)}}
-
-    /* ── REVEAL ON SCROLL ── */
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
-    .reveal.visible{opacity:1;transform:translateY(0);}
-  </style>
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+<base target="_blank">
 </head>
 <body class="intro-on">
 
-<!-- Cursors -->
-<div id="cd"></div>
-<div id="cr"></div>
+<div id="cd"></div><div id="cr"></div>
+<canvas id="bg3d"></canvas>
 
-<!-- Animated Background Canvas -->
-<canvas id="bg-canvas"></canvas>
-
-<!-- ── INTRO OVERLAY ── -->
+<!-- ═══ INTRO ═══ -->
 <div id="intro">
-  <canvas id="intro-canvas"></canvas>
+  <canvas id="intro-3d"></canvas>
   <div class="intro-center">
-    <div class="ball-ring">
-      <svg class="ball-svg" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="55" cy="55" r="50" stroke="rgba(0,255,231,0.1)" stroke-width="1"/>
-        <circle cx="55" cy="55" r="40" stroke="rgba(180,0,255,0.15)" stroke-width="1"/>
-        <path d="M55 5 A50 50 0 0 1 105 55" stroke="url(#g1)" stroke-width="2" stroke-linecap="round"/>
-        <path d="M55 15 A40 40 0 0 0 15 55" stroke="url(#g2)" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="55" cy="55" r="6" fill="rgba(0,255,231,0.8)"/>
-        <circle cx="55" cy="55" r="3" fill="#fff"/>
-        <defs>
-          <linearGradient id="g1" x1="55" y1="5" x2="105" y2="55" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#00ffe7"/><stop offset="1" stop-color="#b400ff"/>
-          </linearGradient>
-          <linearGradient id="g2" x1="55" y1="15" x2="15" y2="55" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#b400ff"/><stop offset="1" stop-color="#ff3cac"/>
-          </linearGradient>
-        </defs>
-      </svg>
-      <div class="ball-glow"></div>
-      <div class="data-stream">SYS://BOOT</div>
+    <div class="photo-orbit">
+      <div class="orbit-ring">
+        <svg viewBox="0 0 190 190" fill="none"><circle cx="95" cy="95" r="93" stroke="rgba(0,255,231,.28)" stroke-width="1" stroke-dasharray="4 10"/></svg>
+        <div class="orbit-dot"></div>
+      </div>
+      <div class="orbit-ring r2">
+        <svg viewBox="0 0 178 178" fill="none"><circle cx="89" cy="89" r="87" stroke="rgba(255,60,172,.22)" stroke-width="1" stroke-dasharray="2 14"/></svg>
+        <div class="orbit-dot"></div>
+      </div>
+      <div class="orbit-ring r3"></div>
+      <div class="photo-core"><img src="photo.jpg" alt="Jerein Sam Thomas"></div>
+      <div class="photo-scan"></div>
     </div>
     <div class="intro-title">JEREIN SAM THOMAS</div>
-    <div class="intro-sub">Physics <span>&amp;</span> Performance Architect</div>
+    <div class="intro-sub">Physics <span>×</span> Data <span>×</span> Football Analytics</div>
     <div class="intro-bar-wrap"><div class="intro-bar" id="ibar"></div></div>
-    <div class="intro-bar-label" id="iblabel">INITIALIZING...</div>
+    <div class="intro-bar-label" id="iblabel">INITIALIZING SYSTEMS...</div>
     <div class="intro-status">
       <div class="isl" id="is1"><span>PHYSICS_ENGINE</span><span class="status-val">LOADING</span></div>
-      <div class="isl" id="is2"><span>DATA_SCIENCE_CORE</span><span class="status-val">LOADING</span></div>
-      <div class="isl" id="is3"><span>FOOTBALL_ANALYTICS</span><span class="status-val">LOADING</span></div>
+      <div class="isl" id="is2"><span>TRACKING_DATA_FEED</span><span class="status-val">LOADING</span></div>
+      <div class="isl" id="is3"><span>Xg_MODEL_v4.2</span><span class="status-val">LOADING</span></div>
       <div class="isl" id="is4"><span>NEURAL_SYSTEMS</span><span class="status-val">LOADING</span></div>
-      <div class="isl" id="is5"><span>PORTFOLIO_READY</span><span class="status-val">STANDBY</span></div>
+      <div class="isl" id="is5"><span>TACTICS_LAB</span><span class="status-val">STANDBY</span></div>
     </div>
   </div>
   <button class="intro-skip" onclick="skipIntro()">SKIP ›</button>
 </div>
 
-<!-- ── NAV ── -->
+<!-- ═══ NAV ═══ -->
 <nav>
   <a href="#hero" class="logo">JST</a>
   <div class="nav-links">
+    <div class="nav-item"><a href="#about">About</a></div>
+    <div class="nav-item"><a href="#lab">Match Lab</a></div>
     <div class="nav-item">
-      <a href="#about">About</a>
-    </div>
-    <div class="nav-item">
-      <a href="#domains">Domains</a>
-    </div>
-
-    <!-- PROJECTS DROPDOWN -->
-    <div class="nav-item">
-      <button class="nav-btn">
-        Projects <span class="nav-arrow">▼</span>
-      </button>
+      <button class="nav-btn">Projects <span class="nav-arrow">▼</span></button>
       <div class="dropdown">
         <div class="dropdown-header">// Active Pipelines</div>
-
-        <a class="dropdown-item" href="ic7.html">
-          <div class="di-icon"><i class="fas fa-futbol"></i></div>
-          <div class="di-info">
-            <div class="di-name">IC7 Iconic Sevens</div>
-            <div class="di-desc">Kerala football clan tracking portal</div>
-          </div>
-          <span class="di-ext">.html →</span>
-        </a>
-
-        <a class="dropdown-item" href="pdfbuilder.html">
-          <div class="di-icon"><i class="fas fa-file-pdf"></i></div>
-          <div class="di-info">
-            <div class="di-name">PDF Builder</div>
-            <div class="di-desc">Dynamic document generation engine</div>
-          </div>
-          <span class="di-ext">.html →</span>
-        </a>
-
-        <a class="dropdown-item" href="projects.html">
-          <div class="di-icon"><i class="fas fa-layer-group"></i></div>
-          <div class="di-info">
-            <div class="di-name">All Projects</div>
-            <div class="di-desc">Full analytical pipeline archive</div>
-          </div>
-          <span class="di-ext">.html →</span>
-        </a>
-
         <a class="dropdown-item" href="https://tacticalanalysis.vercel.app" target="_blank" rel="noopener">
           <div class="di-icon"><i class="fas fa-chess-knight"></i></div>
-          <div class="di-info">
-            <div class="di-name">Tactics Lab</div>
-            <div class="di-desc">Football performance &amp; formation models</div>
-          </div>
+          <div class="di-info"><div class="di-name">Tactics Lab</div><div class="di-desc">Football performance &amp; formation models</div></div>
           <span class="di-ext">↗</span>
         </a>
-
-        <a class="dropdown-github" href="https://github.com" target="_blank">
-          <i class="fab fa-github"></i> View all on GitHub ↗
+        <a class="dropdown-item" href="https://railwaygate.vercel.app" target="_blank" rel="noopener">
+          <div class="di-icon"><i class="fas fa-train-subway"></i></div>
+          <div class="di-info"><div class="di-name">Railway Gate</div><div class="di-desc">Live railway gate system portal</div></div>
+          <span class="di-ext">↗</span>
         </a>
+        <a class="dropdown-item" href="pdfbuilder.html">
+          <div class="di-icon"><i class="fas fa-file-pdf"></i></div>
+          <div class="di-info"><div class="di-name">PDF Builder</div><div class="di-desc">Dynamic document generation engine</div></div>
+          <span class="di-ext">.html →</span>
+        </a>
+        <a class="dropdown-item" href="ic7.html">
+          <div class="di-icon"><i class="fas fa-futbol"></i></div>
+          <div class="di-info"><div class="di-name">IC7 Iconic Sevens</div><div class="di-desc">Kerala football clan tracking portal</div></div>
+          <span class="di-ext">.html →</span>
+        </a>
+        <a class="dropdown-item" href="projects.html">
+          <div class="di-icon"><i class="fas fa-layer-group"></i></div>
+          <div class="di-info"><div class="di-name">All Projects</div><div class="di-desc">Full analytical pipeline archive</div></div>
+          <span class="di-ext">.html →</span>
+        </a>
+        <a class="dropdown-github" href="https://github.com" target="_blank"><i class="fab fa-github"></i> View all on GitHub ↗</a>
       </div>
     </div>
-
-    <div class="nav-item">
-      <a href="#skills">Skills</a>
-    </div>
-    <div class="nav-item">
-      <a href="#education">Education</a>
-    </div>
-    <div class="nav-item">
-      <a href="#contact">Contact</a>
-    </div>
+    <div class="nav-item"><a href="#skills">Skills</a></div>
+    <div class="nav-item"><a href="#education">Education</a></div>
+    <div class="nav-item"><a href="#contact">Contact</a></div>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- ═══ HERO ═══ -->
 <section id="hero">
-  <div class="hero-container">
-    <div class="hero-sub">Physics · Data · Football</div>
-    <div class="hero-name-wrap">
-      <div class="hero-name">JEREIN<br>SAM THOMAS</div>
+  <div class="hero-wrap">
+    <div class="hero-container">
+      <div class="hero-sub">Physics · Data · Football</div>
+      <div class="hero-name">JEREIN<br>SAM <span class="hl">THOMAS</span></div>
+      <div class="hero-terminal">
+        <div class="system-status"><span class="sdot"></span> SYSTEM ONLINE — PORTFOLIO v4.0</div>
+        <div class="hero-desc"><span id="hero-typewriter"></span><span class="cur"></span></div>
+      </div>
+      <div class="hero-tags">
+        <span class="htag" style="animation-delay:.4s">xG &amp; xT Models</span>
+        <span class="htag" style="animation-delay:.55s">Tracking Data</span>
+        <span class="htag" style="animation-delay:.7s">Machine Learning</span>
+        <span class="htag" style="animation-delay:.85s">Python</span>
+        <span class="htag" style="animation-delay:1s">Statistical Modelling</span>
+        <span class="htag" style="animation-delay:1.15s">Quantum Mechanics</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#lab" class="btn btn-solid"><i class="fas fa-futbol"></i> Enter Match Lab</a>
+        <a href="#projects" class="btn btn-ghost"><i class="fas fa-diagram-project"></i> View Projects</a>
+      </div>
     </div>
-    <div class="hero-terminal">
-      <div class="system-status"><span class="sdot"></span> SYSTEM ONLINE — PORTFOLIO v3.0</div>
-      <div class="hero-desc" id="hero-typewriter"></div>
-    </div>
-    <div class="hero-tags">
-      <span class="htag" style="animation-delay:.4s">Quantum Mechanics</span>
-      <span class="htag" style="animation-delay:.55s">Machine Learning</span>
-      <span class="htag" style="animation-delay:.7s">Football Analytics</span>
-      <span class="htag" style="animation-delay:.85s">Python</span>
-      <span class="htag" style="animation-delay:1s">Statistical Modelling</span>
-      <span class="htag" style="animation-delay:1.15s">Performance Architecture</span>
+    <div class="hero-photo-zone">
+      <div class="hero-card" id="tiltCard">
+        <div class="hero-card-badge">⚽ ANALYST // #10</div>
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="hero-card-frame">
+          <div class="hero-card-inner">
+            <img src="photo.jpg" alt="Jerein Sam Thomas">
+            <div class="hero-card-meta">
+              <div class="n">JEREIN S. THOMAS</div>
+              <div class="r">FOOTBALL ANALYTICS · DATA SCIENCE</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="scue"><span>SCROLL</span><div class="sline"></div></div>
 </section>
 
-<!-- ── ABOUT / DOMAINS ── -->
+<!-- ═══ ABOUT ═══ -->
 <section id="about">
   <div class="si">
     <div class="slabel reveal">01 — Identity Matrix</div>
-    <h2 class="stitle reveal">Physics &amp; Performance<br>Architect</h2>
-    <div class="domain-container" id="domains">
-      <div class="domain-card physics reveal">
+    <h2 class="stitle reveal">Physics &amp; Performance<br><em>Architect</em></h2>
+    <div class="domain-container">
+      <div class="domain-card reveal">
         <i class="domain-icon fas fa-atom"></i>
         <h3>Theoretical Physics</h3>
         <p>Bridging quantum mechanics and classical dynamics to model complex systems with precision and rigour.</p>
-        <ul class="domain-list">
-          <li>Quantum mechanics &amp; statistical physics</li>
-          <li>Computational fluid dynamics</li>
-          <li>Thermodynamic modelling</li>
-          <li>Mathematical physics frameworks</li>
-        </ul>
+        <ul class="domain-list"><li>Quantum &amp; statistical physics</li><li>Computational fluid dynamics</li><li>Thermodynamic modelling</li><li>Mathematical physics frameworks</li></ul>
       </div>
-      <div class="domain-card ds reveal" style="transition-delay:.1s">
+      <div class="domain-card reveal" style="transition-delay:.1s">
         <i class="domain-icon fas fa-brain"></i>
         <h3>Data Science</h3>
         <p>Translating raw datasets into predictive intelligence using ML pipelines and statistical inference.</p>
-        <ul class="domain-list">
-          <li>Neural networks &amp; deep learning</li>
-          <li>Bayesian inference pipelines</li>
-          <li>Time-series forecasting</li>
-          <li>Dimensionality reduction</li>
-        </ul>
+        <ul class="domain-list"><li>Neural networks &amp; deep learning</li><li>Bayesian inference pipelines</li><li>Time-series forecasting</li><li>Dimensionality reduction</li></ul>
       </div>
       <div class="domain-card football reveal" style="transition-delay:.2s">
         <i class="domain-icon fas fa-futbol"></i>
         <h3>Football Analytics</h3>
         <p>Applying physics-informed models to decode player movement, tactical geometry, and match entropy.</p>
-        <ul class="domain-list">
-          <li>Expected goals &amp; xT models</li>
-          <li>Spatial-temporal tracking data</li>
-          <li>Formation entropy analysis</li>
-          <li>Performance benchmarking</li>
-        </ul>
+        <ul class="domain-list"><li>Expected goals &amp; xT models</li><li>Spatial-temporal tracking data</li><li>Formation entropy analysis</li><li>Performance benchmarking</li></ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── PROJECTS ── -->
+<!-- ═══ MATCH LAB ═══ -->
+<section id="lab">
+  <div class="si">
+    <div class="slabel reveal">02 — Football Intelligence</div>
+    <h2 class="stitle reveal">The <em>Match Lab</em></h2>
+    <div class="lab-grid">
+      <div class="pitch-wrap reveal">
+        <div class="live-dot"></div>
+        <svg class="pitch-svg" viewBox="0 0 600 380" id="pitchSvg">
+          <defs>
+            <linearGradient id="pgrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#003d22"/><stop offset="1" stop-color="#005231"/>
+            </linearGradient>
+          </defs>
+          <rect x="10" y="10" width="580" height="360" fill="url(#pgrad)" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+          <line x1="300" y1="10" x2="300" y2="370" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+          <circle cx="300" cy="190" r="52" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+          <circle cx="300" cy="190" r="3" fill="rgba(255,255,255,.6)"/>
+          <rect x="10" y="100" width="88" height="180" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+          <rect x="502" y="100" width="88" height="180" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+          <rect x="10" y="148" width="32" height="84" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+          <rect x="558" y="148" width="32" height="84" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+          <!-- pass network -->
+          <g id="passLines" stroke="rgba(0,255,231,.35)" stroke-width="1" stroke-dasharray="4 4"></g>
+          <!-- players injected by JS -->
+          <g id="players"></g>
+          <circle id="ballDot" r="4.5" fill="#ffe066" style="filter:drop-shadow(0 0 6px #ffe066)"/>
+          <text id="ballTag" x="0" y="0" font-family="Fira Code" font-size="9" fill="#ffe066"></text>
+        </svg>
+      </div>
+      <div>
+        <div class="pstat-grid reveal">
+          <div class="pstat"><div class="pv"><span data-count="0.87" data-dec="2">0</span></div><div class="pl">Expected Goals (xG)</div></div>
+          <div class="pstat"><div class="pv"><span data-count="342" data-dec="0">0</span><span> m</span></div><div class="pl">Sprint Distance</div></div>
+          <div class="pstat"><div class="pv"><span data-count="91.4" data-dec="1">0</span><span>%</span></div><div class="pl">Pass Accuracy</div></div>
+          <div class="pstat"><div class="pv"><span data-count="12.8" data-dec="1">0</span><span> km/h</span></div><div class="pl">Top Speed</div></div>
+        </div>
+        <div class="xg-chart reveal" style="transition-delay:.15s">
+          <h4><i class="fas fa-chart-column"></i> Shot Quality Map — xG per Zone</h4>
+          <div class="xg-row"><div class="xg-head"><b>Close Range</b><span>0.41 xG</span></div><div class="xg-track"><div class="xg-fill" data-w="92"></div></div></div>
+          <div class="xg-row"><div class="xg-head"><b>Inside Box</b><span>0.18 xG</span></div><div class="xg-track"><div class="xg-fill" data-w="55"></div></div></div>
+          <div class="xg-row"><div class="xg-head"><b>Edge of Box</b><span>0.07 xG</span></div><div class="xg-track"><div class="xg-fill" data-w="30"></div></div></div>
+          <div class="xg-row"><div class="xg-head"><b>Long Range</b><span>0.03 xG</span></div><div class="xg-track"><div class="xg-fill" data-w="14"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
 <section id="projects">
-  <div class="si" style="padding-top:0;">
-    <div class="slabel reveal">02 — Analytical Pipelines</div>
-    <h2 class="stitle reveal">Selected Work</h2>
+  <div class="si" style="padding-top:20px;">
+    <div class="slabel reveal">03 — Analytical Pipelines</div>
+    <h2 class="stitle reveal">Selected <em>Work</em></h2>
     <div class="index-grid">
-      <a class="index-card reveal" href="pdfbuilder.html">
-        <div class="cimg" style="background:linear-gradient(135deg,#02010a,#0d0020);">
-          <i class="fas fa-file-pdf"></i>
-        </div>
-        <div class="cbody">
-          <div class="ctag">Document Engine</div>
-          <h3>PDF Builder</h3>
-          <p>Dynamic report generation with physics notation rendering and automated formatting pipelines.</p>
-          <div class="cfoot">
-            <span class="cfoot-lang">JavaScript · HTML5</span>
-            <span class="cfoot-link">→ VIEW</span>
-          </div>
-        </div>
-      </a>
-      <a class="index-card reveal" href="projects.html" style="transition-delay:.1s">
-        <div class="cimg" style="background:linear-gradient(135deg,#02010a,#1a0030);">
-          <i class="fas fa-layer-group"></i>
-        </div>
-        <div class="cbody">
-          <div class="ctag">Archive</div>
-          <h3>All Projects</h3>
-          <p>Complete archive of research prototypes, data visualisations, and analytical frameworks.</p>
-          <div class="cfoot">
-            <span class="cfoot-lang">Python · R · JS</span>
-            <span class="cfoot-link">→ VIEW</span>
-          </div>
-        </div>
-      </a>
-      <a class="index-card reveal" href="https://tacticalanalysis.vercel.app" target="_blank" rel="noopener" style="transition-delay:.2s">
-        <div class="cimg" style="background:linear-gradient(135deg,#02010a,#200015);">
-          <i class="fas fa-chess-knight"></i>
-        </div>
-        <div class="cbody">
-          <div class="ctag">Football Intelligence</div>
-          <h3>Tactics Lab</h3>
+      <a class="index-card reveal" href="https://tacticalanalysis.vercel.app" target="_blank" rel="noopener">
+        <div class="cimg" style="background:linear-gradient(135deg,#02010a,#052a18);"><i class="fas fa-chess-knight"></i></div>
+        <div class="cbody"><div class="ctag g">Football Intelligence</div><h3>Tactics Lab</h3>
           <p>Physics-informed models for tactical geometry, spatial dominance maps, and formation entropy scoring.</p>
-          <div class="cfoot">
-            <span class="cfoot-lang">Python · StatsBomb</span>
-            <span class="cfoot-link">↗ VIEW LIVE</span>
-          </div>
+          <div class="cfoot"><span class="cfoot-lang">Python · StatsBomb</span><span class="cfoot-link">↗ VIEW LIVE</span></div>
         </div>
       </a>
-      <a class="index-card reveal" href="https://github.com" target="_blank" style="transition-delay:.3s">
-        <div class="cimg" style="background:linear-gradient(135deg,#02010a,#001520);">
-          <i class="fab fa-github"></i>
+      <a class="index-card reveal" href="https://railwaygate.vercel.app" target="_blank" rel="noopener" style="transition-delay:.08s">
+        <div class="cimg" style="background:linear-gradient(135deg,#02010a,#1a0020);"><i class="fas fa-train-subway"></i></div>
+        <div class="cbody"><div class="ctag">Live System</div><h3>Railway Gate</h3>
+          <p>Real-time railway gate monitoring portal with live status feeds and infrastructure tracking.</p>
+          <div class="cfoot"><span class="cfoot-lang">Web · Vercel</span><span class="cfoot-link">↗ VIEW LIVE</span></div>
         </div>
-        <div class="cbody">
-          <div class="ctag">Open Source</div>
-          <h3>GitHub Repository</h3>
+      </a>
+      <a class="index-card reveal" href="pdfbuilder.html" style="transition-delay:.16s">
+        <div class="cimg" style="background:linear-gradient(135deg,#02010a,#0d0020);"><i class="fas fa-file-pdf"></i></div>
+        <div class="cbody"><div class="ctag">Document Engine</div><h3>PDF Builder</h3>
+          <p>Dynamic report generation with physics notation rendering and automated formatting pipelines.</p>
+          <div class="cfoot"><span class="cfoot-lang">JavaScript · HTML5</span><span class="cfoot-link">→ VIEW</span></div>
+        </div>
+      </a>
+      <a class="index-card reveal" href="ic7.html" style="transition-delay:.24s">
+        <div class="cimg" style="background:linear-gradient(135deg,#02010a,#200a00);"><i class="fas fa-futbol"></i></div>
+        <div class="cbody"><div class="ctag g">Community</div><h3>IC7 Iconic Sevens</h3>
+          <p>Kerala football clan tracking portal — fixtures, player stats, and clan rankings.</p>
+          <div class="cfoot"><span class="cfoot-lang">Web · HTML</span><span class="cfoot-link">→ VIEW</span></div>
+        </div>
+      </a>
+      <a class="index-card reveal" href="https://github.com" target="_blank" style="transition-delay:.32s">
+        <div class="cimg" style="background:linear-gradient(135deg,#02010a,#001520);"><i class="fab fa-github"></i></div>
+        <div class="cbody"><div class="ctag">Open Source</div><h3>GitHub Repository</h3>
           <p>Full codebase, research notebooks, and experimental branches available publicly on GitHub.</p>
-          <div class="cfoot">
-            <span class="cfoot-lang">Public Repos</span>
-            <span class="cfoot-link">↗ GITHUB</span>
-          </div>
+          <div class="cfoot"><span class="cfoot-lang">Public Repos</span><span class="cfoot-link">↗ GITHUB</span></div>
         </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ── SKILLS ── -->
+<!-- ═══ SKILLS ═══ -->
 <section id="skills">
   <div class="si">
-    <div class="slabel reveal">03 — Capability Matrix</div>
-    <h2 class="stitle reveal">Skills &amp; Tools</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;" class="reveal">
+    <div class="slabel reveal">04 — Capability Matrix</div>
+    <h2 class="stitle reveal">Skills &amp; <em>Tools</em></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;" class="reveal" id="skillsGrid">
       <div>
         <div class="sub-headers">Technical</div>
         <div class="skrow"><div class="skhead"><span class="sknm">Python</span><span class="skpct">95%</span></div><div class="sktrack"><div class="skfill" data-w="95"></div></div></div>
@@ -486,8 +543,8 @@
       </div>
       <div>
         <div class="sub-headers">Domain</div>
+        <div class="skrow"><div class="skhead"><span class="sknm">Football Analytics</span><span class="skpct">90%</span></div><div class="sktrack"><div class="skfill" data-w="90"></div></div></div>
         <div class="skrow"><div class="skhead"><span class="sknm">Theoretical Physics</span><span class="skpct">90%</span></div><div class="sktrack"><div class="skfill" data-w="90"></div></div></div>
-        <div class="skrow"><div class="skhead"><span class="sknm">Football Analytics</span><span class="skpct">85%</span></div><div class="sktrack"><div class="skfill" data-w="85"></div></div></div>
         <div class="skrow"><div class="skhead"><span class="sknm">Data Visualisation</span><span class="skpct">87%</span></div><div class="sktrack"><div class="skfill" data-w="87"></div></div></div>
         <div class="skrow"><div class="skhead"><span class="sknm">Research Methodology</span><span class="skpct">93%</span></div><div class="sktrack"><div class="skfill" data-w="93"></div></div></div>
       </div>
@@ -495,10 +552,10 @@
   </div>
 </section>
 
-<!-- ── EDUCATION ── -->
+<!-- ═══ EDUCATION ═══ -->
 <section id="education">
   <div class="si">
-    <div class="slabel reveal">04 — Academic Matrix</div>
+    <div class="slabel reveal">05 — Academic Matrix</div>
     <h2 class="stitle reveal">Education</h2>
     <div class="edu-grid">
       <div class="edu-card reveal">
@@ -508,10 +565,8 @@
         <div class="edu-year">2020 — 2024</div>
         <div class="highlight-line">Specialisation in computational physics and statistical mechanics with a focus on complex systems.</div>
         <div class="sub-headers">Core Modules</div>
-        <span class="tag c">Quantum Mechanics</span>
-        <span class="tag c">Thermodynamics</span>
-        <span class="tag">Statistical Mechanics</span>
-        <span class="tag">Electrodynamics</span>
+        <span class="tag c">Quantum Mechanics</span><span class="tag c">Thermodynamics</span>
+        <span class="tag">Statistical Mechanics</span><span class="tag">Electrodynamics</span>
       </div>
       <div class="edu-card reveal" style="transition-delay:.15s">
         <div class="edu-badge">Research</div>
@@ -520,43 +575,36 @@
         <div class="edu-year">2024 — Present</div>
         <div class="highlight-line">Applying physics-informed neural networks and Bayesian inference to sports analytics and performance prediction.</div>
         <div class="sub-headers">Focus Areas</div>
-        <span class="tag c">Neural Networks</span>
-        <span class="tag c">Bayesian Methods</span>
-        <span class="tag">Sports Science</span>
-        <span class="tag">Computer Vision</span>
+        <span class="tag g">xG Modelling</span><span class="tag c">Neural Networks</span>
+        <span class="tag c">Bayesian Methods</span><span class="tag">Tracking Data</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CONTACT ── -->
+<!-- ═══ CONTACT ═══ -->
 <section id="contact">
   <div class="si">
-    <div class="slabel reveal">05 — Transmission</div>
-    <h2 class="stitle reveal">Get In Touch</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:700px;" class="reveal">
-      <a href="mailto:jerein@example.com" style="text-decoration:none;display:flex;align-items:center;gap:16px;border:1px solid var(--gb);padding:24px;transition:.3s;" onmouseover="this.style.borderColor='rgba(0,255,231,.25)'" onmouseout="this.style.borderColor='var(--gb)'">
+    <div class="slabel reveal">06 — Transmission</div>
+    <h2 class="stitle reveal">Get In <em>Touch</em></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:720px;" class="reveal">
+      <a href="mailto:jerein@example.com" style="text-decoration:none;display:flex;align-items:center;gap:16px;border:1px solid var(--gb);padding:24px;transition:.3s;" onmouseover="this.style.borderColor='rgba(0,255,231,.3)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)';this.style.transform='translateY(0)'">
         <i class="fas fa-envelope" style="font-size:1.5rem;color:var(--ion);"></i>
-        <div>
-          <div style="font-family:'Orbitron',sans-serif;font-size:.7rem;color:var(--bright);letter-spacing:1px;margin-bottom:4px;">Email</div>
-          <div style="font-family:'Fira Code',monospace;font-size:.6rem;color:var(--dust);">jerein@example.com</div>
-        </div>
+        <div><div style="font-family:'Orbitron';font-size:.7rem;color:var(--bright);letter-spacing:1px;margin-bottom:4px;">Email</div>
+        <div style="font-family:'Fira Code';font-size:.6rem;color:var(--dust);">jerein@example.com</div></div>
       </a>
-      <a href="https://github.com" target="_blank" style="text-decoration:none;display:flex;align-items:center;gap:16px;border:1px solid var(--gb);padding:24px;transition:.3s;" onmouseover="this.style.borderColor='rgba(0,255,231,.25)'" onmouseout="this.style.borderColor='var(--gb)'">
+      <a href="https://github.com" target="_blank" style="text-decoration:none;display:flex;align-items:center;gap:16px;border:1px solid var(--gb);padding:24px;transition:.3s;" onmouseover="this.style.borderColor='rgba(0,255,231,.3)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)';this.style.transform='translateY(0)'">
         <i class="fab fa-github" style="font-size:1.5rem;color:var(--ion);"></i>
-        <div>
-          <div style="font-family:'Orbitron',sans-serif;font-size:.7rem;color:var(--bright);letter-spacing:1px;margin-bottom:4px;">GitHub</div>
-          <div style="font-family:'Fira Code',monospace;font-size:.6rem;color:var(--dust);">@jereinsamthomas</div>
-        </div>
+        <div><div style="font-family:'Orbitron';font-size:.7rem;color:var(--bright);letter-spacing:1px;margin-bottom:4px;">GitHub</div>
+        <div style="font-family:'Fira Code';font-size:.6rem;color:var(--dust);">@jereinsamthomas</div></div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer>
   <div class="foot-logo">JST</div>
-  <div class="foot-copy">© 2025 JEREIN SAM THOMAS — PHYSICS &amp; PERFORMANCE</div>
+  <div class="foot-copy">© 2026 JEREIN SAM THOMAS — PHYSICS &amp; FOOTBALL PERFORMANCE</div>
   <div class="foot-links">
     <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
     <a href="mailto:jerein@example.com"><i class="fas fa-envelope"></i></a>
@@ -564,334 +612,258 @@
 </footer>
 
 <script>
-/* ── CURSORS ── */
+/* ═══ CURSORS ═══ */
 const cd=document.getElementById('cd'),cr=document.getElementById('cr');
-let mx=0,my=0,cx=0,cy=0;
+let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px';});
-setInterval(()=>{cx+=(mx-cx)*.12;cy+=(my-cy)*.12;cr.style.left=cx+'px';cr.style.top=cy+'px';},16);
-document.querySelectorAll('a,button,.index-card,.edu-card,.domain-card,.dropdown-item').forEach(el=>{
+setInterval(()=>{cx+=(mx-cx)*.13;cy+=(my-cy)*.13;cr.style.left=cx+'px';cr.style.top=cy+'px';},16);
+function bindHov(){document.querySelectorAll('a,button,.index-card,.edu-card,.domain-card,.dropdown-item,.pstat,.hero-card').forEach(el=>{
+  if(el._hov)return; el._hov=1;
   el.addEventListener('mouseenter',()=>{cd.classList.add('hov');cr.classList.add('hov');});
   el.addEventListener('mouseleave',()=>{cd.classList.remove('hov');cr.classList.remove('hov');});
-});
+});}
+bindHov();
 
-/* ── ANIMATED BACKGROUND ── */
+/* ═══ THREE.JS BACKGROUND — particle globe + wireframe football ═══ */
+let scene,camera,renderer,particleSphere,wireBall,ringGroup,mouseX=0,mouseY=0;
+function initBG(){
+  const canvas=document.getElementById('bg3d');
+  renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setSize(innerWidth,innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  scene=new THREE.Scene();
+  camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
+  camera.position.z=8;
+
+  // particle globe (right side, physics feel)
+  const geo=new THREE.BufferGeometry();
+  const N=2600,pos=new Float32Array(N*3),col=new Float32Array(N*3);
+  const c1=new THREE.Color(0x00ffe7),c2=new THREE.Color(0xb400ff);
+  for(let i=0;i<N;i++){
+    const phi=Math.acos(2*Math.random()-1),th=Math.random()*Math.PI*2,r=3.4+(Math.random()-.5)*.25;
+    pos[i*3]=r*Math.sin(phi)*Math.cos(th)+4.2;
+    pos[i*3+1]=r*Math.cos(phi)*.8;
+    pos[i*3+2]=r*Math.sin(phi)*Math.sin(th)-1;
+    const c=Math.random()>.5?c1:c2;
+    col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;
+  }
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+  particleSphere=new THREE.Points(geo,new THREE.PointsMaterial({size:.028,vertexColors:true,transparent:true,opacity:.75,depthWrite:false}));
+  scene.add(particleSphere);
+
+  // wireframe football
+  wireBall=new THREE.Group();
+  const ballGeo=new THREE.IcosahedronGeometry(1.15,1);
+  const ballMesh=new THREE.Mesh(ballGeo,new THREE.MeshBasicMaterial({color:0x00ffe7,wireframe:true,transparent:true,opacity:.32}));
+  const inner=new THREE.Mesh(new THREE.IcosahedronGeometry(.85,0),new THREE.MeshBasicMaterial({color:0xb400ff,wireframe:true,transparent:true,opacity:.3}));
+  wireBall.add(ballMesh,inner);
+  wireBall.position.set(-4.6,1.4,-1.5);
+  scene.add(wireBall);
+
+  // rings
+  ringGroup=new THREE.Group();
+  for(let i=0;i<3;i++){
+    const ring=new THREE.Mesh(new THREE.TorusGeometry(1.7+i*.4,.006,8,120),
+      new THREE.MeshBasicMaterial({color:i%2?0xff3cac:0x00ffe7,transparent:true,opacity:.22-i*.05}));
+    ring.rotation.x=Math.PI/2.3+i*.3;
+    ringGroup.add(ring);
+  }
+  ringGroup.position.copy(wireBall.position);
+  scene.add(ringGroup);
+
+  // dust particles
+  const dN=700,dPos=new Float32Array(dN*3);
+  for(let i=0;i<dN;i++){dPos[i*3]=(Math.random()-.5)*24;dPos[i*3+1]=(Math.random()-.5)*14;dPos[i*3+2]=(Math.random()-.5)*10-2;}
+  const dGeo=new THREE.BufferGeometry();dGeo.setAttribute('position',new THREE.BufferAttribute(dPos,3));
+  scene.add(new THREE.Points(dGeo,new THREE.PointsMaterial({color:0x8899bb,size:.02,transparent:true,opacity:.5})));
+
+  document.addEventListener('mousemove',e=>{mouseX=(e.clientX/innerWidth-.5)*2;mouseY=(e.clientY/innerHeight-.5)*2;});
+  window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+  animateBG();
+}
+function animateBG(){
+  requestAnimationFrame(animateBG);
+  const t=performance.now()*.0004;
+  particleSphere.rotation.y=t*.8;
+  wireBall.rotation.y=t*2.2;wireBall.rotation.x=Math.sin(t*3)*.25;
+  ringGroup.rotation.z=t;ringGroup.rotation.y=t*1.4;
+  camera.position.x+=(mouseX*.7-camera.position.x)*.03;
+  camera.position.y+=(-mouseY*.5-camera.position.y)*.03;
+  camera.lookAt(0,0,0);
+  renderer.render(scene,camera);
+}
+initBG();
+
+/* ═══ INTRO 3D particle burst canvas ═══ */
 (function(){
-  const canvas=document.getElementById('bg-canvas');
-  const ctx=canvas.getContext('2d');
-  let W,H,stars=[],nodes=[],edges=[],waveOffset=0;
-
-  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-  resize();
-  window.addEventListener('resize',resize);
-
-  // Stars
-  for(let i=0;i<220;i++){
-    stars.push({
-      x:Math.random()*2000,y:Math.random()*1200,
-      size:Math.random()*1.4+.2,
-      opacity:Math.random()*.6+.1,
-      pulse:Math.random()*Math.PI*2,
-      speed:Math.random()*.003+.001
-    });
-  }
-
-  // Network nodes (physics-graph feel)
-  for(let i=0;i<28;i++){
-    nodes.push({
-      x:Math.random()*1.6*1920-0.3*1920,
-      y:Math.random()*1.4*1080-0.2*1080,
-      vx:(Math.random()-.5)*.25,
-      vy:(Math.random()-.5)*.25,
-      r:Math.random()*2+1,
-      color:Math.random()>.5?'#00ffe7':'#b400ff',
-      alpha:Math.random()*.25+.08
-    });
-  }
-
-  // Build edges between close nodes
-  function buildEdges(){
-    edges=[];
-    for(let i=0;i<nodes.length;i++){
-      for(let j=i+1;j<nodes.length;j++){
-        const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
-        const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<340) edges.push({a:i,b:j,d});
-      }
-    }
-  }
-  buildEdges();
-
-  // Floating equations / symbols
-  const symbols=['∇²ψ','∮E·dA','∑F=ma','δS=0','∂ψ/∂t','xG','ΔS≥0','⟨H⟩','∫L dt','xT'];
-  const floats=symbols.map((s,i)=>({
-    text:s,
-    x:Math.random()*1800+100,
-    y:Math.random()*900+100,
-    vx:(Math.random()-.5)*.15,
-    vy:(Math.random()-.5)*.08,
-    alpha:Math.random()*.08+.03,
-    size:Math.random()*6+9,
-    phase:Math.random()*Math.PI*2
-  }));
-
-  // Hexagonal grid overlay (subtle)
-  function drawHexGrid(ctx,W,H){
-    const size=48,w=size*Math.sqrt(3),h=size*2,a=.015;
-    ctx.save();
-    ctx.strokeStyle=`rgba(0,255,231,${a})`;
-    ctx.lineWidth=.4;
-    for(let row=-1;row<H/h+2;row++){
-      for(let col=-1;col<W/w+2;col++){
-        const xo=(row%2)*w/2;
-        const px=col*w+xo,py=row*h*.75;
-        ctx.beginPath();
-        for(let k=0;k<6;k++){
-          const angle=Math.PI/180*(60*k-30);
-          const kx=px+size*Math.cos(angle),ky=py+size*Math.sin(angle);
-          k===0?ctx.moveTo(kx,ky):ctx.lineTo(kx,ky);
-        }
-        ctx.closePath();ctx.stroke();
-      }
-    }
-    ctx.restore();
-  }
-
-  // Sine wave lines
-  function drawWaves(ctx,W,H,t){
-    const waves=[
-      {y:.25,amp:28,freq:.0025,speed:.7,color:'rgba(0,255,231,0.04)'},
-      {y:.45,amp:18,freq:.004,speed:.5,color:'rgba(180,0,255,0.03)'},
-      {y:.7,amp:22,freq:.003,speed:.9,color:'rgba(255,60,172,0.025)'},
-    ];
-    waves.forEach(w=>{
-      ctx.beginPath();
-      ctx.strokeStyle=w.color;
-      ctx.lineWidth=1;
-      for(let x=0;x<=W;x+=3){
-        const y=H*w.y+Math.sin(x*w.freq+t*w.speed)*w.amp;
-        x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-      }
-      ctx.stroke();
-    });
-  }
-
-  // Shooting particles
-  const sparks=[];
-  function spawnSpark(){
-    if(Math.random()>.98) sparks.push({
-      x:Math.random()*W,y:0,
-      vx:(Math.random()-.5)*.8,vy:Math.random()*.6+.4,
-      life:1,decay:Math.random()*.008+.004,
-      color:Math.random()>.5?'#00ffe7':'#b400ff'
-    });
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    waveOffset+=.008;
-
-    // Hex grid (static feel)
-    drawHexGrid(ctx,W,H);
-
-    // Stars
-    stars.forEach(s=>{
-      s.pulse+=s.speed;
-      const a=s.opacity*(0.6+0.4*Math.sin(s.pulse));
-      ctx.beginPath();
-      ctx.arc(s.x%W,s.y%H,s.size,0,Math.PI*2);
-      ctx.fillStyle=`rgba(255,255,255,${a})`;
-      ctx.fill();
-    });
-
-    // Wave lines
-    drawWaves(ctx,W,H,waveOffset);
-
-    // Network edges
-    edges.forEach(e=>{
-      const na=nodes[e.a],nb=nodes[e.b];
-      const alpha=Math.max(0,(340-e.d)/340)*0.08;
-      const g=ctx.createLinearGradient(na.x,na.y,nb.x,nb.y);
-      g.addColorStop(0,'rgba(0,255,231,'+alpha+')');
-      g.addColorStop(1,'rgba(180,0,255,'+alpha+')');
-      ctx.beginPath();ctx.moveTo(na.x,na.y);ctx.lineTo(nb.x,nb.y);
-      ctx.strokeStyle=g;ctx.lineWidth=.6;ctx.stroke();
-    });
-
-    // Network nodes
-    nodes.forEach(n=>{
-      n.x+=n.vx;n.y+=n.vy;
-      if(n.x<-200||n.x>W+200){n.vx*=-1;}
-      if(n.y<-200||n.y>H+200){n.vy*=-1;}
-      ctx.beginPath();
-      ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      ctx.fillStyle=n.color.replace(')',`,${n.alpha})`).replace('rgb','rgba');
-      ctx.fill();
-    });
-
-    // Floating math symbols
-    floats.forEach(f=>{
-      f.phase+=.004;
-      f.x+=f.vx;f.y+=f.vy+Math.sin(f.phase)*.08;
-      if(f.x<-100)f.x=W+50;if(f.x>W+100)f.x=-50;
-      if(f.y<-50)f.y=H+20;if(f.y>H+50)f.y=-20;
-      ctx.font=`${f.size}px 'Fira Code', monospace`;
-      ctx.fillStyle=`rgba(0,255,231,${f.alpha})`;
-      ctx.fillText(f.text,f.x,f.y);
-    });
-
-    // Sparks / falling particles
-    spawnSpark();
-    for(let i=sparks.length-3;i>=0;i--){
-      const s=sparks[i];
-      s.x+=s.vx;s.y+=s.vy;s.life-=s.decay;
-      if(s.life<=0){sparks.splice(i,1);continue;}
-      ctx.beginPath();
-      ctx.arc(s.x,s.y,1,0,Math.PI*2);
-      ctx.fillStyle=s.color.replace(')',`,${s.life*0.5})`).replace('#00ffe7','rgba(0,255,231').replace('#b400ff','rgba(180,0,255');
-      ctx.fill();
-    }
-
-    // Rebuild edges occasionally
-    if(Math.random()<.008) buildEdges();
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-/* ── INTRO ── */
-const intro=document.getElementById('intro');
-const ibar=document.getElementById('ibar');
-const iblabel=document.getElementById('iblabel');
-const statusItems=['PHYSICS_ENGINE','DATA_SCIENCE_CORE','FOOTBALL_ANALYTICS','NEURAL_SYSTEMS','PORTFOLIO_READY'];
-const labels=['LOADING PHYSICS MODULE...','CALIBRATING DATA CORE...','SYNCING FOOTBALL DB...','TRAINING NEURAL NETS...','ALL SYSTEMS NOMINAL'];
-
-(function introCanvas(){
-  const c=document.getElementById('intro-canvas');
-  const ctx=c.getContext('2d');
-  c.width=window.innerWidth;c.height=window.innerHeight;
-  const pts=[];
-  for(let i=0;i<80;i++) pts.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.2+.3});
-  function drawIC(){
+  const c=document.getElementById('intro-3d'),ctx=c.getContext('2d');
+  function rs(){c.width=innerWidth;c.height=innerHeight;}rs();addEventListener('resize',rs);
+  const pts=Array.from({length:110},()=>({
+    x:Math.random()*c.width,y:Math.random()*c.height,
+    vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,
+    r:Math.random()*1.4+.3,hue:Math.random()>.5}));
+  (function d(){
+    if(document.getElementById('intro').style.display==='none')return;
     ctx.clearRect(0,0,c.width,c.height);
     pts.forEach(p=>{
       p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>c.width)p.vx*=-1;
-      if(p.y<0||p.y>c.height)p.vy*=-1;
+      if(p.x<0||p.x>c.width)p.vx*=-1;if(p.y<0||p.y>c.height)p.vy*=-1;
       pts.forEach(q=>{
-        const dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
-        if(d<180){
-          ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
-          ctx.strokeStyle=`rgba(0,255,231,${(1-d/180)*.06})`;ctx.lineWidth=.5;ctx.stroke();
-        }
+        const dx=p.x-q.x,dy=p.y-q.y,dd=Math.hypot(dx,dy);
+        if(dd<170){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle=`rgba(0,255,231,${(1-dd/170)*.07})`;ctx.lineWidth=.5;ctx.stroke();}
       });
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(0,255,231,0.15)';ctx.fill();
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);
+      ctx.fillStyle=p.hue?'rgba(0,255,231,.18)':'rgba(180,0,255,.18)';ctx.fill();
     });
-    requestAnimationFrame(drawIC);
-  }
-  drawIC();
+    requestAnimationFrame(d);
+  })();
 })();
 
+/* ═══ INTRO SEQUENCE ═══ */
+const intro=document.getElementById('intro'),ibar=document.getElementById('ibar'),iblabel=document.getElementById('iblabel');
+const steps=[
+  {pct:18,label:'LOADING PHYSICS MODULE...',item:1,delay:350},
+  {pct:42,label:'SYNCING TRACKING DATA FEED...',item:2,delay:750},
+  {pct:64,label:'CALIBRATING xG MODEL v4.2...',item:3,delay:700},
+  {pct:84,label:'TRAINING NEURAL SYSTEMS...',item:4,delay:750},
+  {pct:100,label:'ALL SYSTEMS NOMINAL — KICK OFF',item:5,delay:550},
+];
 let introStarted=false;
 function runIntro(){
-  if(introStarted) return; introStarted=true;
-  let pct=0;
-  const steps=[
-    {pct:18,label:labels[0],item:0,delay:300},
-    {pct:38,label:labels[1],item:1,delay:700},
-    {pct:58,label:labels[2],item:2,delay:600},
-    {pct:78,label:labels[3],item:3,delay:700},
-    {pct:100,label:labels[4],item:4,delay:500},
-  ];
-  let stepIdx=0;
-  function tick(){
-    if(stepIdx>=steps.length){
-      setTimeout(exitIntro,700); return;
-    }
-    const s=steps[stepIdx];
+  if(introStarted)return;introStarted=true;
+  let i=0;
+  (function tick(){
+    if(i>=steps.length){setTimeout(exitIntro,800);return;}
+    const s=steps[i++];
     setTimeout(()=>{
-      iblabel.textContent=s.label;
-      animateBar(s.pct);
-      const el=document.getElementById('is'+(s.item+1));
-      el.classList.add('lit');
-      setTimeout(()=>{
-        el.querySelector('.status-val').textContent='OK';
-        el.classList.add('done');
-      },400);
-      stepIdx++;tick();
+      iblabel.textContent=s.label;ibar.style.width=s.pct+'%';
+      const el=document.getElementById('is'+s.item);el.classList.add('lit');
+      setTimeout(()=>{el.querySelector('.status-val').textContent='OK';el.classList.add('done');},380);
+      tick();
     },s.delay);
-  }
-  document.getElementById('is1').classList.add('lit');
-  setTimeout(tick,200);
+  })();
 }
-
-function animateBar(target){
-  const current=parseFloat(ibar.style.width)||0;
-  const step=(target-current)/25;
-  let n=0;
-  const id=setInterval(()=>{
-    n++;
-    const now=Math.min(current+step*n,target);
-    ibar.style.width=now+'%';
-    if(now>=target) clearInterval(id);
-  },20);
-}
-
 function exitIntro(){
   intro.classList.add('exit');
   document.body.classList.remove('intro-on');
-  setTimeout(()=>intro.style.display='none',1200);
-  startHeroTypewriter();
-  animateSkills();
+  setTimeout(()=>intro.style.display='none',1100);
+  startTypewriter();animateCounters();animateSkills();
 }
+function skipIntro(){if(!introStarted){introStarted=true;}exitIntro();}
+window.addEventListener('load',()=>setTimeout(runIntro,500));
 
-function skipIntro(){introStarted=true;exitIntro();}
-window.addEventListener('load',()=>setTimeout(runIntro,400));
-
-/* ── HERO TYPEWRITER ── */
-function startHeroTypewriter(){
+/* ═══ TYPEWRITER ═══ */
+function startTypewriter(){
   const el=document.getElementById('hero-typewriter');
-  const lines=[
-    "From physics to data science . I build systems where  the basic idea and tactics of a beautiful game (tactic.os 0.45.",
-    " Specialising in physics in ug , tactical analytics, and the mathematics of human performance."
-  ];
-  let fullText='';lines.forEach(l=>fullText+=l);
-  let i=0;
+  const html='I decode the <span class="kw">physics of football</span> — building xG models, tracking-data pipelines and tactical intelligence systems where data meets the beautiful game.';
+  let i=0;const plain=html.replace(/<[^>]+>/g,'');
   const id=setInterval(()=>{
-    el.textContent=fullText.slice(0,i++);
-    if(i>fullText.length) clearInterval(id);
-  },28);
+    i++;
+    // rebuild html up to i visible chars
+    let count=0,out='';
+    for(let k=0;k<html.length;){
+      if(html[k]==='<'){const j=html.indexOf('>',k);out+=html.slice(k,j+1);k=j+1;}
+      else{if(count<i)out+=html[k];count++;k++;}
+    }
+    el.innerHTML=out;
+    if(i>=plain.length)clearInterval(id);
+  },26);
 }
 
-/* ── SKILL BARS ── */
+/* ═══ TILT CARD ═══ */
+const card=document.getElementById('tiltCard');
+card.addEventListener('mousemove',e=>{
+  const r=card.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  card.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg) translateZ(12px)`;
+});
+card.addEventListener('mouseleave',()=>card.style.transform='rotateY(0) rotateX(0)');
+
+/* ═══ PITCH ANIMATION ═══ */
+const NS='http://www.w3.org/2000/svg';
+const playersG=document.getElementById('players');
+const homeXY=[[90,190],[170,120],[170,260],[190,190],[260,100],[260,280],[290,190],[370,110],[370,270],[430,190],[480,150]];
+const awayXY=homeXY.map(([x,y])=>[600-x,380-y]);
+const players=[];
+[...homeXY.map((p,i)=>({x:p[0],y:p[1],c:'#00ffe7',t:'H'+(i+1)})),...awayXY.map((p,i)=>({x:p[0],y:p[1],c:'#ff3cac',t:'A'+(i+1)}))]
+.forEach(p=>{
+  const g=document.createElementNS(NS,'g');
+  const ring=document.createElementNS(NS,'circle');
+  ring.setAttribute('r',7);ring.setAttribute('fill','none');ring.setAttribute('stroke',p.c);ring.setAttribute('stroke-width',1);ring.setAttribute('opacity',.5);
+  const dot=document.createElementNS(NS,'circle');
+  dot.setAttribute('r',4);dot.setAttribute('fill',p.c);dot.setAttribute('style',`filter:drop-shadow(0 0 4px ${p.c})`);
+  const tx=document.createElementNS(NS,'text');
+  tx.setAttribute('y',-11);tx.setAttribute('text-anchor','middle');tx.setAttribute('font-size',8);
+  tx.setAttribute('font-family','Fira Code');tx.setAttribute('fill','rgba(255,255,255,.7)');tx.textContent=p.t;
+  g.append(ring,dot,tx);g.setAttribute('transform',`translate(${p.x},${p.y})`);
+  playersG.appendChild(g);
+  players.push({g,ox:p.x,oy:p.y,ph:Math.random()*6.28,sp:.4+Math.random()*.5,c:p.c});
+});
+const passLines=document.getElementById('passLines');
+function rebuildPasses(){
+  passLines.innerHTML='';
+  for(let k=0;k<7;k++){
+    const a=players[Math.floor(Math.random()*11)],b=players[Math.floor(Math.random()*11)];
+    const l=document.createElementNS(NS,'line');
+    l.setAttribute('x1',a.g.transform.baseVal[0].matrix.e);
+    l.setAttribute('y1',a.g.transform.baseVal[0].matrix.f);
+    l.setAttribute('x2',b.g.transform.baseVal[0].matrix.e);
+    l.setAttribute('y2',b.g.transform.baseVal[0].matrix.f);
+    passLines.appendChild(l);
+  }
+}
+rebuildPasses();setInterval(rebuildPasses,1800);
+const ballDot=document.getElementById('ballDot'),ballTag=document.getElementById('ballTag');
+let ballT=0,ballFrom=players[3],ballTo=players[8];
+setInterval(()=>{ballFrom=ballTo;ballTo=players[Math.floor(Math.random()*11)];ballT=0;},2600);
+(function pitchAnim(){
+  const t=performance.now()*.001;
+  players.forEach(p=>{
+    const x=p.ox+Math.sin(t*p.sp+p.ph)*14,y=p.oy+Math.cos(t*p.sp*.8+p.ph)*11;
+    p.g.setAttribute('transform',`translate(${x},${y})`);
+  });
+  ballT=Math.min(1,ballT+.012);
+  const e=ballT<.5?2*ballT*ballT:1-Math.pow(-2*ballT+2,2)/2;
+  const a=ballFrom.g.transform.baseVal[0].matrix,b=ballTo.g.transform.baseVal[0].matrix;
+  const bx=a.e+(b.e-a.e)*e,by=a.f+(b.f-a.f)*e;
+  ballDot.setAttribute('cx',bx);ballDot.setAttribute('cy',by);
+  ballTag.setAttribute('x',bx+9);ballTag.setAttribute('y',by-7);
+  ballTag.textContent='xG '+(0.08+Math.random()*.005).toFixed(2);
+  requestAnimationFrame(pitchAnim);
+})();
+
+/* ═══ COUNTERS + BARS ═══ */
+function animateCounters(){
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseFloat(el.dataset.count),dec=+el.dataset.dec,t0=performance.now();
+    (function step(){
+      const p=Math.min(1,(performance.now()-t0)/1600),e=1-Math.pow(1-p,3);
+      el.textContent=(target*e).toFixed(dec);
+      if(p<1)requestAnimationFrame(step);
+    })();
+  });
+  document.querySelectorAll('.xg-fill').forEach(b=>b.style.width=b.dataset.w+'%');
+}
 function animateSkills(){
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.querySelectorAll('.skfill').forEach(bar=>{
-          bar.style.width=bar.dataset.w+'%';
-        });
-      }
-    });
-  },{threshold:.3});
-  document.querySelectorAll('#skills .si').forEach(el=>observer.observe(el));
+  const o=new IntersectionObserver(es=>es.forEach(en=>{
+    if(en.isIntersecting){en.target.querySelectorAll('.skfill').forEach(b=>b.style.width=b.dataset.w+'%');}
+  }),{threshold:.3});
+  o.observe(document.getElementById('skillsGrid'));
 }
 
-/* ── SCROLL REVEAL ── */
-const ro=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('visible');});
-},{threshold:.12});
+/* ═══ REVEAL ═══ */
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-/* ── NAV active on scroll ── */
+/* nav active */
 const sections=document.querySelectorAll('section[id]');
 window.addEventListener('scroll',()=>{
-  const top=window.scrollY+80;
+  const top=scrollY+80;
   sections.forEach(s=>{
-    if(top>=s.offsetTop && top<s.offsetTop+s.offsetHeight){
-      document.querySelectorAll('.nav-item > a').forEach(a=>{
-        a.style.color=a.getAttribute('href')==='#'+s.id?'var(--bright)':'';
-      });
+    if(top>=s.offsetTop&&top<s.offsetTop+s.offsetHeight){
+      document.querySelectorAll('.nav-item>a').forEach(a=>a.style.color=a.getAttribute('href')==='#'+s.id?'var(--bright)':'');
     }
   });
 });
