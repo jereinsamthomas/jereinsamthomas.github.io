@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jerein Sam Thomas — Football Analytics &amp; Tactical Intelligence</title>
+  <meta name="description" content="Cinematic editorial portfolio of Jerein Sam Thomas: exploring football through match data, tactical structures, spatial intelligence, and predictive modeling.">
+  <meta name="keywords" content="Football Analytics, Tactical Intelligence, Sports Data Science, Jerein Sam Thomas, Pitch Maps, Shot Maps, xG, El Clásico">
+  
+  <!-- Typography: Bodoni Moda & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="editorial-body">
+
+  <!-- Grain Texture Overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- Navigation Bar (Overlaid on Hero) -->
+  <header class="site-header" id="siteHeader">
+    <div class="nav-container">
+      <!-- Left: Menu Trigger -->
+      <button class="nav-btn nav-btn-menu" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="editorialNavModal">
+        <span class="menu-icon-lines" aria-hidden="true">
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+        </span>
+        <span class="nav-btn-label">MENU</span>
+      </button>
+
+      <!-- Center: Brand Wordmark -->
+      <a href="index.html" class="nav-brand" aria-label="Jerein Sam Thomas Home">
+        <span class="brand-title">Jerein Sam Thomas</span>
+        <span class="brand-subtitle">FOOTBALL ANALYTICS</span>
+      </a>
+
+      <!-- Right: Analysis Jump / Search -->
+      <a href="#analysisRoom" class="nav-btn nav-btn-analysis" id="navAnalysisLink" aria-label="Jump to Analysis Room">
+        <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span class="nav-btn-label">ANALYSIS</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Fullscreen Slide-over Editorial Menu Modal -->
+  <aside class="editorial-modal" id="editorialNavModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Main Navigation">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-panel">
+      <div class="modal-top">
+        <div class="modal-label">INDEX &amp; NAVIGATION</div>
+        <button class="modal-close" id="modalClose" aria-label="Close navigation menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <nav class="modal-links">
+        <a href="#heroSection" class="modal-link">
+          <span class="link-idx">01</span>
+          <span class="link-name">Stadium Hero</span>
+        </a>
+        <a href="#editorialStatement" class="modal-link">
+          <span class="link-idx">02</span>
+          <span class="link-name">Reading The Game</span>
+        </a>
+        <a href="#analysisRoom" class="modal-link">
+          <span class="link-idx">03</span>
+          <span class="link-name">El Clásico Analysis</span>
+        </a>
+        <a href="#analystProfile" class="modal-link">
+          <span class="link-idx">04</span>
+          <span class="link-name">Analyst Profile</span>
+        </a>
+      </nav>
+      <div class="modal-projects">
+        <div class="modal-label">FEATURED MATCH STUDY</div>
+        <ul class="modal-studies-list">
+          <li>
+            <a href="analysis/el-clasico.html" style="font-weight: 600; color: var(--rust);">
+              ⚽ El Clásico: Yesterday's Match — Tactical &amp; Data Breakdown &rarr;
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-links-external">
+          <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <span class="bullet" aria-hidden="true">·</span>
+          <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a25a2a7/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <span class="bullet" aria-hidden="true">·</span>
+          <a href="https://jereinsamthomas.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Scroll Container -->
+  <main class="page-scroll-wrapper" id="pageWrapper">
+
+    <!-- 1. HERO — FULL-VIEWPORT FOOTBALL INTRODUCTION -->
+    <section class="hero-section" id="heroSection" aria-label="Introduction Stadium Hero">
+      <div class="hero-stage-container" id="heroStage">
+        <!-- Layer 1: Stadium Background Photo -->
+        <div class="hero-layer hero-layer-photo">
+          <img src="assets/hero-stadium.jpg" alt="Atmospheric night football stadium under bright floodlights" class="hero-stadium-img" id="heroStadiumImg" width="2688" height="1520" fetchpriority="high">
+        </div>
+
+        <!-- Layer 2: Text and Headline Block (Behind Player) -->
+        <div class="hero-layer hero-layer-typography" id="heroTypography">
+          <div class="hero-title-group">
+            <p class="hero-eyebrow" id="heroEyebrow">FOOTBALL ANALYTICS · TACTICAL INTELLIGENCE</p>
+            <h1 class="hero-main-title" id="heroMainTitle" aria-label="FOOTBALL">
+              <span class="split-word" data-word="FOOTBALL">FOOTBALL</span>
+            </h1>
+            <p class="hero-secondary-title" id="heroSecondaryTitle">BEYOND THE SCORELINE.</p>
+          </div>
+        </div>
+
+        <!-- Layer 3: Transparent Footballer Cutout (Overlapping headline) -->
+        <div class="hero-layer hero-layer-player" id="heroPlayerLayer">
+          <picture>
+            <source srcset="assets/footballer-cutout.webp" type="image/webp">
+            <img src="assets/footballer-cutout.png" alt="Professional football player mid-stride dribbling the ball" class="hero-player-img" id="heroPlayerImg" width="896" height="1200">
+          </picture>
+        </div>
+
+        <!-- Layer 4: Personal Introduction Block (Lower Left) -->
+        <div class="hero-intro-card" id="heroIntroCard">
+          <div class="intro-author">JEREIN SAM THOMAS</div>
+          <div class="intro-role">FOOTBALL ANALYTICS | SPORTS DATA SCIENCE</div>
+          <p class="intro-text">
+            I'm a Data Science postgraduate and Physics graduate exploring football through match data, tactical structures, spatial analysis, and performance metrics. My aim is to turn match events into clear, evidence-based football insights.
+          </p>
+          <div class="intro-links">
+            <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer" class="intro-link" aria-label="GitHub Profile">
+              <span>GitHub</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </a>
+            <span class="intro-sep" aria-hidden="true">/</span>
+            <a href="https://jereinsamthomas.github.io" target="_blank" rel="noopener noreferrer" class="intro-link" aria-label="Personal Portfolio">
+              <span>Portfolio</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </a>
+            <span class="intro-sep" aria-hidden="true">/</span>
+            <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a25a2a7/" target="_blank" rel="noopener noreferrer" class="intro-link" aria-label="LinkedIn Profile">
+              <span>LinkedIn</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Layer 5: Bottom Call-To-Action Pill -->
+        <div class="hero-cta-wrapper" id="heroCtaWrapper">
+          <a href="#analysisRoom" class="hero-cta-pill" id="heroCtaPill" aria-label="Scroll to Analysis Gallery">
+            <span class="cta-pill-label">EXPLORE ANALYSIS</span>
+            <span class="cta-pill-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        <!-- Scroll Melt Gradient Overlay -->
+        <div class="hero-paper-gradient" id="heroPaperGradient" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- 2. THE ANALYSIS ROOM — EDITORIAL STATEMENT & SOLE EL CLÁSICO STUDY -->
+    <section class="analysis-room-section" id="analysisRoom">
+      
+      <!-- Editorial Statement Block -->
+      <div class="editorial-statement-wrap" id="editorialStatement">
+        <div class="statement-container">
+          <p class="statement-label" id="statementLabel">READING THE GAME</p>
+          
+          <h2 class="editorial-statement-title" id="statementTitle">
+            <span class="statement-line statement-line-1">
+              <span class="statement-word">THE</span>
+              <span class="statement-word">GAME</span>
+              <span class="statement-pill-photo" aria-hidden="true">
+                <img src="assets/analysis/pill-pitch.jpg" alt="Aerial football pitch detail" class="pill-img" id="pillImg1" width="80" height="80">
+              </span>
+              <span class="statement-word">BEYOND</span>
+            </span>
+            <span class="statement-line statement-line-2">
+              <span class="statement-word">THE</span>
+              <span class="statement-word">SCORELINE</span>
+              <span class="statement-pill-photo" aria-hidden="true">
+                <img src="assets/analysis/pill-tactics.jpg" alt="Tactical performance footage detail" class="pill-img" id="pillImg2" width="80" height="80">
+              </span>
+              <span class="statement-word">THROUGH</span>
+            </span>
+            <span class="statement-line statement-line-3">
+              <span class="statement-word">DATA</span>
+              <span class="statement-word">AND</span>
+              <span class="statement-word">TACTICS</span>
+            </span>
+          </h2>
+
+          <!-- Custom 66px Geometric Pitch Emblem (Double Ring with Football Pitch) -->
+          <div class="pitch-emblem-wrap" id="pitchEmblemWrap" aria-hidden="true">
+            <svg class="pitch-emblem-svg" width="66" height="66" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+              <!-- Outer Double Ring -->
+              <circle cx="50" cy="50" r="47" stroke-width="1.2" stroke-dasharray="2 3" opacity="0.65" />
+              <circle cx="50" cy="50" r="43" stroke-width="1.8" />
+              <!-- Pitch Outline -->
+              <rect x="22" y="27" width="56" height="46" rx="2" stroke-width="1.5" />
+              <!-- Halfway Line & Centre Circle -->
+              <line x1="50" y1="27" x2="50" y2="73" stroke-width="1.2" />
+              <circle cx="50" cy="50" r="8" stroke-width="1.2" />
+              <circle cx="50" cy="50" r="1.5" fill="currentColor" />
+              <!-- Left Penalty Area -->
+              <rect x="22" y="37" width="10" height="26" stroke-width="1.1" />
+              <rect x="22" y="42" width="4" height="16" stroke-width="0.9" />
+              <path d="M 32 45 A 5 5 0 0 1 32 55" stroke-width="1.1" />
+              <!-- Right Penalty Area -->
+              <rect x="68" y="37" width="10" height="26" stroke-width="1.1" />
+              <rect x="74" y="42" width="4" height="16" stroke-width="0.9" />
+              <path d="M 68 45 A 5 5 0 0 0 68 55" stroke-width="1.1" />
+              <!-- Corner Arcs -->
+              <path d="M 22 30 A 3 3 0 0 1 25 27" stroke-width="0.8" />
+              <path d="M 22 70 A 3 3 0 0 0 25 73" stroke-width="0.8" />
+              <path d="M 78 30 A 3 3 0 0 0 75 27" stroke-width="0.8" />
+              <path d="M 78 70 A 3 3 0 0 1 75 73" stroke-width="0.8" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Gallery Header -->
+      <div class="gallery-header-wrap">
+        <div class="editorial-container">
+          <p class="gallery-label">FEATURED MATCH ANALYSIS</p>
+          <h3 class="gallery-heading">THE ANALYSIS ROOM</h3>
+          <p class="gallery-intro">
+            A comprehensive, data-driven investigation of yesterday's El Clásico: attacking patterns, expected goals, passing networks, and tactical adaptations.
+          </p>
+        </div>
+      </div>
+
+      <!-- Sole Featured Study: El Clásico Yesterday -->
+      <div class="projects-gallery-container editorial-container" id="projectsGallery">
+        
+        <article class="project-editorial-card card-wide" data-project-id="01">
+          <a href="analysis/el-clasico.html" class="project-card-link" aria-label="Open Full Tactical Breakdown of Yesterday's El Clásico">
+            <div class="card-media-wrap" style="height: clamp(320px, 40vw, 540px);">
+              <img src="assets/analysis/el-clasico-aerial.jpg" alt="Overhead view of stadium pitch during El Clásico under floodlights" class="card-img" width="1200" height="675">
+              <div class="card-media-badge">YESTERDAY'S MATCH · LA LIGA</div>
+            </div>
+            <div class="card-content-wrap">
+              <div class="card-topics">
+                <span class="topic-tag">El Clásico Special</span>
+                <span class="topic-tag">Match Analysis</span>
+                <span class="topic-tag">Shot Maps &amp; xG</span>
+                <span class="topic-tag">Passing Networks</span>
+                <span class="topic-tag">Spatial Intelligence</span>
+              </div>
+              <h4 class="card-title" style="font-size: clamp(24px, 3vw, 42px);">
+                El Clásico 2026/27: How Real Madrid Beat Barcelona Despite Losing the Possession Battle
+              </h4>
+              <p class="card-desc" style="font-size: clamp(14px, 1.25vw, 17px); max-width: 880px;">
+                A data-driven tactical breakdown of FC Barcelona 1–2 Real Madrid (25 October 2026 at Spotify Camp Nou): analyzing shot quality over volume (0.195 vs. 0.066 xG/shot), spatial utilization, defensive resilience, and the decisive 87th-minute transition winner.
+              </p>
+
+              <!-- Inline Quick Match Stats Strip -->
+              <div class="clasico-quick-stats-strip">
+                <div class="stat-pill-item">
+                  <span class="stat-pill-label">Final Score</span>
+                  <span class="stat-pill-val">FC Barcelona 1 — 2 Real Madrid</span>
+                </div>
+                <div class="stat-pill-item">
+                  <span class="stat-pill-label">Expected Goals (xG)</span>
+                  <span class="stat-pill-val">1.19 xG vs 1.95 xG</span>
+                </div>
+                <div class="stat-pill-item">
+                  <span class="stat-pill-label">Possession</span>
+                  <span class="stat-pill-val">62% — 38%</span>
+                </div>
+                <div class="stat-pill-item">
+                  <span class="stat-pill-label">Decisive Factor</span>
+                  <span class="stat-pill-val">87' Transition Winner</span>
+                </div>
+              </div>
+
+              <div class="card-action">
+                <span class="card-action-text" style="font-size: 12px; letter-spacing: 0.22em;">OPEN FULL INTERACTIVE MATCH DATA &amp; PITCH MAP</span>
+                <span class="card-action-arrow" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 3. ANALYST PROFILE — QUICK FACTS AND METHODS -->
+    <section class="analyst-profile-section" id="analystProfile">
+      <div class="profile-top-hairline" aria-hidden="true"></div>
+      
+      <div class="profile-grid editorial-container">
+        
+        <!-- Column 1: Identity & Play Badge -->
+        <div class="profile-col profile-col-left" id="profileColLeft">
+          <p class="profile-label">THE ANALYST</p>
+          <h2 class="profile-headline" id="profileHeadline">
+            <span class="profile-word">QUICK</span>
+            <span class="profile-word">FACTS</span>
+            <span class="profile-word">ABOUT</span>
+            <span class="profile-word">JEREIN</span>
+          </h2>
+          
+          <!-- Rotating 84px Radial Play Badge -->
+          <div class="play-badge-wrap">
+            <a href="analysis/el-clasico.html" class="play-badge-link" aria-label="Explore El Clásico Analysis">
+              <div class="play-badge-circle" id="playBadge">
+                <svg class="radial-ticks-svg" width="84" height="84" viewBox="0 0 84 84" aria-hidden="true">
+                  <g class="ticks-group" transform="translate(42, 42)">
+                    <g id="svgTicksGroup">
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(0)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(7.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(15)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(22.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(30)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(37.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(45)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(52.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(60)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(67.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(75)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(82.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(90)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(97.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(105)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(112.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(120)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(127.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(135)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(142.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(150)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(157.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(165)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(172.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(180)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(187.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(195)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(202.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(210)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(217.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(225)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(232.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(240)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(247.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(255)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(262.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(270)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(277.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(285)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(292.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(300)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(307.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(315)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(322.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(330)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(337.5)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(345)" />
+                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(352.5)" />
+                    </g>
+                  </g>
+                  <!-- Center Circle & Play Triangle -->
+                  <circle cx="42" cy="42" r="16" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.2" />
+                  <polygon points="40,36 48,42 40,48" fill="var(--rust)" />
+                </svg>
+              </div>
+              <span class="play-badge-caption">EXPLORE EL CLÁSICO</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Introduction & Facts Table -->
+        <div class="profile-col profile-col-mid" id="profileColMid">
+          <p class="profile-bio-text">
+            With a foundation in Physics and postgraduate study in Data Science, I approach football as a combination of space, movement, probability, and decision-making. My projects explore how structured data can reveal patterns that are not immediately obvious from the scoreline.
+          </p>
+          
+          <div class="facts-table-wrap">
+            <table class="facts-table">
+              <tbody>
+                <tr class="fact-row">
+                  <td class="fact-label">Focus</td>
+                  <td class="fact-value">Football Analytics</td>
+                </tr>
+                <tr class="fact-row">
+                  <td class="fact-label">Education</td>
+                  <td class="fact-value">MSc Data Science</td>
+                </tr>
+                <tr class="fact-row">
+                  <td class="fact-label">Foundation</td>
+                  <td class="fact-value">BSc Physics</td>
+                </tr>
+                <tr class="fact-row">
+                  <td class="fact-label">Technical tools</td>
+                  <td class="fact-value">Python, Pandas, scikit-learn</td>
+                </tr>
+                <tr class="fact-row">
+                  <td class="fact-label">Analysis methods</td>
+                  <td class="fact-value">Match Statistics, Data Visualization, Tactical Analysis</td>
+                </tr>
+                <tr class="fact-row">
+                  <td class="fact-label">Featured study</td>
+                  <td class="fact-value">El Clásico Tactical Breakdown</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="profile-social-links">
+            <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer" class="profile-ext-link">
+              <span>GitHub</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </a>
+            <span class="sep" aria-hidden="true">·</span>
+            <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a25a2a7/" target="_blank" rel="noopener noreferrer" class="profile-ext-link">
+              <span>LinkedIn</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </a>
+            <span class="sep" aria-hidden="true">·</span>
+            <a href="https://jereinsamthomas.github.io" target="_blank" rel="noopener noreferrer" class="profile-ext-link">
+              <span>Portfolio</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 3: Editorial Portrait -->
+        <div class="profile-col profile-col-right" id="profileColRight">
+          <div class="portrait-editorial-frame" id="portraitFrame">
+            <img src="assets/profile/analyst-portrait.jpg" alt="Football performance and tactical analyst in stadium suite examining match event data" class="portrait-img" id="portraitImg" width="800" height="1200" loading="lazy">
+          </div>
+          <p class="portrait-caption">MATCH ANALYST SUITE · TACTICAL EVENT DATA</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="site-footer">
+      <div class="editorial-container footer-content">
+        <div class="footer-left">
+          <span class="footer-brand">Jerein Sam Thomas</span>
+          <span class="footer-sub">Editorial Football Analytics &amp; Tactical Science</span>
+        </div>
+        <div class="footer-right">
+          <span class="footer-copy">&copy; 2026 Jerein Sam Thomas. Data-driven football intelligence.</span>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
