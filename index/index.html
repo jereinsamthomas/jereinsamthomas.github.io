@@ -76,7 +76,7 @@
           <li><a href="#analytics-lab" class="pro-nav-item"><span class="nav-dot"></span>Analytics Lab</a></li>
           <li><a href="#isl-case-study" class="pro-nav-item"><span class="nav-dot"></span>ISL Project</a></li>
           <li><a href="#tactics-os" class="pro-nav-item"><span class="nav-dot"></span>Tactics OS</a></li>
-          <li><a href="#match-analysis" class="pro-nav-item"><span class="nav-dot"></span>Match Analysis</a></li>
+          <li><a href="#match-analysis" class="pro-nav-item"><span class="nav-dot"></span>Match Analysis <span class="nav-live-badge">EL CLÁSICO</span></a></li>
           <li><a href="#data-viz" class="pro-nav-item"><span class="nav-dot"></span>Data Viz</a></li>
           <li><a href="#other-projects" class="pro-nav-item"><span class="nav-dot"></span>Research</a></li>
           <li><a href="#skills" class="pro-nav-item"><span class="nav-dot"></span>Skills</a></li>
@@ -87,6 +87,13 @@
 
       <!-- Right Pro Utility Strip -->
       <div class="pro-nav-actions">
+        <!-- El Clasico Deep Dive Direct Access -->
+        <a href="analysis/el-clasico-2026.html" class="nav-match-direct-btn" target="_blank" title="Open Complete El Clásico 2026 Deep Dive Dossier">
+          <span class="match-pulse-dot"></span>
+          <span>EL CLÁSICO '26</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </a>
+
         <!-- Live Scouting Status Indicator -->
         <div class="nav-status-chip" title="Available for Club Internships">
           <span class="status-ping"></span>
@@ -134,7 +141,7 @@
     <button class="dock-dot" data-slide="2" data-title="Analytics Lab" title="Slide 03: Analytics Lab"><span class="dot-inner"></span><span class="dock-label">03. Analytics Lab</span></button>
     <button class="dock-dot" data-slide="3" data-title="ISL Case Study" title="Slide 04: ISL Project"><span class="dot-inner"></span><span class="dock-label">04. ISL Project</span></button>
     <button class="dock-dot" data-slide="4" data-title="Tactics OS" title="Slide 05: Tactics OS"><span class="dot-inner"></span><span class="dock-label">05. Tactics OS</span></button>
-    <button class="dock-dot" data-slide="5" data-title="Match Analysis" title="Slide 06: Match Analysis"><span class="dot-inner"></span><span class="dock-label">06. Match Analysis</span></button>
+    <button class="dock-dot" data-slide="5" data-title="El Clásico Match Analysis" title="Slide 06: El Clásico 2026 Tactical Analysis"><span class="dot-inner"></span><span class="dock-label">06. El Clásico</span></button>
     <button class="dock-dot" data-slide="6" data-title="Data Viz" title="Slide 07: Data Viz"><span class="dot-inner"></span><span class="dock-label">07. Data Viz</span></button>
     <button class="dock-dot" data-slide="7" data-title="Research Work" title="Slide 08: Research"><span class="dot-inner"></span><span class="dock-label">08. Research</span></button>
     <button class="dock-dot" data-slide="8" data-title="Skills Matrix" title="Slide 09: Skills"><span class="dot-inner"></span><span class="dock-label">09. Skills</span></button>
@@ -717,17 +724,20 @@ importances = rf.feature_importances_</code></pre>
     <!-- PAGE 6 — MATCH ANALYSIS REPORT                                          -->
     <!-- Environment: Multi-Screen Performance Analyst Room                      -->
     <!-- ======================================================================= -->
-    <section class="section-stage match-report-stage" id="match-analysis" data-slide-index="5" data-title="Match Analysis">
-      <div class="env-bg-layer" style="background-image: url('assets/analyst_room.jpg'); filter: brightness(0.72) contrast(1.08);"></div>
+    <section class="section-stage match-report-stage" id="match-analysis" data-slide-index="5" data-title="El Clásico 2026 Analysis">
+      <div class="env-bg-layer" style="background-image: url('assets/analyst_room.jpg'); filter: brightness(0.68) contrast(1.1);"></div>
       <div class="env-overlay-gradient"></div>
 
       <div class="stage-content">
         
         <div class="section-editorial-header">
-          <div class="sample-label-badge">Sample Match Analysis — DEMO / Data to be populated</div>
-          <h2 class="section-title">Tactical Match <span class="highlight-title">Report</span></h2>
+          <div class="sample-label-badge featured-badge" style="background: rgba(229, 57, 53, 0.16); border-color: rgba(229, 57, 53, 0.45); color: #ff6b6b;">
+            <span class="badge-pulse" style="background: #ff4d4f; box-shadow: 0 0 10px #ff4d4f;"></span>
+            LALIGA 2026/27 • FEATURED TACTICAL CASE STUDY
+          </div>
+          <h2 class="section-title">El Clásico <span class="highlight-title">Tactical Space Analysis</span></h2>
           <p class="section-lede">
-            Professional matchday report structure showcasing practical tactical evaluation and data-backed observations.
+            Spatial inequality, rest-defense vulnerabilities, and transition efficiency behind Real Madrid's 2–1 victory over FC Barcelona at Spotify Camp Nou (25 October 2026).
           </p>
         </div>
 
@@ -735,40 +745,59 @@ importances = rf.feature_importances_</code></pre>
           
           <div class="report-fixture-header">
             <div class="fixture-team home">
-              <span class="team-name">Team A</span>
-              <span class="formation-pill">4-2-3-1</span>
+              <span class="team-name">FC Barcelona</span>
+              <div class="team-meta-row" style="display:flex; align-items:center; gap:8px; margin-top:2px;">
+                <span class="formation-pill">4-3-3 High Press</span>
+                <span style="font-family: var(--font-mono); font-size: 11px; color: #ff6b6b; font-weight: 700;">Score: 1</span>
+              </div>
+              <span style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Fermín López 42' • xG 1.19</span>
             </div>
             <div class="fixture-vs-center">
-              <span class="competition-tag">Indian Super League // Matchday Analysis</span>
-              <span class="vs-label">VS</span>
-              <span class="match-date-tag">Tactical Sample Case Study</span>
+              <span class="competition-tag">LALIGA 2026/27 // MATCHDAY 10</span>
+              <span class="vs-label" style="letter-spacing: 2px;">1 — 2</span>
+              <span class="match-date-tag">25 Oct 2026 • Spotify Camp Nou • Full Time</span>
+              <span style="font-family: var(--font-mono); font-size: 10px; color: #00f2fe; margin-top: 2px;">Decisive: Mbappé 87' (7.4s Break)</span>
             </div>
             <div class="fixture-team away">
-              <span class="team-name">Team B</span>
-              <span class="formation-pill">4-3-3</span>
+              <span class="team-name">Real Madrid</span>
+              <div class="team-meta-row" style="display:flex; align-items:center; gap:8px; margin-top:2px;">
+                <span style="font-family: var(--font-mono); font-size: 11px; color: #00f2fe; font-weight: 700;">Score: 2</span>
+                <span class="formation-pill">4-4-2 Mid-Block</span>
+              </div>
+              <span style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Vinícius Jr. 19', Mbappé 87' • xG 1.95</span>
             </div>
           </div>
 
-          <div class="report-stats-grid">
+          <div class="report-stats-grid" style="grid-template-columns: repeat(6, 1fr);">
             <div class="stat-box">
-              <span class="stat-val-home">54%</span>
+              <span class="stat-val-home">62%</span>
               <span class="stat-label">POSSESSION</span>
-              <span class="stat-val-away">46%</span>
+              <span class="stat-val-away">38%</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-val-home">1.19</span>
+              <span class="stat-label">EXPECTED GOALS</span>
+              <span class="stat-val-away">1.95</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-val-home">18 (7)</span>
+              <span class="stat-label">SHOTS (ON TARGET)</span>
+              <span class="stat-val-away">10 (5)</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-val-home">86%</span>
+              <span class="stat-label">PASS ACCURACY</span>
+              <span class="stat-val-away">84%</span>
             </div>
             <div class="stat-box">
               <span class="stat-val-home">14</span>
-              <span class="stat-label">TOTAL SHOTS</span>
-              <span class="stat-val-away">9</span>
+              <span class="stat-label">DEEP ENTRIES</span>
+              <span class="stat-val-away">6</span>
             </div>
             <div class="stat-box">
-              <span class="stat-val-home">5</span>
-              <span class="stat-label">SHOTS ON TARGET</span>
-              <span class="stat-val-away">3</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-val-home">82%</span>
-              <span class="stat-label">PASSING ACCURACY</span>
-              <span class="stat-val-away">77%</span>
+              <span class="stat-val-home">7.2</span>
+              <span class="stat-label">PPDA INTENSITY</span>
+              <span class="stat-val-away">14.8</span>
             </div>
           </div>
 
@@ -777,57 +806,76 @@ importances = rf.feature_importances_</code></pre>
             <div class="report-section-card">
               <h3 class="report-card-heading">1. Tactical Structure &amp; Phase Breakdown</h3>
               <div class="phase-item">
-                <span class="phase-title">Build-Up Phase &amp; Progression:</span>
-                <p class="phase-desc">Executed a 3+2 build-up structure, dropping the defensive pivot between center-backs to create numerical superiority and bypass opposition forward pressing.</p>
+                <span class="phase-title">Rest-Defense &amp; Inverted Full-Back Vulnerability:</span>
+                <p class="phase-desc">Hansi Flick's Barça deployed a 3-2-2-3 build-up pushing Koundé and Balde high into wide channels. This created severe spatial exposure in transition behind the backline, conceding 1.48 xG directly from counter-attacks.</p>
               </div>
               <div class="phase-item">
-                <span class="phase-title">Defensive Compactness:</span>
-                <p class="phase-desc">Maintained a disciplined 4-4-2 mid-block out of possession, ensuring vertical distances between lines remained under 14 meters.</p>
+                <span class="phase-title">Defensive Compactness &amp; Line Distance:</span>
+                <p class="phase-desc">Real Madrid operated a compact 4-4-2 mid-block maintaining an average vertical distance between lines of only 12–14 meters, successfully denying Robert Lewandowski space inside Zone 14.</p>
               </div>
               <div class="phase-item">
-                <span class="phase-title">Pressing Triggers:</span>
-                <p class="phase-desc">Initiated coordinated high pressing upon backward passes to opposition full-backs, trapping play towards the touchline.</p>
+                <span class="phase-title">Pressing Triggers vs Press Evasion:</span>
+                <p class="phase-desc">Barça's 7.2 PPDA forced 9 high turnovers in the first 35 minutes, but Ancelotti bypassed the press via long diagonal switches from Valverde and Camavinga into the vacated flanks.</p>
               </div>
               <div class="phase-item">
-                <span class="phase-title">In-Game Transitions:</span>
-                <p class="phase-desc">Rapid counter-attacks targeted the space behind opposition full-backs with direct diagonal switches into wide channels.</p>
+                <span class="phase-title">Decisive 87' Counter-Attacking Transition:</span>
+                <p class="phase-desc">A 7.4-second coast-to-coast counter involving 5 touches: Courtois claim &rarr; Valverde vertical release &rarr; Vinícius burst &rarr; Mbappé sharp cut inside Pau Cubarsí &rarr; clinical 0.64 xG finish.</p>
               </div>
             </div>
 
             <div class="report-section-card">
-              <h3 class="report-card-heading">2. Data-Backed Tactical Insights</h3>
+              <h3 class="report-card-heading">2. Space Evidence &amp; Data-Backed Metrics</h3>
               <div class="insights-list">
                 <div class="insight-item">
                   <span class="insight-num">01</span>
                   <div class="insight-content">
-                    <strong>Half-Space Penetration in Zone 14</strong>
-                    <p>62% of final-third entries targeted the inside-right channel, pulling opposition center-backs out of position.</p>
+                    <strong>Shot Quality Over Volume (0.195 vs 0.066 xG/Shot)</strong>
+                    <p>While Barcelona registered 18 shots, average danger was low (0.066 xG). Madrid created 4 Big Chances with nearly triple the finishing threat per attempt.</p>
                   </div>
                 </div>
                 <div class="insight-item">
                   <span class="insight-num">02</span>
                   <div class="insight-content">
-                    <strong>Rest Defense Organization</strong>
-                    <p>Maintaining a 3+2 rest defense structure prevented opposition counter-attacks, conceding zero fast-break shots.</p>
+                    <strong>Bellingham Defensive Shielding (8 Recoveries)</strong>
+                    <p>Jude Bellingham covered 11.4 km, won 5 ground duels, and executed 3 interceptions right in front of the penalty arc, neutralizing Pedri's central playmaking.</p>
                   </div>
                 </div>
                 <div class="insight-item">
                   <span class="insight-num">03</span>
                   <div class="insight-content">
-                    <strong>High-Block Press Resistance</strong>
-                    <p>Completed 88% of progressive passes under pressure by utilizing third-man combinations through the central midfield pivot.</p>
+                    <strong>Left Half-Space Spatial Penetration</strong>
+                    <p>64% of Madrid's dangerous progressions targeted the left channel, exploiting the massive open space behind Jules Koundé with Vinícius Jr.'s 34.8 km/h top sprint.</p>
                   </div>
                 </div>
                 <div class="insight-item">
                   <span class="insight-num">04</span>
                   <div class="insight-content">
-                    <strong>Set-Piece Delivery Efficiency</strong>
-                    <p>Inswinging corner deliveries targeted the near post, winning 4 of 6 first contacts and creating high-danger secondary chances.</p>
+                    <strong>Optical Tracking &amp; 7 Spatial Dimensions</strong>
+                    <p>Rigorous spatial framework measuring Horizontal, Vertical, Functional, Tempo, Inter-line, Dynamic, and Qualitative space directly from match tracking data.</p>
                   </div>
                 </div>
               </div>
             </div>
 
+          </div>
+
+          <!-- Publication Action Callout: Links directly to full deep dive -->
+          <div class="report-cta-card" style="margin-top: 26px; background: linear-gradient(135deg, rgba(0, 242, 254, 0.08) 0%, rgba(79, 140, 255, 0.12) 100%); border: 1px solid rgba(0, 242, 254, 0.35); border-radius: var(--radius-md); padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+            <div class="cta-card-content" style="max-width: 680px;">
+              <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #00f2fe; letter-spacing: 1.5px; margin-bottom: 6px;">
+                COMPLETE EDITORIAL DOSSIER (11 SECTIONS)
+              </div>
+              <h4 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">
+                Explore Interactive Tactical Pitch Map, Space Matrix &amp; Player Radars
+              </h4>
+              <p style="font-size: 12.5px; color: rgba(255, 255, 255, 0.82); line-height: 1.5; margin: 0;">
+                Includes interactive pitch event filtering, xG radius shot map, optical tracking diagrams, 7-dimensional space matrix, and tactical flow charts.
+              </p>
+            </div>
+            <a href="analysis/el-clasico-2026.html" class="btn-read-deepdive" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); color: #040714; font-family: var(--font-display); font-weight: 800; font-size: 13px; letter-spacing: 0.5px; padding: 14px 24px; border-radius: var(--radius-full); text-decoration: none; box-shadow: 0 0 25px rgba(0, 242, 254, 0.4); transition: transform 0.2s ease, box-shadow 0.2s ease; white-space: nowrap;">
+              <span>READ FULL MATCH REPORT</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
           </div>
 
         </div>
