@@ -3071,3 +3071,178 @@ html, body {
     padding-top: 10px;
   }
 }
+
+/* ==========================================================================
+   STRICT SINGLE-FIT SCREEN ARCHITECTURE (NO SCROLL DOWN FOR SINGLE PAGE)
+   ========================================================================== */
+
+/* Force all presentation stages to fit exactly 100vh with no internal scroll */
+.section-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  padding: clamp(54px, 7.5vh, 72px) 0 clamp(48px, 6.5vh, 60px) 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important; /* Disables scroll down inside single page */
+  box-sizing: border-box !important;
+}
+
+/* Ensure stage content centers smoothly within viewport bounds */
+.stage-content {
+  width: 100% !important;
+  max-width: 1220px !important;
+  height: 100% !important;
+  max-height: calc(100vh - clamp(105px, 14vh, 134px)) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Compact Editorial Section Headers for 100vh fit */
+.section-editorial-header {
+  text-align: center !important;
+  max-width: 780px !important;
+  margin: 0 auto clamp(8px, 1.6vh, 16px) auto !important;
+  flex-shrink: 0 !important;
+}
+
+.section-title {
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.65rem, 3.2vh, 2.3rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  color: #ffffff !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: clamp(3px, 0.6vh, 6px) !important;
+}
+
+.section-tag {
+  display: inline-block !important;
+  font-family: var(--font-mono) !important;
+  font-size: 9.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  color: var(--stadium-cyan) !important;
+  background: rgba(56, 189, 248, 0.15) !important;
+  border: 1px solid rgba(56, 189, 248, 0.35) !important;
+  padding: 2px 10px !important;
+  border-radius: var(--radius-full) !important;
+  margin-bottom: clamp(3px, 0.5vh, 6px) !important;
+}
+
+.section-lede {
+  font-size: clamp(0.82rem, 1.3vh, 0.92rem) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  line-height: 1.4 !important;
+  max-width: 660px !important;
+  margin: 0 auto !important;
+}
+
+/* Slide 1: About container compact fit */
+.analyst-journey-container {
+  padding: clamp(14px, 2vh, 22px) !important;
+}
+.journey-stepper {
+  gap: clamp(10px, 1.4vh, 18px) !important;
+}
+.journey-node {
+  padding: clamp(10px, 1.4vh, 16px) !important;
+}
+
+/* Slide 2: Analytics Lab grid compact fit */
+.analytics-lab-grid {
+  gap: clamp(12px, 1.8vh, 20px) !important;
+}
+.lab-project-card {
+  padding: clamp(14px, 2vh, 20px) !important;
+}
+.lab-capabilities-block {
+  margin-top: clamp(8px, 1.2vh, 14px) !important;
+}
+
+/* Slide 3: Case study compact fit */
+.case-study-container {
+  padding: clamp(16px, 2.2vh, 26px) !important;
+}
+.workflow-stepper-box {
+  padding: clamp(12px, 1.8vh, 20px) !important;
+}
+
+/* Slide 4: Tactics OS compact fit */
+.tactical-board-wrapper {
+  padding: clamp(12px, 1.8vh, 20px) !important;
+}
+.pitch-viewport-card {
+  max-height: clamp(210px, 34vh, 310px) !important;
+}
+
+/* Slide 5: Match Analysis Intro Portal Card */
+.match-intro-portal-card {
+  padding: clamp(18px, 2.5vh, 28px) clamp(22px, 2.5vw, 36px) !important;
+  gap: clamp(16px, 2.2vw, 28px) !important;
+}
+.portal-fixture-title {
+  font-size: clamp(1.35rem, 2.4vh, 1.75rem) !important;
+}
+.portal-intro-summary {
+  font-size: clamp(12px, 1.4vh, 13.5px) !important;
+  line-height: 1.55 !important;
+}
+.portal-launch-action {
+  padding: clamp(16px, 2.2vh, 24px) 18px !important;
+  max-width: 290px !important;
+}
+.launch-icon-container {
+  width: clamp(56px, 7.5vh, 72px) !important;
+  height: clamp(56px, 7.5vh, 72px) !important;
+}
+.launch-icon-core {
+  width: clamp(46px, 6vh, 58px) !important;
+  height: clamp(46px, 6vh, 58px) !important;
+}
+
+/* Slide 6: Dataviz grid compact fit */
+.dataviz-grid {
+  gap: clamp(12px, 1.8vh, 20px) !important;
+}
+.viz-card {
+  padding: clamp(12px, 1.8vh, 18px) !important;
+}
+.viz-display-area {
+  min-height: clamp(120px, 18vh, 170px) !important;
+}
+
+/* Slide 7: Additional projects compact fit */
+.additional-projects-grid {
+  gap: clamp(10px, 1.5vh, 18px) !important;
+}
+.other-project-card {
+  padding: clamp(12px, 1.8vh, 18px) !important;
+}
+
+/* Slide 8: Experience compact fit */
+.exp-edu-split-grid {
+  gap: clamp(16px, 2vw, 26px) !important;
+}
+.timeline-content-card {
+  padding: clamp(10px, 1.4vh, 16px) !important;
+}
+
+/* Slide 9: Skills grid compact fit */
+.skills-categories-grid {
+  gap: clamp(10px, 1.5vh, 18px) !important;
+}
+.skill-group-card {
+  padding: clamp(12px, 1.8vh, 18px) !important;
+}
+
+/* Slide 10: Contact compact fit */
+.contact-box-container {
+  padding: clamp(20px, 3vh, 34px) !important;
+  gap: clamp(10px, 1.4vh, 16px) !important;
+}

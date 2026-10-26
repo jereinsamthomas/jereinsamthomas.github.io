@@ -577,31 +577,21 @@
       }
     });
 
-    // Wheel / Trackpad Discrete Slide Flipping
-    let wheelTimeout;
+    // Wheel / Trackpad Discrete Slide Flipping - Immediate 1-Slide Navigation (No internal scroll)
+    let isWheelThrottled = false;
     window.addEventListener('wheel', (e) => {
-      if (isTransitioning) return;
+      if (isTransitioning || isWheelThrottled) return;
 
-      const activeSlideEl = slides[currentSlide];
-      const isScrollable = activeSlideEl.scrollHeight > activeSlideEl.clientHeight;
-
-      if (isScrollable) {
-        const atBottom = activeSlideEl.scrollTop + activeSlideEl.clientHeight >= activeSlideEl.scrollHeight - 12;
-        const atTop = activeSlideEl.scrollTop <= 12;
-
-        if (e.deltaY > 20 && !atBottom) return;
-        if (e.deltaY < -20 && !atTop) return;
-      }
-
-      if (Math.abs(e.deltaY) > 25) {
-        clearTimeout(wheelTimeout);
-        wheelTimeout = setTimeout(() => {
-          if (e.deltaY > 0) {
-            goToSlide(currentSlide + 1);
-          } else {
-            goToSlide(currentSlide - 1);
-          }
-        }, 30);
+      if (Math.abs(e.deltaY) > 18) {
+        isWheelThrottled = true;
+        if (e.deltaY > 0) {
+          goToSlide(currentSlide + 1);
+        } else {
+          goToSlide(currentSlide - 1);
+        }
+        setTimeout(() => {
+          isWheelThrottled = false;
+        }, 550); // Cooldown matching transition duration
       }
     }, { passive: true });
 
