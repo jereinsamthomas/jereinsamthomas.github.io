@@ -3,1347 +3,1598 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jerein Sam Thomas | Football Analytics &amp; Sports Data Science</title>
-  <meta name="description" content="Jerein Sam Thomas — M.Sc. Applied Data Science student with B.Sc. Physics foundation, building football analytics, tactical intelligence engines, and machine-learning models for professional clubs.">
-  <meta name="theme-color" content="#040714">
+  <title>Jerein Sam Thomas — Data Analyst | Football Analytics | Applied Machine Learning</title>
+  <meta name="description" content="Portfolio of Jerein Sam Thomas — Data Analyst specialising in Football Analytics, Applied Machine Learning, and Spatial Data Science. Physics foundation with postgraduate Data Science.">
 
-  <!-- Typography: Modern Editorial Sans + Technical Monospace -->
+  <!-- Google Fonts: Unbounded (Hero Display), Syne, Space Grotesk, Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
 
+  <!-- External Modular Stylesheet -->
   <link rel="stylesheet" href="styles.css">
-</head>
-<body class="theme-football-analyst">
 
-  <!-- ========================================================================= -->
-  <!-- 1. CINEMATIC LOADER                                                       -->
-  <!-- ========================================================================= -->
-  <div class="cinematic-loader-overlay" id="film-loader" aria-hidden="true">
-    <div class="loader-content-wrap">
-      <div class="football-data-symbol">
-        <div class="symbol-orbital-ring"></div>
-        <div class="symbol-core-dot"></div>
-        <svg class="symbol-pitch-mesh" viewBox="0 0 100 65" fill="none" stroke="currentColor">
-          <rect x="5" y="5" width="90" height="55" rx="4" stroke-width="1.5" opacity="0.85"/>
-          <line x1="50" y1="5" x2="50" y2="60" stroke-width="1.5" opacity="0.85"/>
-          <circle cx="50" cy="32.5" r="14" stroke-width="1.5" opacity="0.9"/>
-          <circle cx="50" cy="32.5" r="2.5" fill="currentColor"/>
-        </svg>
+  <!-- Self-contained Lenis Smooth Scroll via Importmap -->
+  <script type="importmap">
+  {
+    "imports": {
+      "lenis": "./assets/vendor/lenis.mjs"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Global Top Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scroll-progress-bar" aria-hidden="true"></div>
+
+  <!-- Accessible Skip Link -->
+  <a href="#home" class="skip-link">Skip to main content</a>
+
+  <!-- Dynamic Custom Cursor -->
+  <div class="custom-cursor" id="cursor"></div>
+  <div class="custom-cursor-follower" id="cursor-follower"></div>
+
+  <!-- Ambient Dynamic Data Grid Canvas -->
+  <canvas id="ambient-grid-canvas" aria-hidden="true"></canvas>
+
+  <!-- Floating Page-to-Page Quick Rail Nav (Desktop) -->
+  <nav class="page-rail-nav" id="page-rail-nav" aria-label="Page to Page Navigation">
+    <ul class="page-rail-list">
+      <li class="page-rail-item"><a href="#home" class="page-rail-link is-active" data-page="home" aria-label="01 Home"><span class="rail-tooltip">01 &bull; Home</span><span class="rail-dot"></span></a></li>
+      <li class="page-rail-item"><a href="#about" class="page-rail-link" data-page="about" aria-label="02 About"><span class="rail-tooltip">02 &bull; About Me</span><span class="rail-dot"></span></a></li>
+      <li class="page-rail-item"><a href="#education" class="page-rail-link" data-page="education" aria-label="03 Education"><span class="rail-tooltip">03 &bull; Education</span><span class="rail-dot"></span></a></li>
+      <li class="page-rail-item"><a href="#projects" class="page-rail-link" data-page="projects" aria-label="04 Projects"><span class="rail-tooltip">04 &bull; Projects (8)</span><span class="rail-dot"></span></a></li>
+      <li class="page-rail-item"><a href="#analysis" class="page-rail-link" data-page="analysis" aria-label="05 Analysis"><span class="rail-tooltip">05 &bull; Match Analysis</span><span class="rail-dot"></span></a></li>
+      <li class="page-rail-item"><a href="#skills" class="page-rail-link" data-page="skills" aria-label="06 Skills"><span class="rail-tooltip">06 &bull; Skills &amp; Stack</span><span class="rail-dot"></span></a></li>
+      <li class="page-rail-item"><a href="#impact" class="page-rail-link" data-page="impact" aria-label="07 Impact"><span class="rail-tooltip">07 &bull; Impact</span><span class="rail-dot"></span></a></li>
+      <li class="page-rail-item"><a href="#research" class="page-rail-link" data-page="research" aria-label="08 Research"><span class="rail-tooltip">08 &bull; Research</span><span class="rail-dot"></span></a></li>
+      <li class="page-rail-item"><a href="#career" class="page-rail-link" data-page="career" aria-label="09 Career"><span class="rail-tooltip">09 &bull; Career Roles</span><span class="rail-dot"></span></a></li>
+      <li class="page-rail-item"><a href="#contact" class="page-rail-link" data-page="contact" aria-label="10 Contact"><span class="rail-tooltip">10 &bull; Contact</span><span class="rail-dot"></span></a></li>
+    </ul>
+  </nav>
+
+  <!-- SVG Liquid Shader (Limited strictly to hero portrait for performance) -->
+  <svg class="liquid-svg-defs" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
+    <defs>
+      <filter id="liquid-hero">
+        <feTurbulence id="turb-hero" type="fractalNoise" baseFrequency="0.009" numOctaves="2" result="noise" />
+        <feDisplacementMap id="disp-hero" in="SourceGraphic" in2="noise" scale="1" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- ====================================================================
+       1. SMOOTH CINEMATIC PRELOADER
+       ==================================================================== -->
+  <div class="preloader" id="preloader" aria-label="Loading Experience">
+    <div class="preloader-curtain preloader-curtain-top"></div>
+    <div class="preloader-curtain preloader-curtain-bottom"></div>
+    <div class="preloader-center-content">
+      <div class="preloader-badge">
+        <span class="badge-dot-live"></span>
+        <span>JEREIN SAM THOMAS &bull; TACTICAL ANALYTICS</span>
       </div>
-      <div class="loader-telemetry-text" id="loader-status-text">INITIALIZING FOOTBALL ANALYTICS LAB...</div>
-      <div class="loader-bar-track">
-        <div class="loader-bar-fill" id="loader-progress-bar"></div>
+      <div class="preloader-title">Jerein Sam Thomas</div>
+      <p class="preloader-subtitle">Data Analyst &bull; Football Intelligence &bull; Applied Machine Learning</p>
+      <div class="preloader-progress-track">
+        <div class="preloader-progress-fill" id="preloader-bar"></div>
       </div>
-      <div class="loader-percentage" id="loader-pct">0%</div>
-      <button class="btn-skip-intro" id="btn-skip-intro">
-        <span>Enter Portfolio</span>
-        <span class="skip-icon">⏭</span>
-      </button>
+      <div class="preloader-status-row">
+        <span class="preloader-status-text" id="preloader-status">CALIBRATING TACTICAL DATA ARCHITECTURE...</span>
+        <span class="preloader-counter-wrap" id="preloader-counter"><span id="preloader-num">0</span><span class="percent">%</span></span>
+      </div>
     </div>
   </div>
 
-  <!-- Tactical Cursor & HUD -->
-  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
-
-  <!-- ========================================================================= -->
-  <!-- 2. PRO FOOTBALL INTELLIGENCE NAVIGATION BAR                               -->
-  <!-- ========================================================================= -->
-  <header class="pro-navbar" id="top-nav">
-    <div class="pro-nav-inner">
-      
-      <!-- Brand & Identity -->
-      <a href="#hero" class="pro-brand" aria-label="Jerein Sam Thomas Football Analytics">
-        <div class="brand-monogram">
-          <span class="monogram-txt">JT</span>
-          <div class="monogram-glow"></div>
-        </div>
-        <div class="brand-details">
-          <div class="brand-name-row">
-            <span class="brand-title">JEREIN SAM THOMAS</span>
-            <span class="pro-pill-badge">PRO</span>
-          </div>
-          <span class="brand-discipline">FOOTBALL ANALYTICS &bull; SPORTS SCIENCE</span>
-        </div>
+  <!-- ====================================================================
+       2. FIXED SITE NAVIGATION
+       ==================================================================== -->
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <a href="#home" class="site-logo" aria-label="Jerein Sam Thomas Home">
+        <span class="logo-badge">JST</span>
+        <span class="logo-text">Jerein Sam Thomas</span>
       </a>
 
-      <!-- Center Pro Navigation Links -->
-      <nav class="pro-nav-menu" id="pro-nav-menu" aria-label="Primary Navigation">
-        <ul class="pro-nav-list">
-          <li><a href="#hero" class="pro-nav-item active"><span class="nav-dot"></span>Overview</a></li>
-          <li><a href="#about" class="pro-nav-item"><span class="nav-dot"></span>About</a></li>
-          <li><a href="#analytics-lab" class="pro-nav-item"><span class="nav-dot"></span>Analytics Lab</a></li>
-          <li><a href="#isl-case-study" class="pro-nav-item"><span class="nav-dot"></span>ISL Project</a></li>
-          <li><a href="#tactics-os" class="pro-nav-item"><span class="nav-dot"></span>Tactics OS</a></li>
-          <li><a href="#match-analysis" class="pro-nav-item" title="Match Analysis & Tactical Dossier">
-            <svg class="nav-item-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px; color: #00f2fe; vertical-align: -1px;"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 16 12 12 8"></polygon></svg>
-            <span>Match Analysis</span>
-            <span class="nav-live-badge">NEW</span>
-          </a></li>
-          <li><a href="#data-viz" class="pro-nav-item"><span class="nav-dot"></span>Data Viz</a></li>
-          <li><a href="#other-projects" class="pro-nav-item"><span class="nav-dot"></span>Research</a></li>
-          <li><a href="#skills" class="pro-nav-item"><span class="nav-dot"></span>Skills</a></li>
-          <li><a href="#experience" class="pro-nav-item"><span class="nav-dot"></span>Experience</a></li>
-          <li><a href="#contact" class="pro-nav-item"><span class="nav-dot"></span>Contact</a></li>
+      <!-- Desktop Navigation -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links-desktop">
+          <li><a href="#home" class="nav-item-link">Home</a></li>
+          <li><a href="#about" class="nav-item-link">About</a></li>
+          <li><a href="#education" class="nav-item-link">Education</a></li>
+          <li><a href="#projects" class="nav-item-link">Projects</a></li>
+          <li><a href="#analysis" class="nav-item-link">Analysis</a></li>
+          <li><a href="#skills" class="nav-item-link">Skills</a></li>
+          <li><a href="#impact" class="nav-item-link">Impact</a></li>
+          <li><a href="#research" class="nav-item-link">Research</a></li>
+          <li><a href="#career" class="nav-item-link">Career</a></li>
+          <li><a href="#contact" class="nav-item-link">Contact</a></li>
         </ul>
       </nav>
 
-      <!-- Right Pro Utility Strip -->
-      <div class="pro-nav-actions">
-        <!-- El Clasico Deep Dive Direct Access -->
-        <a href="match-analyzer/index.html" class="nav-match-direct-btn" target="_blank" title="Navigate to Match Analyzer Hub (All Matches)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 16 12 12 8"></polygon></svg>
-          <span>MATCH ANALYZER HUB</span>
-        </a>
-
-        <!-- Live Scouting Status Indicator -->
-        <div class="nav-status-chip" title="Available for Club Internships">
-          <span class="status-ping"></span>
-          <span class="status-lbl">SCOUTING READY</span>
-        </div>
-
-        <!-- Audio FX Button with Animated Equalizer Bars -->
-        <button class="pro-sfx-toggle" id="sfx-toggle-btn" title="Toggle Sound FX" aria-label="Toggle Audio Feedback">
-          <div class="eq-bars">
-            <span class="eq-bar bar-1"></span>
-            <span class="eq-bar bar-2"></span>
-            <span class="eq-bar bar-3"></span>
-          </div>
-        </button>
-
-        <!-- Premium CV Download Button -->
-        <button class="btn-pro-download" id="btn-nav-resume">
-          <svg class="dl-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          <span>Dossier / CV</span>
-        </button>
-
-        <!-- Mobile Menu Toggle Button -->
-        <button class="pro-mobile-toggle" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
-          <span class="m-line"></span>
-          <span class="m-line"></span>
-        </button>
-      </div>
-
+      <!-- Mobile Hamburger Button (< 1024px) -->
+      <button class="burger-btn" id="burger-btn" type="button" aria-label="Toggle Navigation Menu">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
     </div>
   </header>
 
-  <!-- Presentation Deck Progress Bar -->
-  <div class="deck-progress-track" aria-hidden="true">
-    <div class="deck-progress-bar" id="deck-progress-bar"></div>
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <ul class="mobile-nav-list">
+      <li class="mobile-nav-item"><a href="#home" class="mobile-nav-link">01 — Home</a></li>
+      <li class="mobile-nav-item"><a href="#about" class="mobile-nav-link">02 — About Me</a></li>
+      <li class="mobile-nav-item"><a href="#education" class="mobile-nav-link">03 — Education Timeline</a></li>
+      <li class="mobile-nav-item"><a href="#projects" class="mobile-nav-link">04 — Projects</a></li>
+      <li class="mobile-nav-item"><a href="#analysis" class="mobile-nav-link">05 — Match Analysis</a></li>
+      <li class="mobile-nav-item"><a href="#skills" class="mobile-nav-link">06 — Skills &amp; Tech</a></li>
+      <li class="mobile-nav-item"><a href="#impact" class="mobile-nav-link">07 — Impact</a></li>
+      <li class="mobile-nav-item"><a href="#research" class="mobile-nav-link">08 — Research</a></li>
+      <li class="mobile-nav-item"><a href="#career" class="mobile-nav-link">09 — Career Roles</a></li>
+      <li class="mobile-nav-item"><a href="#contact" class="mobile-nav-link">10 — Contact</a></li>
+    </ul>
   </div>
 
-  <!-- Side Slide Indicator Dock (Desktop) -->
-  <nav class="deck-side-dock" id="deck-side-dock" aria-label="Slide Indicator Dock">
-    <button class="dock-dot active" data-slide="0" data-title="Overview" title="Slide 01: Overview"><span class="dot-inner"></span><span class="dock-label">01. Overview</span></button>
-    <button class="dock-dot" data-slide="1" data-title="About &amp; Journey" title="Slide 02: About"><span class="dot-inner"></span><span class="dock-label">02. About</span></button>
-    <button class="dock-dot" data-slide="2" data-title="Analytics Lab" title="Slide 03: Analytics Lab"><span class="dot-inner"></span><span class="dock-label">03. Analytics Lab</span></button>
-    <button class="dock-dot" data-slide="3" data-title="ISL Case Study" title="Slide 04: ISL Project"><span class="dot-inner"></span><span class="dock-label">04. ISL Project</span></button>
-    <button class="dock-dot" data-slide="4" data-title="Tactics OS" title="Slide 05: Tactics OS"><span class="dot-inner"></span><span class="dock-label">05. Tactics OS</span></button>
-    <button class="dock-dot" data-slide="5" data-title="El Clásico Match Analysis" title="Slide 06: El Clásico 2026 Tactical Analysis"><span class="dot-inner"></span><span class="dock-label">06. El Clásico</span></button>
-    <button class="dock-dot" data-slide="6" data-title="Data Viz" title="Slide 07: Data Viz"><span class="dot-inner"></span><span class="dock-label">07. Data Viz</span></button>
-    <button class="dock-dot" data-slide="7" data-title="Research Work" title="Slide 08: Research"><span class="dot-inner"></span><span class="dock-label">08. Research</span></button>
-    <button class="dock-dot" data-slide="8" data-title="Skills Matrix" title="Slide 09: Skills"><span class="dot-inner"></span><span class="dock-label">09. Skills</span></button>
-    <button class="dock-dot" data-slide="9" data-title="Experience" title="Slide 10: Experience"><span class="dot-inner"></span><span class="dock-label">10. Experience</span></button>
-    <button class="dock-dot" data-slide="10" data-title="Contact &amp; Dossier" title="Slide 11: Contact"><span class="dot-inner"></span><span class="dock-label">11. Contact</span></button>
-  </nav>
+  <main>
 
-  <!-- Floating Bottom Presentation Remote Controller -->
-  <aside class="deck-controller" id="deck-controller" aria-label="Slide Deck Remote">
-    <button class="deck-nav-btn prev" id="deck-prev-btn" title="Previous Slide (Arrow Up / Left / PageUp)" aria-label="Previous Slide">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-      <span>PREV</span>
-    </button>
-    
-    <div class="deck-status-box">
-      <div class="deck-status-top">
-        <span class="deck-slide-num" id="deck-slide-num">SLIDE 01 / 11</span>
-        <span class="deck-key-hint">⌨ ◀ ▶</span>
-      </div>
-      <span class="deck-slide-title" id="deck-slide-title">OVERVIEW &bull; HERO</span>
-    </div>
+    <!-- ====================================================================
+         PAGE 01 — HOME
+         ==================================================================== -->
+    <section class="hero-section" id="home">
 
-    <button class="deck-nav-btn next" id="deck-next-btn" title="Next Slide (Arrow Down / Right / Space / PageDown)" aria-label="Next Slide">
-      <span>NEXT</span>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </button>
-  </aside>
+      <!-- Top Row: Tagline, Roles (Accessibility: no redundant aria-label), Intro & Action Buttons -->
+      <!-- Top Row: Tagline & Roles (Left) + Editorial Quote & Bio (Right) — Kept compact so NO text overlaps the name or photo -->
+      <div class="hero-top-row">
+        <div class="hero-roles-col">
+          <div class="hero-tagline">Turning Football Data into Meaningful Insights</div>
+          <h2 class="hero-roles">
+            <span class="hero-role-line"><span class="hero-role-word" style="transition-delay: 0.18s;">Data Analyst</span></span>
+            <span class="hero-role-line"><span class="hero-role-word" style="transition-delay: 0.26s;">Football Analytics</span></span>
+            <span class="hero-role-line"><span class="hero-role-word" style="transition-delay: 0.34s;">Data Science</span></span>
+          </h2>
+        </div>
 
-  <!-- ========================================================================= -->
-  <!-- 3. MAIN PRESENTATION DECK                                                 -->
-  <!-- ========================================================================= -->
-  <main class="presentation-deck cinematic-scroller" id="scroller">
-
-    <!-- ======================================================================= -->
-    <!-- PAGE 1 — HERO: CINEMATIC STADIUM PITCH LEVEL                            -->
-    <!-- Environment: Clear Daylight Stadium Pitch View                          -->
-    <!-- ======================================================================= -->
-    <section class="section-stage hero-stage active-slide" id="hero" data-slide-index="0" data-title="Overview">
-      <div class="env-bg-layer" style="background-image: url('assets/stadium_hero_daylight.jpg');"></div>
-      <div class="env-overlay-gradient"></div>
-
-      <div class="stage-content hero-grid-content">
-        
-        <div class="hero-editorial-column">
-          
-          <div class="hero-availability-pill">
-            <span class="avail-dot"></span>
-            <span class="avail-text">Available for Football Analytics Internship &bull; From mid-November 2026</span>
-          </div>
-
-          <div class="hero-identity-block">
-            <h1 class="hero-name-title">JEREIN SAM THOMAS</h1>
-            <div class="hero-role-headline">Football Analytics <span class="role-separator">&bull;</span> Sports Data Science</div>
-          </div>
-
-          <p class="hero-description">
-            M.Sc. Applied Data Science student with a B.Sc. in Physics, focused on applying data, machine learning and tactical analysis to football.
+        <div class="hero-desc-col">
+          <p class="hero-intro-quote">
+            "I don't just look at the scoreline. I look at the numbers, patterns and decisions behind it."
           </p>
-
-          <div class="hero-cta-actions">
-            <a href="#analytics-lab" class="btn-primary-pill btn-large">
-              <span>Explore Football Analytics</span>
-              <span class="btn-arrow">→</span>
-            </a>
-
-            <a href="#tactics-os" class="btn-glass-pill btn-large">
-              <span>View Tactics OS</span>
-              <span class="btn-arrow">↗</span>
-            </a>
-
-            <button class="btn-glass-pill btn-large" id="btn-hero-resume">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-              </svg>
-              <span>Download Resume</span>
-            </button>
-          </div>
-
-          <div class="hero-social-links">
-            <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer" class="social-link-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-              <span>GitHub</span>
-            </a>
-
-            <a href="https://linkedin.com/in/jerein-sam-thomas-46a75a2a7" target="_blank" rel="noopener noreferrer" class="social-link-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-              <span>LinkedIn</span>
-            </a>
-
-            <a href="mailto:jereinsamthomas1009@gmail.com" class="social-link-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <span>jereinsamthomas1009@gmail.com</span>
-            </a>
-          </div>
-
-        </div>
-
-        <!-- Clean Tactical HUD Card -->
-        <div class="hero-hud-column">
-          <div class="floating-hud-card">
-            <div class="card-glass-header">
-              <div class="live-pill">
-                <span class="pulsing-core"></span>
-                <span>MATCHDAY INTELLIGENCE</span>
-              </div>
-              <span class="match-time">TACTICAL TELEMETRY</span>
-            </div>
-
-            <div class="match-scoreboard">
-              <div class="team-block">
-                <span class="team-code">HOME</span>
-                <span class="team-score">4-2-3-1</span>
-              </div>
-              <div class="score-divider">vs</div>
-              <div class="team-block">
-                <span class="team-score">4-3-3</span>
-                <span class="team-code">AWAY</span>
-              </div>
-            </div>
-
-            <div class="hud-stats-matrix">
-              <div class="matrix-row">
-                <span class="m-label">PRIMARY OVERLOAD SECTOR</span>
-                <span class="m-value"><strong class="highlight-cyan">Zone 14 Half-Space</strong></span>
-              </div>
-              <div class="bar-track"><div class="bar-fill" style="width: 82%;"></div></div>
-
-              <div class="matrix-row">
-                <span class="m-label">CROSS-VALIDATION</span>
-                <span class="m-value">Stratified 5-Fold</span>
-              </div>
-              <div class="bar-track"><div class="bar-fill emerald" style="width: 88%;"></div></div>
-
-              <div class="matrix-row">
-                <span class="m-label">FORMATION DATABASE</span>
-                <span class="m-value monospace-pill">40+ Structural Shapes</span>
-              </div>
-            </div>
-
-            <div class="card-glass-footer">
-              <span class="hud-status-node">&bull; PYTHON &bull; SCIKIT-LEARN &bull; PANDAS &bull; ML WORKFLOW</span>
-            </div>
+          <p class="hero-desc">
+            Transforming match and player data into tactical clarity, predictive models, and evidence-based performance insights.
+          </p>
+          <div class="hero-direction-inline">
+            <span class="direction-dot"></span>
+            <span>Specialising in football and sports data science</span>
           </div>
         </div>
-
       </div>
 
+      <!-- Giant Display Name: JEREIN SAM THOMAS (Behind Portrait Cutout) -->
+      <h1 class="hero-giant-name hero-name-base" id="hero-giant-name" aria-label="Jerein Sam Thomas">
+        <span class="hero-name-line" id="hero-name-line-1">JEREIN SAM</span>
+        <span class="hero-name-line" id="hero-name-line-2">THOMAS</span>
+        <span class="hero-name-telemetry" aria-hidden="true">
+          <span class="telemetry-bar"></span>
+          <span class="telemetry-label">SPORTS DATA SCIENCE &bull; FOOTBALL ANALYTICS</span>
+          <span class="telemetry-bar"></span>
+        </span>
+      </h1>
+
+      <!-- Founder Portrait Composited Column (Comes on top of the name, tack-sharp lossless rendering) -->
+      <div class="hero-portrait-wrap" id="hero-portrait-wrap">
+        <figure class="hero-portrait-figure" id="hero-portrait-figure">
+          <img
+            class="hero-portrait-media"
+            id="hero-portrait-img"
+            src="assets/portrait_cutout.png"
+            alt="Jerein Sam Thomas — Data Analyst"
+            width="682"
+            height="1024"
+            fetchpriority="high"
+            decoding="sync"
+          >
+        </figure>
+      </div>
+
+      <!-- Gradient Base Melt into background -->
+      <div class="hero-gradient-base" aria-hidden="true"></div>
+
+      <!-- Hero Bottom Bar: Scroll Cue (Left) & Primary Actions (Right) — Cleanly separated from the central typography -->
       <div class="hero-bottom-bar">
-        <div class="bottom-feature-node">
-          <div class="feature-thumb-wrap">
-            <img src="assets/tactical_thumb.jpg" alt="Tactical Spatial AI" class="feature-thumb-img">
+        <div class="hero-scroll-cue">Scroll to explore portfolio</div>
+        <div class="hero-actions-row">
+          <a href="#about" class="btn-primary">Explore My Work</a>
+          <a href="#projects" class="btn-secondary">View My Projects</a>
+          <a href="assets/resume.pdf" class="btn-secondary" target="_blank" rel="noopener noreferrer">Resume PDF ↗</a>
+          <a href="#contact" class="btn-secondary">Contact Me</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Continuous Marquee Ticker -->
+    <section class="marquee-section" aria-label="Core Capabilities">
+      <div class="marquee-track">
+        <span class="marquee-item">Data Analytics <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Football Performance Analysis <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Machine Learning <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Tactical Data Interpretation <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Statistical Research <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Expected Goals (xG) <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Passing Networks <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Spatial Pitch Telemetry <span class="marquee-dot"></span></span>
+        <!-- Duplicate for continuous loop -->
+        <span class="marquee-item">Data Analytics <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Football Performance Analysis <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Machine Learning <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Tactical Data Interpretation <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Statistical Research <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Expected Goals (xG) <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Passing Networks <span class="marquee-dot"></span></span>
+        <span class="marquee-item">Spatial Pitch Telemetry <span class="marquee-dot"></span></span>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PAGE 02 — ABOUT ME
+         ==================================================================== -->
+    <section class="about-section scroll-reveal" id="about">
+      <div class="section-header-block">
+        <div class="eyebrow fade-up-item">Page 02 — About Me</div>
+        <h2 class="section-title">
+          <span class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0.05s;">About Jerein.</span></span>
+        </h2>
+      </div>
+
+      <!-- Narrative Grid -->
+      <div class="about-lead-grid">
+        <div class="about-narrative fade-up-item" style="transition-delay: 0.1s;">
+          <p>
+            I am a postgraduate Data Science student with an undergraduate background in Physics and a strong interest in applying analytical methods to football.
+          </p>
+          <p>
+            My primary career ambition is to become a <strong>Data Analyst</strong>. I am particularly interested in football analytics, where data can be used to understand team performance, player contributions, tactical patterns and match outcomes.
+          </p>
+          <p>
+            My background in Physics has developed my interest in mathematical reasoning, statistics and understanding complex systems. Through Data Science, I am developing the technical ability to work with datasets, identify patterns, build predictive models and communicate analytical findings.
+          </p>
+          <p>
+            <strong>Football is the domain where I want to apply these skills.</strong>
+          </p>
+        </div>
+
+        <div class="about-quote-box fade-up-item" style="transition-delay: 0.2s;">
+          <h3 class="about-quote-title">The Foundation</h3>
+          <p class="about-quote-text">
+            "With an academic foundation in Physics and postgraduate training in Data Science, I work at the intersection of analytical reasoning, football and machine learning."
+          </p>
+        </div>
+      </div>
+
+      <!-- What I Focus On (4 Pillars) -->
+      <div class="section-header-block" style="margin-bottom: 2rem;">
+        <div class="eyebrow fade-up-item">Core Competencies</div>
+        <h3 class="section-title" style="font-size: var(--text-h2);">What I Focus On</h3>
+      </div>
+
+      <div class="focus-grid">
+        <div class="focus-card fade-up-item" style="transition-delay: 0.08s;">
+          <div class="focus-num">01</div>
+          <h4 class="focus-title">Data Analysis</h4>
+          <p class="focus-desc">Working with structured datasets, cleaning data, exploring variables, identifying patterns and interpreting results.</p>
+        </div>
+        <div class="focus-card fade-up-item" style="transition-delay: 0.16s;">
+          <div class="focus-num">02</div>
+          <h4 class="focus-title">Football Analytics</h4>
+          <p class="focus-desc">Investigating team and player performances through match statistics, passing, shooting, possession, defensive actions and tactical patterns.</p>
+        </div>
+        <div class="focus-card fade-up-item" style="transition-delay: 0.24s;">
+          <div class="focus-num">03</div>
+          <h4 class="focus-title">Machine Learning</h4>
+          <p class="focus-desc">Exploring predictive modelling and statistical learning to identify patterns and investigate possible match outcomes.</p>
+        </div>
+        <div class="focus-card fade-up-item" style="transition-delay: 0.32s;">
+          <div class="focus-num">04</div>
+          <h4 class="focus-title">Data Visualisation</h4>
+          <p class="focus-desc">Communicating analytical findings through charts, statistical summaries, pitch visualisations and performance comparisons.</p>
+        </div>
+      </div>
+
+      <!-- My Approach (7 Steps Pipeline) -->
+      <div class="process-container fade-up-item" style="transition-delay: 0.15s;">
+        <div class="process-header">
+          <div class="eyebrow">Methodology</div>
+          <h3 class="section-title" style="font-size: var(--text-h2);">My Approach</h3>
+          <p style="font-size: 0.92rem; color: var(--muted); margin-top: 0.35rem;">
+            My analytical process follows a simple, repeatable principle:
+          </p>
+        </div>
+
+        <div class="process-timeline">
+          <div class="process-step">
+            <span class="process-step-num">Step 01</span>
+            <div class="process-step-title">Understand the question</div>
           </div>
-          <div class="feature-text-block">
-            <span class="feature-title">Connecting Data &amp; Match Reality</span>
-            <span class="feature-desc">Mathematical precision paired with practical tactical intelligence.</span>
+          <div class="process-step">
+            <span class="process-step-num">Step 02</span>
+            <div class="process-step-title">Collect and validate relevant data</div>
+          </div>
+          <div class="process-step">
+            <span class="process-step-num">Step 03</span>
+            <div class="process-step-title">Clean and prepare the dataset</div>
+          </div>
+          <div class="process-step">
+            <span class="process-step-num">Step 04</span>
+            <div class="process-step-title">Explore patterns and relationships</div>
+          </div>
+          <div class="process-step">
+            <span class="process-step-num">Step 05</span>
+            <div class="process-step-title">Apply suitable statistical or ML methods</div>
+          </div>
+          <div class="process-step">
+            <span class="process-step-num">Step 06</span>
+            <div class="process-step-title">Visualise the findings</div>
+          </div>
+          <div class="process-step">
+            <span class="process-step-num">Step 07</span>
+            <div class="process-step-title">Translate results into meaningful conclusions</div>
           </div>
         </div>
 
-        <div class="bottom-tagline-quote">
-          <span class="tagline-dash">—</span>
-          <span class="tagline-text">"I use data to understand the game."</span>
+        <div class="process-principle-banner">
+          <span>Guiding Principle:</span>
+          "I aim to make data understandable, useful and connected to real-world decisions."
         </div>
       </div>
     </section>
 
-    <!-- ======================================================================= -->
-    <!-- PAGE 2 — ABOUT / ANALYST PROFILE                                        -->
-    <!-- Environment: Stadium Tunnel & Tactical Analysis Room                    -->
-    <!-- ======================================================================= -->
-    <section class="section-stage about-stage" id="about" data-slide-index="1" data-title="About &amp; Journey">
-      <div class="env-bg-layer" style="background-image: url('assets/stadium_tunnel.jpg');"></div>
-      <div class="env-overlay-gradient"></div>
+    <!-- ====================================================================
+       PAGE 03 — EDUCATION TIMELINE (ACADEMIC ROADMAP)
+       ==================================================================== -->
+    <section class="education-section scroll-reveal" id="education">
+      <div class="section-header-block">
+        <div class="eyebrow fade-up-item">Page 03 — Education Timeline &amp; Academic Pedigree</div>
+        <h2 class="section-title">
+          <span class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0.05s;">My Academic Roadmap.</span></span>
+        </h2>
+        <p class="section-subtitle fade-up-item" style="transition-delay: 0.15s;">
+          From Physics to Data Science to Football Analytics — My education has gradually moved from understanding the physical world through mathematics and science to understanding complex datasets through statistics, programming and machine learning.
+        </p>
+      </div>
 
-      <div class="stage-content">
-        
-        <div class="section-editorial-header">
-          <span class="section-tag">ANALYST PROFILE &amp; ACADEMIC FOUNDATION</span>
-          <h2 class="section-title">From Physics to <span class="highlight-title">Football Intelligence</span></h2>
-          <p class="section-lede">
-            Combining rigorous physical and statistical principles with applied machine learning to unlock football tactical insights.
-          </p>
+      <!-- Connected Visual Timeline -->
+      <div class="roadmap-timeline">
+
+        <!-- Stage 01: School Education -->
+        <div class="roadmap-card fade-up-item" style="transition-delay: 0.08s;">
+          <div class="roadmap-node">01</div>
+          <div class="roadmap-content">
+            <div class="roadmap-stage-badge">Stage 01 — School Education</div>
+            <h3 class="roadmap-institution">Abraham Mar Thoma Memorial Higher Secondary School</h3>
+            <div class="roadmap-submeta">Edayaranmula · Higher Secondary Education</div>
+            <p style="font-size: 0.9rem; color: var(--muted-light); line-height: 1.55;">
+              Science and mathematical foundation. Development of analytical and problem-solving skills. Early interest in Physics, Mathematics and scientific concepts.
+            </p>
+          </div>
         </div>
 
-        <div class="analyst-journey-container">
-          <div class="journey-header-label">THE ANALYST JOURNEY</div>
-          <div class="journey-stepper">
-            <div class="journey-node">
-              <span class="j-step">01</span>
-              <strong class="j-title">Physics</strong>
-              <span class="j-sub">Vector dynamics, spatial mechanics &amp; analytical logic</span>
+        <!-- Stage 02: Undergraduate Education -->
+        <div class="roadmap-card fade-up-item" style="transition-delay: 0.16s;">
+          <div class="roadmap-node">02</div>
+          <div class="roadmap-content">
+            <div class="roadmap-stage-badge">Stage 02 — Undergraduate Education</div>
+            <h3 class="roadmap-institution">B.Sc. Physics — Mar Thoma College, Thiruvalla</h3>
+            <div class="roadmap-submeta">Mahatma Gandhi University | 2022–2025</div>
+            <p style="font-size: 0.9rem; color: var(--muted-light); line-height: 1.55;">
+              Developed a foundation in scientific and quantitative thinking. Understanding mathematical models, scientific observations, statistical reasoning and complex physical systems.
+            </p>
+            <div class="roadmap-areas-list">
+              <span class="roadmap-tag">Classical Physics</span>
+              <span class="roadmap-tag">Quantum Physics</span>
+              <span class="roadmap-tag">Statistical Physics</span>
+              <span class="roadmap-tag">Mathematics</span>
+              <span class="roadmap-tag">Chemistry</span>
+              <span class="roadmap-tag">Astrophysics</span>
+              <span class="roadmap-tag">Environmental Studies</span>
             </div>
-            <div class="j-arrow">➔</div>
-            <div class="journey-node">
-              <span class="j-step">02</span>
-              <strong class="j-title">Data Science</strong>
-              <span class="j-sub">Statistical modeling, EDA &amp; feature engineering</span>
-            </div>
-            <div class="j-arrow">➔</div>
-            <div class="journey-node">
-              <span class="j-step">03</span>
-              <strong class="j-title">Football Analytics</strong>
-              <span class="j-sub">ISL historical data &amp; match outcome prediction</span>
-            </div>
-            <div class="j-arrow">➔</div>
-            <div class="journey-node">
-              <span class="j-step">04</span>
-              <strong class="j-title">Tactical Analysis</strong>
-              <span class="j-sub">40+ formation shapes, positional coordinates &amp; matchups</span>
-            </div>
-            <div class="j-arrow">➔</div>
-            <div class="journey-node highlight">
-              <span class="j-step">05</span>
-              <strong class="j-title">Performance Analytics</strong>
-              <span class="j-sub">Matchday decision support for professional coaching staff</span>
+            <div class="roadmap-transition-callout">
+              <strong>Transition:</strong> Scientific and mathematical reasoning became the foundation for my interest in data analysis.
             </div>
           </div>
         </div>
 
-        <div class="about-split-layout" style="margin-top: 40px;">
-          <div class="about-text-column">
-            <p class="about-paragraph">
-              I am an <strong>M.Sc. Applied Data Science student at SRM Institute of Science and Technology</strong> with a strong academic foundation in <strong>B.Sc. Physics from Mar Thoma College</strong>. My background in physics gives me a natural intuition for spatial dynamics, vector mechanics, and probabilistic distributions—which I directly apply to football match analysis.
+        <!-- Stage 03: Postgraduate Education -->
+        <div class="roadmap-card fade-up-item" style="transition-delay: 0.24s;">
+          <div class="roadmap-node">03</div>
+          <div class="roadmap-content">
+            <div class="roadmap-stage-badge">Stage 03 — Postgraduate Education</div>
+            <h3 class="roadmap-institution">M.Sc. Applied Data Science — SRMIST</h3>
+            <div class="roadmap-submeta">SRM Institute of Science and Technology, Kattankulathur | August 2025 – June 2027 (expected)</div>
+            <p style="font-size: 0.9rem; color: var(--muted-light); line-height: 1.55;">
+              Currently pursuing postgraduate studies in Data Science. Hands-on training across programming for data analysis, data preparation, EDA, statistics, machine learning and visual storytelling.
             </p>
-            <p class="about-paragraph">
-              My objective is to secure a <strong>Football Analytics / Performance Analysis Internship</strong> starting mid-November 2026 with Indian Super League (ISL) football clubs, football academies, and sports data organizations.
+            <div class="roadmap-milestone-pill">
+              ★ Academic Milestone: 84.44% across first two completed semesters
+            </div>
+            <div class="roadmap-areas-list">
+              <span class="roadmap-tag">Programming for Data Analysis</span>
+              <span class="roadmap-tag">Data Preparation &amp; Processing</span>
+              <span class="roadmap-tag">Exploratory Data Analysis</span>
+              <span class="roadmap-tag">Statistics &amp; Probability</span>
+              <span class="roadmap-tag">Machine Learning</span>
+              <span class="roadmap-tag">Predictive Modelling</span>
+              <span class="roadmap-tag">Data Visualisation</span>
+              <span class="roadmap-tag">Analytical Problem Solving</span>
+            </div>
+            <div class="roadmap-transition-callout">
+              <strong>Transition:</strong> Applying academic Data Science concepts to practical analytical problems, particularly in football.
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 04: Professional Application -->
+        <div class="roadmap-card fade-up-item" style="transition-delay: 0.32s;">
+          <div class="roadmap-node">04</div>
+          <div class="roadmap-content">
+            <div class="roadmap-stage-badge">Stage 04 — Professional Application</div>
+            <h3 class="roadmap-institution">Internship and Applied Experience</h3>
+            <div class="roadmap-submeta">2026 Onward · Industry Focus</div>
+            <p style="font-size: 0.9rem; color: var(--muted-light); line-height: 1.55;">
+              My next step is to gain practical industry experience in Data Analytics or Sports Analytics. My focus is applying academic knowledge to real datasets, developing analytical workflows and contributing to data-driven projects.
             </p>
           </div>
+        </div>
 
-          <div class="about-visual-column">
-            <div class="about-profile-card">
-              <div class="profile-card-header">
-                <span class="terminal-dot red"></span>
-                <span class="terminal-dot yellow"></span>
-                <span class="terminal-dot green"></span>
-                <span class="terminal-title">jerein_analyst_spec.json</span>
-              </div>
-              <div class="profile-card-body">
-                <pre class="code-block"><code>{
-  "analyst": "Jerein Sam Thomas",
-  "focus": "Football Analytics | Sports Data Science",
-  "education": {
-    "postgraduate": "M.Sc. Applied Data Science (SRM IST, 2025–2027)",
-    "undergraduate": "B.Sc. Physics (Mar Thoma College, 2022–2025)"
-  },
-  "analytical_pillars": [
-    "Match Analysis & Pre-Match Opposition Reports",
-    "Predictive Outcome Modeling (scikit-learn)",
-    "Formation Space Analysis & Positional Coordinates",
-    "Feature Engineering & Model Validation"
-  ],
-  "target_roles": ["Football Analytics Intern", "Performance Analyst"],
-  "internship_availability": "Mid-November 2026 onwards"
-}</code></pre>
-              </div>
-            </div>
+        <!-- Stage 05: Career Direction -->
+        <div class="roadmap-card fade-up-item" style="transition-delay: 0.40s;">
+          <div class="roadmap-node">05</div>
+          <div class="roadmap-content">
+            <div class="roadmap-stage-badge">Stage 05 — Career Direction</div>
+            <h3 class="roadmap-institution">Data Analyst | Football &amp; Sports Analytics</h3>
+            <div class="roadmap-submeta">Long-Term Specialisation</div>
+            <p style="font-size: 0.9rem; color: var(--muted-light); line-height: 1.55;">
+              My long-term direction is to work as a Data Analyst, specialising in football data, team performance, player statistics and analytical decision-making.
+            </p>
           </div>
         </div>
 
       </div>
+
+      <!-- The Roadmap In One Line -->
+      <div class="roadmap-summary-banner fade-up-item" style="transition-delay: 0.2s;">
+        Physics <span>→</span> Mathematical Reasoning <span>→</span> Data Science <span>→</span> Data Analytics <span>→</span> Football Analytics Career
+      </div>
     </section>
 
-    <!-- ======================================================================= -->
-    <!-- PAGE 3 — FOOTBALL ANALYTICS LAB                                         -->
-    <!-- Environment: Night Stadium & Tactical Grid Overlay                      -->
-    <!-- ======================================================================= -->
-    <section class="section-stage projects-stage" id="analytics-lab" data-slide-index="2" data-title="Analytics Lab">
-      <div class="env-bg-layer" style="background-image: url('assets/stadium_hero_sky.jpg');"></div>
-      <div class="env-overlay-gradient"></div>
+    <!-- ====================================================================
+       PAGE 04 — COMPLETE PROJECT PORTFOLIO & REPOSITORIES
+       ==================================================================== -->
+    <section class="projects-section scroll-reveal" id="projects">
+      <div class="section-header-block">
+        <div class="eyebrow fade-up-item">Page 04 — Complete Project Portfolio</div>
+        <h2 class="section-title">
+          <span class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0.05s;">Complete Project Portfolio.</span></span>
+        </h2>
+        <p class="section-subtitle fade-up-item" style="transition-delay: 0.15s;">
+          Eight analytical systems and engineering projects across football analytics, machine learning, intelligent simulation, scientific data science, and tactical research.
+        </p>
+      </div>
 
-      <div class="stage-content">
-        
-        <div class="section-editorial-header">
-          <span class="section-tag">ENGINEERED TACTICAL ENGINES</span>
-          <h2 class="section-title">Football Analytics <span class="highlight-title">Lab</span></h2>
-          <p class="section-lede">
-            Interactive sports intelligence modules, simulation engines, and predictive pipelines.
-          </p>
-        </div>
+      <div class="projects-grid">
 
-        <div class="analytics-lab-grid">
-          
-          <div class="lab-project-card">
-            <div class="card-number-tag">01</div>
-            <div class="card-category-badge">MACHINE LEARNING &bull; PREDICTIVE MODELING</div>
-            <h3 class="lab-card-title">ISL Match Outcome Predictor</h3>
-            <p class="lab-card-desc">
-              Machine-learning workflow for analysing historical Indian Super League matches and predicting match outcomes using engineered team, player, and home/away features.
+        <!-- Project 01: Indian Super League Match Prediction & Research -->
+        <article class="project-card fade-up-item" style="transition-delay: 0.08s;">
+          <div class="project-media-wrap">
+            <img
+              class="project-media"
+              src="assets/project-isl-prediction.jpg"
+              alt="Indian Super League Match Prediction Using Machine Learning"
+              width="1376"
+              height="768"
+              loading="lazy"
+              decoding="sync"
+            >
+            <div class="project-veil"></div>
+            <div class="project-badge-float highlight">01 · Published Research — IRJIET</div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Football Analytics | Machine Learning | Predictive Analytics | Research</div>
+            <h3 class="project-title">Indian Super League Match Prediction &amp; Research</h3>
+            <p class="project-desc">
+              Analysing historical Indian Super League match data and developing a machine learning-based approach to predict match outcomes, including home wins, draws, and away wins.
             </p>
-            <div class="lab-capabilities-block">
-              <span class="cap-heading">Capabilities:</span>
-              <div class="cap-tags-row">
-                <span class="cap-tag">Logistic Regression</span>
-                <span class="cap-tag">Random Forest</span>
-                <span class="cap-tag">Feature Engineering</span>
-                <span class="cap-tag">Cross-Validation</span>
-                <span class="cap-tag">Hyperparameter Tuning</span>
-                <span class="cap-tag">Feature Importance</span>
-              </div>
+            <div class="project-specs-list">
+              <div class="project-spec-item"><strong>Dataset:</strong> ~1,100 ISL matches across historical seasons (2015–2024) with 37 feature variables.</div>
+              <div class="project-spec-item"><strong>Analytical Workflow:</strong> Data collection, preprocessing, EDA, feature engineering, statistical modeling, and model evaluation.</div>
+              <div class="project-spec-item"><strong>Publication:</strong> IRJIET Vol. 9, Issue 5 (March 2026), pp. 447–451 · Jerein Sam Thomas, Gautham Ragunath, Adhith NJ.</div>
+              <div class="project-spec-item"><strong>Future Scope:</strong> Player market values, foreign player impact, tackle/interception metrics, and referee/weather variables.</div>
             </div>
-            <div class="lab-tech-stack">
-              <span class="tech-item">Python</span>
-              <span class="tech-item">Pandas</span>
-              <span class="tech-item">scikit-learn</span>
-              <span class="tech-item">Machine Learning</span>
+            <div class="project-tech-row">
+              <span class="project-tech-pill">Python</span>
+              <span class="project-tech-pill">Pandas</span>
+              <span class="project-tech-pill">Scikit-learn</span>
+              <span class="project-tech-pill">Matplotlib</span>
+              <span class="project-tech-pill">Predictive Modeling</span>
             </div>
-            <div class="lab-btn-row">
-              <a href="#isl-case-study" class="btn-card-action btn-primary-card">
-                <span>View Case Study</span>
-                <span>→</span>
-              </a>
-              <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-github">
-                <span>GitHub</span>
-              </a>
+            <div class="project-actions-row" style="margin-top: 0.5rem;">
+              <a href="#research" class="btn-secondary" style="font-size: 0.76rem; padding: 0.5rem 1.15rem;">View Publication Spotlight ↓</a>
             </div>
           </div>
+        </article>
 
-          <div class="lab-project-card featured-flagship-card">
-            <div class="card-number-tag">02</div>
-            <div class="featured-badge">FLAGSHIP TACTICAL ENGINE</div>
-            <div class="card-category-badge">TACTICAL INTELLIGENCE &bull; SIMULATION</div>
-            <h3 class="lab-card-title">Tactics OS / Tactical Battle Engine</h3>
-            <p class="lab-card-desc">
-              Comprehensive tactical intelligence and simulation engine modeling 40+ formations, positional coordinates, player roles, and interactive tactical scenarios.
+        <!-- Project 02: Football Tactical Intelligence System -->
+        <article class="project-card fade-up-item" style="transition-delay: 0.14s;">
+          <div class="project-media-wrap">
+            <img
+              class="project-media"
+              src="assets/project-tactical-intelligence.jpg"
+              alt="Football Tactical Intelligence System"
+              width="1376"
+              height="768"
+              loading="lazy"
+              decoding="sync"
+            >
+            <div class="project-veil"></div>
+            <div class="project-badge-float">02 · Intelligent Tactical Platform</div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Football Analytics | AI | NLP | Tactical Analysis | Intelligent Systems</div>
+            <h3 class="project-title">Football Tactical Intelligence System</h3>
+            <p class="project-desc">
+              An integrated football tactical intelligence platform that allows users to explore formations, tactical styles, player roles, team structures, and tactical matchups with AI-assisted interaction.
             </p>
-            <div class="lab-capabilities-block">
-              <span class="cap-heading">Engine Highlights:</span>
-              <div class="cap-tags-row">
-                <span class="cap-tag highlight">40+ Formations</span>
-                <span class="cap-tag">Formation Comparison</span>
-                <span class="cap-tag">Player Roles</span>
-                <span class="cap-tag">Tactical Scenarios</span>
-                <span class="cap-tag">Tactical Matchup Analysis</span>
-                <span class="cap-tag">xT/xG Concepts</span>
-                <span class="cap-tag">AI Tactical Debate</span>
-                <span class="cap-tag">Interactive Pitch Visualization</span>
-              </div>
+            <div class="project-specs-list">
+              <div class="project-spec-item"><strong>Integrated Modules:</strong> Tactical Assistant, NLP Tactical Support, AI Tactical Battle Engine, and AI Tactical Debate Arena.</div>
+              <div class="project-spec-item"><strong>Tactical Scope:</strong> 40+ formations (4-3-3, 4-2-3-1, 3-5-2, 2-3-5, 4-6-0, 1-1-8) and ~25 tactical playing styles (Tiki-Taka, Gegenpressing, Total Football).</div>
+              <div class="project-spec-item"><strong>Specialist Roles:</strong> Sweeper-Keeper, Libero, Regista, Mezzala, False Nine with role-position compatibility validation.</div>
+              <div class="project-spec-item"><strong>Pitch Visualisation:</strong> Dynamic 105m × 68m football pitch with attacking/defensive spaces, xG, and xT territory modeling.</div>
             </div>
-            <div class="lab-btn-row">
-              <a href="#tactics-os" class="btn-card-action btn-primary-card">
-                <span>Explore Tactical Board</span>
-                <span>↗</span>
-              </a>
-              <a href="https://github.com/jereinsamthomas/tactical-battle-engine" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-github">
-                <span>GitHub Repository</span>
-              </a>
+            <div class="project-tech-row">
+              <span class="project-tech-pill">Football Domain Knowledge</span>
+              <span class="project-tech-pill">AI Tactical Engine</span>
+              <span class="project-tech-pill">NLP Parsing</span>
+              <span class="project-tech-pill">Rule Logic</span>
+              <span class="project-tech-pill">105×68m Pitch</span>
             </div>
           </div>
+        </article>
 
-          <div class="lab-project-card">
-            <div class="card-number-tag">03</div>
-            <div class="card-category-badge">RULE-BASED TACTICAL ANALYSIS</div>
-            <h3 class="lab-card-title">Football Tactics &amp; Formation Engine</h3>
-            <p class="lab-card-desc">
-              Spatial coordinate engine evaluating strengths, weaknesses, and phase-of-play space control across 40+ structural formations.
+        <!-- Project 03: Football Dataset Builder -->
+        <article class="project-card fade-up-item" style="transition-delay: 0.20s;">
+          <div class="project-media-wrap">
+            <img
+              class="project-media"
+              src="assets/project-dataset-builder.jpg"
+              alt="Football Dataset Builder"
+              width="1376"
+              height="768"
+              loading="lazy"
+              decoding="sync"
+            >
+            <div class="project-veil"></div>
+            <div class="project-badge-float">03 · Data Engineering Pipeline</div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Data Analytics | Data Engineering | API Integration | Football Data</div>
+            <h3 class="project-title">Football Dataset Builder</h3>
+            <p class="project-desc">
+              An automated football data extraction and preparation pipeline designed to collect, clean, standardize, and export match, team, and player statistics with semantic field schemas.
             </p>
-            <div class="lab-capabilities-block">
-              <div class="cap-tags-row">
-                <span class="cap-tag">40+ Formations</span>
-                <span class="cap-tag">Positional Coordinates</span>
-                <span class="cap-tag">Player-Role Classification</span>
-                <span class="cap-tag">Rule-Based Analysis</span>
-              </div>
+            <div class="project-specs-list">
+              <div class="project-spec-item"><strong>Data Sources:</strong> Multi-source API integration across StatsBomb Open Data, API-Football, and Sportmonks.</div>
+              <div class="project-spec-item"><strong>Match &amp; Team Data:</strong> xG, xA, progressive passes, key passes, shooting accuracy, defensive recoveries, and team formations.</div>
+              <div class="project-spec-item"><strong>Player Performance:</strong> xGOT, minutes played, pass completion across thirds, duels won/lost, aerial duels, and discipline statistics.</div>
+              <div class="project-spec-item"><strong>Standardized Schema:</strong> Meaningful field names (e.g. <code>Expected_Goals_xG</code>, <code>Possession_Percentage</code>) with CSV, Excel, and Tableau exports.</div>
             </div>
-            <div class="lab-btn-row">
-              <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-github">
-                <span>GitHub Repository</span>
-                <span>↗</span>
-              </a>
+            <div class="project-tech-row">
+              <span class="project-tech-pill">API Integration</span>
+              <span class="project-tech-pill">ETL Pipelines</span>
+              <span class="project-tech-pill">Data Standardization</span>
+              <span class="project-tech-pill">Tableau Datasets</span>
+              <span class="project-tech-pill">Python</span>
             </div>
           </div>
+        </article>
 
-          <div class="lab-project-card">
-            <div class="card-number-tag">04</div>
-            <div class="card-category-badge">NLP &bull; KNOWLEDGE BASE</div>
-            <h3 class="lab-card-title">AI Football Tactical Knowledge Chatbot</h3>
-            <p class="lab-card-desc">
-              Domain-specific natural language processing assistant for discussing tactical concepts, formation mechanics, and player roles.
+        <!-- Project 04: Personal AI Football Match Analysis Platform -->
+        <article class="project-card fade-up-item" style="transition-delay: 0.26s;">
+          <div class="project-media-wrap">
+            <img
+              class="project-media"
+              src="assets/project-match-platform.jpg"
+              alt="Personal AI Football Match Analysis Platform"
+              width="1376"
+              height="768"
+              loading="lazy"
+              decoding="sync"
+            >
+            <div class="project-veil"></div>
+            <div class="project-badge-float highlight">04 · Interactive Web Application</div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Football Analytics | Data Analysis | AI | Machine Learning | Visualisation</div>
+            <h3 class="project-title">Personal AI Football Match Analysis Platform</h3>
+            <p class="project-desc">
+              A comprehensive performance analysis platform for team and individual player evaluation using structured football datasets, spatial pitch tracking, and decoupled AI reporting.
             </p>
-            <div class="lab-capabilities-block">
-              <div class="cap-tags-row">
-                <span class="cap-tag">NLP Intent Recognition</span>
-                <span class="cap-tag">Tactical Knowledge Base</span>
-                <span class="cap-tag">Formation Explanations</span>
-                <span class="cap-tag">Tactical Concepts</span>
-              </div>
+            <div class="project-specs-list">
+              <div class="project-spec-item"><strong>Team &amp; Player Analytics:</strong> xG, xA, xGOT, passing networks, progressive passes, defensive recoveries, and duels.</div>
+              <div class="project-spec-item"><strong>Spatial Intelligence:</strong> Individual &amp; team heatmaps, shot maps, passing networks, Voronoi pitch space, and third-by-third analysis.</div>
+              <div class="project-spec-item"><strong>Decoupled Architecture:</strong> Statistical calculation engine strictly separated from the AI assistant for verified data integrity.</div>
+              <div class="project-spec-item"><strong>Outputs:</strong> Comprehensive team reports, player evaluations, pitch visualisations, and Tableau-ready exports.</div>
             </div>
-            <div class="lab-btn-row">
-              <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-github">
-                <span>GitHub Repository</span>
-                <span>↗</span>
-              </a>
+            <div class="project-tech-row">
+              <span class="project-tech-pill">Football Analytics</span>
+              <span class="project-tech-pill">Spatial Heatmaps</span>
+              <span class="project-tech-pill">Passing Networks</span>
+              <span class="project-tech-pill">xG / xA Models</span>
+              <span class="project-tech-pill">AI Reporting</span>
+            </div>
+            <div class="project-actions-row" style="margin-top: 0.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <a href="match-analyzer/index.html" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size: 0.76rem; padding: 0.5rem 1.15rem;">Launch Platform Home ↗</a>
+              <a href="match-analyzer/analysis/el-clasico.html" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="font-size: 0.76rem; padding: 0.5rem 1.15rem;">El Clásico Study ↗</a>
             </div>
           </div>
+        </article>
 
-        </div>
+        <!-- Project 05: RailGate / RailPro Gate -->
+        <article class="project-card fade-up-item" style="transition-delay: 0.32s;">
+          <div class="project-media-wrap">
+            <img
+              class="project-media"
+              src="assets/project-railgate.jpg"
+              alt="RailGate / RailPro Gate Railway Level-Crossing Simulation"
+              width="1376"
+              height="768"
+              loading="lazy"
+              decoding="sync"
+            >
+            <div class="project-veil"></div>
+            <div class="project-badge-float">05 · Geospatial Simulation</div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Railway Technology | Monitoring | Simulation | Geospatial Visualisation</div>
+            <h3 class="project-title">RailGate / RailPro Gate</h3>
+            <p class="project-desc">
+              A railway level-crossing monitoring and simulation platform inspired by daily commuter gate delays along the Tambaram–Chengalpattu (TBM–CGL) suburban railway corridor.
+            </p>
+            <div class="project-specs-list">
+              <div class="project-spec-item"><strong>Corridor Context:</strong> Tambaram–Chengalpattu (TBM–CGL) suburban railway section with real-world crossing bottlenecks.</div>
+              <div class="project-spec-item"><strong>Train Simulation:</strong> Simulated EMU 4001 train movement, real-time position updates, timing calculations, and boom-barrier animations.</div>
+              <div class="project-spec-item"><strong>Traffic Intelligence:</strong> Road queue length visualisation, traffic rerouting engine, and gate opening/closing delay forecasts.</div>
+              <div class="project-spec-item"><strong>Interfaces &amp; Maps:</strong> Responsive desktop and mobile interfaces with Leaflet 1.9.4, OpenStreetMap, and Esri satellite overlays.</div>
+            </div>
+            <div class="project-tech-row">
+              <span class="project-tech-pill">Python</span>
+              <span class="project-tech-pill">FastAPI</span>
+              <span class="project-tech-pill">SQLite</span>
+              <span class="project-tech-pill">Leaflet 1.9.4</span>
+              <span class="project-tech-pill">Geospatial GIS</span>
+              <span class="project-tech-pill">Simulation</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 06: Traffic Assistance System -->
+        <article class="project-card fade-up-item" style="transition-delay: 0.38s;">
+          <div class="project-media-wrap">
+            <img
+              class="project-media"
+              src="assets/project-traffic.jpg"
+              alt="Traffic Assistance System"
+              width="1376"
+              height="768"
+              loading="lazy"
+              decoding="sync"
+            >
+            <div class="project-veil"></div>
+            <div class="project-badge-float">06 · Intelligent Mobility</div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Traffic Assistance | Data Analytics | Intelligent Systems</div>
+            <h3 class="project-title">Traffic Assistance System</h3>
+            <p class="project-desc">
+              A standalone intelligent traffic assistance platform focused on helping road users and fleet dispatchers understand vehicular road traffic conditions and supporting rerouting decisions.
+            </p>
+            <div class="project-specs-list">
+              <div class="project-spec-item"><strong>Dedicated Scope:</strong> Independent road traffic intelligence platform distinct from railway crossing simulation.</div>
+              <div class="project-spec-item"><strong>Queue Monitoring:</strong> Road traffic queue detection, congestion intensity indexes, and intersection delay tracking.</div>
+              <div class="project-spec-item"><strong>Rerouting Assistance:</strong> Real-time alternative route recommendation, commute time forecasts, and congestion mitigation.</div>
+              <div class="project-spec-item"><strong>Visualisation:</strong> Geospatial road traffic condition heatmaps, visual commute indicators, and traffic telemetry.</div>
+            </div>
+            <div class="project-tech-row">
+              <span class="project-tech-pill">Traffic Analytics</span>
+              <span class="project-tech-pill">Queue Monitoring</span>
+              <span class="project-tech-pill">Route Assistance</span>
+              <span class="project-tech-pill">Geospatial Data</span>
+              <span class="project-tech-pill">Intelligent Systems</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 07: NanoMedAI -->
+        <article class="project-card fade-up-item" style="transition-delay: 0.44s;">
+          <div class="project-media-wrap">
+            <img
+              class="project-media"
+              src="assets/project-nanomed.jpg"
+              alt="NanoMedAI Nanomedicine Prediction Platform"
+              width="1376"
+              height="768"
+              loading="lazy"
+              decoding="sync"
+            >
+            <div class="project-veil"></div>
+            <div class="project-badge-float">07 · Scientific Data Science (~35% Dev)</div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Scientific Data Science | AI | Machine Learning | Nanomedicine</div>
+            <h3 class="project-title">NanoMedAI — Nanoparticle Platform</h3>
+            <p class="project-desc">
+              A scientific data science platform for investigating nanoparticle physicochemical properties, drug delivery kinetics, cytotoxicity profiles, and formulation stability.
+            </p>
+            <div class="project-specs-list">
+              <div class="project-spec-item"><strong>Core Modules:</strong> Dashboard, Nanoparticle Builder, Prediction &amp; Simulation, Drug Release Analysis, Stability Analysis, Screening, Reports.</div>
+              <div class="project-spec-item"><strong>Analytical Features:</strong> Zeta potential telemetry, cytotoxicity metrics, SMILES molecular structure diagrams, and drug release curves.</div>
+              <div class="project-spec-item"><strong>Explainable AI:</strong> SHAP feature importance charts, model interpretability, and prediction uncertainty confidence warnings.</div>
+              <div class="project-spec-item"><strong>Scientific Integrity:</strong> Preserves established scientific interface; prioritizes reliable laboratory datasets without fabricated functionality.</div>
+            </div>
+            <div class="project-tech-row">
+              <span class="project-tech-pill">Scientific Data Analysis</span>
+              <span class="project-tech-pill">Predictive Modelling</span>
+              <span class="project-tech-pill">SMILES Chemistry</span>
+              <span class="project-tech-pill">SHAP Explainable AI</span>
+              <span class="project-tech-pill">Nanomedicine</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 08: Football Analysis Blog -->
+        <article class="project-card fade-up-item" style="transition-delay: 0.50s;">
+          <div class="project-media-wrap">
+            <img
+              class="project-media"
+              src="assets/project-analysis-blog.jpg"
+              alt="Football Analysis Blog & Tactical Publishing"
+              width="1376"
+              height="768"
+              loading="lazy"
+              decoding="sync"
+            >
+            <div class="project-veil"></div>
+            <div class="project-badge-float highlight">08 · Research Communication</div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Football Analytics | Data Storytelling | Research Communication</div>
+            <h3 class="project-title">Football Analysis Blog</h3>
+            <p class="project-desc">
+              A dedicated digital publication for football match analysis, statistical insights, spatial tactical studies, and evidence-based football research communication.
+            </p>
+            <div class="project-specs-list">
+              <div class="project-spec-item"><strong>Editorial Content:</strong> Match analysis articles, team performance breakdowns, player statistics, and tactical comparisons.</div>
+              <div class="project-spec-item"><strong>Visual Analytics:</strong> Shot maps, xG models, passing networks, player heatmaps, and pitch-based space diagrams.</div>
+              <div class="project-spec-item"><strong>Tactical Deep-Dives:</strong> Formation shapes, space creation/utilisation, pressing intensity, and evidence-based match conclusions.</div>
+              <div class="project-spec-item"><strong>Featured Study:</strong> El Clásico 2026/27 (FC Barcelona 1–2 Real Madrid) spatial intelligence and transition breakdown.</div>
+            </div>
+            <div class="project-tech-row">
+              <span class="project-tech-pill">Data Storytelling</span>
+              <span class="project-tech-pill">Football Research</span>
+              <span class="project-tech-pill">Tactical Writing</span>
+              <span class="project-tech-pill">Pitch Diagrams</span>
+              <span class="project-tech-pill">Statistical Interpretation</span>
+            </div>
+            <div class="project-actions-row" style="margin-top: 0.5rem;">
+              <a href="match-analyzer/index.html#analysisRoom" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size: 0.76rem; padding: 0.5rem 1.15rem;">Read Tactical Articles ↗</a>
+            </div>
+          </div>
+        </article>
 
       </div>
     </section>
 
-    <!-- ======================================================================= -->
-    <!-- PAGE 4 — ISL MATCH OUTCOME PREDICTOR CASE STUDY                         -->
-    <!-- ======================================================================= -->
-    <section class="section-stage case-study-stage" id="isl-case-study" data-slide-index="3" data-title="ISL Project">
-      <div class="env-bg-layer" style="background-image: url('assets/stadium_hero_daylight.jpg'); filter: brightness(0.6) saturate(1.15);"></div>
-      <div class="env-overlay-gradient"></div>
+    <!-- ====================================================================
+       PAGE 05 — FOOTBALL ANALYSIS & MATCH INTELLIGENCE
+       ==================================================================== -->
+    <section class="analysis-section scroll-reveal" id="analysis">
+      <!-- Anchor alias for deep-linking from /analysis/el-clasico.html -->
+      <div id="analysisRoom" style="position:relative;top:-80px;"></div>
 
-      <div class="stage-content">
-        
-        <div class="section-editorial-header">
-          <span class="section-tag">CASE STUDY // INDIAN SUPER LEAGUE</span>
-          <h2 class="section-title">ISL Match Outcome <span class="highlight-title">Predictor</span></h2>
-          <p class="section-lede">
-            An empirical machine-learning workflow designed to evaluate historical ISL fixture dynamics and predict match results.
-          </p>
-        </div>
-
-        <div class="case-study-container">
-          
-          <div class="workflow-stepper-box">
-            <h4 class="box-title">ANALYTICAL WORKFLOW PIPELINE</h4>
-            <div class="workflow-chain">
-              <div class="wf-node">Historical Match Data</div>
-              <div class="wf-sep">➔</div>
-              <div class="wf-node">Data Cleaning</div>
-              <div class="wf-sep">➔</div>
-              <div class="wf-node">Feature Engineering</div>
-              <div class="wf-sep">➔</div>
-              <div class="wf-node">Model Training</div>
-              <div class="wf-sep">➔</div>
-              <div class="wf-node">Model Evaluation</div>
-              <div class="wf-sep">➔</div>
-              <div class="wf-node highlight">Match Outcome Analysis</div>
-            </div>
-          </div>
-
-          <div class="case-study-details-grid">
-            
-            <div class="cs-card">
-              <h3 class="cs-heading">WHAT I ANALYSED</h3>
-              <ul class="cs-list">
-                <li><strong>Historical ISL Match Records:</strong> Processed multi-season match results, goals scored, conceded, and points tally.</li>
-                <li><strong>Team Performance Indicators:</strong> Extracted rolling goal averages, home vs. away form variations, and head-to-head records.</li>
-                <li><strong>Home Advantage Factors:</strong> Quantified home-ground advantage and travel fatigue multipliers.</li>
-                <li><strong>Feature Importance:</strong> Ranked key predictive indicators to assess which variables drove outcome probability.</li>
-                <li><strong>Model Comparison:</strong> Evaluated Logistic Regression vs. Random Forest algorithms under 5-Fold Stratified Cross-Validation.</li>
-              </ul>
-            </div>
-
-            <div class="cs-card">
-              <h3 class="cs-heading">CODE IMPLEMENTATION</h3>
-              <div class="code-snippet-box">
-<pre><code># ISL Match Outcome Predictor Pipeline
-from sklearn.model_selection import StratifiedKFold, cross_val_score
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-
-# 1. Load engineered historical ISL feature matrix
-X, y = load_isl_engineered_features()
-
-# 2. Stratified 5-Fold Cross Validation
-cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-
-# 3. Model Training & Evaluation
-rf = RandomForestClassifier(n_estimators=100, max_depth=6)
-scores = cross_val_score(rf, X, y, cv=cv, scoring='accuracy')
-
-# 4. Feature Importance Extraction
-rf.fit(X, y)
-importances = rf.feature_importances_</code></pre>
-              </div>
-              <div class="truthfulness-note">
-                <span class="note-icon">ℹ</span>
-                <span>Ground truth: Metrics are computed directly on actual historical datasets with zero fabricated accuracy claims.</span>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
+      <div class="section-header-block">
+        <div class="eyebrow fade-up-item">Page 05 — Football Analysis &amp; Match Intelligence</div>
+        <h2 class="section-title">
+          <span class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0.05s;">Understanding the Game Through Spatial Data.</span></span>
+        </h2>
+        <p class="section-subtitle fade-up-item" style="transition-delay: 0.15s;">
+          Football is a dynamic landscape of decisions, physical space, pressing geometry, and performance. Combining tracking telemetry, predictive shot models, and high-tempo transition analysis to translate on-pitch reality into actionable sporting intelligence.
+        </p>
       </div>
-    </section>
 
-    <!-- ======================================================================= -->
-    <!-- PAGE 5 — TACTICS OS / FORMATION ENGINE (INTERACTIVE TACTICAL BOARD)     -->
-    <!-- ======================================================================= -->
-    <section class="section-stage tactics-stage" id="tactics-os" data-slide-index="4" data-title="Tactics OS">
-      <div class="env-bg-layer" style="background-image: url('assets/stadium_hero_sky.jpg'); filter: brightness(0.65);"></div>
-      <div class="env-overlay-gradient"></div>
-
-      <div class="stage-content">
-        
-        <div class="section-editorial-header">
-          <span class="section-tag">INTERACTIVE TACTICAL BOARD</span>
-          <h2 class="section-title">Tactics OS <span class="highlight-title">Formation Engine</span></h2>
-          <p class="section-lede">
-            Interactive pitch visualization modeling 40+ formations, space control, and structural matchup trade-offs.
+      <!-- ================================================================
+           FEATURED MATCH ANALYZER SHOWCASE (EL CLÁSICO 2026/27 DOSSIER)
+           ================================================================ -->
+      <div class="match-analyzer-showcase fade-up-item">
+        <div class="match-analyzer-meta-col">
+          <div class="match-badge">
+            <span class="live-dot" aria-hidden="true"></span>
+            FEATURED MATCH DOSSIER · EL CLÁSICO 2026/27
+          </div>
+          <h3 class="match-title">Match Analyzer: Spatial Pitch Telemetry &amp; Tactical Space Breakdown</h3>
+          <div class="match-scoreline">
+            <span class="score-team">FC Barcelona</span>
+            <span class="score-num">1 — 2</span>
+            <span class="score-team">Real Madrid</span>
+            <span class="score-venue">· Spotify Camp Nou (25 Oct 2026)</span>
+          </div>
+          <p class="match-narrative">
+            An editorial, publication-grade spatial intelligence study analyzing 1,420 match events, defensive compression blocks, and the decisive 87' coast-to-coast transition. Exploring shot quality over shot volume, half-space isolation, and counter-press dynamics.
           </p>
-        </div>
-
-        <div class="tactical-board-wrapper">
-          
-          <div class="formation-buttons-bar">
-            <span class="bar-lbl">SELECT FORMATION:</span>
-            <button class="btn-formation active" data-formation="4-2-3-1">4-2-3-1</button>
-            <button class="btn-formation" data-formation="4-3-3">4-3-3</button>
-            <button class="btn-formation" data-formation="4-4-2">4-4-2</button>
-            <button class="btn-formation" data-formation="3-5-2">3-5-2</button>
-            <button class="btn-formation" data-formation="3-4-3">3-4-3</button>
-            <button class="btn-formation" data-formation="4-6-0">4-6-0 (False 9)</button>
-          </div>
-
-          <div class="tactical-arena-grid">
-            
-            <div class="pitch-viewport-card">
-              <div class="pitch-container-2d" id="pitch-2d">
-                <div class="pitch-lines-overlay">
-                  <div class="p-half-line"></div>
-                  <div class="p-center-circle"></div>
-                  <div class="p-center-dot"></div>
-                  <div class="p-box-left"></div>
-                  <div class="p-box-right"></div>
-                  <div class="p-six-left"></div>
-                  <div class="p-six-right"></div>
-                  <div class="zone-14-box" title="Zone 14 (Half-Space Overload Area)">
-                    <span>ZONE 14</span>
-                  </div>
-                </div>
-                <div class="players-overlay-layer" id="players-dots-layer"></div>
-              </div>
+          <div class="match-metrics-grid">
+            <div class="match-metric-card">
+              <span class="m-val">1.42 — 2.18</span>
+              <span class="m-lbl">Expected Goals (xG)</span>
             </div>
-
-            <div class="tactical-analysis-card">
-              <div class="card-glass-header">
-                <span class="live-pill"><span class="pulsing-core"></span> LIVE TACTICAL MATCHUP</span>
-                <span class="monospace-pill" id="selected-formation-name">4-2-3-1 (BALANCED DOUBLE PIVOT)</span>
-              </div>
-
-              <div class="matchup-breakdown">
-                <div class="m-item">
-                  <span class="m-title">Positional Space Control:</span>
-                  <p class="m-text" id="tactics-space-text">Strong central occupation with two defensive pivots protecting Zone 14 while allowing attacking midfielder to exploit space between opposition lines.</p>
-                </div>
-
-                <div class="m-item">
-                  <span class="m-title">Attacking Structure:</span>
-                  <p class="m-text" id="tactics-attack-text">Wide wingers isolate opposition full-backs 1v1, supported by overlapping full-backs to generate 2v1 crossing overloads.</p>
-                </div>
-
-                <div class="m-item">
-                  <span class="m-title">Defensive Rest Organization:</span>
-                  <p class="m-text" id="tactics-def-text">Maintains a reliable 3+2 or 2+3 rest defense structure, mitigating central fast-break counter-attacks upon ball loss.</p>
-                </div>
-
-                <div class="m-item">
-                  <span class="m-title">Tactical Trade-offs &amp; Vulnerabilities:</span>
-                  <p class="m-text" id="tactics-weak-text">Flank exposure when full-backs push high without double-pivot wide coverage; requires disciplined pressing triggers.</p>
-                </div>
-              </div>
-
-              <div class="github-link-row">
-                <a href="https://github.com/jereinsamthomas/tactical-battle-engine" target="_blank" rel="noopener noreferrer" class="btn-primary-pill">
-                  <span>Open Tactics OS Repository</span>
-                  <span>↗</span>
-                </a>
-              </div>
+            <div class="match-metric-card">
+              <span class="m-val">64%</span>
+              <span class="m-lbl">Half-Space Control</span>
             </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ======================================================================= -->
-    <!-- PAGE 6 — MATCH ANALYSIS REPORT                                          -->
-    <!-- Environment: Multi-Screen Performance Analyst Room                      -->
-    <!-- ======================================================================= -->
-    <section class="section-stage match-report-stage" id="match-analysis" data-slide-index="5" data-title="Match Analysis">
-      <div class="env-bg-layer" style="background-image: url('assets/analyst_room.jpg'); filter: brightness(0.65) contrast(1.15);"></div>
-      <div class="env-overlay-gradient"></div>
-
-      <div class="stage-content">
-        
-        <div class="section-editorial-header">
-          <div class="sample-label-badge featured-badge" style="background: rgba(0, 242, 254, 0.12); border-color: rgba(0, 242, 254, 0.4); color: #00f2fe;">
-            <span class="badge-pulse" style="background: #00f2fe; box-shadow: 0 0 10px #00f2fe;"></span>
-            TACTICAL INTELLIGENCE // MULTI-MATCH ANALYSIS HUB
-          </div>
-          <h2 class="section-title">Match <span class="highlight-title">Analysis</span></h2>
-          <p class="section-lede">
-            Deconstructing spatial mechanics, rest-defense vulnerabilities, and transition efficiency through rigorous data analytics and optical tracking.
-          </p>
-        </div>
-
-        <!-- Sleek Editorial Intro Showcase Card with Direct Navigation Portal -->
-        <div class="match-intro-portal-card">
-          <div class="portal-card-glow"></div>
-          
-          <div class="portal-card-left">
-            <div class="portal-match-tag">
-              <span class="tag-live-dot"></span>
-              <span>FEATURED STUDY · LALIGA 2026/27</span>
+            <div class="match-metric-card">
+              <span class="m-val">7.4s</span>
+              <span class="m-lbl">87' Transition Winner</span>
             </div>
-
-            <h3 class="portal-fixture-title">
-              El Clásico: FC Barcelona <span class="score-num">1 — 2</span> Real Madrid
-            </h3>
-            
-            <p class="portal-fixture-meta">
-              25 October 2026 · Spotify Camp Nou · 62% vs 38% Possession · 1.19 vs 1.95 xG
-            </p>
-
-            <p class="portal-intro-summary">
-              A comprehensive tactical deconstruction examining how Carlo Ancelotti’s Real Madrid absorbed sustained spatial pressure, dismantled Hansi Flick’s aggressive 3-2-2-3 high line, and executed a decisive 7.4-second coast-to-coast transition winner in the 87th minute.
-            </p>
-
-            <div class="portal-pillars-row">
-              <div class="pillar-chip">
-                <span class="pillar-icon">📐</span>
-                <span class="pillar-txt">7-D Spatial Framework</span>
-              </div>
-              <div class="pillar-chip">
-                <span class="pillar-icon">⚡</span>
-                <span class="pillar-txt">Transition Sequence Maps</span>
-              </div>
-              <div class="pillar-chip">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-txt">xG Shot Quality vs Volume</span>
-              </div>
-              <div class="pillar-chip">
-                <span class="pillar-icon">🛡️</span>
-                <span class="pillar-txt">Rest-Defense Diagnostics</span>
-              </div>
+            <div class="match-metric-card">
+              <span class="m-val">84.2%</span>
+              <span class="m-lbl">Midfield Retention</span>
             </div>
           </div>
-
-          <div class="portal-card-right">
-            <!-- Iconic Interactive Launch Button: Navigates to match-analyzer/index.html -->
-            <a href="match-analyzer/index.html" class="portal-launch-action" title="Navigate to Match Analyzer Index Page (Multi-Match Hub)" target="_blank">
-              <div class="launch-icon-container">
-                <div class="icon-radar-ring ring-1"></div>
-                <div class="icon-radar-ring ring-2"></div>
-                <div class="icon-radar-ring ring-3"></div>
-                <div class="launch-icon-core">
-                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                </div>
-              </div>
-              
-              <div class="launch-text-wrap">
-                <span class="launch-heading">ENTER MATCH ANALYZER</span>
-                <span class="launch-subheading">Tactical Hub · Multi-Match Intelligence &rarr;</span>
-              </div>
+          <div class="match-actions-row">
+            <a href="match-analyzer/index.html" class="btn-primary" target="_blank" rel="noopener noreferrer">
+              Launch Match Analysis Home ↗
             </a>
+            <a href="match-analyzer/analysis/el-clasico.html" class="btn-secondary" target="_blank" rel="noopener noreferrer">
+              El Clásico Case Study ↗
+            </a>
+            <a href="assets/El_Clasico_2026_27_Tactical_Space_Analysis.pdf" class="btn-secondary" target="_blank" rel="noopener noreferrer">
+              View Dossier (PDF ↗)
+            </a>
+          </div>
+        </div>
 
-            <!-- Quick Sub Links -->
-            <div class="portal-sub-actions">
-              <a href="match-analyzer/index.html" class="sub-portal-link" target="_blank">
-                <span>Match Analyzer Index</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              </a>
-              <span class="link-divider">·</span>
-              <a href="analysis/el-clasico.html" class="sub-portal-link" target="_blank">
-                <span>El Clásico Case Study</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              </a>
-            </div>
+        <div class="match-analyzer-media-col">
+          <a href="match-analyzer/index.html" target="_blank" rel="noopener noreferrer" class="match-media-link" aria-label="Open Match Analysis Platform Home">
+            <figure class="match-media-frame">
+              <img
+                src="assets/tactical_match_analysis.jpg"
+                alt="Match Analyzer — Tactical Telemetry & Pitch Control Dashboard"
+                class="match-media-img"
+                width="1920"
+                height="1080"
+                loading="lazy"
+              >
+              <div class="match-media-badge">
+                <span class="live-dot" aria-hidden="true"></span>
+                MATCH ANALYSIS PLATFORM · CLICK TO LAUNCH ↗
+              </div>
+              <div class="match-media-glass-info">
+                <div class="match-media-tag">1,420 Events Tracked · 34 Voronoi Cells</div>
+                <div class="match-media-cta">Launch Analysis Home ↗</div>
+              </div>
+            </figure>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tactical Simulation Subheader -->
+      <div class="pitch-lab-header fade-up-item" style="margin-top: 3.5rem; margin-bottom: 1.5rem;">
+        <div class="eyebrow">Tactical Simulation Lab</div>
+        <h3 style="font-family: var(--font-display); font-size: 1.6rem; text-transform: uppercase; color: #fff; margin-top: 0.35rem;">
+          Interactive Pitch Telemetry &amp; Vector Layers
+        </h3>
+        <p style="font-size: 0.92rem; color: var(--muted-light); margin-top: 0.25rem;">
+          Toggle through real-time analytical layers: shot distributions, progressive pass paths, pressing recoveries, and territorial pitch control.
+        </p>
+      </div>
+<div class="pitch-lab-container fade-up-item" style="transition-delay: 0.1s;">
+        <div>
+          <!-- Layer Switcher -->
+          <div class="pitch-controls-bar">
+            <button class="pitch-layer-btn is-active" data-pitch-layer="xg" type="button">Attacking xG Shot Map</button>
+            <button class="pitch-layer-btn" data-pitch-layer="passing" type="button">Passing Network</button>
+            <button class="pitch-layer-btn" data-pitch-layer="defensive" type="button">Defensive Duels &amp; Pressing</button>
+            <button class="pitch-layer-btn" data-pitch-layer="space" type="button">Spatial Pitch Control</button>
           </div>
 
+          <!-- Dynamic SVG Pitch Graphic with Switchable Layers -->
+          <div class="pitch-svg-frame" id="pitch-svg-frame">
+            <svg viewBox="0 0 800 500" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#0b1410;">
+              <!-- Pitch Lines -->
+              <rect x="25" y="25" width="750" height="450" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+              <line x1="400" y1="25" x2="400" y2="475" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+              <circle cx="400" cy="250" r="65" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+              <circle cx="400" cy="250" r="3" fill="rgba(255,255,255,0.6)"/>
+              <!-- Penalty Areas -->
+              <rect x="25" y="115" width="125" height="220" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+              <rect x="650" y="115" width="125" height="220" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+              <!-- Six Yard Boxes -->
+              <rect x="25" y="175" width="45" height="100" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+              <rect x="730" y="175" width="45" height="100" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+              <path d="M 150 195 A 65 65 0 0 1 150 305" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+              <path d="M 650 195 A 65 65 0 0 0 650 305" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+
+              <!-- Layer 1: Attacking xG (Default Visible) -->
+              <g id="layer-xg" class="pitch-layer-group">
+                <circle cx="680" cy="245" r="14" class="pitch-interactive-node" data-tooltip="High-Danger Central Shot: 0.74 xG" fill="rgba(255, 59, 29, 0.85)" stroke="#fff" stroke-width="2"/>
+                <text x="680" y="249" font-size="10" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">0.74</text>
+                <circle cx="650" cy="210" r="10" class="pitch-interactive-node" data-tooltip="Cutback Box Strike: 0.42 xG" fill="rgba(255, 106, 61, 0.75)" stroke="#fff" stroke-width="1.5"/>
+                <text x="650" y="214" font-size="9" font-family="sans-serif" fill="#fff" text-anchor="middle" pointer-events="none">0.42</text>
+                <circle cx="620" cy="285" r="7" class="pitch-interactive-node" data-tooltip="Diagonal Effort: 0.11 xG" fill="rgba(255, 180, 0, 0.7)" stroke="#fff" stroke-width="1"/>
+                <circle cx="580" cy="180" r="5" class="pitch-interactive-node" data-tooltip="Long-Range Perimeter: 0.04 xG" fill="rgba(255, 255, 255, 0.5)"/>
+                <circle cx="590" cy="330" r="4.5" class="pitch-interactive-node" data-tooltip="Wide Angle Volley: 0.03 xG" fill="rgba(255, 255, 255, 0.4)"/>
+                <circle cx="695" cy="235" r="16" class="pitch-interactive-node" data-tooltip="Keeper Post-Shot Expected Goals Variance" fill="none" stroke="#00e599" stroke-width="2.5" stroke-dasharray="4,2"/>
+                <line x1="620" y1="285" x2="760" y2="250" stroke="rgba(255,59,29,0.6)" stroke-width="2" stroke-dasharray="3,3"/>
+                <line x1="680" y1="245" x2="765" y2="248" stroke="#ff3b1d" stroke-width="3"/>
+              </g>
+
+              <!-- Layer 2: Passing Network (Hidden initially) -->
+              <g id="layer-passing" class="pitch-layer-group" style="display:none;">
+                <circle cx="210" cy="180" r="12" class="pitch-interactive-node" data-tooltip="Left Center Back &bull; 92% Acc &bull; First Build Phase" fill="#ff3b1d"/>
+                <text x="210" y="184" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">CB</text>
+                <circle cx="210" cy="320" r="12" class="pitch-interactive-node" data-tooltip="Right Center Back &bull; Long Diagonal Switcher" fill="#ff3b1d"/>
+                <text x="210" y="324" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">CB</text>
+                <circle cx="340" cy="250" r="18" class="pitch-interactive-node" data-tooltip="Defensive Midfield Pivot &bull; High Node Centrality (0.91)" fill="#ff6a3d" stroke="#fff" stroke-width="2"/>
+                <text x="340" y="254" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">DM</text>
+                <circle cx="470" cy="170" r="14" class="pitch-interactive-node" data-tooltip="Advanced Playmaker &bull; 64 Progressive Carries" fill="#ff3b1d"/>
+                <text x="470" y="174" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">CM</text>
+                <circle cx="560" cy="90" r="11" class="pitch-interactive-node" data-tooltip="Right Winger &bull; Half-Space Penetration" fill="#ff3b1d"/>
+                <text x="560" y="94" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">RW</text>
+                <line x1="210" y1="180" x2="340" y2="250" stroke="rgba(255, 59, 29, 0.75)" stroke-width="4"/>
+                <line x1="210" y1="320" x2="340" y2="250" stroke="rgba(255, 59, 29, 0.75)" stroke-width="4"/>
+                <line x1="340" y1="250" x2="470" y2="170" stroke="#00e599" stroke-width="6"/>
+                <line x1="470" y1="170" x2="560" y2="90" stroke="rgba(0, 229, 153, 0.8)" stroke-width="3.5"/>
+              </g>
+
+              <!-- Layer 3: Defensive Duels & Pressing (Hidden initially) -->
+              <g id="layer-defensive" class="pitch-layer-group" style="display:none;">
+                <rect x="280" y="60" width="260" height="380" fill="rgba(255, 59, 29, 0.12)" stroke="rgba(255, 59, 29, 0.4)" stroke-dasharray="6,4" rx="8"/>
+                <circle cx="360" cy="140" r="8" class="pitch-interactive-node" data-tooltip="Counter-Press Recovery (1.2s Post-Turnover)" fill="#00e599"/>
+                <text x="360" y="143" font-size="8" fill="#000" font-weight="bold" text-anchor="middle" pointer-events="none">✓</text>
+                <circle cx="420" cy="220" r="8" class="pitch-interactive-node" data-tooltip="Central Lane Interception &bull; 68.2% Duel Win" fill="#00e599"/>
+                <text x="420" y="223" font-size="8" fill="#000" font-weight="bold" text-anchor="middle" pointer-events="none">✓</text>
+                <circle cx="330" cy="360" r="8" class="pitch-interactive-node" data-tooltip="Flank Duel Contested &bull; Second Ball Forced" fill="#ff3b1d"/>
+                <text x="330" y="363" font-size="8" fill="#fff" font-weight="bold" text-anchor="middle" pointer-events="none">✕</text>
+                <circle cx="480" cy="290" r="8" class="pitch-interactive-node" data-tooltip="High Turnover Tackle &bull; Immediate Transition Trigger" fill="#00e599"/>
+                <text x="480" y="293" font-size="8" fill="#000" font-weight="bold" text-anchor="middle" pointer-events="none">✓</text>
+              </g>
+
+              <!-- Layer 4: Spatial Pitch Control (Hidden initially) -->
+              <g id="layer-space" class="pitch-layer-group" style="display:none;">
+                <polygon points="25,25 250,25 210,180 25,115" class="pitch-interactive-node" data-tooltip="Defensive Third Coverage: 86% Compactness" fill="rgba(0, 229, 153, 0.15)" stroke="rgba(0, 229, 153, 0.4)"/>
+                <polygon points="250,25 550,25 470,170 340,250 210,180" class="pitch-interactive-node" data-tooltip="Midfield Transition Corridor: 64% Pitch Control" fill="rgba(255, 59, 29, 0.22)" stroke="rgba(255, 59, 29, 0.5)"/>
+                <polygon points="550,25 775,25 775,200 650,210 470,170" class="pitch-interactive-node" data-tooltip="Right Flank Overload: 78% Territory Domination" fill="rgba(255, 106, 61, 0.25)" stroke="rgba(255, 106, 61, 0.6)"/>
+                <polygon points="340,250 470,170 650,210 680,340 450,380" class="pitch-interactive-node" data-tooltip="Attacking Box Domination: 72% Voronoi Spatial Share" fill="rgba(255, 59, 29, 0.3)" stroke="#ff3b1d"/>
+                <text x="520" y="270" fill="#fff" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle" pointer-events="none">High Control: 64%</text>
+              </g>
+            </svg>
+            <!-- Interactive Floating Pitch Tooltip -->
+            <div class="pitch-floating-tooltip" id="pitch-tooltip" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <!-- Telemetry Breakdown Info -->
+        <div class="pitch-info-col">
+          <div class="eyebrow" id="pitch-active-layer-tag">Layer 01 — Attacking xG</div>
+          <h3 class="pitch-info-title" id="pitch-active-layer-title">Shot Locations &amp; Quality</h3>
+          <p class="pitch-info-desc" id="pitch-active-layer-desc">
+            Mapping shot coordinates, angles, goalkeeper positioning, and pressure variables to quantify Expected Goals (xG). Distinguishing high-probability central chances from low-conversion perimeter efforts.
+          </p>
+
+          <div class="pitch-stat-metrics">
+            <div class="pitch-metric-box">
+              <div class="pitch-metric-val" id="stat-val-1">2.41</div>
+              <div class="pitch-metric-lbl" id="stat-lbl-1">Total Team xG</div>
+            </div>
+            <div class="pitch-metric-box">
+              <div class="pitch-metric-val" id="stat-val-2">0.17</div>
+              <div class="pitch-metric-lbl" id="stat-lbl-2">Avg xG Per Shot</div>
+            </div>
+            <div class="pitch-metric-box">
+              <div class="pitch-metric-val" id="stat-val-3">82.4%</div>
+              <div class="pitch-metric-lbl" id="stat-lbl-3">Pass Progression</div>
+            </div>
+            <div class="pitch-metric-box">
+              <div class="pitch-metric-val" id="stat-val-4">63%</div>
+              <div class="pitch-metric-lbl" id="stat-lbl-4">Final Third Entries</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Pillar Detailed Analytical Areas -->
+      <div class="analysis-triad-grid">
+
+        <!-- Pillar 01: Team Performance Analysis -->
+        <div class="analysis-card fade-up-item" style="transition-delay: 0.08s;">
+          <h3 class="analysis-card-title">Team Performance</h3>
+
+          <div class="analysis-subpillar">Attacking Performance</div>
+          <ul class="analysis-list">
+            <li>Goals and Expected Goals (xG)</li>
+            <li>Expected Assists (xA)</li>
+            <li>Total shots and shots on target</li>
+            <li>Big chances created and missed</li>
+            <li>Key passes &amp; Progressive passes</li>
+            <li>Through balls &amp; Final-third entries</li>
+          </ul>
+
+          <div class="analysis-subpillar">Possession &amp; Passing</div>
+          <ul class="analysis-list">
+            <li>Possession percentage &amp; retention</li>
+            <li>Passing accuracy &amp; completion</li>
+            <li>Progressive passing combinations</li>
+            <li>Ball recoveries &amp; passing networks</li>
+          </ul>
+
+          <div class="analysis-subpillar">Defensive Performance</div>
+          <ul class="analysis-list">
+            <li>Tackles &amp; tackle success rate</li>
+            <li>Interceptions, clearances &amp; blocks</li>
+            <li>Defensive and aerial duels</li>
+            <li>Defensive errors &amp; recovery zones</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 02: Player Performance Analysis -->
+        <div class="analysis-card fade-up-item" style="transition-delay: 0.16s;">
+          <h3 class="analysis-card-title">Player Performance</h3>
+          <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5;">
+            Individual contributions are investigated through isolated event metrics and contextual role expectations:
+          </p>
+
+          <ul class="analysis-list" style="margin-top: 0.5rem;">
+            <li>Goals and assists</li>
+            <li>Individual xG and xA contribution</li>
+            <li>Shooting accuracy &amp; shot volume</li>
+            <li>Key passes and progressive carry volume</li>
+            <li>Passing accuracy across pitch thirds</li>
+            <li>Tackles and interceptions</li>
+            <li>Duels won vs duels lost</li>
+            <li>Aerial duel performance</li>
+            <li>Possession won and lost under pressure</li>
+            <li>Overall player involvement rate</li>
+            <li>Position-based peer comparisons</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 03: Spatial & Tactical Analysis -->
+        <div class="analysis-card fade-up-item" style="transition-delay: 0.24s;">
+          <h3 class="analysis-card-title">Spatial &amp; Tactical</h3>
+          <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5;">
+            Connecting pitch coordinates with tactical intent and positional structure:
+          </p>
+
+          <ul class="analysis-list" style="margin-top: 0.5rem;">
+            <li>Shot maps &amp; conversion probability</li>
+            <li>Passing maps &amp; network density</li>
+            <li>Player heatmaps &amp; average positions</li>
+            <li>Team formation shape &amp; compactness</li>
+            <li>Attacking movement patterns</li>
+            <li>Defensive line positioning &amp; offside traps</li>
+            <li>Space creation &amp; half-space utilisation</li>
+            <li>Build-up sequences from back third</li>
+            <li>Pressing triggers and recovery zones</li>
+          </ul>
+
+          <div class="skill-note-box" style="margin-top: 1rem; padding: 0.85rem; font-size: 0.76rem;">
+            <strong>Data Integrity:</strong> Distance covered and detailed pressing intensity are reported only when verified tracking data is available.
+          </div>
         </div>
 
       </div>
-    </section>
 
-    <!-- ======================================================================= -->
-    <!-- PAGE 7 — DATA VISUALIZATION                                             -->
-    <!-- Environment: Analytics Command Room                                     -->
-    <!-- ======================================================================= -->
-    <section class="section-stage dataviz-stage" id="data-viz" data-slide-index="6" data-title="Data Viz">
-      <div class="env-bg-layer" style="background-image: url('assets/analyst_room.jpg'); filter: brightness(0.65) saturate(1.2);"></div>
-      <div class="env-overlay-gradient"></div>
-
-      <div class="stage-content">
-        
-        <div class="section-editorial-header">
-          <span class="section-tag">VISUAL METRICS &amp; PATTERNS</span>
-          <h2 class="section-title">Football Data <span class="highlight-title">Visualization</span></h2>
-          <p class="section-lede">
-            Analytical charts and visual matrices communicating practical football insights.
-          </p>
-        </div>
-
-        <div class="dataviz-grid">
-          
-          <div class="viz-card">
-            <div class="viz-card-header">
-              <span class="viz-type">PREDICTIVE MODELING</span>
-              <h3 class="viz-title">Match Outcome Distributions</h3>
-            </div>
-            <div class="viz-display-area">
-              <div class="outcome-dist-bar">
-                <div class="dist-seg home" style="width: 48%;"><span class="dist-label">Home: 48%</span></div>
-                <div class="dist-seg draw" style="width: 28%;"><span class="dist-label">Draw: 28%</span></div>
-                <div class="dist-seg away" style="width: 24%;"><span class="dist-label">Away: 24%</span></div>
-              </div>
-              <div class="viz-metric-legend">
-                <span class="leg-item"><span class="dot-c home"></span> Home Win Probability</span>
-                <span class="leg-item"><span class="dot-c draw"></span> Draw Probability</span>
-                <span class="leg-item"><span class="dot-c away"></span> Away Win Probability</span>
-              </div>
-            </div>
-            <p class="viz-caption">Class probability output from Logistic Regression and Random Forest models with engineered home advantage features.</p>
-          </div>
-
-          <div class="viz-card">
-            <div class="viz-card-header">
-              <span class="viz-type">TACTICAL PROFILING</span>
-              <h3 class="viz-title">Formation Usage &amp; Comparison</h3>
-            </div>
-            <div class="viz-display-area">
-              <div class="formation-bars-stack">
-                <div class="f-bar-row">
-                  <span class="f-name">4-2-3-1</span>
-                  <div class="f-track"><div class="f-fill" style="width: 88%;"></div></div>
-                  <span class="f-pct">High Balance</span>
-                </div>
-                <div class="f-bar-row">
-                  <span class="f-name">4-3-3</span>
-                  <div class="f-track"><div class="f-fill" style="width: 74%;"></div></div>
-                  <span class="f-pct">Flank Threat</span>
-                </div>
-                <div class="f-bar-row">
-                  <span class="f-name">3-5-2</span>
-                  <div class="f-track"><div class="f-fill" style="width: 62%;"></div></div>
-                  <span class="f-pct">Central Density</span>
-                </div>
-              </div>
-            </div>
-            <p class="viz-caption">Comparative evaluation of tactical formations across space control, central defensive density, and transition speed.</p>
-          </div>
-
-          <div class="viz-card">
-            <div class="viz-card-header">
-              <span class="viz-type">SPATIAL THREAT</span>
-              <h3 class="viz-title">Shot Analysis &amp; Danger Zones</h3>
-            </div>
-            <div class="viz-display-area pitch-mini-zone">
-              <div class="mini-pitch-frame">
-                <div class="penalty-box"></div>
-                <div class="six-yard-box"></div>
-                <div class="shot-dot high-xg" style="left: 50%; top: 35%;" title="High Danger"></div>
-                <div class="shot-dot med-xg" style="left: 38%; top: 45%;" title="Medium Danger"></div>
-                <div class="shot-dot low-xg" style="left: 65%; top: 60%;" title="Low Danger"></div>
-                <div class="shot-dot goal" style="left: 48%; top: 22%;" title="Goal"></div>
-              </div>
-              <div class="shot-legend">
-                <span class="s-leg"><span class="dot-s goal"></span> Goal</span>
-                <span class="s-leg"><span class="dot-s high"></span> High Threat</span>
-                <span class="s-leg"><span class="dot-s low"></span> Low Threat</span>
-              </div>
-            </div>
-            <p class="viz-caption">Spatial shot distribution mapping shooting angles, distance to goal, and defensive occlusion zones.</p>
-          </div>
-
-          <div class="viz-card">
-            <div class="viz-card-header">
-              <span class="viz-type">MOMENTUM DYNAMICS</span>
-              <h3 class="viz-title">Tactical Pressure Trends</h3>
-            </div>
-            <div class="viz-display-area">
-              <div class="momentum-wave-wrapper">
-                <svg class="momentum-svg" viewBox="0 0 300 80" preserveAspectRatio="none">
-                  <path d="M0,40 Q40,15 80,45 T160,25 T240,60 T300,30" fill="none" stroke="#10b981" stroke-width="2.5"/>
-                  <line x1="0" y1="40" x2="300" y2="40" stroke="rgba(255,255,255,0.2)" stroke-dasharray="4,4"/>
-                </svg>
-                <div class="momentum-labels">
-                  <span>0'</span>
-                  <span>15'</span>
-                  <span>30'</span>
-                  <span>45' (HT)</span>
-                  <span>60'</span>
-                  <span>75'</span>
-                  <span>90'</span>
-                </div>
-              </div>
-            </div>
-            <p class="viz-caption">Minute-by-minute tactical momentum tracking sustained territorial pressure and turnover locations.</p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ======================================================================= -->
-    <!-- PAGE 8 — ADDITIONAL DATA SCIENCE WORK                                   -->
-    <!-- Environment: Clear Scientific, Railway & Urban Systems Backdrops        -->
-    <!-- ======================================================================= -->
-    <section class="section-stage other-projects-stage" id="other-projects" data-slide-index="7" data-title="Research Work">
-      <div class="env-bg-layer" style="background-image: url('assets/scientific_lab.jpg'); filter: brightness(0.65);"></div>
-      <div class="env-overlay-gradient"></div>
-
-      <div class="stage-content">
-        
-        <div class="section-editorial-header">
-          <span class="section-tag">COMPUTATIONAL RESEARCH</span>
-          <h2 class="section-title">Additional Data Science <span class="highlight-title">Work</span></h2>
-          <p class="section-lede">
-            Applied statistical computing and predictive modeling projects in research, transportation, and urban analytics.
-          </p>
-        </div>
-
-        <div class="additional-projects-grid">
-          
-          <div class="other-project-card" style="background-image: linear-gradient(180deg, rgba(8,16,36,0.85), rgba(8,16,36,0.96)), url('assets/scientific_lab.jpg'); background-size: cover;">
-            <div class="other-icon">🧪</div>
-            <span class="other-category">COMPUTATIONAL BIOPHYSICS</span>
-            <h3 class="other-title">Nanoparticle Drug Structure, Stability &amp; Risk Prediction</h3>
-            <p class="other-desc">
-              Predictive modeling framework evaluating molecular stability, encapsulation efficiency, and structural risk indicators in nanoparticle drug formulations.
+      <!-- My Analytical Question Banner -->
+      <div class="question-banner fade-up-item" style="transition-delay: 0.2s;">
+        <div class="question-grid">
+          <div class="question-contrast-left">
+            <div class="question-old">Common Question</div>
+            <div class="question-old-quote">"Which team had more possession?"</div>
+            <div class="question-new-heading">What I Investigate</div>
+            <p style="font-size: 0.92rem; color: var(--muted-light); line-height: 1.55;">
+              Aggregate numbers without spatial context are misleading. I break down what that possession actually produced:
             </p>
-            <div class="tech-tags-row">
-              <span class="t-tag">Python</span>
-              <span class="t-tag">Machine Learning</span>
-              <span class="t-tag">Feature Selection</span>
+          </div>
+
+          <div class="question-inquiries-list">
+            <div class="inquiry-item">1. Where did the possession happen?</div>
+            <div class="inquiry-item">2. Was possession converted into attacking opportunities?</div>
+            <div class="inquiry-item">3. Which areas of the pitch were used effectively?</div>
+            <div class="inquiry-item">4. How did passing patterns support progression?</div>
+            <div class="inquiry-item">5. Where did the team lose possession?</div>
+            <div class="inquiry-item">6. Which players contributed most to attacking &amp; defensive phases?</div>
+          </div>
+        </div>
+
+        <div class="question-principle-quote">
+          "Numbers provide <span>evidence</span>. Football context gives those numbers <span>meaning</span>."
+        </div>
+      </div>
+    
+    </section>
+
+    <!-- ====================================================================
+       PAGE 06 — SKILLS & TECHNOLOGY STACK
+       ==================================================================== -->
+    <section class="skills-section scroll-reveal" id="skills">
+      <div class="section-header-block">
+        <div class="eyebrow fade-up-item">Page 06 — Skills &amp; Tooling</div>
+        <h2 class="section-title">
+          <span class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0.05s;">My Analytical Toolkit.</span></span>
+        </h2>
+        <p class="section-subtitle fade-up-item" style="transition-delay: 0.15s;">
+          My skills are organised around the complete data analysis process, with football analytics as the specialist application area.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+
+        <!-- 01. Data Analytics -->
+        <div class="skill-card fade-up-item" style="transition-delay: 0.06s;">
+          <div class="skill-card-top">
+            <h3 class="skill-category-title">Data Analytics</h3>
+            <span class="skill-category-num">01</span>
+          </div>
+          <div class="skill-tags-cloud">
+            <span class="skill-chip">Data Cleaning &amp; Preparation</span>
+            <span class="skill-chip">Exploratory Data Analysis (EDA)</span>
+            <span class="skill-chip">Statistical Analysis</span>
+            <span class="skill-chip">Data Interpretation</span>
+            <span class="skill-chip">Feature Analysis</span>
+            <span class="skill-chip">Dataset Structuring</span>
+            <span class="skill-chip">Pattern Identification</span>
+            <span class="skill-chip">Comparative Analysis</span>
+            <span class="skill-chip">Analytical Reporting</span>
+          </div>
+        </div>
+
+        <!-- 02. Programming & Data Tools -->
+        <div class="skill-card fade-up-item" style="transition-delay: 0.12s;">
+          <div class="skill-card-top">
+            <h3 class="skill-category-title">Programming &amp; Data Tools</h3>
+            <span class="skill-category-num">02</span>
+          </div>
+          <div class="skill-tags-cloud">
+            <span class="skill-chip">Python</span>
+            <span class="skill-chip">Pandas</span>
+            <span class="skill-chip">NumPy</span>
+            <span class="skill-chip">Data Processing</span>
+            <span class="skill-chip">Analytical Workflows</span>
+            <span class="skill-chip">Data Science Libraries</span>
+            <span class="skill-chip">Scikit-learn</span>
+            <span class="skill-chip">Matplotlib</span>
+          </div>
+        </div>
+
+        <!-- 03. Machine Learning -->
+        <div class="skill-card fade-up-item" style="transition-delay: 0.18s;">
+          <div class="skill-card-top">
+            <h3 class="skill-category-title">Machine Learning</h3>
+            <span class="skill-category-num">03</span>
+          </div>
+          <div class="skill-tags-cloud">
+            <span class="skill-chip">Predictive Modelling</span>
+            <span class="skill-chip">Classification</span>
+            <span class="skill-chip">Feature Engineering</span>
+            <span class="skill-chip">Model Evaluation</span>
+            <span class="skill-chip">Pattern Recognition</span>
+            <span class="skill-chip">Statistical Learning</span>
+          </div>
+        </div>
+
+        <!-- 04. Football Analytics -->
+        <div class="skill-card fade-up-item" style="transition-delay: 0.24s;">
+          <div class="skill-card-top">
+            <h3 class="skill-category-title">Football Analytics</h3>
+            <span class="skill-category-num">04</span>
+          </div>
+          <div class="skill-tags-cloud">
+            <span class="skill-chip">Match Performance Analysis</span>
+            <span class="skill-chip">Team Performance Analysis</span>
+            <span class="skill-chip">Player Performance Analysis</span>
+            <span class="skill-chip">Passing &amp; Possession Analysis</span>
+            <span class="skill-chip">Shooting &amp; Expected Goals (xG)</span>
+            <span class="skill-chip">Defensive Performance Analysis</span>
+            <span class="skill-chip">Formation &amp; Tactical Analysis</span>
+            <span class="skill-chip">Match Outcome Prediction</span>
+            <span class="skill-chip">Spatial &amp; Pitch-Based Analysis</span>
+          </div>
+        </div>
+
+        <!-- 05. Natural Language Processing -->
+        <div class="skill-card fade-up-item" style="transition-delay: 0.30s;">
+          <div class="skill-card-top">
+            <h3 class="skill-category-title">Natural Language Processing</h3>
+            <span class="skill-category-num">05</span>
+          </div>
+          <div class="skill-tags-cloud">
+            <span class="skill-chip">Text-Based Football Queries</span>
+            <span class="skill-chip">Football Terminology Interpretation</span>
+            <span class="skill-chip">Formation &amp; Position Validation</span>
+            <span class="skill-chip">Rule-Based Tactical Information Processing</span>
+          </div>
+        </div>
+
+        <!-- 06. Scientific & Analytical Thinking -->
+        <div class="skill-card fade-up-item" style="transition-delay: 0.36s;">
+          <div class="skill-card-top">
+            <h3 class="skill-category-title">Scientific &amp; Analytical Thinking</h3>
+            <span class="skill-category-num">06</span>
+          </div>
+          <div class="skill-tags-cloud">
+            <span class="skill-chip">Mathematical Reasoning</span>
+            <span class="skill-chip">Statistical Thinking</span>
+            <span class="skill-chip">Quantitative Problem Solving</span>
+            <span class="skill-chip">Research &amp; Evidence-Based Interpretation</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Skills demonstration disclaimer -->
+      <div class="skill-note-box fade-up-item" style="transition-delay: 0.2s;">
+        <strong>Toolkit Integrity Note:</strong> Only tools and techniques confidently demonstrated are listed. Additional tools such as SQL and Tableau are expanding with practical experience.
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         IMPACT GRID SECTION (ACCESSIBILITY: SEMANTIC <DL> WITH <DT> THEN <DD>)
+         ==================================================================== -->
+    <section class="impact-section scroll-reveal" id="impact">
+      <div class="section-header-block">
+        <div class="eyebrow fade-up-item">Page 07 — Measurable Production Impact</div>
+        <h2 class="section-title">
+          <span class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0.05s;">Quantitative Rigor, Measured.</span></span>
+        </h2>
+      </div>
+
+      <!-- Semantic description list: <dt> (label) precedes <dd> (numeric figure) -->
+      <dl class="impact-grid">
+
+        <div class="impact-cell fade-up-item" style="transition-delay: 0.05s;">
+          <dt class="impact-label">Matches analyzed in study</dt>
+          <dd class="impact-figure">~1,100</dd>
+        </div>
+
+        <div class="impact-cell fade-up-item" style="transition-delay: 0.15s;">
+          <dt class="impact-label">Engineered feature variables</dt>
+          <dd class="impact-figure">37</dd>
+        </div>
+
+        <div class="impact-cell fade-up-item" style="transition-delay: 0.25s;">
+          <dt class="impact-label">Tactical formations modeled</dt>
+          <dd class="impact-figure">40+</dd>
+        </div>
+
+        <!-- Replaced "IRJIET" with numeric stat "1" (Peer-reviewed publication) -->
+        <div class="impact-cell fade-up-item" style="transition-delay: 0.35s;">
+          <dt class="impact-label">Peer-reviewed journal paper (IRJIET)</dt>
+          <dd class="impact-figure">1</dd>
+        </div>
+
+      </dl>
+    </section>
+
+    
+
+    <!-- ====================================================================
+         PAGE 08 — RESEARCH & PUBLICATIONS
+         ==================================================================== -->
+    <section class="research-section scroll-reveal" id="research">
+      <div class="section-header-block">
+        <div class="eyebrow fade-up-item">Page 08 — Research &amp; Publications</div>
+        <h2 class="section-title">
+          <span class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0.05s;">Academic Research &amp; Publications.</span></span>
+        </h2>
+        <p class="section-subtitle fade-up-item" style="transition-delay: 0.15s;">
+          Peer-reviewed scientific research exploring football match outcome prediction through machine learning, feature engineering, and statistical modeling.
+        </p>
+      </div>
+
+      <!-- Spotlight Paper Card -->
+      <div class="paper-spotlight-card fade-up-item" style="transition-delay: 0.1s;">
+        <div class="paper-header">
+          <div class="paper-journal-badge">
+            <span>IRJIET · INTERNATIONAL RESEARCH JOURNAL</span>
+            <span>VOL. 9 · ISSUE 5 · MARCH 2026</span>
+          </div>
+          <h3 class="paper-title">Indian Super League Match Prediction Using Machine Learning</h3>
+          <p class="paper-authors">
+            <strong>Authors:</strong> Jerein Sam Thomas, Gautham Ragunath, Adhith NJ
+          </p>
+          <p class="paper-abstract">
+            This study investigates historical Indian Super League match data across 10 seasons to develop a machine learning methodology predicting match outcomes (Home Win, Draw, Away Win). The research examines exploratory data analysis, feature preparation, and multi-class classification evaluation to quantify competitive performance indicators in Indian professional football.
+          </p>
+          <div class="paper-specs-grid">
+            <div class="paper-spec-box">
+              <div class="paper-spec-num">~1,100</div>
+              <div class="paper-spec-lbl">Matches Analyzed</div>
+            </div>
+            <div class="paper-spec-box">
+              <div class="paper-spec-num">2015–24</div>
+              <div class="paper-spec-lbl">Historical Seasons</div>
+            </div>
+            <div class="paper-spec-box">
+              <div class="paper-spec-num">37</div>
+              <div class="paper-spec-lbl">Feature Variables</div>
+            </div>
+            <div class="paper-spec-box">
+              <div class="paper-spec-num">pp. 447–451</div>
+              <div class="paper-spec-lbl">IRJIET Citation</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="paper-right-col">
+          <div class="eyebrow">Future Research Extensions</div>
+          <ul class="paper-interests-list">
+            <li><strong>Player Contributions:</strong> Individual xG, xA, and minutes impact on team win probability.</li>
+            <li><strong>Market Valuation:</strong> Team and player market values as competitive indicators.</li>
+            <li><strong>Foreign-Player Impact:</strong> Correlation between international signings and offensive output.</li>
+            <li><strong>Defensive Actions:</strong> Tackles, interceptions, clearances, and recovery third distributions.</li>
+            <li><strong>Chance Quality:</strong> Big chances created vs big chances missed under high-pressure gamestates.</li>
+            <li><strong>Environmental Variables:</strong> Weather conditions, pitch surfaces, and referee-related variables.</li>
+          </ul>
+
+          <div class="paper-philosophy-quote">
+            "Prediction models are most valuable not when they claim certainty, but when they illuminate the underlying factors that drive competitive performance."
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PAGE 09 — CAREER & PREFERRED ROLES
+         ==================================================================== -->
+    <section class="career-section scroll-reveal" id="career">
+      <div class="section-header-block">
+        <div class="eyebrow fade-up-item">Page 09 — Career &amp; Preferred Roles</div>
+        <h2 class="section-title">
+          <span class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0.05s;">Where I Want to Contribute.</span></span>
+        </h2>
+        <p class="section-subtitle fade-up-item" style="transition-delay: 0.15s;">
+          To establish a career as a Data Analyst, specialising in football and sports analytics, using statistical analysis, machine learning and data visualisation to turn football data into meaningful and actionable insights.
+        </p>
+      </div>
+
+      <!-- Primary Target Role Feature -->
+      <div class="career-lead-box fade-up-item" style="transition-delay: 0.1s;">
+        <div>
+          <div class="target-role-badge">Primary Career Role</div>
+          <h3 class="target-role-title">Data Analyst</h3>
+          <div style="font-size: 0.95rem; font-weight: 700; color: #00e599; margin-top: 0.4rem; letter-spacing: 0.06em; text-transform: uppercase;">
+            Specialisation: Football Analytics | Sports Data Analytics
+          </div>
+          <div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">
+            Supporting Areas: Machine Learning · AI · NLP · Data Engineering · Data Visualisation
+          </div>
+          <p class="target-role-desc" style="margin-top: 0.85rem;">
+            Combining quantitative problem solving from a Physics &amp; Data Science background with automated ETL pipelines, statistical modelling, and pitch visualisations to support evidence-based sporting and business decisions.
+          </p>
+        </div>
+
+        <div class="target-capabilities-grid">
+          <div class="capability-tag">Data Analysis &amp; EDA</div>
+          <div class="capability-tag">Statistical Analysis</div>
+          <div class="capability-tag">Python &amp; SQL Pipelines</div>
+          <div class="capability-tag">Machine Learning &amp; Prediction</div>
+          <div class="capability-tag">Data Visualisation &amp; Dashboards</div>
+          <div class="capability-tag">Natural Language Processing (NLP)</div>
+          <div class="capability-tag">AI-Assisted Analysis</div>
+          <div class="capability-tag">Data Engineering &amp; APIs</div>
+        </div>
+      </div>
+
+      <!-- 7 Preferred Roles Grid -->
+      <div class="preferred-roles-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+
+        <div class="role-card fade-up-item" style="transition-delay: 0.06s;">
+          <div class="role-index">01</div>
+          <h4 class="role-name">Data Analyst</h4>
+          <p class="role-desc">Primary career target across analytical, business, and sporting environments: performing exploratory analysis, uncovering patterns, and building automated reporting frameworks.</p>
+        </div>
+
+        <div class="role-card fade-up-item" style="transition-delay: 0.12s;">
+          <div class="role-index">02</div>
+          <h4 class="role-name">Football Data Analyst</h4>
+          <p class="role-desc">Working with match event telemetry, player tracking data, and team performance metrics to identify tactical advantages, recruitment targets, and opposition tendencies.</p>
+        </div>
+
+        <div class="role-card fade-up-item" style="transition-delay: 0.18s;">
+          <div class="role-index">03</div>
+          <h4 class="role-name">Sports Data Analyst</h4>
+          <p class="role-desc">Applying rigorous statistical methods, tracking telemetry, and predictive analytics to sports performance, training loads, and competition outcomes.</p>
+        </div>
+
+        <div class="role-card fade-up-item" style="transition-delay: 0.24s;">
+          <div class="role-index">04</div>
+          <h4 class="role-name">Junior Data Analyst</h4>
+          <p class="role-desc">Contributing immediately to end-to-end data cleaning, dataset preparation, dashboard creation, and operational analytics workflows.</p>
+        </div>
+
+        <div class="role-card fade-up-item" style="transition-delay: 0.30s;">
+          <div class="role-index">05</div>
+          <h4 class="role-name">Data Science Analyst</h4>
+          <p class="role-desc">Bridging exploratory analysis with predictive modeling, statistical testing, feature engineering, and machine learning evaluations on multidimensional data.</p>
+        </div>
+
+        <div class="role-card fade-up-item" style="transition-delay: 0.36s;">
+          <div class="role-index">06</div>
+          <h4 class="role-name">Football Performance Analyst</h4>
+          <p class="role-desc">Supporting coaching staff and sporting directors through post-match breakdown, video-integrated metric tracking, tactical space analysis, and opposition profiling.</p>
+        </div>
+
+        <div class="role-card fade-up-item" style="transition-delay: 0.42s;">
+          <div class="role-index">07</div>
+          <h4 class="role-name">Junior Machine Learning Analyst</h4>
+          <p class="role-desc">Developing predictive algorithms, evaluating classification/regression models, tuning hyper-parameters, and validating sports prediction systems.</p>
+        </div>
+
+      </div>
+
+      <!-- What I Bring Banner -->
+      <div class="what-i-bring-banner fade-up-item" style="margin-top: 3.5rem;">
+        <div class="eyebrow">Professional Strengths</div>
+        <h3 style="font-family: var(--font-display); font-size: 1.6rem; text-transform: uppercase; color: #fff;">What I Bring</h3>
+        <p style="font-size: 0.95rem; color: var(--muted-light); line-height: 1.6; max-width: 900px; margin-top: 0.5rem;">
+          "I approach data analysis with a quantitative scientific mindset developed through Physics, combined with modern Data Science methods. My goal is to produce analysis that is accurate, clearly communicated, and directly applicable to real-world sporting and analytical challenges."
+        </p>
+
+        <div class="strengths-checklist-grid">
+          <div class="strength-check-item">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Mathematical &amp; Scientific Foundation</strong>
+              <p>Strong problem-solving instincts rooted in physical principles, statistical rigor, and experimental design.</p>
+            </div>
+          </div>
+          <div class="strength-check-item">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Data Preparation &amp; Pipeline Engineering</strong>
+              <p>Practical ability to clean, reshape, merge, and standardise messy raw datasets into production-ready schemas.</p>
+            </div>
+          </div>
+          <div class="strength-check-item">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Domain Knowledge in Football Tactics</strong>
+              <p>Genuine, in-depth understanding of formations, player roles, pressing triggers, space utilisation, and match context.</p>
+            </div>
+          </div>
+          <div class="strength-check-item">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Clear Visual &amp; Written Communication</strong>
+              <p>Experience presenting technical findings through clean pitch maps, intuitive dashboards, and structured documentation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PAGE 10 — DISPATCH & CONTACT
+         ==================================================================== -->
+    <footer class="contact-section scroll-reveal" id="contact">
+      <div class="section-header-block">
+        <div class="eyebrow fade-up-item">Page 10 — Dispatch &amp; Collaboration</div>
+      </div>
+
+      <div class="contact-container">
+
+        <!-- Left: Pitch & Closing Statement -->
+        <div class="contact-left-col">
+          <h2 class="contact-heading">
+            <span class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0.05s;">Let's Connect.</span></span>
+          </h2>
+
+          <!-- Copy updated to "currently open to" -->
+          <p class="contact-subtext fade-up-item" style="transition-delay: 0.15s;">
+            Currently open to Data Analytics, Machine Learning, and Sports Analytics internship and entry-level opportunities. Interested in collaborating with organisations, football clubs, research groups and analytics teams.
+          </p>
+
+          <div class="fade-up-item" style="transition-delay: 0.22s;">
+            <div class="eyebrow" style="margin-bottom: 0.5rem;">Current Opportunity Interest</div>
+            <div class="contact-opportunities-list">
+              <span class="opportunity-pill">Data Analyst Intern</span>
+              <span class="opportunity-pill">Football Analytics Intern</span>
+              <span class="opportunity-pill">Sports Data Analyst Intern</span>
+              <span class="opportunity-pill">Junior Data Analyst</span>
+              <span class="opportunity-pill">Entry-Level Data Science Analyst</span>
             </div>
           </div>
 
-          <div class="other-project-card" style="background-image: linear-gradient(180deg, rgba(8,16,36,0.85), rgba(8,16,36,0.96)), url('assets/railway_analytics.jpg'); background-size: cover;">
-            <div class="other-icon">🚆</div>
-            <span class="other-category">TRANSIT SYSTEMS ANALYTICS</span>
-            <h3 class="other-title">Railway Gate Status &amp; Train Traffic Analytics</h3>
-            <p class="other-desc">
-              Data-driven traffic monitoring system predicting railway level-crossing wait times, operational bottlenecks, and congestion patterns.
+          <div class="contact-closing-box fade-up-item" style="transition-delay: 0.3s;">
+            <p>"I believe meaningful analysis begins with the right questions. My goal is to use data, statistics and technology to understand football more deeply and turn analytical findings into practical insights."</p>
+            <p style="margin-top: 0.75rem; font-style: normal; font-weight: 700; color: #fff;">
+              Jerein Sam Thomas — Data Analyst | Football Analytics | Applied Machine Learning
             </p>
-            <div class="tech-tags-row">
-              <span class="t-tag">Python</span>
-              <span class="t-tag">Time Series</span>
-              <span class="t-tag">Statistical Analytics</span>
-            </div>
           </div>
+        </div>
 
-          <div class="other-project-card" style="background-image: linear-gradient(180deg, rgba(8,16,36,0.85), rgba(8,16,36,0.96)), url('assets/traffic_analytics.jpg'); background-size: cover;">
-            <div class="other-icon">🚦</div>
-            <span class="other-category">URBAN MOBILITY</span>
-            <h3 class="other-title">Traffic Assistance &amp; Congestion Analytics</h3>
-            <p class="other-desc">
-              Spatial-temporal analytics pipeline identifying congestion hotspots, vehicular flow rates, and routing optimizations across urban corridors.
-            </p>
-            <div class="tech-tags-row">
-              <span class="t-tag">EDA</span>
-              <span class="t-tag">Spatial Analysis</span>
-              <span class="t-tag">Visualization</span>
+        <!-- Right: Official Verified Channels & Resume Placeholder Link -->
+        <div class="contact-channels-card fade-up-item" style="transition-delay: 0.18s;">
+          <div class="channels-header">Professional Channels</div>
+
+          <!-- Resume PDF Download Link -->
+          <a href="assets/resume.pdf" target="_blank" rel="noopener noreferrer" class="channel-link-item">
+            <div class="channel-left-info">
+              <span class="channel-name">Curriculum Vitae / Resume</span>
+              <span class="channel-handle">Download PDF Document</span>
             </div>
-          </div>
+            <span class="channel-arrow">↗</span>
+          </a>
 
+          <!-- Email -->
+          <a href="mailto:jereinsamthomas@gmail.com" class="channel-link-item">
+            <div class="channel-left-info">
+              <span class="channel-name">Direct Email</span>
+              <span class="channel-handle">jereinsamthomas@gmail.com</span>
+            </div>
+            <span class="channel-arrow">↗</span>
+          </a>
+
+          <!-- Copy Email Button -->
+          <button type="button" class="copy-email-btn" id="copy-email-btn">
+            <span id="copy-text">Copy Email Address</span>
+          </button>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a25a2a7/" target="_blank" rel="noreferrer noopener" class="channel-link-item">
+            <div class="channel-left-info">
+              <span class="channel-name">LinkedIn Profile</span>
+              <span class="channel-handle">linkedin.com/in/jerein-sam-thomas-46a25a2a7</span>
+            </div>
+            <span class="channel-arrow">↗</span>
+          </a>
+
+          <!-- GitHub -->
+          <a href="https://github.com/jereinsamthomas" target="_blank" rel="noreferrer noopener" class="channel-link-item">
+            <div class="channel-left-info">
+              <span class="channel-name">GitHub Repositories</span>
+              <span class="channel-handle">github.com/jereinsamthomas</span>
+            </div>
+            <span class="channel-arrow">↗</span>
+          </a>
+
+          <!-- Portfolio Live -->
+          <a href="https://jereinsamthomas.github.io/" target="_blank" rel="noreferrer noopener" class="channel-link-item">
+            <div class="channel-left-info">
+              <span class="channel-name">Web Portfolio</span>
+              <span class="channel-handle">jereinsamthomas.github.io</span>
+            </div>
+            <span class="channel-arrow">↗</span>
+          </a>
         </div>
 
       </div>
-    </section>
 
-    <!-- ======================================================================= -->
-    <!-- PAGE 9 — EXPERIENCE & EDUCATION                                         -->
-    <!-- ======================================================================= -->
-    <section class="section-stage experience-stage" id="experience" data-slide-index="8" data-title="Experience">
-      <div class="env-bg-layer" style="background-image: url('assets/stadium_tunnel.jpg'); filter: brightness(0.65);"></div>
-      <div class="env-overlay-gradient"></div>
-
-      <div class="stage-content">
-        
-        <div class="section-editorial-header">
-          <span class="section-tag">BACKGROUND &amp; CREDENTIALS</span>
-          <h2 class="section-title">Experience &amp; <span class="highlight-title">Education</span></h2>
-          <p class="section-lede">
-            Professional software operations internships and academic degrees.
-          </p>
+      <!-- Sub-Footer Copyright Bar -->
+      <div class="footer-bar">
+        <div class="footer-signature">
+          <strong>Jerein Sam Thomas</strong> — Turning Football Data into Meaningful Insights
         </div>
-
-        <div class="exp-edu-split-grid">
-          
-          <div class="exp-column">
-            <h3 class="column-heading">INTERNSHIP EXPERIENCE</h3>
-            
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content-card">
-                <div class="timeline-header-row">
-                  <span class="timeline-role">Software Implementation &amp; Operations Intern</span>
-                  <span class="timeline-date">May 15 – June 30, 2025</span>
-                </div>
-                <span class="timeline-org">MMNC / TMSoft</span>
-                <p class="timeline-desc">
-                  Assisted in enterprise software implementation workflows, operational verification, technical database support, and system troubleshooting.
-                </p>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content-card">
-                <div class="timeline-header-row">
-                  <span class="timeline-role">AI–ML Virtual Internship</span>
-                  <span class="timeline-date">Oct 2025 – Dec 2025</span>
-                </div>
-                <span class="timeline-org">AICTE EduSkills (Supported by Google for Developers)</span>
-                <p class="timeline-desc">
-                  Engaged in practical machine learning workflows, exploring classification algorithms, regression modeling, and structured data preparation techniques.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="edu-column">
-            <h3 class="column-heading">EDUCATION</h3>
-
-            <div class="edu-card">
-              <div class="edu-icon">🎓</div>
-              <span class="edu-years">2025 – 2027</span>
-              <h4 class="edu-degree">M.Sc. Applied Data Science</h4>
-              <span class="edu-institution">S.R.M. Institute of Science and Technology</span>
-              <p class="edu-summary">
-                Specialized study in sports data science, predictive machine learning, statistical modeling, database systems, and data visualization.
-              </p>
-            </div>
-
-            <div class="edu-card">
-              <div class="edu-icon">⚛️</div>
-              <span class="edu-years">2022 – 2025</span>
-              <h4 class="edu-degree">B.Sc. Physics</h4>
-              <span class="edu-institution">Mar Thoma College</span>
-              <p class="edu-summary">
-                Rigorous grounding in vector calculus, classical mechanics, thermodynamics, and analytical problem-solving.
-              </p>
-            </div>
-          </div>
-
+        <div>
+          SRMIST · M.Sc. Applied Data Science | B.Sc. Physics (MG Univ)
         </div>
-
+        <div>
+          © 2026 Jerein Sam Thomas. All rights reserved.
+        </div>
       </div>
-    </section>
-
-    <!-- ======================================================================= -->
-    <!-- PAGE 10 — SKILLS                                                        -->
-    <!-- ======================================================================= -->
-    <section class="section-stage skills-stage" id="skills" data-slide-index="9" data-title="Skills Matrix">
-      <div class="env-bg-layer" style="background-image: url('assets/stadium_hero_sky.jpg'); filter: brightness(0.6);"></div>
-      <div class="env-overlay-gradient"></div>
-
-      <div class="stage-content">
-        
-        <div class="section-editorial-header">
-          <span class="section-tag">COMPETENCIES</span>
-          <h2 class="section-title">The Analyst <span class="highlight-title">Toolkit</span></h2>
-          <p class="section-lede">
-            Specialized toolkit categorized across football analytics, data science, machine learning, and visualization.
-          </p>
-        </div>
-
-        <div class="skills-categories-grid">
-          
-          <div class="skill-group-card">
-            <div class="group-header">
-              <span class="group-icon">⚽</span>
-              <h3 class="group-title">Football Analytics</h3>
-            </div>
-            <div class="skill-chips-wrap">
-              <span class="skill-chip highlight">Football Data Analysis</span>
-              <span class="skill-chip highlight">Match Outcome Prediction</span>
-              <span class="skill-chip highlight">Formation Analysis</span>
-              <span class="skill-chip highlight">Tactical Analysis</span>
-              <span class="skill-chip">Sports Analytics</span>
-            </div>
-          </div>
-
-          <div class="skill-group-card">
-            <div class="group-header">
-              <span class="group-icon">🔬</span>
-              <h3 class="group-title">Programming &amp; Data</h3>
-            </div>
-            <div class="skill-chips-wrap">
-              <span class="skill-chip highlight">Python</span>
-              <span class="skill-chip highlight">SQL</span>
-              <span class="skill-chip highlight">Pandas</span>
-              <span class="skill-chip highlight">NumPy</span>
-              <span class="skill-chip">Data Cleaning</span>
-              <span class="skill-chip">EDA</span>
-              <span class="skill-chip">Statistical Analysis</span>
-            </div>
-          </div>
-
-          <div class="skill-group-card">
-            <div class="group-header">
-              <span class="group-icon">🤖</span>
-              <h3 class="group-title">Machine Learning</h3>
-            </div>
-            <div class="skill-chips-wrap">
-              <span class="skill-chip highlight">scikit-learn</span>
-              <span class="skill-chip">Classification</span>
-              <span class="skill-chip">Regression</span>
-              <span class="skill-chip">Feature Engineering</span>
-              <span class="skill-chip">Hyperparameter Tuning</span>
-              <span class="skill-chip">Cross-Validation</span>
-              <span class="skill-chip">Model Evaluation</span>
-            </div>
-          </div>
-
-          <div class="skill-group-card">
-            <div class="group-header">
-              <span class="group-icon">📊</span>
-              <h3 class="group-title">Visualization</h3>
-            </div>
-            <div class="skill-chips-wrap">
-              <span class="skill-chip highlight">Matplotlib</span>
-              <span class="skill-chip highlight">Seaborn</span>
-              <span class="skill-chip">Power BI</span>
-            </div>
-          </div>
-
-          <div class="skill-group-card">
-            <div class="group-header">
-              <span class="group-icon">💬</span>
-              <h3 class="group-title">NLP &amp; Tools</h3>
-            </div>
-            <div class="skill-chips-wrap">
-              <span class="skill-chip highlight">NLP</span>
-              <span class="skill-chip highlight">Intent Recognition</span>
-              <span class="skill-chip">Knowledge-Based Chatbots</span>
-              <span class="skill-chip">Jupyter</span>
-              <span class="skill-chip">VS Code</span>
-              <span class="skill-chip">Git &amp; GitHub</span>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ======================================================================= -->
-    <!-- PAGE 11 — CONTACT: EMPTY NIGHT STADIUM UNDER FLOODLIGHTS               -->
-    <!-- Environment: Clear Floodlit Stadium at Night                            -->
-    <!-- ======================================================================= -->
-    <section class="section-stage contact-stage" id="contact" data-slide-index="10" data-title="Contact &amp; Dossier">
-      <div class="env-bg-layer" style="background-image: url('assets/empty_stadium_night.jpg'); filter: brightness(0.85) contrast(1.15);"></div>
-      <div class="env-overlay-gradient"></div>
-
-      <div class="stage-content">
-        
-        <div class="contact-box-container">
-          <div class="contact-badge-pill">AVAILABLE FOR FOOTBALL ANALYTICS INTERNSHIP</div>
-          <h2 class="contact-headline">Let's Analyse <span class="highlight-title">The Game.</span></h2>
-          <div class="contact-sub-identity">
-            <strong>Jerein Sam Thomas</strong> &bull; Football Analytics &bull; Sports Data Science
-          </div>
-          <p class="contact-subtext">
-            Actively seeking football analytics and performance analysis internship opportunities from mid-November 2026 with professional football clubs, sports analytics teams, and academies.
-          </p>
-
-          <div class="contact-methods-row">
-            
-            <a href="mailto:jereinsamthomas1009@gmail.com" class="contact-btn-item primary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-              <span>jereinsamthomas1009@gmail.com</span>
-            </a>
-
-            <a href="tel:+916282858488" class="contact-btn-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-              </svg>
-              <span>+91 6282858488</span>
-            </a>
-
-            <a href="https://linkedin.com/in/jerein-sam-thomas-46a75a2a7" target="_blank" rel="noopener noreferrer" class="contact-btn-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-              <span>LinkedIn</span>
-            </a>
-
-            <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer" class="contact-btn-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-              <span>GitHub</span>
-            </a>
-
-            <a href="https://jereinsamthomas.github.io" target="_blank" rel="noopener noreferrer" class="contact-btn-item">
-              <span>jereinsamthomas.github.io</span>
-            </a>
-
-          </div>
-
-          <div class="resume-download-bar">
-            <button class="btn-primary-pill" id="btn-download-resume-bottom">
-              <span>Download Official Resume (PDF)</span>
-              <span class="btn-arrow">↓</span>
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
+    </footer>
 
   </main>
 
-  <!-- ========================================================================= -->
-  <!-- 4. RESUME PREVIEW MODAL                                                   -->
-  <!-- ========================================================================= -->
-  <div class="cinematic-modal-overlay" id="resume-modal" aria-hidden="true">
-    <div class="modal-glass-container resume-modal-container">
-      <button class="btn-close-modal" id="close-resume-modal" aria-label="Close modal">&times;</button>
-      
-      <div class="modal-telemetry-header">
-        <div class="tag-row">
-          <span class="live-pill"><span class="pulsing-core"></span> VERIFIED CREDENTIALS</span>
-          <span class="monospace-pill">CURRICULUM VITAE</span>
-        </div>
-        <h3 class="modal-match-title">Jerein Sam Thomas</h3>
-        <p class="modal-sub">Football Analytics | Sports Data Science &bull; M.Sc. Applied Data Science (B.Sc. Physics)</p>
-      </div>
-
-      <div class="resume-sheet-body">
-        
-        <div class="resume-section">
-          <h4 class="resume-section-title">Education</h4>
-          <div class="resume-item">
-            <strong>M.Sc. Applied Data Science</strong> &bull; SRM Institute of Science and Technology (2025–2027)
-          </div>
-          <div class="resume-item">
-            <strong>B.Sc. Physics</strong> &bull; Mar Thoma College (2022–2025)
-          </div>
-        </div>
-
-        <div class="resume-section">
-          <h4 class="resume-section-title">Football Analytics Projects</h4>
-          <div class="resume-item">
-            <strong>Tactics OS / Tactical Battle Engine:</strong> Football simulation and tactical engine covering 40+ formations, positional coordinates, role interactions, and space control.
-          </div>
-          <div class="resume-item">
-            <strong>ISL Match Outcome Predictor:</strong> Predictive machine learning workflow with Python, Pandas, scikit-learn, cross-validation, and feature importance for historical ISL match fixtures.
-          </div>
-          <div class="resume-item">
-            <strong>Football Tactics &amp; Formation Engine:</strong> Rule-based spatial classifier for tactical shape and zone overload evaluation.
-          </div>
-          <div class="resume-item">
-            <strong>AI Football Tactical Knowledge Chatbot:</strong> Domain-specific NLP assistant for tactical discussions.
-          </div>
-        </div>
-
-        <div class="resume-section">
-          <h4 class="resume-section-title">Internship Experience</h4>
-          <div class="resume-item">
-            <strong>Software Implementation &amp; Operations Intern:</strong> MMNC / TMSoft (May 15 – June 30, 2025)
-          </div>
-          <div class="resume-item">
-            <strong>AI–ML Virtual Internship:</strong> AICTE EduSkills Supported by Google for Developers (Oct 2025 – Dec 2025)
-          </div>
-        </div>
-
-        <div class="resume-section">
-          <h4 class="resume-section-title">Technical Toolkit</h4>
-          <div class="resume-item">
-            Python, SQL, Pandas, NumPy, scikit-learn, Classification, Regression, Feature Engineering, Cross-Validation, Matplotlib, Seaborn, Power BI, NLP.
-          </div>
-        </div>
-
-      </div>
-
-      <div class="modal-footer-actions">
-        <a href="mailto:jereinsamthomas1009@gmail.com?subject=Football%20Analytics%20Internship%20Inquiry" class="btn-primary-pill">
-          <span>Email Jerein</span>
-          <span>✉</span>
-        </a>
-      </div>
-
-    </div>
-  </div>
-
-  <footer class="cinematic-footer">
-    <div class="footer-inner">
-      <div class="footer-left">
-        <span class="footer-sparkle">✦</span>
-        <span>Jerein Sam Thomas &bull; Football Analytics &bull; Sports Data Science</span>
-      </div>
-      <div class="footer-center">
-        <span>Available for Football Analytics Internship &bull; From mid-November 2026</span>
-      </div>
-      <div class="footer-right">
-        <span>M.Sc. Applied Data Science (SRM IST) &bull; B.Sc. Physics (Mar Thoma College)</span>
-      </div>
-    </div>
-  </footer>
-
-  <script src="app.js"></script>
+  <!-- External Modular JavaScript -->
+  <script type="module" src="main.js"></script>
 </body>
 </html>
