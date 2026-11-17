@@ -138,28 +138,12 @@
     </ul>
   </div>
 
-  <!-- Stadium Tunnel Doors Cinematic Intro Overlay (Dual Sliding Doors) -->
-  <div class="stadium-tunnel-entrance is-hidden" id="stadiumTunnelEntrance" aria-hidden="true">
-    <div class="tunnel-door-panel tunnel-door-left" id="tunnelDoorLeft"></div>
-    <div class="tunnel-door-panel tunnel-door-right" id="tunnelDoorRight"></div>
-    <div class="tunnel-seam-glow" id="tunnelSeamGlow"></div>
-  </div>
-
   <main>
 
     <!-- ====================================================================
          PAGE 01 — HOME
          ==================================================================== -->
     <section class="hero-section" id="home">
-
-      <!-- Multi-Layer Football Stadium Cinema Stage Backdrop -->
-      <div class="hero-stadium-backdrop" aria-hidden="true">
-        <div class="stadium-stage-img-wrap">
-          <img src="assets/stadium_cinematic_hero.jpg" alt="" class="stadium-stage-bg" width="1920" height="1080">
-          <div class="stadium-mist-overlay"></div>
-          <div class="stadium-light-flare"></div>
-        </div>
-      </div>
 
       <!-- Top Row: Tagline, Roles (Accessibility: no redundant aria-label), Intro & Action Buttons -->
       <!-- Top Row: Tagline & Roles (Left) + Editorial Quote & Bio (Right) — Kept compact so NO text overlaps the name or photo -->
@@ -187,22 +171,7 @@
         </div>
       </div>
 
-      <!-- Floating Tactical Telemetry HUD Cards (Desktop) -->
-      <div class="hero-tactical-hud hud-left" aria-hidden="true">
-        <div class="tactical-hud-pill">
-          <span class="badge-dot-live"></span>
-          <span class="hud-tag">OPTICAL 60FPS TRACKING</span>
-        </div>
-        <div class="tactical-hud-val">ZONE 14 CONTROL: 64.2%</div>
-      </div>
-
-      <div class="hero-tactical-hud hud-right" aria-hidden="true">
-        <div class="tactical-hud-pill">
-          <span class="badge-dot-live" style="background:#00f2fe;box-shadow:0 0 8px #00f2fe;"></span>
-          <span class="hud-tag">EXPECTED GOALS (xG)</span>
-        </div>
-        <div class="tactical-hud-val">+0.76 DECISIVE TRANSITION</div>
-      </div>
+      
 
       <!-- Giant Display Name: JEREIN SAM THOMAS (Behind Portrait Cutout) -->
       <h1 class="hero-giant-name hero-name-base" id="hero-giant-name" aria-label="Jerein Sam Thomas">
@@ -238,10 +207,7 @@
       <div class="hero-bottom-bar">
         <div class="hero-scroll-cue">Scroll to explore portfolio</div>
         <div class="hero-actions-row">
-          <button class="btn-primary btn-stadium-cinema" id="btnReplayStadium" type="button" aria-label="Replay Football Stadium Cinematic Intro">
-            <span class="cinema-icon" aria-hidden="true">▶</span> Replay Stadium Cinema
-          </button>
-          <a href="match-analyzer/index.html" class="btn-secondary" style="border-color: rgba(255,59,29,0.55); color: #fff;">
+          <a href="match-analyzer/index.html" class="btn-primary" style="background:#ff3b1d; border-color:#ff3b1d; color:#fff;" aria-label="Explore Football Match Analysis Platform">
             Football Match Analysis ↗
           </a>
           <a href="#about" class="btn-secondary">Explore My Work</a>

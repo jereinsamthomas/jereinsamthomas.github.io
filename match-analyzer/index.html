@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Football Match Analysis — Jerein Sam Thomas | Tactical Intelligence Suite</title>
-  <meta name="description" content="Football Match Analysis: spatial pitch telemetry, tactical structures, and predictive match intelligence by Jerein Sam Thomas.">
+  <title>Football Match Analysis — Jerein Sam Thomas | UEFA Pro Tactical Intelligence Suite</title>
+  <meta name="description" content="Elite football match analysis: spatial pitch telemetry, xG models, half-space breakdowns, and predictive tactical intelligence by Jerein Sam Thomas.">
   <meta name="keywords" content="Football Analytics, Tactical Summit, El Clásico, Match Analysis, xG, Spatial Telemetry, Jerein Sam Thomas">
 
   <!-- Preload Inter Variable Font -->
@@ -1459,6 +1459,568 @@
       box-shadow: 0 0 10px rgba(255, 59, 29, 0.35);
     }
 
+  
+    /* =========================================================================
+       ELITE FOOTBALL MATCH ANALYSIS HERO SUITE
+       ========================================================================= */
+    :root {
+      --bg: #000000;
+      --bg-darker: #000000;
+      --ink: #000000;
+      --btn: #ff3b1d;
+      --btn-hover: #ff5638;
+      --text: #FFFFFF;
+      --football-orange: #ff3b1d;
+      --football-cyan: #00f2fe;
+      --football-green: #00e599;
+      --football-gold: #ffbe0b;
+      --border-subtle: rgba(255, 255, 255, 0.14);
+    }
+
+    .brand-accent {
+      color: var(--football-orange);
+      font-weight: 800;
+      text-shadow: 0 0 15px rgba(255, 59, 29, 0.5);
+    }
+
+    .badge-dot-live {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--football-orange);
+      box-shadow: 0 0 10px var(--football-orange);
+      margin-right: 6px;
+      animation: livePulseDot 1.4s infinite alternate ease-in-out;
+    }
+
+    @keyframes livePulseDot {
+      from { transform: scale(0.9); opacity: 0.7; }
+      to { transform: scale(1.35); opacity: 1; }
+    }
+
+    .btn-back-portfolio {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 7px 16px;
+      transition: all 0.25s ease;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-back-portfolio:hover {
+      color: #fff;
+      border-color: var(--football-orange);
+      background: rgba(255, 59, 29, 0.2);
+      transform: translateX(-2px);
+    }
+
+    .btn-replay-cinema {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #00f2fe;
+      border: 1px solid rgba(0, 242, 254, 0.4);
+      border-radius: 999px;
+      padding: 7px 16px;
+      transition: all 0.25s ease;
+      background: rgba(0, 242, 254, 0.1);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-replay-cinema:hover {
+      background: rgba(0, 242, 254, 0.25);
+      border-color: #00f2fe;
+      box-shadow: 0 0 18px rgba(0, 242, 254, 0.5);
+      color: #fff;
+    }
+
+    /* 1. Back Layer (Stadium Bowl) */
+    .layer-back {
+      z-index: 1 !important;
+      transform-origin: 50% 40%;
+      will-change: transform;
+    }
+
+    .layer-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.55) contrast(1.18);
+    }
+
+    /* 2. Mid Layer (Transparent Tactical Pitch Canvas directly over grass) */
+    .layer-mid {
+      z-index: 2 !important;
+      transform-origin: 50% 45%;
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    .stage-pitch-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: auto;
+      z-index: 2;
+    }
+
+    /* 3. Headline Block (Above pitch, below analyst) */
+    .headline-block {
+      position: absolute;
+      z-index: 3 !important;
+      pointer-events: none;
+      width: 100vw;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      white-space: nowrap;
+      will-change: transform;
+    }
+
+    .hero-tactical-banner {
+      display: inline-flex;
+      gap: 0.85rem;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.85rem;
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(8px);
+      padding: 5px 16px;
+      border-radius: 999px;
+    }
+
+    .match-badge {
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--football-orange);
+    }
+
+    .match-meta {
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .word-football {
+      color: #FFFFFF;
+      text-shadow: 0 0 25px rgba(255, 255, 255, 0.45), 0 2px 10px rgba(0, 0, 0, 0.95);
+    }
+
+    .word-match {
+      color: #ff3b1d;
+      text-shadow: 0 0 35px rgba(255, 59, 29, 0.6), 0 2px 10px rgba(0, 0, 0, 0.95);
+    }
+
+    .word-analysis {
+      color: #FFFFFF;
+      text-shadow: 0 0 25px rgba(255, 255, 255, 0.45), 0 2px 10px rgba(0, 0, 0, 0.95);
+    }
+
+    .hero-tactical-subbar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      margin-top: 0.95rem;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 6px 18px;
+      border-radius: 999px;
+    }
+
+    .subbar-chip {
+      font-family: monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .subbar-dot {
+      color: var(--football-orange);
+      font-weight: bold;
+    }
+
+    /* 4. Front Layer (Analyst Cutout Overlapping Text) */
+    .layer-front {
+      z-index: 4 !important;
+      transform-origin: 50% 100%;
+      will-change: transform;
+    }
+
+    /* 5. Balcony Railing Telemetry HUD & Interactive Controls */
+    .balcony-telemetry-hud {
+      position: absolute;
+      top: 56%;
+      left: 4.5%;
+      right: 4.5%;
+      z-index: 5 !important;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      pointer-events: auto;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.8s ease 4.2s, transform 0.8s ease 4.2s;
+    }
+
+    body:not(.intro) .balcony-telemetry-hud {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hud-main-deck {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    /* Live Match Scoreboard Pill */
+    .hud-match-scoreboard {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 10px;
+      padding: 0.55rem 1.1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+      gap: 1rem;
+    }
+
+    .scoreboard-team {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .team-code {
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #fff;
+    }
+
+    .team-score {
+      font-family: monospace;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--football-orange);
+      background: rgba(255, 59, 29, 0.15);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 59, 29, 0.3);
+    }
+
+    .team-xg {
+      font-family: monospace;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .scoreboard-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0 0.8rem;
+    }
+
+    .match-time-live {
+      font-family: monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #00e599;
+      display: flex;
+      align-items: center;
+    }
+
+    .match-stage {
+      font-family: monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+    }
+
+    /* Telemetry Info Cards */
+    .telemetry-card {
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+      padding: 0.55rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3px;
+      color: #FFFFFF;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+      min-width: 170px;
+    }
+
+    .telemetry-card .t-label {
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .telemetry-card .t-val {
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 12.5px;
+      color: #00f2fe;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Interactive Tactical Phase Selector Bar */
+    .balcony-tactical-controls {
+      display: flex;
+      gap: 0.55rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.88);
+      padding: 0.4rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(14px);
+      align-self: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.85);
+    }
+
+    .balcony-mode-btn {
+      font-family: monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.75);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .balcony-mode-btn .btn-num {
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .balcony-mode-btn:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .balcony-mode-btn.active {
+      color: #fff;
+      border-color: var(--football-orange);
+      background: rgba(255, 59, 29, 0.25);
+      box-shadow: 0 0 16px rgba(255, 59, 29, 0.45);
+    }
+
+    .balcony-mode-btn.active .btn-num {
+      color: #fff;
+      background: var(--football-orange);
+    }
+
+    /* Tunnel Doors Markings & Lock */
+    .door-panel {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 50.1%;
+      background-image: url('assets/stadium_tunnel_doors.jpg');
+      background-size: 200% 100%;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.98);
+      will-change: transform;
+    }
+
+    .tunnel-door-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3.5rem;
+      pointer-events: none;
+    }
+
+    .left-stencil {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .right-stencil {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .tunnel-stencil-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      padding: 1.35rem 1.75rem;
+      border-radius: 8px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.95);
+      max-width: 400px;
+    }
+
+    .tunnel-badge {
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--football-orange);
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .tunnel-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      line-height: 1.2;
+    }
+
+    .tunnel-status {
+      font-family: monospace;
+      font-size: 9.5px;
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tunnel-hazard-strip {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 12px;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        #ff3b1d,
+        #ff3b1d 14px,
+        #000000 14px,
+        #000000 28px
+      );
+      box-shadow: 0 0 18px rgba(255, 59, 29, 0.7);
+    }
+
+    .tunnel-hazard-strip.strip-right {
+      right: auto;
+      left: 0;
+    }
+
+    .tunnel-center-lock {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      pointer-events: none;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .lock-ring {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 59, 29, 0.85);
+      animation: spinLockRing 12s linear infinite;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes spinLockRing {
+      to { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    .lock-icon {
+      width: 84px;
+      height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 50%;
+      color: var(--football-orange);
+      box-shadow: 0 0 32px rgba(255, 59, 29, 0.55);
+    }
+
+    .lock-text {
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: center;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 6px 16px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .lock-text span {
+      color: var(--football-green);
+      font-weight: 800;
+    }
+
   </style>
 </head>
 <body class="intro">
@@ -1466,7 +2028,7 @@
   <!-- =======================================================================
        1. HERO VIEWPORT — FOOTBALL MATCH ANALYSIS CINEMATIC STAGE (100svh)
        ======================================================================= -->
-    <main class="hero" id="hero" aria-label="Football Match Analysis Hero Stage">
+      <main class="hero" id="hero" aria-label="Football Match Analysis Hero Stage">
 
     <!-- Nav pinned to viewport -->
     <header class="nav" id="mainNav">
@@ -1498,7 +2060,7 @@
     <!-- Stage (16:9 Cover Box) -->
     <div class="stage" id="stage">
 
-      <!-- 1. Back Layer: Floodlit Stadium Canopy & Atmosphere -->
+      <!-- 1. Back Layer: Floodlit Stadium Pitch Bowl & Sky (z-index: 1) -->
       <div class="stage-layer layer-back" id="layerBack">
         <img
           src="assets/stadium_cinematic_hero.jpg"
@@ -1506,17 +2068,21 @@
           id="imgBack"
           width="1920"
           height="1080"
-          style="filter: brightness(0.52) contrast(1.18) blur(1px);"
         >
         <div class="stadium-floodlight-cones" aria-hidden="true"></div>
         <div class="top-shade" id="topShade"></div>
       </div>
 
-      <!-- 2. Headline Block -->
+      <!-- 2. Mid Layer: Live Interactive 3D Tactical Pitch Canvas on the Turf (z-index: 2) -->
+      <div class="stage-layer layer-mid" id="layerMid">
+        <canvas id="stagePitchCanvas" class="stage-pitch-canvas"></canvas>
+      </div>
+
+      <!-- 3. Headline Block: Above pitch, shining in stadium sky (z-index: 3) -->
       <div class="headline-block" id="headlineBlock">
         <div class="hero-tactical-banner">
-          <span class="match-badge">UEFA TACTICAL INTELLIGENCE · MATCHDAY 32</span>
-          <span class="match-meta">EL CLÁSICO 2026/27 · SPACE &amp; TELEMETRY SUITE</span>
+          <span class="match-badge">UEFA PRO TACTICAL INTELLIGENCE · MATCHDAY 32</span>
+          <span class="match-meta">EL CLÁSICO 2026/27: REAL MADRID 3 — 2 FC BARCELONA</span>
         </div>
         <span class="kicker" id="kicker">SPATIAL TACTICAL INTELLIGENCE ·</span>
         <h1 class="giant-word" id="giantWord" aria-label="Football Match Analysis">
@@ -1533,28 +2099,17 @@
           </span>
         </h1>
         <div class="hero-tactical-subbar">
+          <span class="subbar-chip">xG: REAL MADRID 1.95 vs 1.19 BARCELONA</span>
+          <span class="subbar-dot">•</span>
           <span class="subbar-chip">ZONE 14 CONTROL: 64%</span>
           <span class="subbar-dot">•</span>
-          <span class="subbar-chip">xG: REAL MADRID 1.95 vs BARCELONA 1.19</span>
+          <span class="subbar-chip">87' TRANSITION WINNER (7.4s)</span>
           <span class="subbar-dot">•</span>
-          <span class="subbar-chip">87' DECISIVE COUNTER-PRESS (7.4s)</span>
+          <span class="subbar-chip">PPDA: 7.8</span>
         </div>
       </div>
 
-      <!-- 3. Mid Layer: Floodlit Stadium Pitch & Stands -->
-      <div class="stage-layer layer-mid" id="layerMid">
-        <img
-          src="assets/stadium_cinematic_hero.jpg"
-          alt="Illuminated football pitch and stadium stands under floodlights"
-          id="imgMid"
-          width="1920"
-          height="1080"
-        >
-        <!-- Live Animated Pitch Passing Vectors Canvas -->
-        <canvas id="stagePitchCanvas" class="stage-pitch-canvas"></canvas>
-      </div>
-
-      <!-- 4. Front Layer: Tactical Football Analyst at Suite Balcony with Laptop -->
+      <!-- 4. Front Layer: Tactical Football Analyst at Suite Balcony with Laptop (z-index: 4) -->
       <div class="stage-layer layer-front" id="layerFront">
         <div class="glass-tint" id="glassTint"></div>
         <img
@@ -1566,36 +2121,62 @@
           height="768"
         >
 
-        <!-- Football Tactical Telemetry HUD Overlay on Balcony Railing -->
+        <!-- 5. Football Tactical Telemetry HUD on Balcony Railing (z-index: 5) -->
         <div class="balcony-telemetry-hud" id="balconyHud" aria-hidden="true">
-          <div class="telemetry-card">
-            <span class="t-label">Live Match Telemetry</span>
-            <span class="t-val"><span class="live-pulse"></span> Camp Nou 2026/27</span>
+          <!-- Top Row: Scoreboard + Key Metrics -->
+          <div class="hud-main-deck">
+            <!-- Live Match Scoreboard Pill -->
+            <div class="hud-match-scoreboard">
+              <div class="scoreboard-team">
+                <span class="team-code">RMA</span>
+                <span class="team-score">3</span>
+                <span class="team-xg">1.95 xG</span>
+              </div>
+              <div class="scoreboard-divider">
+                <span class="match-time-live"><span class="badge-dot-live"></span> 87' FT</span>
+                <span class="match-stage">EL CLÁSICO</span>
+              </div>
+              <div class="scoreboard-team">
+                <span class="team-score">2</span>
+                <span class="team-code">FCB</span>
+                <span class="team-xg">1.19 xG</span>
+              </div>
+            </div>
+
+            <!-- Active Tactical Metric Card -->
+            <div class="telemetry-card">
+              <span class="t-label">Active Tactical Focus</span>
+              <span class="t-val" id="hudActiveMetric"><span class="live-pulse"></span> 87' Winner Transition (7.4s)</span>
+            </div>
+
+            <!-- Decisive Sequence Metric Card -->
+            <div class="telemetry-card">
+              <span class="t-label">Decisive Sequence</span>
+              <span class="t-val" id="hudDecisiveVal" style="color:#ff3b1d;">Bellingham → Vinícius Jr. (0.62 xG Finish)</span>
+            </div>
           </div>
-          <div class="telemetry-card">
-            <span class="t-label">Expected Goals (xG)</span>
-            <span class="t-val" style="color:#ff3b1d;">1.19 vs 1.95 xG</span>
-          </div>
-          <div class="telemetry-card">
-            <span class="t-label">Central Zone 14 Space</span>
-            <span class="t-val" style="color:#00e599;">64% Control</span>
-          </div>
-          <div class="telemetry-card">
-            <span class="t-label">Decisive Transition</span>
-            <span class="t-val">87' Winner (7.4s)</span>
-          </div>
-          <!-- Interactive Balcony Tactical Mode Selectors -->
+
+          <!-- Bottom Row: Interactive Tactical Phase Selectors -->
           <div class="balcony-tactical-controls">
-            <button class="balcony-mode-btn active" data-mode="vectors" type="button">Pass Vectors</button>
-            <button class="balcony-mode-btn" data-mode="zone14" type="button">Zone 14 Box</button>
-            <button class="balcony-mode-btn" data-mode="press" type="button">High Press</button>
+            <button class="balcony-mode-btn active" data-mode="transition" type="button">
+              <span class="btn-num">01</span> 87' Winner (7.4s)
+            </button>
+            <button class="balcony-mode-btn" data-mode="zone14" type="button">
+              <span class="btn-num">02</span> Zone 14 Space (64%)
+            </button>
+            <button class="balcony-mode-btn" data-mode="formations" type="button">
+              <span class="btn-num">03</span> 4-4-2 vs 4-3-3 Shapes
+            </button>
+            <button class="balcony-mode-btn" data-mode="press" type="button">
+              <span class="btn-num">04</span> PPDA 7.8 Press Trap
+            </button>
           </div>
         </div>
       </div>
 
     </div><!-- /.stage -->
 
-    <!-- 5. Opening Box (Top-Down Aerial Pitch Zoom & Tilt with Live Optical Radar) -->
+    <!-- 6. Opening Box (Top-Down Aerial Pitch Zoom & Tilt with Live Optical Radar) -->
     <div class="opening-box" id="openingBox">
       <img
         src="assets/stadium_cinematic_hero.jpg"
@@ -1611,7 +2192,7 @@
       <!-- Stadium Cinema HUD Overlay -->
       <div class="opening-tactical-hud" id="openingTacticalHud">
         <div class="hud-top-meta">
-          <span class="hud-pill"><span class="badge-dot-live"></span> VENUE: CAMP NOU · 84,000 ATTENDANCE</span>
+          <span class="hud-pill"><span class="badge-dot-live"></span> VENUE: SANTIAGO BERNABÉU · 84,744 ATTENDANCE</span>
           <span class="hud-pill">MATCHDAY 32 · EL CLÁSICO 2026/27</span>
           <span class="hud-pill" style="color:#00f2fe;">OPTICAL 60 FPS TRACKING</span>
         </div>
@@ -1622,13 +2203,13 @@
       </div>
     </div>
 
-    <!-- 6. Stadium Tunnel Blast Doors -->
+    <!-- 7. Stadium Tunnel Blast Doors -->
     <div class="doors-box" id="doorsBox">
       <div class="door-panel door-left" id="doorLeft">
         <div class="tunnel-door-overlay">
           <div class="tunnel-stencil-block left-stencil">
-            <span class="tunnel-badge">UEFA STADIUM TUNNEL · SECTOR 01</span>
-            <h3 class="tunnel-title">PLAYERS &amp; TACTICAL STAFF</h3>
+            <span class="tunnel-badge">UEFA STADIUM TUNNEL · SECTOR A-01</span>
+            <h3 class="tunnel-title">PLAYERS &amp; ANALYSTS ONLY</h3>
             <p class="tunnel-status"><span class="badge-dot-live"></span> MATCHDAY 32 ACTIVE</p>
           </div>
           <div class="tunnel-hazard-strip"></div>
@@ -1649,7 +2230,7 @@
       <div class="tunnel-center-lock" id="tunnelCenterLock">
         <div class="lock-ring"></div>
         <div class="lock-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
           </svg>
@@ -1658,7 +2239,7 @@
       </div>
     </div>
 
-    <!-- 7. Scroll Indicator -->
+    <!-- 8. Scroll Indicator -->
     <a href="#analysisRoom" class="hero-scroll-cue" id="heroScrollCue">
       <span>EXPLORE MATCH ANALYSIS ROOM</span>
       <svg class="cue-bounce" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
@@ -1890,7 +2471,7 @@
   <!-- =======================================================================
        JAVASCRIPT — FOOTBALL TACTICAL ENGINE & MATCH INTERACTION
        ======================================================================= -->
-    <script>
+      <script>
     (function () {
       'use strict';
 
@@ -1913,13 +2494,12 @@
       const layerFront = document.getElementById('layerFront');
       const topShade = document.getElementById('topShade');
       const balconyHud = document.getElementById('balconyHud');
-      const heroScrollCue = document.getElementById('heroScrollCue');
       const btnReplayIntro = document.getElementById('btnReplayIntro');
+      const hudActiveMetric = document.getElementById('hudActiveMetric');
+      const hudDecisiveVal = document.getElementById('hudDecisiveVal');
 
-      // Asset references for readiness
       const imgDoors = new Image();
       imgDoors.src = 'assets/stadium_tunnel_doors.jpg';
-      const imgMid = document.getElementById('imgMid');
       const imgFront = document.getElementById('imgFront');
 
       let stageWidth = 1600;
@@ -1928,7 +2508,7 @@
       let baselineY = 387;
 
       /* =======================================================================
-         1. Dynamic Stage Sizing & Typography Calculation
+         1. Dynamic Responsive Stage Sizing & Typography
          ======================================================================= */
       function initStageLayout() {
         const vw = window.innerWidth;
@@ -1974,7 +2554,7 @@
           navBottom = 12 + 34;
         }
 
-        const sizeA = (0.75 * stageWidth) / widthPerEm;
+        const sizeA = (0.78 * stageWidth) / widthPerEm;
         const sizeB = (0.94 * vw) / widthPerEm;
         const availableGap = baselineInViewport - (navBottom + 0.035 * vh);
         const sizeC = Math.max(18, availableGap / 0.88);
@@ -2011,7 +2591,6 @@
       const easeHandoff = 'cubic-bezier(.45,0,.55,1)';
       const easeReveal = 'cubic-bezier(.2,.65,.3,1)';
       const easeBack = 'cubic-bezier(.45,0,.35,1)';
-      const easeMidUp = 'cubic-bezier(.45,0,.3,1)';
       const easeHeadline = 'cubic-bezier(.3,0,.4,1)';
       const easeFrontUp = 'cubic-bezier(.2,.5,.2,1)';
 
@@ -2054,7 +2633,7 @@
           { offset: 1, transform: 'translateX(101%)' }
         ]);
 
-        // Aerial Pitch Camera Pull-Back & Tilt: 0.02s -> 2.45s
+        // Aerial Pitch Camera Pull-Back: 0.02s -> 2.45s
         createAnimation(imgAerial, [
           { offset: 0, transform: 'scale(1.42) translateY(10%)' },
           { offset: 1000 / 7400, transform: 'scale(1.42) translateY(10%)', easing: 'cubic-bezier(.22,1,.36,1)' },
@@ -2112,16 +2691,6 @@
           { offset: 2900 / 7400, transform: 'translateY(0)', easing: easeBack },
           { offset: 4300 / 7400, transform: 'translateY(-1.5%)' },
           { offset: 1, transform: 'translateY(-1.5%)' }
-        ]);
-
-        // Mid Layer: 2.90s -> 4.30s (-4%), hold to 4.60s, -> 6.90s (0)
-        createAnimation(layerMid, [
-          { offset: 0, transform: 'translateY(0)' },
-          { offset: 2900 / 7400, transform: 'translateY(0)', easing: easeMidUp },
-          { offset: 4300 / 7400, transform: 'translateY(-4%)' },
-          { offset: 4600 / 7400, transform: 'translateY(-4%)', easing: easeHandoff },
-          { offset: 6900 / 7400, transform: 'translateY(0)' },
-          { offset: 1, transform: 'translateY(0)' }
         ]);
 
         // Headline Block: 3.00s -> 4.80s
@@ -2193,15 +2762,12 @@
         requestAnimationFrame(masterTick);
       }
 
-      // Check Readiness & Start Immediately
-      function checkAndStart() {
-        if (imgMid && imgMid.complete && imgFront && imgFront.complete) {
-          setTimeout(startIntro, 80);
-        } else {
-          window.addEventListener('load', () => setTimeout(startIntro, 80));
-        }
+      // Check Readiness & Start
+      if (imgFront && imgFront.complete) {
+        setTimeout(startIntro, 80);
+      } else {
+        window.addEventListener('load', () => setTimeout(startIntro, 80));
       }
-      checkAndStart();
 
       if (btnReplayIntro) {
         btnReplayIntro.addEventListener('click', (e) => {
@@ -2212,12 +2778,11 @@
       }
 
       /* =======================================================================
-         4. Live Optical Pitch Tracking Canvas (Opening Sequence)
+         4. Live Optical Pitch Tracking Radar (Opening Sequence)
          ======================================================================= */
       function initOpeningRadar() {
         if (!openingCanvas) return;
         const ctx = openingCanvas.getContext('2d');
-        let animId;
 
         function resize() {
           openingCanvas.width = openingCanvas.offsetWidth || 1920;
@@ -2226,21 +2791,14 @@
         resize();
         window.addEventListener('resize', resize);
 
-        // Player tracking mock nodes
-        const madridNodes = [
-          { x: 0.48, y: 0.72, vx: 0.0004, vy: -0.0002, label: 'Bellingham' },
-          { x: 0.32, y: 0.60, vx: -0.0003, vy: 0.0004, label: 'Vinícius' },
-          { x: 0.55, y: 0.52, vx: 0.0005, vy: 0.0003, label: 'Mbappé' },
-          { x: 0.42, y: 0.82, vx: 0.0002, vy: -0.0004, label: 'Valverde' },
-          { x: 0.58, y: 0.84, vx: -0.0003, vy: 0.0002, label: 'Camavinga' }
-        ];
-
-        const barcaNodes = [
-          { x: 0.46, y: 0.44, vx: -0.0003, vy: 0.0003, label: 'Pedri' },
-          { x: 0.62, y: 0.38, vx: 0.0004, vy: -0.0002, label: 'Yamal' },
-          { x: 0.52, y: 0.32, vx: 0.0002, vy: 0.0005, label: 'Lewandowski' },
-          { x: 0.38, y: 0.46, vx: -0.0004, vy: -0.0002, label: 'Raphinha' },
-          { x: 0.50, y: 0.60, vx: 0.0003, vy: -0.0003, label: 'De Jong' }
+        const nodes = [
+          { x: 0.44, y: 0.65, vx: 0.0003, vy: -0.0002, team: 'madrid', name: 'Bellingham #5' },
+          { x: 0.32, y: 0.58, vx: -0.0003, vy: 0.0003, team: 'madrid', name: 'Vinícius #7' },
+          { x: 0.52, y: 0.48, vx: 0.0004, vy: 0.0002, team: 'madrid', name: 'Mbappé #9' },
+          { x: 0.40, y: 0.78, vx: 0.0002, vy: -0.0003, team: 'madrid', name: 'Valverde #15' },
+          { x: 0.48, y: 0.48, vx: -0.0003, vy: 0.0002, team: 'barca', name: 'De Jong #21' },
+          { x: 0.60, y: 0.40, vx: 0.0003, vy: -0.0002, team: 'barca', name: 'Pedri #8' },
+          { x: 0.66, y: 0.36, vx: 0.0002, vy: 0.0004, team: 'barca', name: 'Lamine Yamal #19' }
         ];
 
         let tick = 0;
@@ -2251,84 +2809,54 @@
           const h = openingCanvas.height;
           ctx.clearRect(0, 0, w, h);
 
-          // Draw center pitch tactical grid
-          ctx.strokeStyle = 'rgba(0, 242, 254, 0.15)';
+          // Center Circle Pulse
+          ctx.strokeStyle = 'rgba(0, 242, 254, 0.2)';
           ctx.lineWidth = 1;
           const cx = w * 0.5;
           const cy = h * 0.52;
-
-          // Center circle tactical pulse
-          const radius = (Math.sin(tick * 0.04) * 6) + Math.min(w, h) * 0.16;
+          const r = (Math.sin(tick * 0.04) * 6) + Math.min(w, h) * 0.15;
           ctx.beginPath();
-          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+          ctx.arc(cx, cy, r, 0, Math.PI * 2);
           ctx.stroke();
 
-          // Connect passing lines
-          ctx.strokeStyle = 'rgba(255, 59, 29, 0.4)';
+          // Connect passing line
+          ctx.strokeStyle = 'rgba(255, 59, 29, 0.45)';
           ctx.setLineDash([6, 6]);
           ctx.lineDashOffset = -tick * 0.8;
           ctx.beginPath();
-          ctx.moveTo(madridNodes[0].x * w, madridNodes[0].y * h);
-          ctx.lineTo(madridNodes[1].x * w, madridNodes[1].y * h);
-          ctx.lineTo(madridNodes[2].x * w, madridNodes[2].y * h);
+          ctx.moveTo(nodes[0].x * w, nodes[0].y * h);
+          ctx.lineTo(nodes[1].x * w, nodes[1].y * h);
           ctx.stroke();
           ctx.setLineDash([]);
 
-          // Draw Madrid Players (White / Gold)
-          madridNodes.forEach(node => {
+          // Draw tracked player dots
+          nodes.forEach(node => {
             node.x += node.vx;
             node.y += node.vy;
             if (node.x < 0.2 || node.x > 0.8) node.vx *= -1;
-            if (node.y < 0.3 || node.y > 0.9) node.vy *= -1;
+            if (node.y < 0.3 || node.y > 0.85) node.vy *= -1;
 
             const px = node.x * w;
             const py = node.y * h;
+            const isMadrid = node.team === 'madrid';
 
-            // Halo
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+            ctx.fillStyle = isMadrid ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 242, 254, 0.25)';
             ctx.beginPath();
-            ctx.arc(px, py, 8, 0, Math.PI * 2);
+            ctx.arc(px, py, 9, 0, Math.PI * 2);
             ctx.fill();
 
-            // Core
-            ctx.fillStyle = '#FFFFFF';
+            ctx.fillStyle = isMadrid ? '#FFFFFF' : '#00f2fe';
             ctx.beginPath();
-            ctx.arc(px, py, 4, 0, Math.PI * 2);
+            ctx.arc(px, py, 4.5, 0, Math.PI * 2);
             ctx.fill();
 
-            // Label
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-            ctx.font = '10px monospace';
-            ctx.fillText(node.label, px + 8, py - 4);
-          });
-
-          // Draw Barça Players (Cyan / Claret)
-          barcaNodes.forEach(node => {
-            node.x += node.vx;
-            node.y += node.vy;
-            if (node.x < 0.2 || node.x > 0.8) node.vx *= -1;
-            if (node.y < 0.2 || node.y > 0.8) node.vy *= -1;
-
-            const px = node.x * w;
-            const py = node.y * h;
-
-            ctx.fillStyle = 'rgba(0, 242, 254, 0.25)';
-            ctx.beginPath();
-            ctx.arc(px, py, 8, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = '#00f2fe';
-            ctx.beginPath();
-            ctx.arc(px, py, 4, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = 'rgba(0, 242, 254, 0.85)';
-            ctx.font = '10px monospace';
-            ctx.fillText(node.label, px + 8, py - 4);
+            ctx.fillStyle = isMadrid ? '#fff' : '#00f2fe';
+            ctx.font = 'bold 9.5px monospace';
+            ctx.fillText(node.name, px + 10, py + 3);
           });
 
           if (!isIntroFinished) {
-            animId = requestAnimationFrame(drawRadar);
+            requestAnimationFrame(drawRadar);
           }
         }
 
@@ -2337,9 +2865,104 @@
       initOpeningRadar();
 
       /* =======================================================================
-         5. Stage Pitch Vectors & Zone 14 Overlay Canvas
+         5. Interactive Live 3D Tactical Pitch Canvas & Modes
          ======================================================================= */
-      let currentBalconyMode = 'vectors';
+      const tacticalModes = {
+        transition: {
+          activeMetric: "87' Decisive Transition (7.4s Turnaround)",
+          decisiveVal: "Bellingham → Vinícius Jr. (0.62 xG Finish)",
+          madrid: [
+            { x: 0.30, y: 0.68, name: 'Valverde #15', role: 'Recovery (0.0s)' },
+            { x: 0.44, y: 0.58, name: 'Bellingham #5', role: 'Turn & Assist (2.1s)' },
+            { x: 0.66, y: 0.42, name: 'Vinícius Jr. #7', role: '1v1 Finish (7.4s)' },
+            { x: 0.56, y: 0.36, name: 'Mbappé #9', role: 'Decoy Run' },
+            { x: 0.38, y: 0.74, name: 'Camavinga #6', role: 'Defensive Cover' }
+          ],
+          barca: [
+            { x: 0.42, y: 0.54, name: 'De Jong #21', role: 'Dispossessed' },
+            { x: 0.52, y: 0.46, name: 'Pedri #8', role: 'Tracking Back' },
+            { x: 0.64, y: 0.46, name: 'Cubarsí #2', role: 'Backpedal' },
+            { x: 0.70, y: 0.38, name: 'Koundé #23', role: 'Out of Position' }
+          ],
+          passSegments: [
+            { fx: 0.30, fy: 0.68, tx: 0.44, ty: 0.58, color: '#00f2fe', label: '18m Line-Break' },
+            { fx: 0.44, fy: 0.58, tx: 0.66, ty: 0.42, color: '#ff3b1d', label: '32m Diagonal Through-Ball' }
+          ],
+          zone14: false
+        },
+        zone14: {
+          activeMetric: "Zone 14 Space Dominance (64% Control)",
+          decisiveVal: "5 Key Passes Inside Barcelona Danger Zone",
+          madrid: [
+            { x: 0.46, y: 0.54, name: 'Bellingham #5', role: 'Zone 14 Anchor' },
+            { x: 0.38, y: 0.66, name: 'Valverde #15', role: 'Support' },
+            { x: 0.48, y: 0.68, name: 'Camavinga #6', role: 'Pivot' },
+            { x: 0.60, y: 0.44, name: 'Vinícius Jr. #7', role: 'Left Half-Space' },
+            { x: 0.54, y: 0.38, name: 'Mbappé #9', role: 'Box Threat' }
+          ],
+          barca: [
+            { x: 0.48, y: 0.48, name: 'De Jong #21', role: 'Stretched' },
+            { x: 0.40, y: 0.50, name: 'Pedri #8', role: 'Half-Space' },
+            { x: 0.58, y: 0.42, name: 'Cubarsí #2', role: 'CB Step' }
+          ],
+          passSegments: [
+            { fx: 0.38, fy: 0.66, tx: 0.46, ty: 0.54, color: '#00f2fe', label: 'Entry Pass' },
+            { fx: 0.46, fy: 0.54, tx: 0.60, ty: 0.44, color: '#ff3b1d', label: 'Key Pass' }
+          ],
+          zone14: true
+        },
+        formations: {
+          activeMetric: "Mid-Block 4-4-2 vs Positional 4-3-3",
+          decisiveVal: "Compactness: 28.4m vs Width: 61.2m",
+          madrid: [
+            { x: 0.34, y: 0.78, name: 'Mendy #23', role: 'LB' },
+            { x: 0.42, y: 0.80, name: 'Rüdiger #22', role: 'CB' },
+            { x: 0.52, y: 0.80, name: 'Militão #3', role: 'CB' },
+            { x: 0.60, y: 0.78, name: 'Carvajal #2', role: 'RB' },
+            { x: 0.36, y: 0.64, name: 'Bellingham #5', role: 'LM' },
+            { x: 0.44, y: 0.66, name: 'Camavinga #6', role: 'CM' },
+            { x: 0.52, y: 0.66, name: 'Valverde #15', role: 'CM' },
+            { x: 0.60, y: 0.64, name: 'Rodrygo #11', role: 'RM' },
+            { x: 0.44, y: 0.50, name: 'Vinícius Jr. #7', role: 'FW' },
+            { x: 0.52, y: 0.50, name: 'Mbappé #9', role: 'FW' }
+          ],
+          barca: [
+            { x: 0.32, y: 0.42, name: 'Balde #3', role: 'LB' },
+            { x: 0.44, y: 0.36, name: 'Araújo #4', role: 'CB' },
+            { x: 0.52, y: 0.36, name: 'Cubarsí #2', role: 'CB' },
+            { x: 0.64, y: 0.42, name: 'Koundé #23', role: 'RB' },
+            { x: 0.48, y: 0.46, name: 'De Jong #21', role: 'CDM' },
+            { x: 0.40, y: 0.52, name: 'Pedri #8', role: 'LCM' },
+            { x: 0.56, y: 0.52, name: 'Olmo #20', role: 'RCM' },
+            { x: 0.34, y: 0.56, name: 'Raphinha #11', role: 'LW' },
+            { x: 0.48, y: 0.58, name: 'Lewandowski #9', role: 'ST' },
+            { x: 0.62, y: 0.56, name: 'Lamine Yamal #19', role: 'RW' }
+          ],
+          passSegments: [],
+          zone14: false
+        },
+        press: {
+          activeMetric: "High-Intensity Counter-Press Trap (PPDA 7.8)",
+          decisiveVal: "Double-Press Trap on Barcelona Deep Pivot",
+          madrid: [
+            { x: 0.44, y: 0.54, name: 'Camavinga #6', role: 'Primary Press' },
+            { x: 0.52, y: 0.52, name: 'Valverde #15', role: 'Interception Trap' },
+            { x: 0.40, y: 0.48, name: 'Bellingham #5', role: 'Passing Lane Cut' },
+            { x: 0.56, y: 0.42, name: 'Mbappé #9', role: 'CB Press' }
+          ],
+          barca: [
+            { x: 0.46, y: 0.50, name: 'De Jong #21', role: 'Target Trap' },
+            { x: 0.38, y: 0.44, name: 'Cubarsí #2', role: 'Ball Carrier' },
+            { x: 0.56, y: 0.46, name: 'Pedri #8', role: 'Covered' }
+          ],
+          passSegments: [
+            { fx: 0.38, fy: 0.44, tx: 0.46, ty: 0.50, color: 'rgba(255,255,255,0.4)', label: 'Trap Trigger Pass' }
+          ],
+          zone14: false
+        }
+      };
+
+      let currentModeKey = 'transition';
 
       function initStagePitchCanvas() {
         if (!stageCanvas) return;
@@ -2353,96 +2976,187 @@
         resize();
         window.addEventListener('resize', resize);
 
-        function drawPitchHUD() {
+        function drawPitch() {
           tick++;
           const w = stageCanvas.width;
           const h = stageCanvas.height;
           ctx.clearRect(0, 0, w, h);
 
-          // Perspective Pitch Center & Zone 14
-          const zx = w * 0.42;
-          const zy = h * 0.48;
-          const zw = w * 0.16;
-          const zh = h * 0.18;
+          const mode = tacticalModes[currentModeKey];
+          if (!mode) return;
 
-          if (currentBalconyMode === 'zone14' || currentBalconyMode === 'vectors') {
-            // Zone 14 highlighted rectangle
-            ctx.fillStyle = 'rgba(255, 59, 29, 0.12)';
+          // 1. Perspective Pitch Grid & Zone 14
+          const zx = w * 0.40;
+          const zy = h * 0.48;
+          const zw = w * 0.18;
+          const zh = h * 0.16;
+
+          if (mode.zone14) {
+            // Glowing Zone 14 Danger Box
+            const pulse = (Math.sin(tick * 0.05) + 1) * 0.5;
+            ctx.fillStyle = `rgba(255, 59, 29, ${0.14 + pulse * 0.08})`;
             ctx.fillRect(zx, zy, zw, zh);
 
-            ctx.strokeStyle = 'rgba(255, 59, 29, 0.75)';
-            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = '#ff3b1d';
+            ctx.lineWidth = 2;
             ctx.strokeRect(zx, zy, zw, zh);
 
             ctx.fillStyle = '#ff3b1d';
             ctx.font = 'bold 11px monospace';
-            ctx.fillText('ZONE 14: 64% CONTROL', zx + 10, zy + 20);
+            ctx.fillText('ZONE 14: 64% CONTROL', zx + 12, zy + 22);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '9.5px monospace';
+            ctx.fillText('5 Big Chances Created', zx + 12, zy + 38);
           }
 
-          if (currentBalconyMode === 'vectors') {
-            // Animated decisive transition passing line
-            ctx.strokeStyle = '#00f2fe';
-            ctx.lineWidth = 2.5;
-            ctx.setLineDash([8, 8]);
-            ctx.lineDashOffset = -tick * 1.2;
+          // 2. Animated Passing Vectors
+          if (mode.passSegments && mode.passSegments.length > 0) {
+            mode.passSegments.forEach(seg => {
+              const x1 = seg.fx * w;
+              const y1 = seg.fy * h;
+              const x2 = seg.tx * w;
+              const y2 = seg.ty * h;
 
-            ctx.beginPath();
-            ctx.moveTo(w * 0.35, h * 0.65);
-            ctx.quadraticCurveTo(w * 0.45, h * 0.48, w * 0.62, h * 0.42);
-            ctx.stroke();
-            ctx.setLineDash([]);
+              ctx.strokeStyle = seg.color;
+              ctx.lineWidth = 2.5;
+              ctx.setLineDash([8, 8]);
+              ctx.lineDashOffset = -tick * 1.2;
 
-            // Pulse beacon at recipient
-            ctx.fillStyle = 'rgba(0, 242, 254, 0.4)';
-            ctx.beginPath();
-            ctx.arc(w * 0.62, h * 0.42, 10 + Math.sin(tick * 0.1) * 3, 0, Math.PI * 2);
-            ctx.fill();
+              ctx.beginPath();
+              ctx.moveTo(x1, y1);
+              ctx.lineTo(x2, y2);
+              ctx.stroke();
+              ctx.setLineDash([]);
 
-            ctx.fillStyle = '#FFFFFF';
-            ctx.beginPath();
-            ctx.arc(w * 0.62, h * 0.42, 4, 0, Math.PI * 2);
-            ctx.fill();
+              // Pulse beacon at destination
+              ctx.fillStyle = seg.color;
+              ctx.beginPath();
+              ctx.arc(x2, y2, 8 + Math.sin(tick * 0.1) * 3, 0, Math.PI * 2);
+              ctx.globalAlpha = 0.35;
+              ctx.fill();
+              ctx.globalAlpha = 1.0;
 
-            ctx.fillStyle = '#00f2fe';
-            ctx.font = '10px monospace';
-            ctx.fillText("87' VINÍCIUS 1v1 FINISH", w * 0.62 + 14, h * 0.42 + 4);
+              // Pass label
+              if (seg.label) {
+                const mx = (x1 + x2) / 2;
+                const my = (y1 + y2) / 2;
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+                ctx.fillRect(mx - 60, my - 12, 120, 20);
+                ctx.strokeStyle = seg.color;
+                ctx.lineWidth = 1;
+                ctx.strokeRect(mx - 60, my - 12, 120, 20);
+
+                ctx.fillStyle = seg.color;
+                ctx.font = 'bold 9.5px monospace';
+                ctx.textAlign = 'center';
+                ctx.fillText(seg.label, mx, my + 2);
+                ctx.textAlign = 'left';
+              }
+            });
           }
 
-          if (currentBalconyMode === 'press') {
-            // High press defensive cage
-            ctx.strokeStyle = 'rgba(0, 229, 153, 0.8)';
-            ctx.fillStyle = 'rgba(0, 229, 153, 0.1)';
-            ctx.lineWidth = 1.5;
+          // 3. Real Madrid Player Pins (White / Gold)
+          if (mode.madrid) {
+            mode.madrid.forEach(p => {
+              const px = p.x * w;
+              const py = p.y * h;
 
-            ctx.beginPath();
-            ctx.ellipse(w * 0.48, h * 0.54, w * 0.12, h * 0.14, -0.15, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.stroke();
+              // Halo
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+              ctx.beginPath();
+              ctx.arc(px, py, 11, 0, Math.PI * 2);
+              ctx.fill();
 
-            ctx.fillStyle = '#00e599';
-            ctx.font = 'bold 10px monospace';
-            ctx.fillText('PPDA 7.8 COUNTER-PRESS TRAP', w * 0.40, h * 0.55);
+              // Pin Core
+              ctx.fillStyle = '#FFFFFF';
+              ctx.beginPath();
+              ctx.arc(px, py, 6, 0, Math.PI * 2);
+              ctx.fill();
+
+              // Border
+              ctx.strokeStyle = '#ffbe0b';
+              ctx.lineWidth = 1.5;
+              ctx.stroke();
+
+              // Player Label Pill
+              ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+              ctx.fillRect(px + 10, py - 14, 110, 22);
+              ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+              ctx.strokeRect(px + 10, py - 14, 110, 22);
+
+              ctx.fillStyle = '#FFFFFF';
+              ctx.font = 'bold 9.5px monospace';
+              ctx.fillText(p.name, px + 15, py - 2);
+
+              ctx.fillStyle = 'rgba(255, 190, 11, 0.85)';
+              ctx.font = '8px monospace';
+              ctx.fillText(p.role, px + 15, py + 6);
+            });
           }
 
-          requestAnimationFrame(drawPitchHUD);
+          // 4. FC Barcelona Player Pins (Blaugrana / Cyan)
+          if (mode.barca) {
+            mode.barca.forEach(p => {
+              const px = p.x * w;
+              const py = p.y * h;
+
+              ctx.fillStyle = 'rgba(0, 242, 254, 0.25)';
+              ctx.beginPath();
+              ctx.arc(px, py, 11, 0, Math.PI * 2);
+              ctx.fill();
+
+              ctx.fillStyle = '#00f2fe';
+              ctx.beginPath();
+              ctx.arc(px, py, 6, 0, Math.PI * 2);
+              ctx.fill();
+
+              ctx.strokeStyle = '#ff3b1d';
+              ctx.lineWidth = 1.5;
+              ctx.stroke();
+
+              ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+              ctx.fillRect(px + 10, py - 14, 110, 22);
+              ctx.strokeStyle = 'rgba(0, 242, 254, 0.25)';
+              ctx.strokeRect(px + 10, py - 14, 110, 22);
+
+              ctx.fillStyle = '#00f2fe';
+              ctx.font = 'bold 9.5px monospace';
+              ctx.fillText(p.name, px + 15, py - 2);
+
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+              ctx.font = '8px monospace';
+              ctx.fillText(p.role, px + 15, py + 6);
+            });
+          }
+
+          requestAnimationFrame(drawPitch);
         }
 
-        drawPitchHUD();
+        drawPitch();
       }
       initStagePitchCanvas();
 
-      // Balcony mode button triggers
-      const balconyModeBtns = document.querySelectorAll('.balcony-mode-btn');
-      balconyModeBtns.forEach(btn => {
+      // Interactive Balcony Mode Selectors
+      const modeButtons = document.querySelectorAll('.balcony-mode-btn');
+      modeButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-          balconyModeBtns.forEach(b => b.classList.remove('active'));
+          modeButtons.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          currentBalconyMode = btn.getAttribute('data-mode') || 'vectors';
+
+          const modeKey = btn.getAttribute('data-mode') || 'transition';
+          currentModeKey = modeKey;
+
+          const mode = tacticalModes[modeKey];
+          if (mode) {
+            if (hudActiveMetric) hudActiveMetric.innerHTML = '<span class="live-pulse"></span> ' + mode.activeMetric;
+            if (hudDecisiveVal) hudDecisiveVal.textContent = mode.decisiveVal;
+          }
         });
       });
 
       /* =======================================================================
-         6. Pitch Telemetry Layer Switcher (Analysis Room)
+         6. Pitch Telemetry Layer Switcher (Analysis Room Below)
          ======================================================================= */
       function setupPitchControls() {
         const buttons = document.querySelectorAll('.pitch-ctrl-btn');
