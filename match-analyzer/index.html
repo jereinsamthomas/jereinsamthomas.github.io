@@ -192,7 +192,7 @@
       white-space: nowrap;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 1s ease 3.5s;
+      transition: opacity 0.4s ease;
     }
 
     body:not(.intro) .hero-football-tag {
@@ -244,7 +244,7 @@
       pointer-events: auto;
       opacity: 0;
       transform: translateY(12px);
-      transition: opacity 0.8s ease 4.2s, transform 0.8s ease 4.2s;
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     body:not(.intro) .balcony-telemetry-hud {
@@ -529,7 +529,7 @@
       text-transform: uppercase;
       cursor: pointer;
       opacity: 0;
-      transition: opacity 1s ease 4.5s;
+      transition: opacity 0.4s ease;
     }
 
     body:not(.intro) .hero-scroll-cue {
@@ -1683,7 +1683,7 @@
       pointer-events: auto;
       opacity: 0;
       transform: translateY(16px);
-      transition: opacity 0.8s ease 4.2s, transform 0.8s ease 4.2s;
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     body:not(.intro) .balcony-telemetry-hud {
@@ -2736,11 +2736,47 @@
           animations[i].currentTime = boundedMs;
         }
 
+        // Hide doors cleanly once offscreen (at 1.35s)
+        if (elapsedMs >= 1350 && doorsBox && doorsBox.style.display !== 'none') {
+          doorsBox.style.display = 'none';
+        }
+
+        // Hide opening box once fully dissolved (at 2.95s)
+        if (elapsedMs >= 2950 && openingBox && openingBox.style.display !== 'none') {
+          openingBox.style.display = 'none';
+        }
+
+        // Seamless, smooth finish at end of timeline (no sudden layout jump)
         if (elapsedMs >= TOTAL_MS && !isIntroFinished) {
           isIntroFinished = true;
           document.body.classList.remove('intro');
+          document.body.classList.add('intro-complete');
+
+          // Lock permanent resting positions
           if (doorsBox) doorsBox.style.display = 'none';
           if (openingBox) openingBox.style.display = 'none';
+          if (layerFront) layerFront.style.transform = 'translateY(0)';
+          if (headlineBlock) headlineBlock.style.transform = 'translateX(-50%) translateY(0)';
+          if (layerBack) layerBack.style.transform = 'translateY(-1.5%)';
+          if (nav) {
+            nav.style.opacity = '1';
+            nav.style.transform = 'translateY(0)';
+          }
+          if (kicker) {
+            kicker.style.opacity = '1';
+            kicker.style.transform = 'translate(0, 0)';
+          }
+          letters.forEach(l => {
+            l.style.opacity = '1';
+            l.style.transform = 'translateY(0)';
+          });
+          if (balconyHud) {
+            balconyHud.style.opacity = '1';
+            balconyHud.style.transform = 'translateY(0)';
+          }
+          if (heroScrollCue) {
+            heroScrollCue.style.opacity = '1';
+          }
           return;
         }
 
@@ -2750,11 +2786,21 @@
       }
 
       function startIntro() {
+        document.body.classList.remove('intro-complete');
         document.body.classList.add('intro');
-        if (doorsBox) doorsBox.style.display = 'block';
+        if (doorsBox) {
+          doorsBox.style.display = 'block';
+        }
         if (openingBox) {
           openingBox.style.display = 'block';
           openingBox.style.opacity = '1';
+        }
+        if (tunnelCenterLock) {
+          tunnelCenterLock.style.opacity = '1';
+          tunnelCenterLock.style.transform = 'translate(-50%, -50%) scale(1)';
+        }
+        if (layerFront) {
+          layerFront.style.transform = 'translateY(66%)';
         }
         buildTimelineAnimations();
         clockStartTime = performance.now();
