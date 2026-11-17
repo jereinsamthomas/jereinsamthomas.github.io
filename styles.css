@@ -3074,6 +3074,225 @@ circle.pitch-interactive-node:hover {
 }
 
 /* ====================================================================
+   18B. FOOTBALL STADIUM CINEMA STAGE & TUNNEL DOORS (HOME PAGE)
+   ==================================================================== */
+
+/* 1. Floodlit Stadium Backdrop behind hero */
+.hero-stadium-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.38;
+  mix-blend-mode: screen;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stadium-stage-img-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.stadium-stage-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  filter: saturate(1.25) brightness(0.9);
+  transform: scale(1.02);
+  transition: transform 6s ease-out;
+}
+
+body.hero-active .stadium-stage-bg {
+  transform: scale(1.0);
+}
+
+.stadium-mist-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 35%, rgba(255, 59, 29, 0.08) 0%, transparent 60%),
+              linear-gradient(180deg, rgba(8, 8, 10, 0.45) 0%, transparent 45%, rgba(8, 8, 10, 0.96) 92%);
+  pointer-events: none;
+}
+
+.stadium-light-flare {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 45%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(0, 242, 254, 0.16) 0%, rgba(255, 59, 29, 0.08) 35%, transparent 70%);
+  pointer-events: none;
+  animation: floodlightGlow 6s infinite alternate ease-in-out;
+}
+
+@keyframes floodlightGlow {
+  0% { opacity: 0.65; transform: translateX(-50%) scale(0.98); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1.02); }
+}
+
+/* 2. Stadium Tunnel Doors Entrance Overlay */
+.stadium-tunnel-entrance {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9980;
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 0.5s ease;
+}
+
+.stadium-tunnel-entrance.is-hidden {
+  display: none !important;
+}
+
+.tunnel-door-panel {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50.2%;
+  background-image: url('assets/stadium_tunnel_doors.jpg');
+  background-size: 200% 100%;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.95);
+  will-change: transform;
+}
+
+.tunnel-door-left {
+  left: 0;
+  background-position: 0 50%;
+  transform: translateX(0);
+}
+
+.tunnel-door-right {
+  right: 0;
+  background-position: 100% 50%;
+  transform: translateX(0);
+}
+
+.tunnel-seam-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #ff3b1d 0%, #00f2fe 50%, #fff 100%);
+  box-shadow: 0 0 25px #00f2fe, 0 0 45px #ff3b1d;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+/* Sliding active states */
+.stadium-tunnel-entrance.is-opening .tunnel-door-left {
+  transform: translateX(-101%);
+  transition: transform 1.25s cubic-bezier(0.1, 0.2, 0.8, 1);
+}
+
+.stadium-tunnel-entrance.is-opening .tunnel-door-right {
+  transform: translateX(101%);
+  transition: transform 1.35s cubic-bezier(0.4, 0.6, 0.9, 1);
+}
+
+.stadium-tunnel-entrance.is-opening .tunnel-seam-glow {
+  opacity: 0;
+}
+
+/* 3. Floating Tactical Telemetry HUD Cards on Home Page */
+.hero-tactical-hud {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .hero-tactical-hud {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    position: absolute;
+    z-index: 28;
+    pointer-events: auto;
+    background: rgba(13, 10, 34, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 0.65rem 1.15rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .hero-tactical-hud:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 59, 29, 0.4);
+  }
+
+  .hud-left {
+    left: var(--gutter);
+    bottom: 18%;
+  }
+
+  .hud-right {
+    right: var(--gutter);
+    bottom: 18%;
+    align-items: flex-end;
+  }
+
+  .tactical-hud-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .tactical-hud-pill .hud-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .tactical-hud-val {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #00f2fe;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* Replay Button Styling */
+.btn-stadium-cinema {
+  background: linear-gradient(135deg, #ff3b1d 0%, #ff6a3d 100%) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 18px rgba(255, 59, 29, 0.45) !important;
+}
+
+.btn-stadium-cinema:hover {
+  background: linear-gradient(135deg, #ff5638 0%, #ff835c 100%) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 6px 24px rgba(255, 59, 29, 0.65) !important;
+}
+
+.cinema-icon {
+  font-size: 0.72rem;
+  display: inline-block;
+  color: #fff;
+}
+
+/* ====================================================================
    19. REDUCED MOTION PREFERENCE
    ==================================================================== */
 @media (prefers-reduced-motion: reduce) {

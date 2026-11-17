@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Harborlux — Claim Your Summit | Football Tactical Intelligence</title>
-  <meta name="description" content="Harborlux: high-altitude pitch intelligence and tactical space analysis above the game. Claim your summit with Jerein Sam Thomas.">
+  <title>Football Match Analysis — Jerein Sam Thomas | Tactical Intelligence</title>
+  <meta name="description" content="Football Match Analysis: spatial pitch telemetry, tactical structures, and predictive match intelligence by Jerein Sam Thomas.">
   <meta name="keywords" content="Football Analytics, Tactical Summit, Harborlux, El Clásico, Match Analysis, xG, Spatial Telemetry, Jerein Sam Thomas">
 
   <!-- Preload Inter Variable Font -->
@@ -1058,7 +1058,7 @@
 
       <!-- Centre Pill Bar -->
       <nav class="pill-bar" id="pillBar" aria-label="Main menu">
-        <a href="#hero" class="pill-link active" id="link1">Tactical Summit</a>
+        <a href="#hero" class="pill-link active" id="link1">Match Analysis</a>
         <a href="#analysisRoom" class="pill-link" id="link2">El Clásico Study</a>
         <a href="#pitchLab" class="pill-link" id="link3">Pitch Telemetry</a>
         <a href="#matchHub" class="pill-link" id="link4">Match Hub</a>
@@ -1101,11 +1101,21 @@
 
       <!-- 2. Headline Block -->
       <div class="headline-block" id="headlineBlock">
-        <span class="kicker" id="kicker">Claim Your</span>
-        <h1 class="giant-word" id="giantWord" aria-label="Claim Your Summit">
-          <span class="letter">S</span><span class="letter">u</span><span class="letter">m</span><span class="letter">m</span><span class="letter">i</span><span class="letter">t</span>
+        <span class="kicker" id="kicker">SPATIAL TACTICAL INTELLIGENCE ·</span>
+        <h1 class="giant-word" id="giantWord" aria-label="Football Match Analysis">
+          <span class="word-group word-football">
+            <span class="letter">F</span><span class="letter">O</span><span class="letter">O</span><span class="letter">T</span><span class="letter">B</span><span class="letter">A</span><span class="letter">L</span><span class="letter">L</span>
+          </span>
+          <span class="word-space">&nbsp;</span>
+          <span class="word-group word-match">
+            <span class="letter">M</span><span class="letter">A</span><span class="letter">T</span><span class="letter">C</span><span class="letter">H</span>
+          </span>
+          <span class="word-space">&nbsp;</span>
+          <span class="word-group word-analysis">
+            <span class="letter">A</span><span class="letter">N</span><span class="letter">A</span><span class="letter">L</span><span class="letter">Y</span><span class="letter">S</span><span class="letter">I</span><span class="letter">S</span>
+          </span>
         </h1>
-        <div class="hero-football-tag">SPATIAL MATCH INTELLIGENCE &amp; TELEMETRY SUITE</div>
+        <div class="hero-football-tag">EL CLÁSICO 2026/27 · SPACE &amp; TELEMETRY SUITE</div>
       </div>
 
       <!-- 3. Mid Layer -->
@@ -1491,7 +1501,7 @@
         measureSpan.style.position = 'absolute';
         measureSpan.style.visibility = 'hidden';
         measureSpan.style.whiteSpace = 'nowrap';
-        measureSpan.textContent = 'Summit';
+        measureSpan.textContent = 'FOOTBALL MATCH ANALYSIS';
         document.body.appendChild(measureSpan);
         const measuredWidthAt100 = measureSpan.getBoundingClientRect().width;
         document.body.removeChild(measureSpan);
@@ -1515,10 +1525,10 @@
           navBottom = 12 + 34;
         }
 
-        const sizeA = (0.625 * stageWidth) / widthPerEm;
-        const sizeB = (0.92 * vw) / widthPerEm;
+        const sizeA = (0.75 * stageWidth) / widthPerEm;
+        const sizeB = (0.94 * vw) / widthPerEm;
         const availableGap = baselineInViewport - (navBottom + 0.035 * vh);
-        const sizeC = Math.max(20, availableGap / 0.88);
+        const sizeC = Math.max(18, availableGap / 0.88);
 
         wordSize = Math.min(sizeA, sizeB, sizeC);
 
@@ -1615,10 +1625,10 @@
         { offset: 1, opacity: 1, transform: 'translate(0, 0)' }
       ]);
 
-      // Letters reveal: 2.45 + i * 0.054 -> + 0.70s
+      // Letters reveal: 2.45 + i * 0.026 -> + 0.55s
       letters.forEach((letter, i) => {
-        const startSec = 2.45 + i * 0.054;
-        const endSec = startSec + 0.70;
+        const startSec = 2.45 + i * 0.026;
+        const endSec = startSec + 0.55;
         createAnimation(letter, [
           { offset: 0, opacity: 0, transform: 'translateY(0.14em)' },
           { offset: (startSec * 1000) / TOTAL_MS, opacity: 0, transform: 'translateY(0.14em)', easing: easeReveal },

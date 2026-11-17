@@ -134,16 +134,49 @@ import Lenis from 'lenis';
     });
   }
 
+  // Tactical passing beam state
+  let passProgress = 0;
+
   function drawAmbientParticles() {
     if (!ambientCtx || prefersReducedMotion) return;
     const w = ambientCanvas.width;
     const h = ambientCanvas.height;
     ambientCtx.clearRect(0, 0, w, h);
 
-    // Subtle drift with scroll velocity
     const scrollDrift = currentScrollVelocity * 0.08;
 
-    ambientCtx.fillStyle = 'rgba(255, 59, 29, 0.65)';
+    // 1. Subtle 3D perspective Tactical Pitch Wireframe on lower screen
+    ambientCtx.save();
+    ambientCtx.strokeStyle = 'rgba(0, 229, 153, 0.07)';
+    ambientCtx.lineWidth = 1;
+    const pitchTop = h * 0.62;
+    const pitchBottom = h * 0.98;
+    const pitchLeft = w * 0.12;
+    const pitchRight = w * 0.88;
+
+    // Pitch perimeter
+    ambientCtx.beginPath();
+    ambientCtx.moveTo(pitchLeft, pitchTop);
+    ambientCtx.lineTo(pitchRight, pitchTop);
+    ambientCtx.lineTo(w * 0.96, pitchBottom);
+    ambientCtx.lineTo(w * 0.04, pitchBottom);
+    ambientCtx.closePath();
+    ambientCtx.stroke();
+
+    // Halfway line & center circle
+    const midY = (pitchTop + pitchBottom) / 2;
+    ambientCtx.beginPath();
+    ambientCtx.moveTo((pitchLeft + w * 0.04) / 2, midY);
+    ambientCtx.lineTo((pitchRight + w * 0.96) / 2, midY);
+    ambientCtx.stroke();
+
+    ambientCtx.beginPath();
+    ambientCtx.ellipse(w / 2, midY, w * 0.06, h * 0.045, 0, 0, Math.PI * 2);
+    ambientCtx.stroke();
+    ambientCtx.restore();
+
+    // 2. Animated Tracking Particles & Tactical Voronoi Links
+    ambientCtx.fillStyle = 'rgba(255, 59, 29, 0.7)';
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
       p.x += p.vx;
@@ -173,6 +206,33 @@ import Lenis from 'lenis';
         }
       }
     }
+
+    // 3. Animated progressive tactical passing beam
+    passProgress = (passProgress + 0.008) % 1;
+    if (particles.length > 2) {
+      const srcNode = particles[0];
+      const targetNode = particles[1];
+      const curX = srcNode.x + (targetNode.x - srcNode.x) * passProgress;
+      const curY = srcNode.y + (targetNode.y - srcNode.y) * passProgress;
+
+      ambientCtx.save();
+      ambientCtx.strokeStyle = 'rgba(0, 242, 254, 0.4)';
+      ambientCtx.lineWidth = 1.5;
+      ambientCtx.setLineDash([4, 4]);
+      ambientCtx.beginPath();
+      ambientCtx.moveTo(srcNode.x, srcNode.y);
+      ambientCtx.lineTo(targetNode.x, targetNode.y);
+      ambientCtx.stroke();
+
+      ambientCtx.fillStyle = '#00f2fe';
+      ambientCtx.shadowColor = '#00f2fe';
+      ambientCtx.shadowBlur = 8;
+      ambientCtx.beginPath();
+      ambientCtx.arc(curX, curY, 3, 0, Math.PI * 2);
+      ambientCtx.fill();
+      ambientCtx.restore();
+    }
+
     ambientCtx.globalAlpha = 1;
   }
 
@@ -418,6 +478,7 @@ import Lenis from 'lenis';
         if (preloader) preloader.classList.add('is-fading');
         setTimeout(() => {
           if (preloader) preloader.classList.add('is-wiped');
+          playStadiumCinematicIntro();
           setTimeout(() => {
             document.body.classList.add('hero-active');
             lenis.start();
@@ -431,6 +492,63 @@ import Lenis from 'lenis';
     }
     requestAnimationFrame(tick);
   }
+
+  /* ------------------------------------------------------------------
+     11B. FOOTBALL STADIUM TUNNEL DOORS CINEMATIC INTRO SEQUENCE
+     ------------------------------------------------------------------ */
+  const stadiumTunnel = document.getElementById('stadiumTunnelEntrance');
+  const btnReplayStadium = document.getElementById('btnReplayStadium');
+
+  function playStadiumCinematicIntro() {
+    if (prefersReducedMotion || !stadiumTunnel) return;
+
+    // Reset doors state
+    stadiumTunnel.classList.remove('is-hidden');
+    stadiumTunnel.classList.remove('is-opening');
+    stadiumTunnel.style.opacity = '1';
+
+    // 120ms pause before opening sequence
+    setTimeout(() => {
+      stadiumTunnel.classList.add('is-opening');
+
+      // Re-trigger letter staggered pop
+      const letters = document.querySelectorAll('.reveal-letter');
+      letters.forEach(letter => {
+        letter.style.transition = 'none';
+        letter.style.transform = 'translateY(110%)';
+        letter.style.opacity = '0';
+      });
+
+      setTimeout(() => {
+        letters.forEach((letter) => {
+          letter.style.transition = '';
+          letter.style.transform = '';
+          letter.style.opacity = '';
+        });
+      }, 350);
+
+      // Hide tunnel doors overlay after doors split completely
+      setTimeout(() => {
+        stadiumTunnel.style.opacity = '0';
+        setTimeout(() => {
+          stadiumTunnel.classList.add('is-hidden');
+        }, 500);
+      }, 1400);
+    }, 120);
+  }
+
+  if (btnReplayStadium) {
+    btnReplayStadium.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.scrollY > 50) {
+        lenis.scrollTo(0, { duration: 0.6 });
+        setTimeout(playStadiumCinematicIntro, 400);
+      } else {
+        playStadiumCinematicIntro();
+      }
+    });
+  }
+
   runPreloader();
 
   /* ------------------------------------------------------------------
