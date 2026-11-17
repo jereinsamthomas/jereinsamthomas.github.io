@@ -2,7 +2,7 @@
    1. DESIGN TOKENS, TYPOGRAPHY & RESET
    ==================================================================== */
 :root {
-  --background: #08080a;
+  --background: #000000;
   --foreground: #f3f1ea;
   --surface: #111114;
   --surface-2: #16161b;
@@ -760,7 +760,7 @@ main {
   justify-content: space-between;
   min-height: 100svh;
   overflow: hidden;
-  background: var(--background);
+  background: #000000 !important;
   perspective: 1200px;
   padding-bottom: 2rem;
 }
@@ -789,7 +789,7 @@ main {
   pointer-events: auto;
   position: relative;
   z-index: 35;
-  background: radial-gradient(ellipse at top left, rgba(8, 8, 10, 0.75) 0%, transparent 80%);
+  background: radial-gradient(ellipse at top left, rgba(0, 0, 0, 0.85) 0%, transparent 80%);
   padding: 0.5rem 0.8rem;
   border-radius: 8px;
 }
@@ -835,7 +835,7 @@ main {
   pointer-events: auto;
   position: relative;
   z-index: 35;
-  background: radial-gradient(ellipse at top right, rgba(8, 8, 10, 0.75) 0%, transparent 80%);
+  background: radial-gradient(ellipse at top right, rgba(0, 0, 0, 0.85) 0%, transparent 80%);
   padding: 0.6rem 0.9rem;
   border-radius: 8px;
 }
@@ -1067,7 +1067,7 @@ main {
   bottom: 0;
   z-index: 21;
   height: 16vh;
-  background: linear-gradient(to bottom, transparent, #08080a 92%);
+  background: linear-gradient(to bottom, transparent, #000000 95%);
   pointer-events: none;
 }
 
@@ -3115,8 +3115,8 @@ body.hero-active .stadium-stage-bg {
 .stadium-mist-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 35%, rgba(255, 59, 29, 0.08) 0%, transparent 60%),
-              linear-gradient(180deg, rgba(8, 8, 10, 0.45) 0%, transparent 45%, rgba(8, 8, 10, 0.96) 92%);
+  background: radial-gradient(circle at 50% 35%, rgba(255, 59, 29, 0.06) 0%, transparent 60%),
+              linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, transparent 45%, #000000 95%);
   pointer-events: none;
 }
 
@@ -3218,7 +3218,7 @@ body.hero-active .stadium-stage-bg {
     position: absolute;
     z-index: 28;
     pointer-events: auto;
-    background: rgba(13, 10, 34, 0.65);
+    background: rgba(0, 0, 0, 0.88);
     border: 1px solid rgba(255, 255, 255, 0.14);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);

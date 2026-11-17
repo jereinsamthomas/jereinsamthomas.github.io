@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Football Match Analysis — Jerein Sam Thomas | Tactical Intelligence</title>
+  <title>Football Match Analysis — Jerein Sam Thomas | Tactical Intelligence Suite</title>
   <meta name="description" content="Football Match Analysis: spatial pitch telemetry, tactical structures, and predictive match intelligence by Jerein Sam Thomas.">
-  <meta name="keywords" content="Football Analytics, Tactical Summit, Harborlux, El Clásico, Match Analysis, xG, Spatial Telemetry, Jerein Sam Thomas">
+  <meta name="keywords" content="Football Analytics, Tactical Summit, El Clásico, Match Analysis, xG, Spatial Telemetry, Jerein Sam Thomas">
 
   <!-- Preload Inter Variable Font -->
   <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
@@ -26,23 +26,23 @@
     }
 
     :root {
-      --bg: #0D0A22;
-      --bg-darker: #070514;
-      --ink: #180F3C;
-      --btn: #F2B8C0;
-      --btn-hover: #F7C9D0;
+      --bg: #000000;
+      --bg-darker: #000000;
+      --ink: #000000;
+      --btn: #ff3b1d;
+      --btn-hover: #ff5638;
       --text: #FFFFFF;
       --link-inactive: rgba(255, 255, 255, 0.88);
       --link-hover-bg: rgba(255, 255, 255, 0.14);
-      --nav-glass-bg: rgba(255, 255, 255, 0.14);
-      --nav-glass-ring: rgba(255, 255, 255, 0.12);
+      --nav-glass-bg: rgba(0, 0, 0, 0.65);
+      --nav-glass-ring: rgba(255, 255, 255, 0.15);
       --u: 1px;
 
       /* Football Editorial Accents */
       --football-orange: #ff3b1d;
       --football-cyan: #00f2fe;
       --football-green: #00e599;
-      --paper-card: #13102d;
+      --paper-card: #0a0a0f;
       --border-subtle: rgba(255, 255, 255, 0.12);
     }
 
@@ -65,7 +65,7 @@
     }
 
     /* =========================================================================
-       HERO VIEWPORT — HARBORLUX CINEMATIC STAGE (100svh)
+       HERO VIEWPORT — FOOTBALL MATCH ANALYSIS CINEMATIC STAGE (100svh)
        ========================================================================= */
     .hero {
       position: relative;
@@ -117,8 +117,8 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 45%;
-      background: linear-gradient(180deg, rgba(13, 8, 40, 0.45) 0%, transparent 100%);
+      height: 48%;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.35) 50%, transparent 100%);
       pointer-events: none;
       z-index: 3;
       opacity: 0;
@@ -342,9 +342,10 @@
       position: absolute;
       top: 0;
       height: 100%;
-      width: 50%;
-      background-image: url('https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063048_97fd9a70-adbe-46bd-bfce-ec1004f6c7d8.png&w=2000&q=85');
+      width: 50.1%;
+      background-image: url('assets/stadium_tunnel_doors.jpg');
       background-size: 200% 100%;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95);
       will-change: transform;
     }
 
@@ -549,7 +550,7 @@
        ========================================================================= */
     .analysis-room-section {
       position: relative;
-      background: radial-gradient(circle at 50% 0%, #151136 0%, #070514 100%);
+      background: radial-gradient(circle at 50% 0%, #0c0b16 0%, #000000 100%);
       padding: 90px 24px 120px;
       color: #FFFFFF;
       z-index: 20;
@@ -760,7 +761,7 @@
 
     /* Interactive Pitch Telemetry Section */
     .pitch-lab-box {
-      background: #080718;
+      background: #04040a;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 16px;
       padding: 32px;
@@ -1027,32 +1028,461 @@
         display: none !important;
       }
     }
+  
+    /* =========================================================================
+       FOOTBALL STADIUM HERO ENHANCEMENTS
+       ========================================================================= */
+    .brand-accent {
+      color: var(--football-orange);
+      font-weight: 800;
+    }
+
+    .badge-dot-live {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--football-orange);
+      box-shadow: 0 0 10px var(--football-orange);
+      margin-right: 6px;
+      animation: livePulseDot 1.4s infinite alternate ease-in-out;
+    }
+
+    @keyframes livePulseDot {
+      from { transform: scale(0.9); opacity: 0.7; }
+      to { transform: scale(1.3); opacity: 1; }
+    }
+
+    .btn-back-portfolio {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 7px 16px;
+      transition: all 0.25s ease;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .btn-back-portfolio:hover {
+      color: #fff;
+      border-color: var(--football-orange);
+      background: rgba(255, 59, 29, 0.2);
+      transform: translateX(-2px);
+    }
+
+    .btn-replay-cinema {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #00f2fe;
+      border: 1px solid rgba(0, 242, 254, 0.4);
+      border-radius: 999px;
+      padding: 7px 16px;
+      transition: all 0.25s ease;
+      background: rgba(0, 242, 254, 0.1);
+      cursor: pointer;
+    }
+
+    .btn-replay-cinema:hover {
+      background: rgba(0, 242, 254, 0.25);
+      border-color: #00f2fe;
+      box-shadow: 0 0 16px rgba(0, 242, 254, 0.45);
+      color: #fff;
+    }
+
+    /* Tunnel Doors Tactical Markings */
+    .tunnel-door-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3.5rem;
+      pointer-events: none;
+    }
+
+    .left-stencil {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .right-stencil {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .tunnel-stencil-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      background: rgba(0, 0, 0, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 1.25rem 1.6rem;
+      border-radius: 6px;
+      box-shadow: 0 12px 45px rgba(0, 0, 0, 0.9);
+      max-width: 380px;
+    }
+
+    .tunnel-badge {
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--football-orange);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .tunnel-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      line-height: 1.15;
+    }
+
+    .tunnel-status {
+      font-family: monospace;
+      font-size: 9.5px;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tunnel-hazard-strip {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 10px;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        #ff3b1d,
+        #ff3b1d 12px,
+        #000000 12px,
+        #000000 24px
+      );
+      box-shadow: 0 0 15px rgba(255, 59, 29, 0.6);
+    }
+
+    .tunnel-hazard-strip.strip-right {
+      right: auto;
+      left: 0;
+    }
+
+    /* Tunnel Center Lock Emblem */
+    .tunnel-center-lock {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .lock-ring {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 59, 29, 0.75);
+      animation: spinLockRing 12s linear infinite;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes spinLockRing {
+      to { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    .lock-icon {
+      width: 76px;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      color: var(--football-orange);
+      box-shadow: 0 0 28px rgba(255, 59, 29, 0.5);
+    }
+
+    .lock-text {
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-align: center;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.88);
+      padding: 5px 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .lock-text span {
+      color: var(--football-green);
+      font-weight: 700;
+    }
+
+    /* Opening Stadium Canvas & HUD */
+    .opening-tactical-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .opening-tactical-hud {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4.5rem 3rem 3rem;
+      box-sizing: border-box;
+    }
+
+    .hud-top-meta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .hud-pill {
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 5px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+    }
+
+    .hud-center-telemetry {
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .tactical-radar-crosshair {
+      width: 88px;
+      height: 88px;
+      border: 1px solid rgba(0, 242, 254, 0.5);
+      border-radius: 50%;
+      position: relative;
+      animation: radarPulse 2.2s infinite ease-out;
+    }
+
+    .tactical-radar-crosshair::before, .tactical-radar-crosshair::after {
+      content: '';
+      position: absolute;
+      background: rgba(0, 242, 254, 0.65);
+    }
+
+    .tactical-radar-crosshair::before {
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+    }
+
+    .tactical-radar-crosshair::after {
+      left: 50%;
+      top: 0;
+      width: 1px;
+      height: 100%;
+    }
+
+    @keyframes radarPulse {
+      0% { transform: scale(0.9); opacity: 0.45; }
+      50% { transform: scale(1.18); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.45; }
+    }
+
+    .telemetry-readout {
+      font-family: monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #00f2fe;
+      background: rgba(0, 0, 0, 0.88);
+      border: 1px solid rgba(0, 242, 254, 0.35);
+      padding: 7px 16px;
+      border-radius: 4px;
+      text-shadow: 0 0 12px rgba(0, 242, 254, 0.6);
+    }
+
+    /* Hero Tactical Banner & Subbar */
+    .hero-tactical-banner {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .match-badge {
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--football-orange);
+      background: rgba(255, 59, 29, 0.15);
+      border: 1px solid rgba(255, 59, 29, 0.4);
+      padding: 4px 11px;
+      border-radius: 4px;
+    }
+
+    .match-meta {
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .hero-tactical-subbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      margin-top: 0.95rem;
+      flex-wrap: wrap;
+    }
+
+    .subbar-chip {
+      font-family: monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 5px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+    }
+
+    .subbar-dot {
+      color: var(--football-orange);
+      font-weight: bold;
+    }
+
+    /* Stage Pitch Canvas (Live Passing Vectors on Mid Layer) */
+    .stage-pitch-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.9;
+    }
+
+    /* Stadium Floodlight Cones */
+    .stadium-floodlight-cones {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 25% 15%, rgba(0, 242, 254, 0.14) 0%, transparent 55%),
+                  radial-gradient(ellipse at 75% 15%, rgba(255, 255, 255, 0.12) 0%, transparent 55%);
+      mix-blend-mode: screen;
+    }
+
+    /* Balcony Mode Selectors */
+    .balcony-tactical-controls {
+      display: flex;
+      gap: 0.45rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 4px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .balcony-mode-btn {
+      font-family: monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.75);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .balcony-mode-btn:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .balcony-mode-btn.active {
+      color: var(--football-orange);
+      border-color: var(--football-orange);
+      background: rgba(255, 59, 29, 0.18);
+      box-shadow: 0 0 10px rgba(255, 59, 29, 0.35);
+    }
+
   </style>
 </head>
 <body class="intro">
 
   <!-- =======================================================================
-       1. HERO VIEWPORT — HARBORLUX CINEMATIC STAGE (100svh)
+       1. HERO VIEWPORT — FOOTBALL MATCH ANALYSIS CINEMATIC STAGE (100svh)
        ======================================================================= -->
-  <main class="hero" id="hero" aria-label="Harborlux Hero Stage">
+    <main class="hero" id="hero" aria-label="Football Match Analysis Hero Stage">
 
     <!-- Nav pinned to viewport -->
     <header class="nav" id="mainNav">
       <div class="nav-row-1">
         <div class="nav-left">
-          <a href="/" class="wordmark" id="brandWordmark" aria-label="Harborlux Home">HARBORLUX</a>
-          <span class="theme-badge" id="themeBadge">FOOTBALL ANALYTICS</span>
+          <a href="../index.html" class="wordmark" id="brandWordmark" aria-label="Jerein Sam Thomas Football Analytics">
+            <span class="brand-accent">JEREIN SAM</span> THOMAS
+          </a>
+          <span class="theme-badge" id="themeBadge">
+            <span class="badge-dot-live"></span> UEFA PRO MATCH LAB
+          </span>
         </div>
         <div class="nav-right">
-          <div class="lang-group" aria-label="Language selector">
-            <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <ellipse cx="12" cy="12" rx="4.5" ry="10"></ellipse>
-            </svg>
-            <span>Eng</span>
-          </div>
-          <a href="#analysisRoom" class="btn-enquire" id="btnAction">Launch Lab ↗</a>
+          <a href="../index.html" class="btn-back-portfolio">← Portfolio</a>
+          <button class="btn-replay-cinema" id="btnReplayIntro" type="button" aria-label="Replay Stadium Intro">▶ Replay Cinema</button>
+          <a href="#analysisRoom" class="btn-enquire" id="btnAction">Launch Tactical Lab ↗</a>
         </div>
       </div>
 
@@ -1068,39 +1498,26 @@
     <!-- Stage (16:9 Cover Box) -->
     <div class="stage" id="stage">
 
-      <!-- 1. Back Layer -->
+      <!-- 1. Back Layer: Floodlit Stadium Canopy & Atmosphere -->
       <div class="stage-layer layer-back" id="layerBack">
         <img
-          src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063251_24fbd7cc-00df-49ec-8fbf-d8a0349b1e98.png&w=2000&q=85"
-          alt="Violet storm sky with rolling clouds and mist"
+          src="assets/stadium_cinematic_hero.jpg"
+          alt="Stadium floodlights night sky over arena canopy"
           id="imgBack"
-          width="2688"
-          height="1520"
+          width="1920"
+          height="1080"
+          style="filter: brightness(0.52) contrast(1.18) blur(1px);"
         >
-        <!-- Seamless Dual Rain Videos -->
-        <video
-          id="rainVideoA"
-          class="rain-video"
-          playsinline
-          muted
-          preload="auto"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261117_063703_04e54df7-2236-4dff-b95b-a9a34c1f78ec.mp4"
-        ></video>
-        <video
-          id="rainVideoB"
-          class="rain-video"
-          playsinline
-          muted
-          preload="auto"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261117_063703_04e54df7-2236-4dff-b95b-a9a34c1f78ec.mp4"
-        ></video>
-
-        <!-- Top Shade -->
+        <div class="stadium-floodlight-cones" aria-hidden="true"></div>
         <div class="top-shade" id="topShade"></div>
       </div>
 
       <!-- 2. Headline Block -->
       <div class="headline-block" id="headlineBlock">
+        <div class="hero-tactical-banner">
+          <span class="match-badge">UEFA TACTICAL INTELLIGENCE · MATCHDAY 32</span>
+          <span class="match-meta">EL CLÁSICO 2026/27 · SPACE &amp; TELEMETRY SUITE</span>
+        </div>
         <span class="kicker" id="kicker">SPATIAL TACTICAL INTELLIGENCE ·</span>
         <h1 class="giant-word" id="giantWord" aria-label="Football Match Analysis">
           <span class="word-group word-football">
@@ -1115,33 +1532,41 @@
             <span class="letter">A</span><span class="letter">N</span><span class="letter">A</span><span class="letter">L</span><span class="letter">Y</span><span class="letter">S</span><span class="letter">I</span><span class="letter">S</span>
           </span>
         </h1>
-        <div class="hero-football-tag">EL CLÁSICO 2026/27 · SPACE &amp; TELEMETRY SUITE</div>
+        <div class="hero-tactical-subbar">
+          <span class="subbar-chip">ZONE 14 CONTROL: 64%</span>
+          <span class="subbar-dot">•</span>
+          <span class="subbar-chip">xG: REAL MADRID 1.95 vs BARCELONA 1.19</span>
+          <span class="subbar-dot">•</span>
+          <span class="subbar-chip">87' DECISIVE COUNTER-PRESS (7.4s)</span>
+        </div>
       </div>
 
-      <!-- 3. Mid Layer -->
+      <!-- 3. Mid Layer: Floodlit Stadium Pitch & Stands -->
       <div class="stage-layer layer-mid" id="layerMid">
         <img
-          src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063252_b9f2fecf-9be0-485f-842f-3aa6bbc251f2.png&w=2000&q=85"
-          alt="Neon city skyline with illuminated harbour water"
+          src="assets/stadium_cinematic_hero.jpg"
+          alt="Illuminated football pitch and stadium stands under floodlights"
           id="imgMid"
-          width="2688"
-          height="1520"
+          width="1920"
+          height="1080"
         >
+        <!-- Live Animated Pitch Passing Vectors Canvas -->
+        <canvas id="stagePitchCanvas" class="stage-pitch-canvas"></canvas>
       </div>
 
-      <!-- 4. Front Layer -->
+      <!-- 4. Front Layer: Tactical Football Analyst at Suite Balcony with Laptop -->
       <div class="stage-layer layer-front" id="layerFront">
         <div class="glass-tint" id="glassTint"></div>
         <img
-          src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063151_7804d758-a2eb-4499-9b56-8f493edbb206.png&w=2000&q=85"
-          alt="Man in dark coat standing at penthouse glass balcony overlooking skyline"
+          src="assets/analyst_stadium_transparent.png"
+          alt="Football tactical analyst in dark coat standing at stadium suite balcony overlooking floodlit pitch"
           class="front-img"
           id="imgFront"
-          width="2688"
-          height="1520"
+          width="1376"
+          height="768"
         >
 
-        <!-- Football Tactical Telemetry HUD Overlay -->
+        <!-- Football Tactical Telemetry HUD Overlay on Balcony Railing -->
         <div class="balcony-telemetry-hud" id="balconyHud" aria-hidden="true">
           <div class="telemetry-card">
             <span class="t-label">Live Match Telemetry</span>
@@ -1159,35 +1584,78 @@
             <span class="t-label">Decisive Transition</span>
             <span class="t-val">87' Winner (7.4s)</span>
           </div>
+          <!-- Interactive Balcony Tactical Mode Selectors -->
+          <div class="balcony-tactical-controls">
+            <button class="balcony-mode-btn active" data-mode="vectors" type="button">Pass Vectors</button>
+            <button class="balcony-mode-btn" data-mode="zone14" type="button">Zone 14 Box</button>
+            <button class="balcony-mode-btn" data-mode="press" type="button">High Press</button>
+          </div>
         </div>
       </div>
 
     </div><!-- /.stage -->
 
-    <!-- 5. Opening Box (Aerial Still + Tilt Video) -->
+    <!-- 5. Opening Box (Top-Down Aerial Pitch Zoom & Tilt with Live Optical Radar) -->
     <div class="opening-box" id="openingBox">
       <img
-        src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063055_ee1debcd-d200-484f-b94f-fad6dcffd4eb.png&w=2000&q=85"
-        alt="Top-down drone shot of skyscraper rooftop pool at night"
+        src="assets/stadium_cinematic_hero.jpg"
+        alt="Top-down aerial view of floodlit football stadium pitch at night"
         class="aerial-img"
         id="imgAerial"
-        width="2688"
-        height="1520"
+        width="1920"
+        height="1080"
       >
-      <video
-        id="tiltVideo"
-        class="tilt-video"
-        playsinline
-        muted
-        preload="auto"
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261117_063355_a600befc-45d6-4a32-9db6-9d6565a89609.mp4"
-      ></video>
+      <!-- Live Optical Player Tracking Canvas -->
+      <canvas id="openingTacticalCanvas" class="opening-tactical-canvas"></canvas>
+
+      <!-- Stadium Cinema HUD Overlay -->
+      <div class="opening-tactical-hud" id="openingTacticalHud">
+        <div class="hud-top-meta">
+          <span class="hud-pill"><span class="badge-dot-live"></span> VENUE: CAMP NOU · 84,000 ATTENDANCE</span>
+          <span class="hud-pill">MATCHDAY 32 · EL CLÁSICO 2026/27</span>
+          <span class="hud-pill" style="color:#00f2fe;">OPTICAL 60 FPS TRACKING</span>
+        </div>
+        <div class="hud-center-telemetry">
+          <div class="tactical-radar-crosshair"></div>
+          <div class="telemetry-readout">SPATIAL TRACKING ACTIVE · 22 PLAYERS + BALL MAPPED</div>
+        </div>
+      </div>
     </div>
 
-    <!-- 6. Doors Box -->
+    <!-- 6. Stadium Tunnel Blast Doors -->
     <div class="doors-box" id="doorsBox">
-      <div class="door-panel door-left" id="doorLeft"></div>
-      <div class="door-panel door-right" id="doorRight"></div>
+      <div class="door-panel door-left" id="doorLeft">
+        <div class="tunnel-door-overlay">
+          <div class="tunnel-stencil-block left-stencil">
+            <span class="tunnel-badge">UEFA STADIUM TUNNEL · SECTOR 01</span>
+            <h3 class="tunnel-title">PLAYERS &amp; TACTICAL STAFF</h3>
+            <p class="tunnel-status"><span class="badge-dot-live"></span> MATCHDAY 32 ACTIVE</p>
+          </div>
+          <div class="tunnel-hazard-strip"></div>
+        </div>
+      </div>
+      <div class="door-panel door-right" id="doorRight">
+        <div class="tunnel-door-overlay">
+          <div class="tunnel-stencil-block right-stencil">
+            <span class="tunnel-badge">OPTICAL TRACKING · 60 FPS HD</span>
+            <h3 class="tunnel-title">EL CLÁSICO 2026/27 TACTICS</h3>
+            <p class="tunnel-status">SYSTEMS CALIBRATED · SENSORS LIVE</p>
+          </div>
+          <div class="tunnel-hazard-strip strip-right"></div>
+        </div>
+      </div>
+
+      <!-- Center Seam Lock Emblem -->
+      <div class="tunnel-center-lock" id="tunnelCenterLock">
+        <div class="lock-ring"></div>
+        <div class="lock-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <div class="lock-text">STADIUM MATCH CONTROL<br><span>INITIALIZING TACTICAL SUITE</span></div>
+      </div>
     </div>
 
     <!-- 7. Scroll Indicator -->
@@ -1410,7 +1878,7 @@
         </div>
         <div class="footer-links">
           <a href="../index.html">Main Portfolio</a>
-          <a href="harborlux.html">Pure Harborlux View</a>
+          <a href="#hero">Stadium Match View</a>
           <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a25a2a7/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
@@ -1420,33 +1888,22 @@
   </section>
 
   <!-- =======================================================================
-       JAVASCRIPT — HARBORLUX ENGINE & TACTICAL INTERACTION
+       JAVASCRIPT — FOOTBALL TACTICAL ENGINE & MATCH INTERACTION
        ======================================================================= -->
-  <script>
+    <script>
     (function () {
       'use strict';
-
-      // Check reduced motion
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-        document.body.classList.remove('intro');
-        const dBox = document.getElementById('doorsBox');
-        const oBox = document.getElementById('openingBox');
-        if (dBox) dBox.style.display = 'none';
-        if (oBox) oBox.style.display = 'none';
-        initStageLayout();
-        window.addEventListener('resize', initStageLayout);
-        setupPitchControls();
-        return;
-      }
 
       // Elements
       const stage = document.getElementById('stage');
       const doorLeft = document.getElementById('doorLeft');
       const doorRight = document.getElementById('doorRight');
-      const openingBox = document.getElementById('openingBox');
       const doorsBox = document.getElementById('doorsBox');
-      const tiltVideo = document.getElementById('tiltVideo');
+      const tunnelCenterLock = document.getElementById('tunnelCenterLock');
+      const openingBox = document.getElementById('openingBox');
+      const imgAerial = document.getElementById('imgAerial');
+      const openingCanvas = document.getElementById('openingTacticalCanvas');
+      const stageCanvas = document.getElementById('stagePitchCanvas');
       const nav = document.getElementById('mainNav');
       const kicker = document.getElementById('kicker');
       const letters = document.querySelectorAll('.giant-word .letter');
@@ -1455,14 +1912,13 @@
       const layerMid = document.getElementById('layerMid');
       const layerFront = document.getElementById('layerFront');
       const topShade = document.getElementById('topShade');
-      const rainVideoA = document.getElementById('rainVideoA');
-      const rainVideoB = document.getElementById('rainVideoB');
+      const balconyHud = document.getElementById('balconyHud');
+      const heroScrollCue = document.getElementById('heroScrollCue');
+      const btnReplayIntro = document.getElementById('btnReplayIntro');
 
       // Asset references for readiness
       const imgDoors = new Image();
-      imgDoors.src = 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063048_97fd9a70-adbe-46bd-bfce-ec1004f6c7d8.png&w=2000&q=85';
-      const imgAerial = document.getElementById('imgAerial');
-      const imgBack = document.getElementById('imgBack');
+      imgDoors.src = 'assets/stadium_tunnel_doors.jpg';
       const imgMid = document.getElementById('imgMid');
       const imgFront = document.getElementById('imgFront');
 
@@ -1478,21 +1934,18 @@
         const vw = window.innerWidth;
         const vh = window.innerHeight;
 
-        // Stage: larger of viewport width and viewport height * 16/9
         stageWidth = Math.max(vw, vh * 16 / 9);
         stageHeight = stageWidth * 9 / 16;
 
         stage.style.width = stageWidth + 'px';
         stage.style.height = stageHeight + 'px';
 
-        // Update u variable
         let u = 1;
         if (vw >= 820 && vh > 500) {
           u = Math.min(vw / 1440, vh / 900);
         }
         document.documentElement.style.setProperty('--u', u + 'px');
 
-        // Measure word at 100px font size
         const measureSpan = document.createElement('span');
         measureSpan.style.fontFamily = 'Inter, sans-serif';
         measureSpan.style.fontSize = '100px';
@@ -1507,17 +1960,13 @@
         document.body.removeChild(measureSpan);
 
         const widthPerEm = measuredWidthAt100 / 100;
-
-        // Portrait check (height > 1.2 * width)
         const isPortrait = vh > 1.2 * vw;
         const baselinePercent = isPortrait ? 0.362 : 0.43;
         baselineY = stageHeight * baselinePercent;
 
-        // Stage top in viewport
         const stageTopInViewport = (vh - stageHeight) / 2;
         const baselineInViewport = stageTopInViewport + baselineY;
 
-        // Nav bottom in viewport
         let navBottom = 100 * u;
         if (vw < 820) {
           navBottom = 16 + 40 + 12 + 36;
@@ -1532,18 +1981,18 @@
 
         wordSize = Math.min(sizeA, sizeB, sizeC);
 
-        // Apply font size and positioning
         const giantWord = document.getElementById('giantWord');
-        giantWord.style.fontSize = wordSize + 'px';
+        if (giantWord) giantWord.style.fontSize = wordSize + 'px';
 
         const wordCapHeight = 0.727 * wordSize;
-        headlineBlock.style.top = (baselineY - wordCapHeight) + 'px';
+        if (headlineBlock) headlineBlock.style.top = (baselineY - wordCapHeight) + 'px';
 
-        // Kicker sizing and placement
-        const kickerFontSize = 0.118 * wordSize;
-        kicker.style.fontSize = kickerFontSize + 'px';
-        kicker.style.top = (-kickerFontSize - 0.02 * wordSize) + 'px';
-        kicker.style.transform = `translateX(-50%) translateX(-${0.1 * wordSize}px)`;
+        if (kicker) {
+          const kickerFontSize = 0.118 * wordSize;
+          kicker.style.fontSize = kickerFontSize + 'px';
+          kicker.style.top = (-kickerFontSize - 0.02 * wordSize) + 'px';
+          kicker.style.transform = `translateX(-50%) translateX(-${0.1 * wordSize}px)`;
+        }
       }
 
       initStageLayout();
@@ -1553,7 +2002,7 @@
          2. Web Animations Master Clock Timeline (7.4s / 7400ms)
          ======================================================================= */
       const TOTAL_MS = 7400;
-      const animations = [];
+      let animations = [];
 
       const easeDoorsLeft = 'cubic-bezier(.1,.2,.8,1)';
       const easeDoorsRight = 'cubic-bezier(.4,.6,.9,1)';
@@ -1577,190 +2026,147 @@
         return anim;
       }
 
-      // Left Door: 0.02s -> 1.13s
-      createAnimation(doorLeft, [
-        { offset: 0, transform: 'translateX(0)' },
-        { offset: 20 / 7400, transform: 'translateX(0)', easing: easeDoorsLeft },
-        { offset: 1130 / 7400, transform: 'translateX(-101%)' },
-        { offset: 1, transform: 'translateX(-101%)' }
-      ]);
+      function buildTimelineAnimations() {
+        animations.forEach(a => a.cancel());
+        animations = [];
 
-      // Right Door: 0.02s -> 1.24s
-      createAnimation(doorRight, [
-        { offset: 0, transform: 'translateX(0)' },
-        { offset: 20 / 7400, transform: 'translateX(0)', easing: easeDoorsRight },
-        { offset: 1240 / 7400, transform: 'translateX(101%)' },
-        { offset: 1, transform: 'translateX(101%)' }
-      ]);
+        // Center Lock: 0.02s -> 0.75s fade & split
+        createAnimation(tunnelCenterLock, [
+          { offset: 0, opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+          { offset: 20 / 7400, opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+          { offset: 750 / 7400, opacity: 0, transform: 'translate(-50%, -50%) scale(1.35)' },
+          { offset: 1, opacity: 0, transform: 'translate(-50%, -50%) scale(1.35)' }
+        ]);
 
-      // Tilt video opacity: 1.19s -> 1.47s
-      createAnimation(tiltVideo, [
-        { offset: 0, opacity: 0 },
-        { offset: 1190 / 7400, opacity: 0, easing: easeInOut },
-        { offset: 1470 / 7400, opacity: 1 },
-        { offset: 1, opacity: 1 }
-      ]);
+        // Left Tunnel Door: 0.02s -> 1.18s
+        createAnimation(doorLeft, [
+          { offset: 0, transform: 'translateX(0)' },
+          { offset: 20 / 7400, transform: 'translateX(0)', easing: easeDoorsLeft },
+          { offset: 1180 / 7400, transform: 'translateX(-101%)' },
+          { offset: 1, transform: 'translateX(-101%)' }
+        ]);
 
-      // Opening box: 2.45s -> 2.95s
-      createAnimation(openingBox, [
-        { offset: 0, opacity: 1 },
-        { offset: 2450 / 7400, opacity: 1, easing: easeHandoff },
-        { offset: 2950 / 7400, opacity: 0 },
-        { offset: 1, opacity: 0 }
-      ]);
+        // Right Tunnel Door: 0.02s -> 1.26s
+        createAnimation(doorRight, [
+          { offset: 0, transform: 'translateX(0)' },
+          { offset: 20 / 7400, transform: 'translateX(0)', easing: easeDoorsRight },
+          { offset: 1260 / 7400, transform: 'translateX(101%)' },
+          { offset: 1, transform: 'translateX(101%)' }
+        ]);
 
-      // Nav: 2.45s -> 2.75s
-      createAnimation(nav, [
-        { offset: 0, opacity: 0, transform: 'translateY(-6px)' },
-        { offset: 2450 / 7400, opacity: 0, transform: 'translateY(-6px)', easing: easeOut },
-        { offset: 2750 / 7400, opacity: 1, transform: 'translateY(0)' },
-        { offset: 1, opacity: 1, transform: 'translateY(0)' }
-      ]);
+        // Aerial Pitch Camera Pull-Back & Tilt: 0.02s -> 2.45s
+        createAnimation(imgAerial, [
+          { offset: 0, transform: 'scale(1.42) translateY(10%)' },
+          { offset: 1000 / 7400, transform: 'scale(1.42) translateY(10%)', easing: 'cubic-bezier(.22,1,.36,1)' },
+          { offset: 2450 / 7400, transform: 'scale(1.0) translateY(0)' },
+          { offset: 1, transform: 'scale(1.0) translateY(0)' }
+        ]);
 
-      // Kicker: 2.45s -> 3.10s
-      createAnimation(kicker, [
-        { offset: 0, opacity: 0, transform: 'translate(0, 0.5em)' },
-        { offset: 2450 / 7400, opacity: 0, transform: 'translate(0, 0.5em)', easing: easeReveal },
-        { offset: 3100 / 7400, opacity: 1, transform: 'translate(0, 0)' },
-        { offset: 1, opacity: 1, transform: 'translate(0, 0)' }
-      ]);
+        // Opening Box Dissolve: 2.45s -> 2.95s
+        createAnimation(openingBox, [
+          { offset: 0, opacity: 1 },
+          { offset: 2450 / 7400, opacity: 1, easing: easeHandoff },
+          { offset: 2950 / 7400, opacity: 0 },
+          { offset: 1, opacity: 0 }
+        ]);
 
-      // Letters reveal: 2.45 + i * 0.026 -> + 0.55s
-      letters.forEach((letter, i) => {
-        const startSec = 2.45 + i * 0.026;
-        const endSec = startSec + 0.55;
-        createAnimation(letter, [
-          { offset: 0, opacity: 0, transform: 'translateY(0.14em)' },
-          { offset: (startSec * 1000) / TOTAL_MS, opacity: 0, transform: 'translateY(0.14em)', easing: easeReveal },
-          { offset: (endSec * 1000) / TOTAL_MS, opacity: 1, transform: 'translateY(0)' },
+        // Nav Reveal: 2.45s -> 2.75s
+        createAnimation(nav, [
+          { offset: 0, opacity: 0, transform: 'translateY(-6px)' },
+          { offset: 2450 / 7400, opacity: 0, transform: 'translateY(-6px)', easing: easeOut },
+          { offset: 2750 / 7400, opacity: 1, transform: 'translateY(0)' },
           { offset: 1, opacity: 1, transform: 'translateY(0)' }
         ]);
-      });
 
-      // Top shade: 2.90s -> 3.70s
-      createAnimation(topShade, [
-        { offset: 0, opacity: 0 },
-        { offset: 2900 / 7400, opacity: 0, easing: easeInOut },
-        { offset: 3700 / 7400, opacity: 1 },
-        { offset: 1, opacity: 1 }
-      ]);
+        // Kicker: 2.45s -> 3.10s
+        createAnimation(kicker, [
+          { offset: 0, opacity: 0, transform: 'translate(0, 0.5em)' },
+          { offset: 2450 / 7400, opacity: 0, transform: 'translate(0, 0.5em)', easing: easeReveal },
+          { offset: 3100 / 7400, opacity: 1, transform: 'translate(0, 0)' },
+          { offset: 1, opacity: 1, transform: 'translate(0, 0)' }
+        ]);
 
-      // Back layer: 2.90s -> 4.30s
-      createAnimation(layerBack, [
-        { offset: 0, transform: 'translateY(0)' },
-        { offset: 2900 / 7400, transform: 'translateY(0)', easing: easeBack },
-        { offset: 4300 / 7400, transform: 'translateY(-1.5%)' },
-        { offset: 1, transform: 'translateY(-1.5%)' }
-      ]);
-
-      // Mid layer: 2.90s -> 4.30s (-4%), hold to 4.60s, -> 6.90s (0)
-      createAnimation(layerMid, [
-        { offset: 0, transform: 'translateY(0)' },
-        { offset: 2900 / 7400, transform: 'translateY(0)', easing: easeMidUp },
-        { offset: 4300 / 7400, transform: 'translateY(-4%)' },
-        { offset: 4600 / 7400, transform: 'translateY(-4%)', easing: easeHandoff },
-        { offset: 6900 / 7400, transform: 'translateY(0)' },
-        { offset: 1, transform: 'translateY(0)' }
-      ]);
-
-      // Headline block: 3.00s -> 4.80s
-      createAnimation(headlineBlock, [
-        { offset: 0, transform: 'translateX(-50%) translateY(6%)' },
-        { offset: 3000 / 7400, transform: 'translateX(-50%) translateY(6%)', easing: easeHeadline },
-        { offset: 4800 / 7400, transform: 'translateX(-50%) translateY(0)' },
-        { offset: 1, transform: 'translateX(-50%) translateY(0)' }
-      ]);
-
-      // Front layer: 3.35s -> 6.00s (-2.5%) -> 7.30s (0)
-      createAnimation(layerFront, [
-        { offset: 0, transform: 'translateY(66%)' },
-        { offset: 3350 / 7400, transform: 'translateY(66%)', easing: easeFrontUp },
-        { offset: 6000 / 7400, transform: 'translateY(-2.5%)', easing: easeHandoff },
-        { offset: 7300 / 7400, transform: 'translateY(0)' },
-        { offset: 1, transform: 'translateY(0)' }
-      ]);
-
-      /* =======================================================================
-         3. Rain Loop Controller (Back Layer)
-         ======================================================================= */
-      let rainStarted = false;
-      let activeRainVideo = null;
-      const RAIN_CLIP_LOOP_END = 3.6;
-      const RAIN_CROSSFADE_LEAD = 0.75;
-
-      function startRainLoop() {
-        if (rainStarted) return;
-        rainStarted = true;
-        activeRainVideo = rainVideoA;
-        rainVideoA.currentTime = 0;
-        rainVideoA.style.opacity = '1';
-        rainVideoA.play().catch(() => {});
-
-        setupRainCrossfade(rainVideoA, rainVideoB);
-        setupRainCrossfade(rainVideoB, rainVideoA);
-      }
-
-      function setupRainCrossfade(currentVid, nextVid) {
-        currentVid.addEventListener('timeupdate', function () {
-          if (activeRainVideo === currentVid && currentVid.currentTime >= (RAIN_CLIP_LOOP_END - RAIN_CROSSFADE_LEAD)) {
-            nextVid.currentTime = 0;
-            nextVid.style.opacity = '1';
-            nextVid.play().catch(() => {});
-
-            currentVid.style.opacity = '0';
-            activeRainVideo = nextVid;
-
-            setTimeout(() => {
-              if (activeRainVideo !== currentVid) {
-                currentVid.pause();
-              }
-            }, 800);
-          }
+        // Letters Reveal: 2.45 + i * 0.026 -> + 0.55s
+        letters.forEach((letter, i) => {
+          const startSec = 2.45 + i * 0.026;
+          const endSec = startSec + 0.55;
+          createAnimation(letter, [
+            { offset: 0, opacity: 0, transform: 'translateY(0.14em)' },
+            { offset: (startSec * 1000) / TOTAL_MS, opacity: 0, transform: 'translateY(0.14em)', easing: easeReveal },
+            { offset: (endSec * 1000) / TOTAL_MS, opacity: 1, transform: 'translateY(0)' },
+            { offset: 1, opacity: 1, transform: 'translateY(0)' }
+          ]);
         });
+
+        // Top Shade: 2.90s -> 3.70s
+        createAnimation(topShade, [
+          { offset: 0, opacity: 0 },
+          { offset: 2900 / 7400, opacity: 0, easing: easeInOut },
+          { offset: 3700 / 7400, opacity: 1 },
+          { offset: 1, opacity: 1 }
+        ]);
+
+        // Back Layer: 2.90s -> 4.30s
+        createAnimation(layerBack, [
+          { offset: 0, transform: 'translateY(0)' },
+          { offset: 2900 / 7400, transform: 'translateY(0)', easing: easeBack },
+          { offset: 4300 / 7400, transform: 'translateY(-1.5%)' },
+          { offset: 1, transform: 'translateY(-1.5%)' }
+        ]);
+
+        // Mid Layer: 2.90s -> 4.30s (-4%), hold to 4.60s, -> 6.90s (0)
+        createAnimation(layerMid, [
+          { offset: 0, transform: 'translateY(0)' },
+          { offset: 2900 / 7400, transform: 'translateY(0)', easing: easeMidUp },
+          { offset: 4300 / 7400, transform: 'translateY(-4%)' },
+          { offset: 4600 / 7400, transform: 'translateY(-4%)', easing: easeHandoff },
+          { offset: 6900 / 7400, transform: 'translateY(0)' },
+          { offset: 1, transform: 'translateY(0)' }
+        ]);
+
+        // Headline Block: 3.00s -> 4.80s
+        createAnimation(headlineBlock, [
+          { offset: 0, transform: 'translateX(-50%) translateY(6%)' },
+          { offset: 3000 / 7400, transform: 'translateX(-50%) translateY(6%)', easing: easeHeadline },
+          { offset: 4800 / 7400, transform: 'translateX(-50%) translateY(0)' },
+          { offset: 1, transform: 'translateX(-50%) translateY(0)' }
+        ]);
+
+        // Front Layer (Tactical Analyst): 3.35s -> 6.00s (-2.5%) -> 7.30s (0)
+        createAnimation(layerFront, [
+          { offset: 0, transform: 'translateY(66%)' },
+          { offset: 3350 / 7400, transform: 'translateY(66%)', easing: easeFrontUp },
+          { offset: 6000 / 7400, transform: 'translateY(-2.5%)', easing: easeHandoff },
+          { offset: 7300 / 7400, transform: 'translateY(0)' },
+          { offset: 1, transform: 'translateY(0)' }
+        ]);
+
+        // Balcony HUD: 4.20s -> 5.20s
+        createAnimation(balconyHud, [
+          { offset: 0, opacity: 0, transform: 'translateY(16px)' },
+          { offset: 4200 / 7400, opacity: 0, transform: 'translateY(16px)', easing: easeOut },
+          { offset: 5200 / 7400, opacity: 1, transform: 'translateY(0)' },
+          { offset: 1, opacity: 1, transform: 'translateY(0)' }
+        ]);
       }
 
+      buildTimelineAnimations();
+
       /* =======================================================================
-         4. Master Clock Loop & Tilt Video Sync (1.25s -> 2.85s)
+         3. Master Clock Animation Engine
          ======================================================================= */
       let clockStartTime = null;
       let isIntroFinished = false;
 
       function masterTick(now) {
         if (!clockStartTime) clockStartTime = now;
-        const elapsedSec = (now - clockStartTime) / 1000;
         const elapsedMs = now - clockStartTime;
-
         const boundedMs = Math.min(elapsedMs, TOTAL_MS);
+
         for (let i = 0; i < animations.length; i++) {
           animations[i].currentTime = boundedMs;
         }
 
-        // Tilt Video Playback Sync (1.25s -> 2.85s)
-        if (elapsedSec >= 1.25 && elapsedSec < 2.85) {
-          const windowProgress = (elapsedSec - 1.25) / 1.6;
-          const targetVideoTime = windowProgress * 5.04;
-
-          if (tiltVideo.paused) {
-            tiltVideo.play().catch(() => {});
-          }
-
-          const baseRate = 5.04 / 1.6;
-          const timeDiff = targetVideoTime - tiltVideo.currentTime;
-          const nudgedRate = baseRate + (timeDiff * 1.5);
-          tiltVideo.playbackRate = Math.max(0.85 * baseRate, Math.min(1.2 * baseRate, nudgedRate));
-        } else if (elapsedSec >= 2.85 && elapsedSec < 3.2) {
-          if (!tiltVideo.paused) {
-            tiltVideo.pause();
-            tiltVideo.currentTime = 5.04;
-          }
-        }
-
-        // Start rain loop at 2.40s
-        if (elapsedSec >= 2.40 && !rainStarted) {
-          startRainLoop();
-        }
-
-        // Finish intro at 7.4s
         if (elapsedMs >= TOTAL_MS && !isIntroFinished) {
           isIntroFinished = true;
           document.body.classList.remove('intro');
@@ -1774,46 +2180,269 @@
         }
       }
 
-      /* =======================================================================
-         5. Preload & Asset Readiness Check
-         ======================================================================= */
-      let isReadyToStart = false;
-
-      function checkAssetsReady() {
-        if (isReadyToStart) return;
-
-        const doorsReady = imgDoors.complete && imgDoors.naturalWidth > 0;
-        const aerialReady = imgAerial.complete && imgAerial.naturalWidth > 0;
-        const backReady = imgBack.complete && imgBack.naturalWidth > 0;
-        const midReady = imgMid.complete && imgMid.naturalWidth > 0;
-        const frontReady = imgFront.complete && imgFront.naturalWidth > 0;
-        const tiltReady = tiltVideo.readyState >= 3;
-
-        if (doorsReady && aerialReady && backReady && midReady && frontReady && tiltReady) {
-          isReadyToStart = true;
-          setTimeout(() => {
-            requestAnimationFrame(masterTick);
-          }, 120);
+      function startIntro() {
+        document.body.classList.add('intro');
+        if (doorsBox) doorsBox.style.display = 'block';
+        if (openingBox) {
+          openingBox.style.display = 'block';
+          openingBox.style.opacity = '1';
         }
+        buildTimelineAnimations();
+        clockStartTime = performance.now();
+        isIntroFinished = false;
+        requestAnimationFrame(masterTick);
       }
 
-      imgDoors.onload = checkAssetsReady;
-      imgAerial.onload = checkAssetsReady;
-      imgBack.onload = checkAssetsReady;
-      imgMid.onload = checkAssetsReady;
-      imgFront.onload = checkAssetsReady;
-      tiltVideo.addEventListener('canplaythrough', checkAssetsReady);
-
-      setTimeout(() => {
-        if (!isReadyToStart) {
-          console.warn('[Harborlux] Failsafe timer triggered at 5.0s');
-          isReadyToStart = true;
-          requestAnimationFrame(masterTick);
+      // Check Readiness & Start Immediately
+      function checkAndStart() {
+        if (imgMid && imgMid.complete && imgFront && imgFront.complete) {
+          setTimeout(startIntro, 80);
+        } else {
+          window.addEventListener('load', () => setTimeout(startIntro, 80));
         }
-      }, 5000);
+      }
+      checkAndStart();
+
+      if (btnReplayIntro) {
+        btnReplayIntro.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(startIntro, 200);
+        });
+      }
 
       /* =======================================================================
-         6. Pitch Telemetry Layer Switcher
+         4. Live Optical Pitch Tracking Canvas (Opening Sequence)
+         ======================================================================= */
+      function initOpeningRadar() {
+        if (!openingCanvas) return;
+        const ctx = openingCanvas.getContext('2d');
+        let animId;
+
+        function resize() {
+          openingCanvas.width = openingCanvas.offsetWidth || 1920;
+          openingCanvas.height = openingCanvas.offsetHeight || 1080;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        // Player tracking mock nodes
+        const madridNodes = [
+          { x: 0.48, y: 0.72, vx: 0.0004, vy: -0.0002, label: 'Bellingham' },
+          { x: 0.32, y: 0.60, vx: -0.0003, vy: 0.0004, label: 'Vinícius' },
+          { x: 0.55, y: 0.52, vx: 0.0005, vy: 0.0003, label: 'Mbappé' },
+          { x: 0.42, y: 0.82, vx: 0.0002, vy: -0.0004, label: 'Valverde' },
+          { x: 0.58, y: 0.84, vx: -0.0003, vy: 0.0002, label: 'Camavinga' }
+        ];
+
+        const barcaNodes = [
+          { x: 0.46, y: 0.44, vx: -0.0003, vy: 0.0003, label: 'Pedri' },
+          { x: 0.62, y: 0.38, vx: 0.0004, vy: -0.0002, label: 'Yamal' },
+          { x: 0.52, y: 0.32, vx: 0.0002, vy: 0.0005, label: 'Lewandowski' },
+          { x: 0.38, y: 0.46, vx: -0.0004, vy: -0.0002, label: 'Raphinha' },
+          { x: 0.50, y: 0.60, vx: 0.0003, vy: -0.0003, label: 'De Jong' }
+        ];
+
+        let tick = 0;
+
+        function drawRadar() {
+          tick++;
+          const w = openingCanvas.width;
+          const h = openingCanvas.height;
+          ctx.clearRect(0, 0, w, h);
+
+          // Draw center pitch tactical grid
+          ctx.strokeStyle = 'rgba(0, 242, 254, 0.15)';
+          ctx.lineWidth = 1;
+          const cx = w * 0.5;
+          const cy = h * 0.52;
+
+          // Center circle tactical pulse
+          const radius = (Math.sin(tick * 0.04) * 6) + Math.min(w, h) * 0.16;
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+          ctx.stroke();
+
+          // Connect passing lines
+          ctx.strokeStyle = 'rgba(255, 59, 29, 0.4)';
+          ctx.setLineDash([6, 6]);
+          ctx.lineDashOffset = -tick * 0.8;
+          ctx.beginPath();
+          ctx.moveTo(madridNodes[0].x * w, madridNodes[0].y * h);
+          ctx.lineTo(madridNodes[1].x * w, madridNodes[1].y * h);
+          ctx.lineTo(madridNodes[2].x * w, madridNodes[2].y * h);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // Draw Madrid Players (White / Gold)
+          madridNodes.forEach(node => {
+            node.x += node.vx;
+            node.y += node.vy;
+            if (node.x < 0.2 || node.x > 0.8) node.vx *= -1;
+            if (node.y < 0.3 || node.y > 0.9) node.vy *= -1;
+
+            const px = node.x * w;
+            const py = node.y * h;
+
+            // Halo
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+            ctx.beginPath();
+            ctx.arc(px, py, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Core
+            ctx.fillStyle = '#FFFFFF';
+            ctx.beginPath();
+            ctx.arc(px, py, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Label
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '10px monospace';
+            ctx.fillText(node.label, px + 8, py - 4);
+          });
+
+          // Draw Barça Players (Cyan / Claret)
+          barcaNodes.forEach(node => {
+            node.x += node.vx;
+            node.y += node.vy;
+            if (node.x < 0.2 || node.x > 0.8) node.vx *= -1;
+            if (node.y < 0.2 || node.y > 0.8) node.vy *= -1;
+
+            const px = node.x * w;
+            const py = node.y * h;
+
+            ctx.fillStyle = 'rgba(0, 242, 254, 0.25)';
+            ctx.beginPath();
+            ctx.arc(px, py, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#00f2fe';
+            ctx.beginPath();
+            ctx.arc(px, py, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = 'rgba(0, 242, 254, 0.85)';
+            ctx.font = '10px monospace';
+            ctx.fillText(node.label, px + 8, py - 4);
+          });
+
+          if (!isIntroFinished) {
+            animId = requestAnimationFrame(drawRadar);
+          }
+        }
+
+        drawRadar();
+      }
+      initOpeningRadar();
+
+      /* =======================================================================
+         5. Stage Pitch Vectors & Zone 14 Overlay Canvas
+         ======================================================================= */
+      let currentBalconyMode = 'vectors';
+
+      function initStagePitchCanvas() {
+        if (!stageCanvas) return;
+        const ctx = stageCanvas.getContext('2d');
+        let tick = 0;
+
+        function resize() {
+          stageCanvas.width = stageCanvas.offsetWidth || 1920;
+          stageCanvas.height = stageCanvas.offsetHeight || 1080;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        function drawPitchHUD() {
+          tick++;
+          const w = stageCanvas.width;
+          const h = stageCanvas.height;
+          ctx.clearRect(0, 0, w, h);
+
+          // Perspective Pitch Center & Zone 14
+          const zx = w * 0.42;
+          const zy = h * 0.48;
+          const zw = w * 0.16;
+          const zh = h * 0.18;
+
+          if (currentBalconyMode === 'zone14' || currentBalconyMode === 'vectors') {
+            // Zone 14 highlighted rectangle
+            ctx.fillStyle = 'rgba(255, 59, 29, 0.12)';
+            ctx.fillRect(zx, zy, zw, zh);
+
+            ctx.strokeStyle = 'rgba(255, 59, 29, 0.75)';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(zx, zy, zw, zh);
+
+            ctx.fillStyle = '#ff3b1d';
+            ctx.font = 'bold 11px monospace';
+            ctx.fillText('ZONE 14: 64% CONTROL', zx + 10, zy + 20);
+          }
+
+          if (currentBalconyMode === 'vectors') {
+            // Animated decisive transition passing line
+            ctx.strokeStyle = '#00f2fe';
+            ctx.lineWidth = 2.5;
+            ctx.setLineDash([8, 8]);
+            ctx.lineDashOffset = -tick * 1.2;
+
+            ctx.beginPath();
+            ctx.moveTo(w * 0.35, h * 0.65);
+            ctx.quadraticCurveTo(w * 0.45, h * 0.48, w * 0.62, h * 0.42);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Pulse beacon at recipient
+            ctx.fillStyle = 'rgba(0, 242, 254, 0.4)';
+            ctx.beginPath();
+            ctx.arc(w * 0.62, h * 0.42, 10 + Math.sin(tick * 0.1) * 3, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#FFFFFF';
+            ctx.beginPath();
+            ctx.arc(w * 0.62, h * 0.42, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#00f2fe';
+            ctx.font = '10px monospace';
+            ctx.fillText("87' VINÍCIUS 1v1 FINISH", w * 0.62 + 14, h * 0.42 + 4);
+          }
+
+          if (currentBalconyMode === 'press') {
+            // High press defensive cage
+            ctx.strokeStyle = 'rgba(0, 229, 153, 0.8)';
+            ctx.fillStyle = 'rgba(0, 229, 153, 0.1)';
+            ctx.lineWidth = 1.5;
+
+            ctx.beginPath();
+            ctx.ellipse(w * 0.48, h * 0.54, w * 0.12, h * 0.14, -0.15, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#00e599';
+            ctx.font = 'bold 10px monospace';
+            ctx.fillText('PPDA 7.8 COUNTER-PRESS TRAP', w * 0.40, h * 0.55);
+          }
+
+          requestAnimationFrame(drawPitchHUD);
+        }
+
+        drawPitchHUD();
+      }
+      initStagePitchCanvas();
+
+      // Balcony mode button triggers
+      const balconyModeBtns = document.querySelectorAll('.balcony-mode-btn');
+      balconyModeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          balconyModeBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentBalconyMode = btn.getAttribute('data-mode') || 'vectors';
+        });
+      });
+
+      /* =======================================================================
+         6. Pitch Telemetry Layer Switcher (Analysis Room)
          ======================================================================= */
       function setupPitchControls() {
         const buttons = document.querySelectorAll('.pitch-ctrl-btn');
