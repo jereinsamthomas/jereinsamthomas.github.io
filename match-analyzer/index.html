@@ -3,527 +3,1835 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jerein Sam Thomas — Football Analytics &amp; Tactical Intelligence</title>
-  <meta name="description" content="Cinematic editorial portfolio of Jerein Sam Thomas: exploring football through match data, tactical structures, spatial intelligence, and predictive modeling.">
-  <meta name="keywords" content="Football Analytics, Tactical Intelligence, Sports Data Science, Jerein Sam Thomas, Pitch Maps, Shot Maps, xG, El Clásico">
-  
-  <!-- Typography: Bodoni Moda & Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="styles.css">
+  <title>Harborlux — Claim Your Summit | Football Tactical Intelligence</title>
+  <meta name="description" content="Harborlux: high-altitude pitch intelligence and tactical space analysis above the game. Claim your summit with Jerein Sam Thomas.">
+  <meta name="keywords" content="Football Analytics, Tactical Summit, Harborlux, El Clásico, Match Analysis, xG, Spatial Telemetry, Jerein Sam Thomas">
+
+  <!-- Preload Inter Variable Font -->
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url('https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0D0A22;
+      --bg-darker: #070514;
+      --ink: #180F3C;
+      --btn: #F2B8C0;
+      --btn-hover: #F7C9D0;
+      --text: #FFFFFF;
+      --link-inactive: rgba(255, 255, 255, 0.88);
+      --link-hover-bg: rgba(255, 255, 255, 0.14);
+      --nav-glass-bg: rgba(255, 255, 255, 0.14);
+      --nav-glass-ring: rgba(255, 255, 255, 0.12);
+      --u: 1px;
+
+      /* Football Editorial Accents */
+      --football-orange: #ff3b1d;
+      --football-cyan: #00f2fe;
+      --football-green: #00e599;
+      --paper-card: #13102d;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* =========================================================================
+       HERO VIEWPORT — HARBORLUX CINEMATIC STAGE (100svh)
+       ========================================================================= */
+    .hero {
+      position: relative;
+      width: 100vw;
+      height: 100svh;
+      min-height: 520px;
+      overflow: hidden;
+      isolation: isolate;
+      background-color: var(--bg);
+    }
+
+    /* 16:9 Stage Container */
+    .stage {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1600px;
+      height: 900px;
+      pointer-events: none;
+    }
+
+    .stage-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .stage-layer img,
+    .stage-layer video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 1. Back Layer */
+    .layer-back {
+      z-index: 1;
+      transform-origin: 50% 40%;
+      will-change: transform;
+    }
+
+    .layer-back .top-shade {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 45%;
+      background: linear-gradient(180deg, rgba(13, 8, 40, 0.45) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0;
+      will-change: opacity;
+    }
+
+    .rain-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.7s linear;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* 2. Headline Block */
+    .headline-block {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+      width: 100vw;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      white-space: nowrap;
+      will-change: transform;
+    }
+
+    .kicker {
+      position: absolute;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      color: #FFFFFF;
+      line-height: 1;
+      left: 50%;
+      white-space: nowrap;
+      will-change: opacity, transform;
+    }
+
+    .giant-word {
+      display: inline-block;
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1;
+      color: #FFFFFF;
+      margin: 0;
+      padding: 0;
+      white-space: nowrap;
+    }
+
+    .giant-word .letter {
+      display: inline-block;
+      will-change: opacity, transform;
+    }
+
+    /* Football Subtitle Tag */
+    .hero-football-tag {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -28px;
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 500;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1s ease 3.5s;
+    }
+
+    body:not(.intro) .hero-football-tag {
+      opacity: 1;
+    }
+
+    /* 3. Mid Layer */
+    .layer-mid {
+      z-index: 3;
+      transform-origin: 50% 45%;
+      will-change: transform;
+    }
+
+    /* 4. Front Layer */
+    .layer-front {
+      z-index: 4;
+      transform-origin: 50% 100%;
+      will-change: transform;
+    }
+
+    .glass-tint {
+      position: absolute;
+      left: 5.2%;
+      right: 4.1%;
+      top: 57.9%;
+      height: 25.4%;
+      background: linear-gradient(180deg, rgba(190, 200, 255, 0.10) 0%, rgba(150, 160, 230, 0.05) 60%, rgba(120, 130, 210, 0.08) 100%);
+      backdrop-filter: blur(1.2px) saturate(1.05);
+      -webkit-backdrop-filter: blur(1.2px) saturate(1.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .front-img {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Tactical Telemetry HUD Overlay on Balcony Railing */
+    .balcony-telemetry-hud {
+      position: absolute;
+      top: 61%;
+      left: 7%;
+      right: 6%;
+      z-index: 5;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: auto;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.8s ease 4.2s, transform 0.8s ease 4.2s;
+    }
+
+    body:not(.intro) .balcony-telemetry-hud {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .telemetry-card {
+      background: rgba(13, 10, 34, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      padding: 8px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 11px;
+      color: #FFFFFF;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .telemetry-card .t-label {
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      color: rgba(255, 255, 255, 0.65);
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .telemetry-card .t-val {
+      font-weight: 700;
+      font-size: 13px;
+      color: #00f2fe;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .live-pulse {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00e599;
+      box-shadow: 0 0 8px #00e599;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+
+    /* 5. Opening Box */
+    .opening-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 6;
+      pointer-events: none;
+      will-change: opacity;
+    }
+
+    .aerial-img, .tilt-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tilt-video {
+      opacity: 0;
+      will-change: opacity;
+    }
+
+    /* 6. Doors Box */
+    .doors-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 7;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .door-panel {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      background-image: url('https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063048_97fd9a70-adbe-46bd-bfce-ec1004f6c7d8.png&w=2000&q=85');
+      background-size: 200% 100%;
+      will-change: transform;
+    }
+
+    .door-left {
+      left: 0;
+      background-position: 0 50%;
+    }
+
+    .door-right {
+      right: 0;
+      background-position: 100% 50%;
+    }
+
+    /* Initial state before intro clock starts */
+    .intro .nav {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+
+    .intro .kicker {
+      opacity: 0;
+      transform: translate(0, 0.5em);
+    }
+
+    .intro .giant-word .letter {
+      opacity: 0;
+      transform: translateY(0.14em);
+    }
+
+    .intro .layer-front {
+      transform: translateY(66%);
+    }
+
+    /* 7. Nav (Pinned to viewport) */
+    .nav {
+      position: absolute;
+      top: calc(52 * var(--u));
+      left: 0;
+      width: 100vw;
+      height: calc(48 * var(--u));
+      padding: 0 calc(125 * var(--u));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+      pointer-events: auto;
+      font-size: calc(15 * var(--u));
+      will-change: opacity, transform;
+    }
+
+    /* Left: Wordmark */
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .wordmark {
+      font-weight: 600;
+      font-size: calc(17 * var(--u));
+      letter-spacing: 0.28em;
+      color: #FFFFFF;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .theme-badge {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      background: rgba(255, 59, 29, 0.18);
+      border: 1px solid rgba(255, 59, 29, 0.4);
+      color: #ff3b1d;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* Centre: Pill Bar */
+    .pill-bar {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      height: calc(48 * var(--u));
+      display: flex;
+      align-items: center;
+      padding: calc(5 * var(--u));
+      gap: calc(6 * var(--u));
+      border-radius: 9999px;
+      background: var(--nav-glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: inset 0 0 0 1px var(--nav-glass-ring);
+      white-space: nowrap;
+    }
+
+    .pill-link {
+      height: calc(38 * var(--u));
+      padding: 0 calc(22 * var(--u));
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 400;
+      color: var(--link-inactive);
+      text-decoration: none;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .pill-link:hover {
+      background-color: var(--link-hover-bg);
+      color: #FFFFFF;
+    }
+
+    .pill-link.active {
+      background-color: #FFFFFF;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Right: Mode Toggle + Language + Enquire Button */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: calc(24 * var(--u));
+      white-space: nowrap;
+    }
+
+    .lang-group {
+      display: flex;
+      align-items: center;
+      gap: calc(9 * var(--u));
+      color: rgba(255, 255, 255, 0.90);
+      cursor: pointer;
+    }
+
+    .globe-icon {
+      width: calc(20 * var(--u));
+      height: calc(20 * var(--u));
+      display: block;
+    }
+
+    .btn-enquire {
+      height: calc(44 * var(--u));
+      padding: 0 calc(27 * var(--u));
+      border-radius: 9999px;
+      background-color: var(--btn);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: inherit;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-enquire:hover {
+      background-color: var(--btn-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Floating Scroll Cue */
+    .hero-scroll-cue {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 1s ease 4.5s;
+    }
+
+    body:not(.intro) .hero-scroll-cue {
+      opacity: 1;
+    }
+
+    .cue-bounce {
+      animation: cueBounce 2s infinite ease-in-out;
+    }
+
+    @keyframes cueBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+
+    /* =========================================================================
+       EDITORIAL MATCH ANALYSIS ROOM (BELOW HERO)
+       ========================================================================= */
+    .analysis-room-section {
+      position: relative;
+      background: radial-gradient(circle at 50% 0%, #151136 0%, #070514 100%);
+      padding: 90px 24px 120px;
+      color: #FFFFFF;
+      z-index: 20;
+    }
+
+    .editorial-container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    /* Section Header */
+    .section-eyebrow {
+      font-size: 11.5px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #ff3b1d;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-heading {
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      color: #FFFFFF;
+    }
+
+    .section-desc {
+      font-size: clamp(15px, 1.3vw, 18px);
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 820px;
+      margin-bottom: 48px;
+    }
+
+    /* Featured Match Dossier Card */
+    .dossier-card {
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      margin-bottom: 64px;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 32px;
+      align-items: center;
+      padding: 32px;
+    }
+
+    @media (max-width: 960px) {
+      .dossier-card {
+        grid-template-columns: 1fr;
+        padding: 24px;
+      }
+    }
+
+    .dossier-media {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+    }
+
+    .dossier-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dossier-card:hover .dossier-media img {
+      transform: scale(1.03);
+    }
+
+    .dossier-media-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      padding: 5px 10px;
+      border-radius: 9999px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .dossier-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .dossier-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag-pill {
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .dossier-title {
+      font-size: clamp(22px, 2.4vw, 32px);
+      font-weight: 700;
+      line-height: 1.25;
+      color: #FFFFFF;
+    }
+
+    .dossier-summary {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .dossier-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 10px 14px;
+      border-radius: 8px;
+    }
+
+    .stat-box .s-lbl {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 2px;
+    }
+
+    .stat-box .s-val {
+      font-size: 15px;
+      font-weight: 700;
+      color: #00f2fe;
+    }
+
+    .dossier-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn-action-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ff3b1d;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-action-primary:hover {
+      background: #ff5638;
+      transform: translateY(-1px);
+    }
+
+    .btn-action-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 13px;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-action-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Interactive Pitch Telemetry Section */
+    .pitch-lab-box {
+      background: #080718;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 64px;
+    }
+
+    .pitch-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .pitch-ctrl-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .pitch-ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .pitch-ctrl-btn.active {
+      background: #ff3b1d;
+      border-color: #ff3b1d;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .pitch-display-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #091310;
+      position: relative;
+    }
+
+    /* Grid of upcoming studies */
+    .studies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .study-item-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.3s ease;
+    }
+
+    .study-item-card:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .study-badge-status {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #00f2fe;
+    }
+
+    .study-item-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+    }
+
+    .study-item-desc {
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.55;
+    }
+
+    /* Footer Strip */
+    .analysis-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #ff3b1d;
+    }
+
+    /* =========================================================================
+       Responsive Rules
+       ========================================================================= */
+
+    /* Below 820px wide */
+    @media (max-width: 819px) {
+      :root {
+        --u: 1px;
+      }
+
+      .nav {
+        top: 16px;
+        padding: 0 18px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .nav-row-1 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .wordmark {
+        font-size: 14px;
+        letter-spacing: 0.22em;
+      }
+
+      .nav-right {
+        gap: 16px;
+      }
+
+      .lang-group {
+        font-size: 13px;
+        gap: 6px;
+      }
+
+      .globe-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .btn-enquire {
+        height: 36px;
+        padding: 0 16px;
+        font-size: 13px;
+      }
+
+      .pill-bar {
+        position: relative;
+        left: 0;
+        transform: none;
+        width: 100%;
+        height: 40px;
+        padding: 4px;
+        gap: 4px;
+        justify-content: space-between;
+      }
+
+      .pill-link {
+        flex: 1 1 0;
+        height: 32px;
+        padding: 0 10px;
+        font-size: 12px;
+        text-align: center;
+      }
+
+      .balcony-telemetry-hud {
+        display: none;
+      }
+    }
+
+    /* At 360px and narrower */
+    @media (max-width: 360px) {
+      .pill-link {
+        font-size: 11px;
+        padding: 0 6px;
+      }
+    }
+
+    /* Short landscape screens (height <= 500px) */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .nav {
+        top: 12px;
+        height: 34px;
+        padding: 0 24px;
+        flex-direction: row;
+        gap: 0;
+      }
+
+      .nav-row-1 {
+        display: contents;
+      }
+
+      .wordmark {
+        font-size: 13px;
+      }
+
+      .nav-right {
+        gap: 16px;
+      }
+
+      .lang-group {
+        font-size: 12px;
+      }
+
+      .btn-enquire {
+        height: 32px;
+        padding: 0 16px;
+        font-size: 12px;
+      }
+
+      .pill-bar {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        height: 34px;
+        padding: 3px;
+        gap: 4px;
+      }
+
+      .pill-link {
+        flex: initial;
+        height: 28px;
+        padding: 0 14px;
+        font-size: 12px;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .doors-box, .opening-box {
+        display: none !important;
+      }
+      .nav, .kicker, .giant-word .letter, .layer-front, .layer-mid, .layer-back, .headline-block, .top-shade, .balcony-telemetry-hud, .hero-scroll-cue {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+      .rain-video {
+        display: none !important;
+      }
+    }
+  </style>
 </head>
-<body class="editorial-body">
+<body class="intro">
 
-  <!-- Grain Texture Overlay -->
-  <div class="grain-overlay" aria-hidden="true"></div>
+  <!-- =======================================================================
+       1. HERO VIEWPORT — HARBORLUX CINEMATIC STAGE (100svh)
+       ======================================================================= -->
+  <main class="hero" id="hero" aria-label="Harborlux Hero Stage">
 
-  <!-- Navigation Bar (Overlaid on Hero) -->
-  <header class="site-header" id="siteHeader">
-    <div class="nav-container">
-      <!-- Left: Menu Trigger -->
-      <button class="nav-btn nav-btn-menu" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="editorialNavModal">
-        <span class="menu-icon-lines" aria-hidden="true">
-          <span class="line line-1"></span>
-          <span class="line line-2"></span>
-        </span>
-        <span class="nav-btn-label">MENU</span>
-      </button>
-
-      <!-- Center: Brand Wordmark -->
-      <a href="index.html" class="nav-brand" aria-label="Jerein Sam Thomas Home">
-        <span class="brand-title">Jerein Sam Thomas</span>
-        <span class="brand-subtitle">FOOTBALL ANALYTICS</span>
-      </a>
-
-      <!-- Right: Analysis Jump & Return to Portfolio -->
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <a href="#analysisRoom" class="nav-btn nav-btn-analysis" id="navAnalysisLink" aria-label="Jump to Analysis Room">
-          <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <span class="nav-btn-label">ANALYSIS</span>
-        </a>
-        <a href="../index.html#analysis" class="nav-btn" aria-label="Return to Main Portfolio">
-          <span class="nav-btn-label">PORTFOLIO ↗</span>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Fullscreen Slide-over Editorial Menu Modal -->
-  <aside class="editorial-modal" id="editorialNavModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Main Navigation">
-    <div class="modal-backdrop" id="modalBackdrop"></div>
-    <div class="modal-panel">
-      <div class="modal-top">
-        <div class="modal-label">INDEX &amp; NAVIGATION</div>
-        <button class="modal-close" id="modalClose" aria-label="Close navigation menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-      <nav class="modal-links">
-        <a href="#heroSection" class="modal-link">
-          <span class="link-idx">01</span>
-          <span class="link-name">Stadium Hero</span>
-        </a>
-        <a href="#editorialStatement" class="modal-link">
-          <span class="link-idx">02</span>
-          <span class="link-name">Reading The Game</span>
-        </a>
-        <a href="#analysisRoom" class="modal-link">
-          <span class="link-idx">03</span>
-          <span class="link-name">El Clásico Analysis</span>
-        </a>
-        <a href="#analystProfile" class="modal-link">
-          <span class="link-idx">04</span>
-          <span class="link-name">Analyst Profile</span>
-        </a>
-      </nav>
-      <div class="modal-projects">
-        <div class="modal-label">FEATURED MATCH STUDY</div>
-        <ul class="modal-studies-list">
-          <li>
-            <a href="analysis/el-clasico.html" style="font-weight: 600; color: var(--rust);">
-              ⚽ El Clásico: Yesterday's Match — Tactical &amp; Data Breakdown &rarr;
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <div class="modal-links-external">
-          <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <span class="bullet" aria-hidden="true">·</span>
-          <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a25a2a7/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <span class="bullet" aria-hidden="true">·</span>
-          <a href="https://jereinsamthomas.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+    <!-- Nav pinned to viewport -->
+    <header class="nav" id="mainNav">
+      <div class="nav-row-1">
+        <div class="nav-left">
+          <a href="/" class="wordmark" id="brandWordmark" aria-label="Harborlux Home">HARBORLUX</a>
+          <span class="theme-badge" id="themeBadge">FOOTBALL ANALYTICS</span>
         </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Main Scroll Container -->
-  <main class="page-scroll-wrapper" id="pageWrapper">
-
-    <!-- 1. HERO — FULL-VIEWPORT FOOTBALL INTRODUCTION -->
-    <section class="hero-section" id="heroSection" aria-label="Introduction Stadium Hero">
-      <div class="hero-stage-container" id="heroStage">
-        <!-- Layer 1: Stadium Background Photo -->
-        <div class="hero-layer hero-layer-photo">
-          <img src="assets/hero-stadium.jpg" alt="Atmospheric night football stadium under bright floodlights" class="hero-stadium-img" id="heroStadiumImg" width="2688" height="1520" fetchpriority="high">
-        </div>
-
-        <!-- Layer 2: Text and Headline Block (Behind Player) -->
-        <div class="hero-layer hero-layer-typography" id="heroTypography">
-          <div class="hero-title-group">
-            <p class="hero-eyebrow" id="heroEyebrow">FOOTBALL ANALYTICS · TACTICAL INTELLIGENCE</p>
-            <h1 class="hero-main-title" id="heroMainTitle" aria-label="FOOTBALL">
-              <span class="split-word" data-word="FOOTBALL">FOOTBALL</span>
-            </h1>
-            <p class="hero-secondary-title" id="heroSecondaryTitle">BEYOND THE SCORELINE.</p>
-          </div>
-        </div>
-
-        <!-- Layer 3: Transparent Footballer Cutout (Overlapping headline) -->
-        <div class="hero-layer hero-layer-player" id="heroPlayerLayer">
-          <picture>
-            <source srcset="assets/footballer-cutout.webp" type="image/webp">
-            <img src="assets/footballer-cutout.png" alt="Professional football player mid-stride dribbling the ball" class="hero-player-img" id="heroPlayerImg" width="896" height="1200">
-          </picture>
-        </div>
-
-        <!-- Layer 4: Personal Introduction Block (Lower Left) -->
-        <div class="hero-intro-card" id="heroIntroCard">
-          <div class="intro-author">JEREIN SAM THOMAS</div>
-          <div class="intro-role">FOOTBALL ANALYTICS | SPORTS DATA SCIENCE</div>
-          <p class="intro-text">
-            I'm a Data Science postgraduate and Physics graduate exploring football through match data, tactical structures, spatial analysis, and performance metrics. My aim is to turn match events into clear, evidence-based football insights.
-          </p>
-          <div class="intro-links">
-            <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer" class="intro-link" aria-label="GitHub Profile">
-              <span>GitHub</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-            </a>
-            <span class="intro-sep" aria-hidden="true">/</span>
-            <a href="../index.html#analysis" class="intro-link" aria-label="Return to Main Portfolio">
-              <span>Main Portfolio</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-            </a>
-            <span class="intro-sep" aria-hidden="true">/</span>
-            <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a25a2a7/" target="_blank" rel="noopener noreferrer" class="intro-link" aria-label="LinkedIn Profile">
-              <span>LinkedIn</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Layer 5: Bottom Call-To-Action Pill -->
-        <div class="hero-cta-wrapper" id="heroCtaWrapper">
-          <a href="#analysisRoom" class="hero-cta-pill" id="heroCtaPill" aria-label="Scroll to Analysis Gallery">
-            <span class="cta-pill-label">EXPLORE ANALYSIS</span>
-            <span class="cta-pill-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <polyline points="19 12 12 19 5 12"></polyline>
-              </svg>
-            </span>
-          </a>
-        </div>
-
-        <!-- Scroll Melt Gradient Overlay -->
-        <div class="hero-paper-gradient" id="heroPaperGradient" aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <!-- 2. THE ANALYSIS ROOM — EDITORIAL STATEMENT & SOLE EL CLÁSICO STUDY -->
-    <section class="analysis-room-section" id="analysisRoom">
-      
-      <!-- Editorial Statement Block -->
-      <div class="editorial-statement-wrap" id="editorialStatement">
-        <div class="statement-container">
-          <p class="statement-label" id="statementLabel">READING THE GAME</p>
-          
-          <h2 class="editorial-statement-title" id="statementTitle">
-            <span class="statement-line statement-line-1">
-              <span class="statement-word">THE</span>
-              <span class="statement-word">GAME</span>
-              <span class="statement-pill-photo" aria-hidden="true">
-                <img src="assets/analysis/pill-pitch.jpg" alt="Aerial football pitch detail" class="pill-img" id="pillImg1" width="80" height="80">
-              </span>
-              <span class="statement-word">BEYOND</span>
-            </span>
-            <span class="statement-line statement-line-2">
-              <span class="statement-word">THE</span>
-              <span class="statement-word">SCORELINE</span>
-              <span class="statement-pill-photo" aria-hidden="true">
-                <img src="assets/analysis/pill-tactics.jpg" alt="Tactical performance footage detail" class="pill-img" id="pillImg2" width="80" height="80">
-              </span>
-              <span class="statement-word">THROUGH</span>
-            </span>
-            <span class="statement-line statement-line-3">
-              <span class="statement-word">DATA</span>
-              <span class="statement-word">AND</span>
-              <span class="statement-word">TACTICS</span>
-            </span>
-          </h2>
-
-          <!-- Custom 66px Geometric Pitch Emblem (Double Ring with Football Pitch) -->
-          <div class="pitch-emblem-wrap" id="pitchEmblemWrap" aria-hidden="true">
-            <svg class="pitch-emblem-svg" width="66" height="66" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-              <!-- Outer Double Ring -->
-              <circle cx="50" cy="50" r="47" stroke-width="1.2" stroke-dasharray="2 3" opacity="0.65" />
-              <circle cx="50" cy="50" r="43" stroke-width="1.8" />
-              <!-- Pitch Outline -->
-              <rect x="22" y="27" width="56" height="46" rx="2" stroke-width="1.5" />
-              <!-- Halfway Line & Centre Circle -->
-              <line x1="50" y1="27" x2="50" y2="73" stroke-width="1.2" />
-              <circle cx="50" cy="50" r="8" stroke-width="1.2" />
-              <circle cx="50" cy="50" r="1.5" fill="currentColor" />
-              <!-- Left Penalty Area -->
-              <rect x="22" y="37" width="10" height="26" stroke-width="1.1" />
-              <rect x="22" y="42" width="4" height="16" stroke-width="0.9" />
-              <path d="M 32 45 A 5 5 0 0 1 32 55" stroke-width="1.1" />
-              <!-- Right Penalty Area -->
-              <rect x="68" y="37" width="10" height="26" stroke-width="1.1" />
-              <rect x="74" y="42" width="4" height="16" stroke-width="0.9" />
-              <path d="M 68 45 A 5 5 0 0 0 68 55" stroke-width="1.1" />
-              <!-- Corner Arcs -->
-              <path d="M 22 30 A 3 3 0 0 1 25 27" stroke-width="0.8" />
-              <path d="M 22 70 A 3 3 0 0 0 25 73" stroke-width="0.8" />
-              <path d="M 78 30 A 3 3 0 0 0 75 27" stroke-width="0.8" />
-              <path d="M 78 70 A 3 3 0 0 1 75 73" stroke-width="0.8" />
+        <div class="nav-right">
+          <div class="lang-group" aria-label="Language selector">
+            <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <ellipse cx="12" cy="12" rx="4.5" ry="10"></ellipse>
             </svg>
+            <span>Eng</span>
+          </div>
+          <a href="#analysisRoom" class="btn-enquire" id="btnAction">Launch Lab ↗</a>
+        </div>
+      </div>
+
+      <!-- Centre Pill Bar -->
+      <nav class="pill-bar" id="pillBar" aria-label="Main menu">
+        <a href="#hero" class="pill-link active" id="link1">Tactical Summit</a>
+        <a href="#analysisRoom" class="pill-link" id="link2">El Clásico Study</a>
+        <a href="#pitchLab" class="pill-link" id="link3">Pitch Telemetry</a>
+        <a href="#matchHub" class="pill-link" id="link4">Match Hub</a>
+      </nav>
+    </header>
+
+    <!-- Stage (16:9 Cover Box) -->
+    <div class="stage" id="stage">
+
+      <!-- 1. Back Layer -->
+      <div class="stage-layer layer-back" id="layerBack">
+        <img
+          src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063251_24fbd7cc-00df-49ec-8fbf-d8a0349b1e98.png&w=2000&q=85"
+          alt="Violet storm sky with rolling clouds and mist"
+          id="imgBack"
+          width="2688"
+          height="1520"
+        >
+        <!-- Seamless Dual Rain Videos -->
+        <video
+          id="rainVideoA"
+          class="rain-video"
+          playsinline
+          muted
+          preload="auto"
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261117_063703_04e54df7-2236-4dff-b95b-a9a34c1f78ec.mp4"
+        ></video>
+        <video
+          id="rainVideoB"
+          class="rain-video"
+          playsinline
+          muted
+          preload="auto"
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261117_063703_04e54df7-2236-4dff-b95b-a9a34c1f78ec.mp4"
+        ></video>
+
+        <!-- Top Shade -->
+        <div class="top-shade" id="topShade"></div>
+      </div>
+
+      <!-- 2. Headline Block -->
+      <div class="headline-block" id="headlineBlock">
+        <span class="kicker" id="kicker">Claim Your</span>
+        <h1 class="giant-word" id="giantWord" aria-label="Claim Your Summit">
+          <span class="letter">S</span><span class="letter">u</span><span class="letter">m</span><span class="letter">m</span><span class="letter">i</span><span class="letter">t</span>
+        </h1>
+        <div class="hero-football-tag">SPATIAL MATCH INTELLIGENCE &amp; TELEMETRY SUITE</div>
+      </div>
+
+      <!-- 3. Mid Layer -->
+      <div class="stage-layer layer-mid" id="layerMid">
+        <img
+          src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063252_b9f2fecf-9be0-485f-842f-3aa6bbc251f2.png&w=2000&q=85"
+          alt="Neon city skyline with illuminated harbour water"
+          id="imgMid"
+          width="2688"
+          height="1520"
+        >
+      </div>
+
+      <!-- 4. Front Layer -->
+      <div class="stage-layer layer-front" id="layerFront">
+        <div class="glass-tint" id="glassTint"></div>
+        <img
+          src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063151_7804d758-a2eb-4499-9b56-8f493edbb206.png&w=2000&q=85"
+          alt="Man in dark coat standing at penthouse glass balcony overlooking skyline"
+          class="front-img"
+          id="imgFront"
+          width="2688"
+          height="1520"
+        >
+
+        <!-- Football Tactical Telemetry HUD Overlay -->
+        <div class="balcony-telemetry-hud" id="balconyHud" aria-hidden="true">
+          <div class="telemetry-card">
+            <span class="t-label">Live Match Telemetry</span>
+            <span class="t-val"><span class="live-pulse"></span> Camp Nou 2026/27</span>
+          </div>
+          <div class="telemetry-card">
+            <span class="t-label">Expected Goals (xG)</span>
+            <span class="t-val" style="color:#ff3b1d;">1.19 vs 1.95 xG</span>
+          </div>
+          <div class="telemetry-card">
+            <span class="t-label">Central Zone 14 Space</span>
+            <span class="t-val" style="color:#00e599;">64% Control</span>
+          </div>
+          <div class="telemetry-card">
+            <span class="t-label">Decisive Transition</span>
+            <span class="t-val">87' Winner (7.4s)</span>
           </div>
         </div>
       </div>
 
-      <!-- Project Gallery Header -->
-      <div class="gallery-header-wrap">
-        <div class="editorial-container">
-          <p class="gallery-label">FEATURED MATCH ANALYSIS</p>
-          <h3 class="gallery-heading">THE ANALYSIS ROOM</h3>
-          <p class="gallery-intro">
-            A comprehensive, data-driven investigation of yesterday's El Clásico: attacking patterns, expected goals, passing networks, and tactical adaptations.
-          </p>
-        </div>
-      </div>
+    </div><!-- /.stage -->
 
-      <!-- Sole Featured Study: El Clásico Yesterday -->
-      <div class="projects-gallery-container editorial-container" id="projectsGallery">
-        
-        <article class="project-editorial-card card-wide" data-project-id="01">
-          <a href="analysis/el-clasico.html" class="project-card-link" aria-label="Open Full Tactical Breakdown of Yesterday's El Clásico">
-            <div class="card-media-wrap" style="height: clamp(320px, 40vw, 540px);">
-              <img src="assets/analysis/el-clasico-aerial.jpg" alt="Overhead view of stadium pitch during El Clásico under floodlights" class="card-img" width="1200" height="675">
-              <div class="card-media-badge">YESTERDAY'S MATCH · LA LIGA</div>
-            </div>
-            <div class="card-content-wrap">
-              <div class="card-topics">
-                <span class="topic-tag">El Clásico Special</span>
-                <span class="topic-tag">Match Analysis</span>
-                <span class="topic-tag">Shot Maps &amp; xG</span>
-                <span class="topic-tag">Passing Networks</span>
-                <span class="topic-tag">Spatial Intelligence</span>
-              </div>
-              <h4 class="card-title" style="font-size: clamp(24px, 3vw, 42px);">
-                El Clásico 2026/27: How Real Madrid Beat Barcelona Despite Losing the Possession Battle
-              </h4>
-              <p class="card-desc" style="font-size: clamp(14px, 1.25vw, 17px); max-width: 880px;">
-                A data-driven tactical breakdown of FC Barcelona 1–2 Real Madrid (25 October 2026 at Spotify Camp Nou): analyzing shot quality over volume (0.195 vs. 0.066 xG/shot), spatial utilization, defensive resilience, and the decisive 87th-minute transition winner.
-              </p>
+    <!-- 5. Opening Box (Aerial Still + Tilt Video) -->
+    <div class="opening-box" id="openingBox">
+      <img
+        src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063055_ee1debcd-d200-484f-b94f-fad6dcffd4eb.png&w=2000&q=85"
+        alt="Top-down drone shot of skyscraper rooftop pool at night"
+        class="aerial-img"
+        id="imgAerial"
+        width="2688"
+        height="1520"
+      >
+      <video
+        id="tiltVideo"
+        class="tilt-video"
+        playsinline
+        muted
+        preload="auto"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261117_063355_a600befc-45d6-4a32-9db6-9d6565a89609.mp4"
+      ></video>
+    </div>
 
-              <!-- Inline Quick Match Stats Strip -->
-              <div class="clasico-quick-stats-strip">
-                <div class="stat-pill-item">
-                  <span class="stat-pill-label">Final Score</span>
-                  <span class="stat-pill-val">FC Barcelona 1 — 2 Real Madrid</span>
-                </div>
-                <div class="stat-pill-item">
-                  <span class="stat-pill-label">Expected Goals (xG)</span>
-                  <span class="stat-pill-val">1.19 xG vs 1.95 xG</span>
-                </div>
-                <div class="stat-pill-item">
-                  <span class="stat-pill-label">Possession</span>
-                  <span class="stat-pill-val">62% — 38%</span>
-                </div>
-                <div class="stat-pill-item">
-                  <span class="stat-pill-label">Decisive Factor</span>
-                  <span class="stat-pill-val">87' Transition Winner</span>
-                </div>
-              </div>
+    <!-- 6. Doors Box -->
+    <div class="doors-box" id="doorsBox">
+      <div class="door-panel door-left" id="doorLeft"></div>
+      <div class="door-panel door-right" id="doorRight"></div>
+    </div>
 
-              <div class="card-action">
-                <span class="card-action-text" style="font-size: 12px; letter-spacing: 0.22em;">OPEN FULL INTERACTIVE MATCH DATA &amp; PITCH MAP</span>
-                <span class="card-action-arrow" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </span>
-              </div>
-            </div>
-          </a>
-        </article>
-
-        <!-- Multi-Match Hub Card 2: Arsenal vs Manchester City (Upcoming) -->
-        <article class="project-editorial-card" data-project-id="02" style="opacity: 0.95;">
-          <div class="card-media-wrap" style="height: clamp(240px, 28vw, 360px); position: relative; overflow: hidden; background: #0c1a38; border-radius: 8px;">
-            <img src="assets/analysis/pill-tactics.jpg" alt="Arsenal vs Manchester City Tactical Half-Space Breakdown" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7) saturate(1.1);">
-            <div style="position: absolute; top: 16px; left: 16px; background: rgba(0, 242, 254, 0.2); border: 1px solid #00f2fe; color: #00f2fe; font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 1px;">
-              COMING NEXT · MATCHDAY ANALYSIS
-            </div>
-          </div>
-          <div class="card-body-wrap" style="padding-top: 18px;">
-            <div class="card-meta-row" style="display: flex; gap: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--rust); text-transform: uppercase;">
-              <span>Premier League</span>
-              <span>·</span>
-              <span>Emirates Stadium</span>
-            </div>
-            <h3 class="card-title" style="font-family: var(--font-display); font-size: 1.5rem; margin: 8px 0; color: #fff;">
-              Arsenal vs Manchester City: Central Zone 14 Dominance &amp; Half-Space Press Resistance
-            </h3>
-            <p class="card-summary" style="font-size: 13.5px; color: rgba(255, 255, 255, 0.75); line-height: 1.55;">
-              Tactical modeling of Mikel Arteta’s mid-block compact spacing against Pep Guardiola’s 3-2-4-1 rotational box midfield, tracking progressive passing channels and duel win rates.
-            </p>
-            <div style="margin-top: 14px; font-family: var(--font-mono); font-size: 11px; color: #00f2fe; font-weight: 700;">
-              DATA PIPELINE ACTIVE // INGESTION IN PROGRESS &rarr;
-            </div>
-          </div>
-        </article>
-
-        <!-- Multi-Match Hub Card 3: Bayern München vs Bayer Leverkusen (Upcoming) -->
-        <article class="project-editorial-card" data-project-id="03" style="opacity: 0.95;">
-          <div class="card-media-wrap" style="height: clamp(240px, 28vw, 360px); position: relative; overflow: hidden; background: #0c1a38; border-radius: 8px;">
-            <img src="assets/analysis/pill-pitch.jpg" alt="Bayern vs Leverkusen Rest-Defense Diagnostics" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7) saturate(1.1);">
-            <div style="position: absolute; top: 16px; left: 16px; background: rgba(168, 100, 56, 0.25); border: 1px solid var(--rust); color: var(--rust); font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 1px;">
-              SCHEDULED · BUNDESLIGA TACTICAL
-            </div>
-          </div>
-          <div class="card-body-wrap" style="padding-top: 18px;">
-            <div class="card-meta-row" style="display: flex; gap: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--rust); text-transform: uppercase;">
-              <span>Bundesliga</span>
-              <span>·</span>
-              <span>Allianz Arena</span>
-            </div>
-            <h3 class="card-title" style="font-family: var(--font-display); font-size: 1.5rem; margin: 8px 0; color: #fff;">
-              Bayern München vs Bayer Leverkusen: High-Line Rest-Defense &amp; Inverted Overloads
-            </h3>
-            <p class="card-summary" style="font-size: 13.5px; color: rgba(255, 255, 255, 0.75); line-height: 1.55;">
-              Spatial diagnostics comparing Alonso's fluid 3-4-2-1 wing-back overloads with Kompany’s intense counter-pressing traps, measuring PPDA intensity and rest-defense stability.
-            </p>
-            <div style="margin-top: 14px; font-family: var(--font-mono); font-size: 11px; color: var(--rust); font-weight: 700;">
-              SPATIAL MATRIX FORMULATION &rarr;
-            </div>
-          </div>
-
-      </div>
-    </section>
-
-    <!-- 3. ANALYST PROFILE — QUICK FACTS AND METHODS -->
-    <section class="analyst-profile-section" id="analystProfile">
-      <div class="profile-top-hairline" aria-hidden="true"></div>
-      
-      <div class="profile-grid editorial-container">
-        
-        <!-- Column 1: Identity & Play Badge -->
-        <div class="profile-col profile-col-left" id="profileColLeft">
-          <p class="profile-label">THE ANALYST</p>
-          <h2 class="profile-headline" id="profileHeadline">
-            <span class="profile-word">QUICK</span>
-            <span class="profile-word">FACTS</span>
-            <span class="profile-word">ABOUT</span>
-            <span class="profile-word">JEREIN</span>
-          </h2>
-          
-          <!-- Rotating 84px Radial Play Badge -->
-          <div class="play-badge-wrap">
-            <a href="analysis/el-clasico.html" class="play-badge-link" aria-label="Explore El Clásico Analysis">
-              <div class="play-badge-circle" id="playBadge">
-                <svg class="radial-ticks-svg" width="84" height="84" viewBox="0 0 84 84" aria-hidden="true">
-                  <g class="ticks-group" transform="translate(42, 42)">
-                    <g id="svgTicksGroup">
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(0)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(7.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(15)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(22.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(30)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(37.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(45)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(52.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(60)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(67.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(75)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(82.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(90)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(97.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(105)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(112.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(120)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(127.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(135)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(142.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(150)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(157.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(165)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(172.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(180)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(187.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(195)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(202.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(210)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(217.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(225)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(232.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(240)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(247.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(255)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(262.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(270)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(277.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(285)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(292.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(300)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(307.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(315)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(322.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(330)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(337.5)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(345)" />
-                      <line x1="0" y1="-38" x2="0" y2="-32" stroke="currentColor" stroke-width="1.2" transform="rotate(352.5)" />
-                    </g>
-                  </g>
-                  <!-- Center Circle & Play Triangle -->
-                  <circle cx="42" cy="42" r="16" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.2" />
-                  <polygon points="40,36 48,42 40,48" fill="var(--rust)" />
-                </svg>
-              </div>
-              <span class="play-badge-caption">EXPLORE EL CLÁSICO</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Column 2: Introduction & Facts Table -->
-        <div class="profile-col profile-col-mid" id="profileColMid">
-          <p class="profile-bio-text">
-            With a foundation in Physics and postgraduate study in Data Science, I approach football as a combination of space, movement, probability, and decision-making. My projects explore how structured data can reveal patterns that are not immediately obvious from the scoreline.
-          </p>
-          
-          <div class="facts-table-wrap">
-            <table class="facts-table">
-              <tbody>
-                <tr class="fact-row">
-                  <td class="fact-label">Focus</td>
-                  <td class="fact-value">Football Analytics</td>
-                </tr>
-                <tr class="fact-row">
-                  <td class="fact-label">Education</td>
-                  <td class="fact-value">MSc Data Science</td>
-                </tr>
-                <tr class="fact-row">
-                  <td class="fact-label">Foundation</td>
-                  <td class="fact-value">BSc Physics</td>
-                </tr>
-                <tr class="fact-row">
-                  <td class="fact-label">Technical tools</td>
-                  <td class="fact-value">Python, Pandas, scikit-learn</td>
-                </tr>
-                <tr class="fact-row">
-                  <td class="fact-label">Analysis methods</td>
-                  <td class="fact-value">Match Statistics, Data Visualization, Tactical Analysis</td>
-                </tr>
-                <tr class="fact-row">
-                  <td class="fact-label">Featured study</td>
-                  <td class="fact-value">El Clásico Tactical Breakdown</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="profile-social-links">
-            <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer" class="profile-ext-link">
-              <span>GitHub</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-            </a>
-            <span class="sep" aria-hidden="true">·</span>
-            <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a25a2a7/" target="_blank" rel="noopener noreferrer" class="profile-ext-link">
-              <span>LinkedIn</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-            </a>
-            <span class="sep" aria-hidden="true">·</span>
-            <a href="https://jereinsamthomas.github.io" target="_blank" rel="noopener noreferrer" class="profile-ext-link">
-              <span>Portfolio</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Column 3: Editorial Portrait -->
-        <div class="profile-col profile-col-right" id="profileColRight">
-          <div class="portrait-editorial-frame" id="portraitFrame">
-            <img src="assets/profile/analyst-portrait.jpg" alt="Football performance and tactical analyst in stadium suite examining match event data" class="portrait-img" id="portraitImg" width="800" height="1200" loading="lazy">
-          </div>
-          <p class="portrait-caption">MATCH ANALYST SUITE · TACTICAL EVENT DATA</p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer class="site-footer">
-      <div class="editorial-container footer-content">
-        <div class="footer-left">
-          <span class="footer-brand">Jerein Sam Thomas</span>
-          <span class="footer-sub">Editorial Football Analytics &amp; Tactical Science</span>
-        </div>
-        <div class="footer-right">
-          <span class="footer-copy">&copy; 2026 Jerein Sam Thomas. Data-driven football intelligence.</span>
-        </div>
-      </div>
-    </footer>
+    <!-- 7. Scroll Indicator -->
+    <a href="#analysisRoom" class="hero-scroll-cue" id="heroScrollCue">
+      <span>EXPLORE MATCH ANALYSIS ROOM</span>
+      <svg class="cue-bounce" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+      </svg>
+    </a>
 
   </main>
 
-  <script src="main.js"></script>
+  <!-- =======================================================================
+       2. THE ANALYSIS ROOM — FULL FOOTBALL TACTICAL INTELLIGENCE SUITE
+       ======================================================================= -->
+  <section class="analysis-room-section" id="analysisRoom">
+    <div class="editorial-container">
+      
+      <!-- Section Header -->
+      <div class="section-eyebrow">
+        <span class="live-pulse"></span>
+        FEATURED MATCH DOSSIER · SPOTIFY CAMP NOU
+      </div>
+      <h2 class="section-heading">Reading the Game Beyond the Scoreline.</h2>
+      <p class="section-desc">
+        Football is a fluid continuum of space creation, physical pressure, and high-tempo decision making. Translating optical tracking, predictive shot models, and transition geometry into actionable sporting intelligence.
+      </p>
+
+      <!-- Featured Dossier Card: El Clásico 2026/27 -->
+      <article class="dossier-card">
+        <div class="dossier-media">
+          <img src="assets/analysis/el-clasico-aerial.jpg" alt="Aerial tactical view of Spotify Camp Nou under floodlights" width="1200" height="675">
+          <div class="dossier-media-badge">LA LIGA 2026/27 · MATCHDAY 10</div>
+        </div>
+
+        <div class="dossier-content">
+          <div class="dossier-tags">
+            <span class="tag-pill">El Clásico Special</span>
+            <span class="tag-pill">Expected Goals (xG)</span>
+            <span class="tag-pill">Passing Networks</span>
+            <span class="tag-pill">Transition Dynamics</span>
+          </div>
+
+          <h3 class="dossier-title">
+            El Clásico 2026/27: How Real Madrid Beat Barcelona Despite Losing Possession
+          </h3>
+
+          <p class="dossier-summary">
+            A comprehensive, publication-grade tactical space investigation of FC Barcelona 1–2 Real Madrid. Analyzing shot quality over shot volume (0.195 vs 0.066 xG/shot), defensive block compression, half-space overload prevention, and the decisive 87' coast-to-coast transition winner.
+          </p>
+
+          <div class="dossier-stats-grid">
+            <div class="stat-box">
+              <div class="s-lbl">Final Scoreline</div>
+              <div class="s-val">FC Barcelona 1 — 2 Real Madrid</div>
+            </div>
+            <div class="stat-box">
+              <div class="s-lbl">Expected Goals</div>
+              <div class="s-val" style="color:#ff3b1d;">1.19 xG vs 1.95 xG</div>
+            </div>
+            <div class="stat-box">
+              <div class="s-lbl">Possession Share</div>
+              <div class="s-val">62% — 38%</div>
+            </div>
+            <div class="stat-box">
+              <div class="s-lbl">Decisive Transition</div>
+              <div class="s-val" style="color:#00e599;">87' Winner (7.4s)</div>
+            </div>
+          </div>
+
+          <div class="dossier-actions">
+            <a href="analysis/el-clasico.html" class="btn-action-primary">
+              Open Full Interactive Case Study &rarr;
+            </a>
+            <a href="El_Clasico_2026_27_Tactical_Space_Analysis FINL.pdf" target="_blank" rel="noopener noreferrer" class="btn-action-secondary">
+              Download Dossier (PDF ↗)
+            </a>
+            <a href="../index.html#analysis" class="btn-action-secondary">
+              Main Portfolio ↗
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===================================================================
+           3. INTERACTIVE PITCH TELEMETRY LAB
+           =================================================================== -->
+      <div class="pitch-lab-box" id="pitchLab">
+        <div class="section-eyebrow" style="color: #00f2fe;">TACTICAL SIMULATION &amp; PITCH LAB</div>
+        <h3 style="font-size: 26px; font-weight: 700; margin-bottom: 8px;">Interactive Pitch Vector Telemetry</h3>
+        <p style="font-size: 14px; color: rgba(255, 255, 255, 0.7); margin-bottom: 20px;">
+          Toggle real-time analytical layers: shot distributions, progressive passing networks, defensive press traps, and spatial pitch control.
+        </p>
+
+        <!-- Controls -->
+        <div class="pitch-controls">
+          <button class="pitch-ctrl-btn active" data-layer="xg" type="button">Attacking xG Shot Map</button>
+          <button class="pitch-ctrl-btn" data-layer="passing" type="button">Passing Network</button>
+          <button class="pitch-ctrl-btn" data-layer="defensive" type="button">Defensive Pressing &amp; Duels</button>
+          <button class="pitch-ctrl-btn" data-layer="space" type="button">Spatial Pitch Control</button>
+        </div>
+
+        <!-- SVG Pitch Frame -->
+        <div class="pitch-display-wrap">
+          <svg viewBox="0 0 800 500" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#091310; display:block;">
+            <!-- Pitch lines -->
+            <rect x="25" y="25" width="750" height="450" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <line x1="400" y1="25" x2="400" y2="475" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <circle cx="400" cy="250" r="65" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <circle cx="400" cy="250" r="3" fill="rgba(255,255,255,0.6)"/>
+            <!-- Penalty Areas -->
+            <rect x="25" y="115" width="125" height="220" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <rect x="650" y="115" width="125" height="220" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <rect x="25" y="175" width="45" height="100" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <rect x="730" y="175" width="45" height="100" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <path d="M 150 195 A 65 65 0 0 1 150 305" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <path d="M 650 195 A 65 65 0 0 0 650 305" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+
+            <!-- Layer 1: Attacking xG (Default Visible) -->
+            <g id="layer-xg">
+              <circle cx="680" cy="245" r="14" fill="rgba(255, 59, 29, 0.85)" stroke="#fff" stroke-width="2"/>
+              <text x="680" y="249" font-size="10" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">0.74</text>
+              <circle cx="650" cy="210" r="10" fill="rgba(255, 106, 61, 0.75)" stroke="#fff" stroke-width="1.5"/>
+              <text x="650" y="214" font-size="9" font-family="sans-serif" fill="#fff" text-anchor="middle" pointer-events="none">0.42</text>
+              <circle cx="620" cy="285" r="7" fill="rgba(255, 180, 0, 0.7)" stroke="#fff" stroke-width="1"/>
+              <circle cx="580" cy="180" r="5" fill="rgba(255, 255, 255, 0.5)"/>
+              <circle cx="590" cy="330" r="4.5" fill="rgba(255, 255, 255, 0.4)"/>
+              <circle cx="695" cy="235" r="16" fill="none" stroke="#00e599" stroke-width="2.5" stroke-dasharray="4,2"/>
+              <line x1="620" y1="285" x2="760" y2="250" stroke="rgba(255,59,29,0.6)" stroke-width="2" stroke-dasharray="3,3"/>
+              <line x1="680" y1="245" x2="765" y2="248" stroke="#ff3b1d" stroke-width="3"/>
+            </g>
+
+            <!-- Layer 2: Passing Network -->
+            <g id="layer-passing" style="display:none;">
+              <circle cx="210" cy="180" r="12" fill="#ff3b1d"/>
+              <text x="210" y="184" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">CB</text>
+              <circle cx="210" cy="320" r="12" fill="#ff3b1d"/>
+              <text x="210" y="324" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">CB</text>
+              <circle cx="340" cy="250" r="18" fill="#ff6a3d" stroke="#fff" stroke-width="2"/>
+              <text x="340" y="254" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">DM</text>
+              <circle cx="470" cy="170" r="14" fill="#ff3b1d"/>
+              <text x="470" y="174" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">CM</text>
+              <circle cx="560" cy="90" r="11" fill="#ff3b1d"/>
+              <text x="560" y="94" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">RW</text>
+              <circle cx="560" cy="410" r="11" fill="#ff3b1d"/>
+              <text x="560" y="414" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">LW</text>
+              <circle cx="640" cy="250" r="15" fill="#ff3b1d" stroke="#00e599" stroke-width="2"/>
+              <text x="640" y="254" font-size="9" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle" pointer-events="none">CF</text>
+              <!-- Links -->
+              <line x1="210" y1="180" x2="340" y2="250" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
+              <line x1="210" y1="320" x2="340" y2="250" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
+              <line x1="340" y1="250" x2="470" y2="170" stroke="#00e599" stroke-width="4.5"/>
+              <line x1="470" y1="170" x2="560" y2="90" stroke="rgba(255,255,255,0.7)" stroke-width="3.5"/>
+              <line x1="470" y1="170" x2="640" y2="250" stroke="#00e599" stroke-width="4"/>
+            </g>
+
+            <!-- Layer 3: Defensive Pressing -->
+            <g id="layer-defensive" style="display:none;">
+              <circle cx="480" cy="220" r="28" fill="rgba(255, 59, 29, 0.35)" stroke="#ff3b1d" stroke-width="1.5" stroke-dasharray="3,3"/>
+              <circle cx="480" cy="220" r="4" fill="#ff3b1d"/>
+              <circle cx="520" cy="140" r="34" fill="rgba(255, 59, 29, 0.45)" stroke="#ff3b1d" stroke-width="2"/>
+              <circle cx="520" cy="140" r="5" fill="#ff3b1d"/>
+              <circle cx="360" cy="310" r="24" fill="rgba(255, 180, 0, 0.35)" stroke="#ffb400" stroke-width="1.5"/>
+              <circle cx="360" cy="310" r="4" fill="#ffb400"/>
+              <rect x="420" y="100" width="180" height="150" fill="none" stroke="#00f2fe" stroke-width="1.5" stroke-dasharray="6,4"/>
+              <text x="510" y="90" font-size="10" font-family="sans-serif" font-weight="bold" fill="#00f2fe" text-anchor="middle">PRIMARY PRESS TRAP (Zone 14)</text>
+            </g>
+
+            <!-- Layer 4: Spatial Control -->
+            <g id="layer-space" style="display:none;">
+              <polygon points="400,25 650,25 600,250 400,250" fill="rgba(0, 229, 153, 0.22)" stroke="#00e599" stroke-width="1.5"/>
+              <polygon points="400,250 600,250 650,475 400,475" fill="rgba(0, 242, 254, 0.2)" stroke="#00f2fe" stroke-width="1.5"/>
+              <polygon points="25,25 400,25 400,250 200,250 25,250" fill="rgba(255, 59, 29, 0.15)" stroke="#ff3b1d" stroke-width="1.5"/>
+              <polygon points="25,250 200,250 400,250 400,475 25,475" fill="rgba(255, 59, 29, 0.15)" stroke="#ff3b1d" stroke-width="1.5"/>
+              <text x="510" y="140" font-size="12" font-family="sans-serif" font-weight="bold" fill="#00e599" text-anchor="middle">Madrid Overload: 64%</text>
+              <text x="200" y="360" font-size="12" font-family="sans-serif" font-weight="bold" fill="#ff3b1d" text-anchor="middle">Rest-Defense Block</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           4. UPCOMING MATCH STUDIES
+           =================================================================== -->
+      <div id="matchHub">
+        <div class="section-eyebrow">MATCH INTELLIGENCE PIPELINE</div>
+        <h3 style="font-size: 26px; font-weight: 700; margin-bottom: 24px;">Upcoming Analytical Studies</h3>
+
+        <div class="studies-grid">
+          <!-- Card 2: Arsenal vs Man City -->
+          <article class="study-item-card">
+            <span class="study-badge-status">PREMIER LEAGUE · EMIRATES STADIUM</span>
+            <h4 class="study-item-title">Arsenal vs Manchester City: Central Zone 14 Dominance &amp; Half-Space Press Resistance</h4>
+            <p class="study-item-desc">
+              Tactical modeling of Mikel Arteta’s mid-block compact spacing against Pep Guardiola’s 3-2-4-1 rotational box midfield, tracking progressive passing channels and duel win rates.
+            </p>
+            <div style="margin-top: auto; font-size: 12px; font-weight: 600; color: #00f2fe;">
+              DATA INGESTION ACTIVE &rarr;
+            </div>
+          </article>
+
+          <!-- Card 3: Bayern vs Leverkusen -->
+          <article class="study-item-card">
+            <span class="study-badge-status" style="color:#ff3b1d;">BUNDESLIGA · ALLIANZ ARENA</span>
+            <h4 class="study-item-title">Bayern München vs Bayer Leverkusen: High-Line Rest-Defense &amp; Inverted Overloads</h4>
+            <p class="study-item-desc">
+              Spatial diagnostics comparing Alonso's fluid 3-4-2-1 wing-back overloads with Kompany’s intense counter-pressing traps, measuring PPDA intensity and rest-defense stability.
+            </p>
+            <div style="margin-top: auto; font-size: 12px; font-weight: 600; color: #ff3b1d;">
+              SPATIAL MATRIX FORMULATION &rarr;
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="analysis-footer">
+        <div>
+          <strong>Jerein Sam Thomas</strong> — Football Analytics &amp; Tactical Intelligence
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Main Portfolio</a>
+          <a href="harborlux.html">Pure Harborlux View</a>
+          <a href="https://github.com/jereinsamthomas" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/jerein-sam-thomas-46a25a2a7/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </footer>
+
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       JAVASCRIPT — HARBORLUX ENGINE & TACTICAL INTERACTION
+       ======================================================================= -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Check reduced motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.body.classList.remove('intro');
+        const dBox = document.getElementById('doorsBox');
+        const oBox = document.getElementById('openingBox');
+        if (dBox) dBox.style.display = 'none';
+        if (oBox) oBox.style.display = 'none';
+        initStageLayout();
+        window.addEventListener('resize', initStageLayout);
+        setupPitchControls();
+        return;
+      }
+
+      // Elements
+      const stage = document.getElementById('stage');
+      const doorLeft = document.getElementById('doorLeft');
+      const doorRight = document.getElementById('doorRight');
+      const openingBox = document.getElementById('openingBox');
+      const doorsBox = document.getElementById('doorsBox');
+      const tiltVideo = document.getElementById('tiltVideo');
+      const nav = document.getElementById('mainNav');
+      const kicker = document.getElementById('kicker');
+      const letters = document.querySelectorAll('.giant-word .letter');
+      const headlineBlock = document.getElementById('headlineBlock');
+      const layerBack = document.getElementById('layerBack');
+      const layerMid = document.getElementById('layerMid');
+      const layerFront = document.getElementById('layerFront');
+      const topShade = document.getElementById('topShade');
+      const rainVideoA = document.getElementById('rainVideoA');
+      const rainVideoB = document.getElementById('rainVideoB');
+
+      // Asset references for readiness
+      const imgDoors = new Image();
+      imgDoors.src = 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063048_97fd9a70-adbe-46bd-bfce-ec1004f6c7d8.png&w=2000&q=85';
+      const imgAerial = document.getElementById('imgAerial');
+      const imgBack = document.getElementById('imgBack');
+      const imgMid = document.getElementById('imgMid');
+      const imgFront = document.getElementById('imgFront');
+
+      let stageWidth = 1600;
+      let stageHeight = 900;
+      let wordSize = 290;
+      let baselineY = 387;
+
+      /* =======================================================================
+         1. Dynamic Stage Sizing & Typography Calculation
+         ======================================================================= */
+      function initStageLayout() {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+
+        // Stage: larger of viewport width and viewport height * 16/9
+        stageWidth = Math.max(vw, vh * 16 / 9);
+        stageHeight = stageWidth * 9 / 16;
+
+        stage.style.width = stageWidth + 'px';
+        stage.style.height = stageHeight + 'px';
+
+        // Update u variable
+        let u = 1;
+        if (vw >= 820 && vh > 500) {
+          u = Math.min(vw / 1440, vh / 900);
+        }
+        document.documentElement.style.setProperty('--u', u + 'px');
+
+        // Measure word at 100px font size
+        const measureSpan = document.createElement('span');
+        measureSpan.style.fontFamily = 'Inter, sans-serif';
+        measureSpan.style.fontSize = '100px';
+        measureSpan.style.fontWeight = '700';
+        measureSpan.style.letterSpacing = '-0.045em';
+        measureSpan.style.position = 'absolute';
+        measureSpan.style.visibility = 'hidden';
+        measureSpan.style.whiteSpace = 'nowrap';
+        measureSpan.textContent = 'Summit';
+        document.body.appendChild(measureSpan);
+        const measuredWidthAt100 = measureSpan.getBoundingClientRect().width;
+        document.body.removeChild(measureSpan);
+
+        const widthPerEm = measuredWidthAt100 / 100;
+
+        // Portrait check (height > 1.2 * width)
+        const isPortrait = vh > 1.2 * vw;
+        const baselinePercent = isPortrait ? 0.362 : 0.43;
+        baselineY = stageHeight * baselinePercent;
+
+        // Stage top in viewport
+        const stageTopInViewport = (vh - stageHeight) / 2;
+        const baselineInViewport = stageTopInViewport + baselineY;
+
+        // Nav bottom in viewport
+        let navBottom = 100 * u;
+        if (vw < 820) {
+          navBottom = 16 + 40 + 12 + 36;
+        } else if (vh <= 500) {
+          navBottom = 12 + 34;
+        }
+
+        const sizeA = (0.625 * stageWidth) / widthPerEm;
+        const sizeB = (0.92 * vw) / widthPerEm;
+        const availableGap = baselineInViewport - (navBottom + 0.035 * vh);
+        const sizeC = Math.max(20, availableGap / 0.88);
+
+        wordSize = Math.min(sizeA, sizeB, sizeC);
+
+        // Apply font size and positioning
+        const giantWord = document.getElementById('giantWord');
+        giantWord.style.fontSize = wordSize + 'px';
+
+        const wordCapHeight = 0.727 * wordSize;
+        headlineBlock.style.top = (baselineY - wordCapHeight) + 'px';
+
+        // Kicker sizing and placement
+        const kickerFontSize = 0.118 * wordSize;
+        kicker.style.fontSize = kickerFontSize + 'px';
+        kicker.style.top = (-kickerFontSize - 0.02 * wordSize) + 'px';
+        kicker.style.transform = `translateX(-50%) translateX(-${0.1 * wordSize}px)`;
+      }
+
+      initStageLayout();
+      window.addEventListener('resize', initStageLayout);
+
+      /* =======================================================================
+         2. Web Animations Master Clock Timeline (7.4s / 7400ms)
+         ======================================================================= */
+      const TOTAL_MS = 7400;
+      const animations = [];
+
+      const easeDoorsLeft = 'cubic-bezier(.1,.2,.8,1)';
+      const easeDoorsRight = 'cubic-bezier(.4,.6,.9,1)';
+      const easeInOut = 'ease-in-out';
+      const easeOut = 'ease-out';
+      const easeHandoff = 'cubic-bezier(.45,0,.55,1)';
+      const easeReveal = 'cubic-bezier(.2,.65,.3,1)';
+      const easeBack = 'cubic-bezier(.45,0,.35,1)';
+      const easeMidUp = 'cubic-bezier(.45,0,.3,1)';
+      const easeHeadline = 'cubic-bezier(.3,0,.4,1)';
+      const easeFrontUp = 'cubic-bezier(.2,.5,.2,1)';
+
+      function createAnimation(el, keyframes) {
+        if (!el) return null;
+        const anim = el.animate(keyframes, {
+          duration: TOTAL_MS,
+          fill: 'both'
+        });
+        anim.pause();
+        animations.push(anim);
+        return anim;
+      }
+
+      // Left Door: 0.02s -> 1.13s
+      createAnimation(doorLeft, [
+        { offset: 0, transform: 'translateX(0)' },
+        { offset: 20 / 7400, transform: 'translateX(0)', easing: easeDoorsLeft },
+        { offset: 1130 / 7400, transform: 'translateX(-101%)' },
+        { offset: 1, transform: 'translateX(-101%)' }
+      ]);
+
+      // Right Door: 0.02s -> 1.24s
+      createAnimation(doorRight, [
+        { offset: 0, transform: 'translateX(0)' },
+        { offset: 20 / 7400, transform: 'translateX(0)', easing: easeDoorsRight },
+        { offset: 1240 / 7400, transform: 'translateX(101%)' },
+        { offset: 1, transform: 'translateX(101%)' }
+      ]);
+
+      // Tilt video opacity: 1.19s -> 1.47s
+      createAnimation(tiltVideo, [
+        { offset: 0, opacity: 0 },
+        { offset: 1190 / 7400, opacity: 0, easing: easeInOut },
+        { offset: 1470 / 7400, opacity: 1 },
+        { offset: 1, opacity: 1 }
+      ]);
+
+      // Opening box: 2.45s -> 2.95s
+      createAnimation(openingBox, [
+        { offset: 0, opacity: 1 },
+        { offset: 2450 / 7400, opacity: 1, easing: easeHandoff },
+        { offset: 2950 / 7400, opacity: 0 },
+        { offset: 1, opacity: 0 }
+      ]);
+
+      // Nav: 2.45s -> 2.75s
+      createAnimation(nav, [
+        { offset: 0, opacity: 0, transform: 'translateY(-6px)' },
+        { offset: 2450 / 7400, opacity: 0, transform: 'translateY(-6px)', easing: easeOut },
+        { offset: 2750 / 7400, opacity: 1, transform: 'translateY(0)' },
+        { offset: 1, opacity: 1, transform: 'translateY(0)' }
+      ]);
+
+      // Kicker: 2.45s -> 3.10s
+      createAnimation(kicker, [
+        { offset: 0, opacity: 0, transform: 'translate(0, 0.5em)' },
+        { offset: 2450 / 7400, opacity: 0, transform: 'translate(0, 0.5em)', easing: easeReveal },
+        { offset: 3100 / 7400, opacity: 1, transform: 'translate(0, 0)' },
+        { offset: 1, opacity: 1, transform: 'translate(0, 0)' }
+      ]);
+
+      // Letters reveal: 2.45 + i * 0.054 -> + 0.70s
+      letters.forEach((letter, i) => {
+        const startSec = 2.45 + i * 0.054;
+        const endSec = startSec + 0.70;
+        createAnimation(letter, [
+          { offset: 0, opacity: 0, transform: 'translateY(0.14em)' },
+          { offset: (startSec * 1000) / TOTAL_MS, opacity: 0, transform: 'translateY(0.14em)', easing: easeReveal },
+          { offset: (endSec * 1000) / TOTAL_MS, opacity: 1, transform: 'translateY(0)' },
+          { offset: 1, opacity: 1, transform: 'translateY(0)' }
+        ]);
+      });
+
+      // Top shade: 2.90s -> 3.70s
+      createAnimation(topShade, [
+        { offset: 0, opacity: 0 },
+        { offset: 2900 / 7400, opacity: 0, easing: easeInOut },
+        { offset: 3700 / 7400, opacity: 1 },
+        { offset: 1, opacity: 1 }
+      ]);
+
+      // Back layer: 2.90s -> 4.30s
+      createAnimation(layerBack, [
+        { offset: 0, transform: 'translateY(0)' },
+        { offset: 2900 / 7400, transform: 'translateY(0)', easing: easeBack },
+        { offset: 4300 / 7400, transform: 'translateY(-1.5%)' },
+        { offset: 1, transform: 'translateY(-1.5%)' }
+      ]);
+
+      // Mid layer: 2.90s -> 4.30s (-4%), hold to 4.60s, -> 6.90s (0)
+      createAnimation(layerMid, [
+        { offset: 0, transform: 'translateY(0)' },
+        { offset: 2900 / 7400, transform: 'translateY(0)', easing: easeMidUp },
+        { offset: 4300 / 7400, transform: 'translateY(-4%)' },
+        { offset: 4600 / 7400, transform: 'translateY(-4%)', easing: easeHandoff },
+        { offset: 6900 / 7400, transform: 'translateY(0)' },
+        { offset: 1, transform: 'translateY(0)' }
+      ]);
+
+      // Headline block: 3.00s -> 4.80s
+      createAnimation(headlineBlock, [
+        { offset: 0, transform: 'translateX(-50%) translateY(6%)' },
+        { offset: 3000 / 7400, transform: 'translateX(-50%) translateY(6%)', easing: easeHeadline },
+        { offset: 4800 / 7400, transform: 'translateX(-50%) translateY(0)' },
+        { offset: 1, transform: 'translateX(-50%) translateY(0)' }
+      ]);
+
+      // Front layer: 3.35s -> 6.00s (-2.5%) -> 7.30s (0)
+      createAnimation(layerFront, [
+        { offset: 0, transform: 'translateY(66%)' },
+        { offset: 3350 / 7400, transform: 'translateY(66%)', easing: easeFrontUp },
+        { offset: 6000 / 7400, transform: 'translateY(-2.5%)', easing: easeHandoff },
+        { offset: 7300 / 7400, transform: 'translateY(0)' },
+        { offset: 1, transform: 'translateY(0)' }
+      ]);
+
+      /* =======================================================================
+         3. Rain Loop Controller (Back Layer)
+         ======================================================================= */
+      let rainStarted = false;
+      let activeRainVideo = null;
+      const RAIN_CLIP_LOOP_END = 3.6;
+      const RAIN_CROSSFADE_LEAD = 0.75;
+
+      function startRainLoop() {
+        if (rainStarted) return;
+        rainStarted = true;
+        activeRainVideo = rainVideoA;
+        rainVideoA.currentTime = 0;
+        rainVideoA.style.opacity = '1';
+        rainVideoA.play().catch(() => {});
+
+        setupRainCrossfade(rainVideoA, rainVideoB);
+        setupRainCrossfade(rainVideoB, rainVideoA);
+      }
+
+      function setupRainCrossfade(currentVid, nextVid) {
+        currentVid.addEventListener('timeupdate', function () {
+          if (activeRainVideo === currentVid && currentVid.currentTime >= (RAIN_CLIP_LOOP_END - RAIN_CROSSFADE_LEAD)) {
+            nextVid.currentTime = 0;
+            nextVid.style.opacity = '1';
+            nextVid.play().catch(() => {});
+
+            currentVid.style.opacity = '0';
+            activeRainVideo = nextVid;
+
+            setTimeout(() => {
+              if (activeRainVideo !== currentVid) {
+                currentVid.pause();
+              }
+            }, 800);
+          }
+        });
+      }
+
+      /* =======================================================================
+         4. Master Clock Loop & Tilt Video Sync (1.25s -> 2.85s)
+         ======================================================================= */
+      let clockStartTime = null;
+      let isIntroFinished = false;
+
+      function masterTick(now) {
+        if (!clockStartTime) clockStartTime = now;
+        const elapsedSec = (now - clockStartTime) / 1000;
+        const elapsedMs = now - clockStartTime;
+
+        const boundedMs = Math.min(elapsedMs, TOTAL_MS);
+        for (let i = 0; i < animations.length; i++) {
+          animations[i].currentTime = boundedMs;
+        }
+
+        // Tilt Video Playback Sync (1.25s -> 2.85s)
+        if (elapsedSec >= 1.25 && elapsedSec < 2.85) {
+          const windowProgress = (elapsedSec - 1.25) / 1.6;
+          const targetVideoTime = windowProgress * 5.04;
+
+          if (tiltVideo.paused) {
+            tiltVideo.play().catch(() => {});
+          }
+
+          const baseRate = 5.04 / 1.6;
+          const timeDiff = targetVideoTime - tiltVideo.currentTime;
+          const nudgedRate = baseRate + (timeDiff * 1.5);
+          tiltVideo.playbackRate = Math.max(0.85 * baseRate, Math.min(1.2 * baseRate, nudgedRate));
+        } else if (elapsedSec >= 2.85 && elapsedSec < 3.2) {
+          if (!tiltVideo.paused) {
+            tiltVideo.pause();
+            tiltVideo.currentTime = 5.04;
+          }
+        }
+
+        // Start rain loop at 2.40s
+        if (elapsedSec >= 2.40 && !rainStarted) {
+          startRainLoop();
+        }
+
+        // Finish intro at 7.4s
+        if (elapsedMs >= TOTAL_MS && !isIntroFinished) {
+          isIntroFinished = true;
+          document.body.classList.remove('intro');
+          if (doorsBox) doorsBox.style.display = 'none';
+          if (openingBox) openingBox.style.display = 'none';
+          return;
+        }
+
+        if (!isIntroFinished) {
+          requestAnimationFrame(masterTick);
+        }
+      }
+
+      /* =======================================================================
+         5. Preload & Asset Readiness Check
+         ======================================================================= */
+      let isReadyToStart = false;
+
+      function checkAssetsReady() {
+        if (isReadyToStart) return;
+
+        const doorsReady = imgDoors.complete && imgDoors.naturalWidth > 0;
+        const aerialReady = imgAerial.complete && imgAerial.naturalWidth > 0;
+        const backReady = imgBack.complete && imgBack.naturalWidth > 0;
+        const midReady = imgMid.complete && imgMid.naturalWidth > 0;
+        const frontReady = imgFront.complete && imgFront.naturalWidth > 0;
+        const tiltReady = tiltVideo.readyState >= 3;
+
+        if (doorsReady && aerialReady && backReady && midReady && frontReady && tiltReady) {
+          isReadyToStart = true;
+          setTimeout(() => {
+            requestAnimationFrame(masterTick);
+          }, 120);
+        }
+      }
+
+      imgDoors.onload = checkAssetsReady;
+      imgAerial.onload = checkAssetsReady;
+      imgBack.onload = checkAssetsReady;
+      imgMid.onload = checkAssetsReady;
+      imgFront.onload = checkAssetsReady;
+      tiltVideo.addEventListener('canplaythrough', checkAssetsReady);
+
+      setTimeout(() => {
+        if (!isReadyToStart) {
+          console.warn('[Harborlux] Failsafe timer triggered at 5.0s');
+          isReadyToStart = true;
+          requestAnimationFrame(masterTick);
+        }
+      }, 5000);
+
+      /* =======================================================================
+         6. Pitch Telemetry Layer Switcher
+         ======================================================================= */
+      function setupPitchControls() {
+        const buttons = document.querySelectorAll('.pitch-ctrl-btn');
+        const layers = {
+          xg: document.getElementById('layer-xg'),
+          passing: document.getElementById('layer-passing'),
+          defensive: document.getElementById('layer-defensive'),
+          space: document.getElementById('layer-space')
+        };
+
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const layerKey = btn.getAttribute('data-layer');
+            Object.keys(layers).forEach(k => {
+              if (layers[k]) {
+                layers[k].style.display = (k === layerKey) ? 'block' : 'none';
+              }
+            });
+          });
+        });
+      }
+
+      setupPitchControls();
+
+    })();
+  </script>
 </body>
 </html>
