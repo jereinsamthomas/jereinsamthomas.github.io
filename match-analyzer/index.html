@@ -141,14 +141,16 @@
     /* 2. Headline Block */
     .headline-block {
       position: absolute;
-      z-index: 2;
-      pointer-events: none;
-      width: 100vw;
+      top: calc(96 * var(--u, 1px));
       left: 50%;
       transform: translateX(-50%);
+      z-index: 10 !important;
       text-align: center;
       white-space: nowrap;
-      will-change: transform;
+      pointer-events: none;
+      width: 100%;
+      max-width: 1400px;
+      will-change: transform, opacity;
     }
 
     .kicker {
@@ -164,13 +166,15 @@
 
     .giant-word {
       display: inline-block;
-      font-weight: 700;
-      letter-spacing: -0.045em;
-      line-height: 1;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
       color: #FFFFFF;
       margin: 0;
       padding: 0;
       white-space: nowrap;
+      text-shadow: 0 4px 28px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 240, 255, 0.25);
     }
 
     .giant-word .letter {
@@ -235,15 +239,16 @@
     /* Tactical Telemetry HUD Overlay on Balcony Railing */
     .balcony-telemetry-hud {
       position: absolute;
-      top: 61%;
-      left: 7%;
-      right: 6%;
-      z-index: 5;
+      bottom: 22px;
+      left: 36px;
+      right: 36px;
+      top: auto !important;
+      z-index: 15 !important;
       display: flex;
       justify-content: space-between;
       pointer-events: auto;
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(16px);
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
@@ -1579,17 +1584,19 @@
       z-index: 2;
     }
 
-    /* 3. Headline Block (Above pitch, below analyst) */
+    /* 3. Headline Block: Above pitch, shining in stadium sky */
     .headline-block {
       position: absolute;
-      z-index: 3 !important;
-      pointer-events: none;
-      width: 100vw;
+      top: calc(96 * var(--u, 1px));
       left: 50%;
       transform: translateX(-50%);
+      z-index: 10 !important;
       text-align: center;
       white-space: nowrap;
-      will-change: transform;
+      pointer-events: none;
+      width: 100%;
+      max-width: 1400px;
+      will-change: transform, opacity;
     }
 
     .hero-tactical-banner {
@@ -1663,23 +1670,45 @@
       font-weight: bold;
     }
 
-    /* 4. Front Layer (Analyst Cutout Overlapping Text) */
+    /* 4. Front Layer: Tactical Football Analyst on Suite Balcony */
     .layer-front {
-      z-index: 4 !important;
+      position: absolute;
+      inset: 0;
+      z-index: 5 !important;
+      pointer-events: none;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
       transform-origin: 50% 100%;
       will-change: transform;
+    }
+
+    .front-img {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 70%;
+      width: auto;
+      max-width: 1300px;
+      object-fit: contain;
+      object-position: center bottom;
+      display: block;
+      pointer-events: none;
+      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.85));
     }
 
     /* 5. Balcony Railing Telemetry HUD & Interactive Controls */
     .balcony-telemetry-hud {
       position: absolute;
-      top: 56%;
-      left: 4.5%;
-      right: 4.5%;
-      z-index: 5 !important;
+      bottom: 22px;
+      left: 36px;
+      right: 36px;
+      top: auto !important;
+      z-index: 15 !important;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.65rem;
       pointer-events: auto;
       opacity: 0;
       transform: translateY(16px);
@@ -2554,24 +2583,23 @@
           navBottom = 12 + 34;
         }
 
-        const sizeA = (0.78 * stageWidth) / widthPerEm;
-        const sizeB = (0.94 * vw) / widthPerEm;
-        const availableGap = baselineInViewport - (navBottom + 0.035 * vh);
-        const sizeC = Math.max(18, availableGap / 0.88);
+        // Headline placement: cleanly positioned in upper stadium sky
+        const topOffset = Math.max(navBottom + 10, stageHeight * 0.10);
+        if (headlineBlock) {
+          headlineBlock.style.top = topOffset + 'px';
+        }
 
-        wordSize = Math.min(sizeA, sizeB, sizeC);
+        const maxTitleWidth = Math.min(stageWidth * 0.72, vw * 0.92);
+        wordSize = Math.max(26, Math.min(64 * u, maxTitleWidth / widthPerEm));
 
         const giantWord = document.getElementById('giantWord');
         if (giantWord) giantWord.style.fontSize = wordSize + 'px';
 
-        const wordCapHeight = 0.727 * wordSize;
-        if (headlineBlock) headlineBlock.style.top = (baselineY - wordCapHeight) + 'px';
-
         if (kicker) {
-          const kickerFontSize = 0.118 * wordSize;
+          const kickerFontSize = Math.max(10, 0.14 * wordSize);
           kicker.style.fontSize = kickerFontSize + 'px';
-          kicker.style.top = (-kickerFontSize - 0.02 * wordSize) + 'px';
-          kicker.style.transform = `translateX(-50%) translateX(-${0.1 * wordSize}px)`;
+          kicker.style.top = (-kickerFontSize - 14) + 'px';
+          kicker.style.transform = 'translateX(-50%)';
         }
       }
 
