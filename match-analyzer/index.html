@@ -42,6 +42,7 @@
       --football-orange: #ff3b1d;
       --football-cyan: #00f2fe;
       --football-green: #00e599;
+      --football-gold: #ffbe0b;
       --paper-card: #0a0a0f;
       --border-subtle: rgba(255, 255, 255, 0.12);
     }
@@ -74,7 +75,7 @@
       position: relative;
       width: 100vw;
       height: 100svh;
-      min-height: 520px;
+      min-height: 540px;
       overflow: hidden;
       isolation: isolate;
       background-color: var(--bg);
@@ -100,19 +101,22 @@
       pointer-events: none;
     }
 
-    .stage-layer img,
-    .stage-layer video {
+    .stage-layer img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    /* 1. Back Layer */
+    /* 1. Back Layer: Floodlit Stadium Pitch Bowl & Sky */
     .layer-back {
       z-index: 1;
       transform-origin: 50% 40%;
       will-change: transform;
+    }
+
+    .layer-back img {
+      filter: brightness(0.72) contrast(1.15);
     }
 
     .layer-back .top-shade {
@@ -121,67 +125,73 @@
       left: 0;
       width: 100%;
       height: 52%;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
       pointer-events: none;
       z-index: 3;
-      opacity: 1 !important;
-    }
-
-    .rain-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
       opacity: 0;
-      transition: opacity 0.7s linear;
-      z-index: 2;
-      pointer-events: none;
+      will-change: opacity;
     }
 
-    /* 2. Headline Block */
+    /* 2. Mid Layer */
+    .layer-mid {
+      z-index: 2;
+      transform-origin: 50% 45%;
+      will-change: transform;
+    }
+
+    /* 3. Headline Block: Centered in Stadium Sky */
     .headline-block {
       position: absolute;
-      top: calc(85 * var(--u, 1px));
+      top: calc(125 * var(--u, 1px));
       left: 50%;
       transform: translateX(-50%);
-      z-index: 10 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 10px !important;
-      text-align: center;
-      pointer-events: none;
       width: 100%;
       max-width: 1400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
       margin: 0 auto;
       will-change: transform, opacity;
     }
 
-    .kicker {
-      position: absolute;
-      font-weight: 300;
-      letter-spacing: -0.01em;
-      color: #FFFFFF;
-      line-height: 1;
-      left: 50%;
-      white-space: nowrap;
-      will-change: opacity, transform;
-    }
-
     .giant-word {
-      display: inline-block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(14px, 2.4vw, 36px);
+      flex-wrap: wrap;
+      margin: 0 auto;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.05;
-      color: #FFFFFF;
-      margin: 0;
-      padding: 0;
+      text-align: center;
+      white-space: normal;
+    }
+
+    .word-group {
+      display: inline-flex;
+      align-items: center;
       white-space: nowrap;
-      text-shadow: 0 4px 28px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 240, 255, 0.25);
+    }
+
+    .word-football {
+      color: #FFFFFF;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 4px 24px rgba(0, 0, 0, 0.95);
+    }
+
+    .word-match {
+      color: #ff3b1d;
+      text-shadow: 0 0 35px rgba(255, 59, 29, 0.65), 0 4px 24px rgba(0, 0, 0, 0.95);
+    }
+
+    .word-analysis {
+      color: #FFFFFF;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 4px 24px rgba(0, 0, 0, 0.95);
     }
 
     .giant-word .letter {
@@ -189,35 +199,7 @@
       will-change: opacity, transform;
     }
 
-    /* Football Subtitle Tag */
-    .hero-football-tag {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: -28px;
-      font-size: 11px;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.75);
-      font-weight: 500;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .hero-football-tag {
-      opacity: 1;
-    }
-
-    /* 3. Mid Layer */
-    .layer-mid {
-      z-index: 3;
-      transform-origin: 50% 45%;
-      will-change: transform;
-    }
-
-    /* 4. Front Layer */
+    /* 4. Front Layer: Tactical Football Analyst at Suite Balcony */
     .layer-front {
       z-index: 4;
       transform-origin: 50% 100%;
@@ -241,87 +223,15 @@
     .front-img {
       position: relative;
       z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.9));
     }
 
-    /* Tactical Telemetry HUD Overlay on Balcony Railing */
-    .balcony-telemetry-hud {
-      position: absolute;
-      bottom: 58px;
-      left: 36px;
-      right: 36px;
-      top: auto !important;
-      z-index: 20 !important;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      pointer-events: auto;
-      opacity: 1 !important;
-      transform: none !important;
-    }
-
-    .balcony-telemetry-hud {
-      position: absolute;
-      bottom: 58px;
-      left: 36px;
-      right: 36px;
-      top: auto !important;
-      z-index: 20 !important;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      pointer-events: auto;
-      opacity: 1 !important;
-      transform: none !important;
-    }
-
-    .telemetry-card {
-      background: rgba(13, 10, 34, 0.55);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 8px;
-      padding: 8px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      font-size: 11px;
-      color: #FFFFFF;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-    }
-
-    .telemetry-card .t-label {
-      font-size: 9.5px;
-      letter-spacing: 0.18em;
-      color: rgba(255, 255, 255, 0.65);
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
-    .telemetry-card .t-val {
-      font-weight: 700;
-      font-size: 13px;
-      color: #00f2fe;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .live-pulse {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #00e599;
-      box-shadow: 0 0 8px #00e599;
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.3); opacity: 0.6; }
-    }
-
-    /* 5. Opening Box */
+    /* 5. Opening Box (Aerial Stadium Pull-Back) */
     .opening-box {
       position: absolute;
       top: 0;
@@ -331,9 +241,10 @@
       z-index: 6;
       pointer-events: none;
       will-change: opacity;
+      overflow: hidden;
     }
 
-    .aerial-img, .tilt-video {
+    .aerial-img {
       position: absolute;
       top: 0;
       left: 0;
@@ -341,14 +252,10 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      will-change: transform;
     }
 
-    .tilt-video {
-      opacity: 0;
-      will-change: opacity;
-    }
-
-    /* 6. Doors Box */
+    /* 6. Stadium Tunnel Doors */
     .doors-box {
       position: absolute;
       top: 0;
@@ -364,7 +271,7 @@
       position: absolute;
       top: 0;
       height: 100%;
-      width: 50.1%;
+      width: 50.15%;
       background-image: url('assets/stadium_tunnel_doors.jpg');
       background-size: 200% 100%;
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.95);
@@ -374,37 +281,100 @@
     .door-left {
       left: 0;
       background-position: 0 50%;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .door-right {
       right: 0;
       background-position: 100% 50%;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
     }
 
-    /* Initial state before intro clock starts */
-    
+    /* Initial state before intro starts */
+    .intro .doors-box {
+      display: block;
+    }
 
-    
+    .intro .opening-box {
+      display: block;
+      opacity: 1;
+    }
 
-    
+    .intro .nav {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
 
-    
+    .intro .giant-word .letter {
+      opacity: 0;
+      transform: translateY(0.22em);
+    }
 
-    /* 7. Nav (Pinned to viewport) */
+    .intro .layer-front {
+      transform: translateY(66%);
+    }
+
+    .intro .hero-scroll-cue {
+      opacity: 0;
+      transform: translateX(-50%) translateY(12px);
+    }
+
+    /* Stationary Complete State */
+    body:not(.intro) .doors-box,
+    body.intro-complete .doors-box {
+      display: none !important;
+    }
+
+    body:not(.intro) .opening-box,
+    body.intro-complete .opening-box {
+      display: none !important;
+    }
+
+    body:not(.intro) .nav,
+    body.intro-complete .nav {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    body:not(.intro) .giant-word .letter,
+    body.intro-complete .giant-word .letter {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    body:not(.intro) .layer-front,
+    body.intro-complete .layer-front {
+      transform: translateY(0);
+    }
+
+    body:not(.intro) .hero-scroll-cue,
+    body.intro-complete .hero-scroll-cue {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* 7. Nav (Pinned to viewport - Clean Two-Row Layout) */
     .nav {
       position: absolute;
-      top: calc(52 * var(--u));
+      top: 0;
       left: 0;
       width: 100vw;
-      height: calc(48 * var(--u));
-      padding: 0 calc(125 * var(--u));
+      padding: 18px clamp(16px, 4vw, 48px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      z-index: 20;
+      pointer-events: auto;
+      will-change: opacity, transform;
+    }
+
+    .nav-row-1 {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      z-index: 10;
-      pointer-events: auto;
-      font-size: calc(15 * var(--u));
-      will-change: opacity, transform;
+      gap: 16px;
     }
 
     /* Left: Wordmark */
@@ -412,15 +382,38 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      white-space: nowrap;
     }
 
     .wordmark {
-      font-weight: 600;
-      font-size: calc(17 * var(--u));
-      letter-spacing: 0.28em;
+      font-weight: 700;
+      font-size: clamp(14px, 1.2vw, 17px);
+      letter-spacing: 0.22em;
       color: #FFFFFF;
       text-decoration: none;
       white-space: nowrap;
+    }
+
+    .brand-accent {
+      color: var(--football-orange);
+      font-weight: 800;
+      text-shadow: 0 0 15px rgba(255, 59, 29, 0.5);
+    }
+
+    .badge-dot-live {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--football-orange);
+      box-shadow: 0 0 10px var(--football-orange);
+      margin-right: 6px;
+      animation: livePulseDot 1.4s infinite alternate ease-in-out;
+    }
+
+    @keyframes livePulseDot {
+      from { transform: scale(0.9); opacity: 0.7; }
+      to { transform: scale(1.35); opacity: 1; }
     }
 
     .theme-badge {
@@ -429,37 +422,42 @@
       background: rgba(255, 59, 29, 0.18);
       border: 1px solid rgba(255, 59, 29, 0.4);
       color: #ff3b1d;
-      padding: 2px 7px;
+      padding: 3px 8px;
       border-radius: 4px;
       font-weight: 600;
       text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
     }
 
     /* Centre: Pill Bar */
     .pill-bar {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      height: calc(48 * var(--u));
+      position: relative;
+      left: auto;
+      transform: none;
+      height: 38px;
       display: flex;
       align-items: center;
-      padding: calc(5 * var(--u));
-      gap: calc(6 * var(--u));
+      padding: 3px 6px;
+      gap: 4px;
       border-radius: 9999px;
-      background: var(--nav-glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: inset 0 0 0 1px var(--nav-glass-ring);
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14), 0 4px 20px rgba(0, 0, 0, 0.6);
       white-space: nowrap;
+      margin: 0 auto;
     }
 
     .pill-link {
-      height: calc(38 * var(--u));
-      padding: 0 calc(22 * var(--u));
+      height: 30px;
+      padding: 0 16px;
       border-radius: 9999px;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 12px;
       font-weight: 400;
       color: var(--link-inactive);
       text-decoration: none;
@@ -478,36 +476,70 @@
       font-weight: 600;
     }
 
-    /* Right: Mode Toggle + Language + Enquire Button */
+    /* Right: Portfolio back + Replay Cinema + Launch Lab */
     .nav-right {
       display: flex;
       align-items: center;
-      gap: calc(24 * var(--u));
+      gap: 10px;
       white-space: nowrap;
     }
 
-    .lang-group {
-      display: flex;
+    .btn-back-portfolio {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      padding: 6px 14px;
+      transition: all 0.25s ease;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      text-decoration: none;
+      display: inline-flex;
       align-items: center;
-      gap: calc(9 * var(--u));
-      color: rgba(255, 255, 255, 0.90);
-      cursor: pointer;
+      gap: 5px;
     }
 
-    .globe-icon {
-      width: calc(20 * var(--u));
-      height: calc(20 * var(--u));
-      display: block;
+    .btn-back-portfolio:hover {
+      color: #fff;
+      border-color: var(--football-orange);
+      background: rgba(255, 59, 29, 0.2);
+      transform: translateX(-2px);
+    }
+
+    .btn-replay-cinema {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #00f2fe;
+      border: 1px solid rgba(0, 242, 254, 0.4);
+      border-radius: 999px;
+      padding: 6px 14px;
+      transition: all 0.25s ease;
+      background: rgba(0, 242, 254, 0.1);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-replay-cinema:hover {
+      background: rgba(0, 242, 254, 0.25);
+      border-color: #00f2fe;
+      box-shadow: 0 0 18px rgba(0, 242, 254, 0.5);
+      color: #fff;
     }
 
     .btn-enquire {
-      height: calc(44 * var(--u));
-      padding: 0 calc(27 * var(--u));
+      height: 34px;
+      padding: 0 18px;
       border-radius: 9999px;
       background-color: var(--btn);
-      color: var(--ink);
+      color: #FFFFFF;
       font-weight: 600;
-      font-size: inherit;
+      font-size: 12px;
       border: none;
       cursor: pointer;
       display: inline-flex;
@@ -515,18 +547,20 @@
       justify-content: center;
       text-decoration: none;
       white-space: nowrap;
-      transition: background-color 0.2s ease, transform 0.2s ease;
+      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 0 15px rgba(255, 59, 29, 0.35);
     }
 
     .btn-enquire:hover {
       background-color: var(--btn-hover);
       transform: translateY(-1px);
+      box-shadow: 0 0 22px rgba(255, 59, 29, 0.6);
     }
 
     /* Floating Scroll Cue */
     .hero-scroll-cue {
       position: absolute;
-      bottom: 14px;
+      bottom: 18px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 25;
@@ -539,45 +573,24 @@
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      padding: 6px 16px;
-      background: rgba(0, 0, 0, 0.8);
-      border: 1px solid rgba(0, 240, 255, 0.4);
+      padding: 7px 18px;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(255, 59, 29, 0.45);
       border-radius: 999px;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 240, 255, 0.15);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 59, 29, 0.2);
       cursor: pointer;
       pointer-events: auto;
-      opacity: 1 !important;
       transition: all 0.3s ease;
+      will-change: opacity, transform;
     }
 
-    .hero-scroll-cue {
-      position: absolute;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 25;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #FFFFFF;
-      font-family: monospace;
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      background: rgba(0, 0, 0, 0.8);
-      border: 1px solid rgba(0, 240, 255, 0.4);
-      border-radius: 999px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 240, 255, 0.15);
-      cursor: pointer;
-      pointer-events: auto;
-      opacity: 1 !important;
-      transition: all 0.3s ease;
+    .hero-scroll-cue:hover {
+      border-color: #ff3b1d;
+      background: rgba(255, 59, 29, 0.2);
+      box-shadow: 0 4px 25px rgba(255, 59, 29, 0.45);
+      transform: translateX(-50%) translateY(-2px);
     }
 
     .cue-bounce {
@@ -588,8 +601,7 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(5px); }
     }
-
-    /* =========================================================================
+/* =========================================================================
        EDITORIAL MATCH ANALYSIS ROOM (BELOW HERO)
        ========================================================================= */
     .analysis-room-section {
@@ -1059,20 +1071,7 @@
         text-align: center;
       }
 
-      .balcony-telemetry-hud {
-      position: absolute;
-      bottom: 58px;
-      left: 36px;
-      right: 36px;
-      top: auto !important;
-      z-index: 20 !important;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      pointer-events: auto;
-      opacity: 1 !important;
-      transform: none !important;
-    }
+      
     }
 
     /* At 360px and narrower */
@@ -1208,7 +1207,7 @@
       .doors-box, .opening-box {
         display: none !important;
       }
-      .nav, .kicker, .giant-word .letter, .layer-front, .layer-mid, .layer-back, .headline-block, .top-shade, .balcony-telemetry-hud, .hero-scroll-cue {
+      .nav, .giant-word .letter, .layer-front, .layer-mid, .layer-back, .headline-block, .top-shade, .hero-scroll-cue {
       position: absolute;
       bottom: 14px;
       left: 50%;
@@ -1240,1043 +1239,14 @@
       }
     }
   
-    /* =========================================================================
-       FOOTBALL STADIUM HERO ENHANCEMENTS
-       ========================================================================= */
-    .brand-accent {
-      color: var(--football-orange);
-      font-weight: 800;
-    }
-
-    .badge-dot-live {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--football-orange);
-      box-shadow: 0 0 10px var(--football-orange);
-      margin-right: 6px;
-      animation: livePulseDot 1.4s infinite alternate ease-in-out;
-    }
-
-    @keyframes livePulseDot {
-      from { transform: scale(0.9); opacity: 0.7; }
-      to { transform: scale(1.3); opacity: 1; }
-    }
-
-    .btn-back-portfolio {
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 999px;
-      padding: 7px 16px;
-      transition: all 0.25s ease;
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(8px);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .btn-back-portfolio:hover {
-      color: #fff;
-      border-color: var(--football-orange);
-      background: rgba(255, 59, 29, 0.2);
-      transform: translateX(-2px);
-    }
-
-    .btn-replay-cinema {
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: #00f2fe;
-      border: 1px solid rgba(0, 242, 254, 0.4);
-      border-radius: 999px;
-      padding: 7px 16px;
-      transition: all 0.25s ease;
-      background: rgba(0, 242, 254, 0.1);
-      cursor: pointer;
-    }
-
-    .btn-replay-cinema:hover {
-      background: rgba(0, 242, 254, 0.25);
-      border-color: #00f2fe;
-      box-shadow: 0 0 16px rgba(0, 242, 254, 0.45);
-      color: #fff;
-    }
-
-    /* Tunnel Doors Tactical Markings */
-    .tunnel-door-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 3.5rem;
-      pointer-events: none;
-    }
-
-    .left-stencil {
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    .right-stencil {
-      align-items: flex-end;
-      text-align: right;
-    }
-
-    .tunnel-stencil-block {
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-      background: rgba(0, 0, 0, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      padding: 1.25rem 1.6rem;
-      border-radius: 6px;
-      box-shadow: 0 12px 45px rgba(0, 0, 0, 0.9);
-      max-width: 380px;
-    }
-
-    .tunnel-badge {
-      font-family: monospace;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      color: var(--football-orange);
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .tunnel-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: #FFFFFF;
-      line-height: 1.15;
-    }
-
-    .tunnel-status {
-      font-family: monospace;
-      font-size: 9.5px;
-      color: rgba(255, 255, 255, 0.7);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .tunnel-hazard-strip {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 10px;
-      height: 100%;
-      background: repeating-linear-gradient(
-        45deg,
-        #ff3b1d,
-        #ff3b1d 12px,
-        #000000 12px,
-        #000000 24px
-      );
-      box-shadow: 0 0 15px rgba(255, 59, 29, 0.6);
-    }
-
-    .tunnel-hazard-strip.strip-right {
-      right: auto;
-      left: 0;
-    }
-
-    /* Tunnel Center Lock Emblem */
-    .tunnel-center-lock {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      pointer-events: none;
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .lock-ring {
-      width: 76px;
-      height: 76px;
-      border-radius: 50%;
-      border: 2px dashed rgba(255, 59, 29, 0.75);
-      animation: spinLockRing 12s linear infinite;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    @keyframes spinLockRing {
-      to { transform: translateX(-50%) rotate(360deg); }
-    }
-
-    .lock-icon {
-      width: 76px;
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 50%;
-      color: var(--football-orange);
-      box-shadow: 0 0 28px rgba(255, 59, 29, 0.5);
-    }
-
-    .lock-text {
-      font-family: monospace;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      text-align: center;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.88);
-      padding: 5px 14px;
-      border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .lock-text span {
-      color: var(--football-green);
-      font-weight: 700;
-    }
-
-    /* Opening Stadium Canvas & HUD */
-    .opening-tactical-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .opening-tactical-hud {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 4.5rem 3rem 3rem;
-      box-sizing: border-box;
-    }
-
-    .hud-top-meta {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .hud-pill {
-      font-family: monospace;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.82);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      padding: 5px 14px;
-      border-radius: 999px;
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-    }
-
-    .hud-center-telemetry {
-      align-self: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.7rem;
-    }
-
-    .tactical-radar-crosshair {
-      width: 88px;
-      height: 88px;
-      border: 1px solid rgba(0, 242, 254, 0.5);
-      border-radius: 50%;
-      position: relative;
-      animation: radarPulse 2.2s infinite ease-out;
-    }
-
-    .tactical-radar-crosshair::before, .tactical-radar-crosshair::after {
-      content: '';
-      position: absolute;
-      background: rgba(0, 242, 254, 0.65);
-    }
-
-    .tactical-radar-crosshair::before {
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 1px;
-    }
-
-    .tactical-radar-crosshair::after {
-      left: 50%;
-      top: 0;
-      width: 1px;
-      height: 100%;
-    }
-
-    @keyframes radarPulse {
-      0% { transform: scale(0.9); opacity: 0.45; }
-      50% { transform: scale(1.18); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.45; }
-    }
-
-    .telemetry-readout {
-      font-family: monospace;
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #00f2fe;
-      background: rgba(0, 0, 0, 0.88);
-      border: 1px solid rgba(0, 242, 254, 0.35);
-      padding: 7px 16px;
-      border-radius: 4px;
-      text-shadow: 0 0 12px rgba(0, 242, 254, 0.6);
-    }
-
-    /* Hero Tactical Banner & Subbar */
-    .hero-tactical-banner {
-      display: flex;
-      gap: 0.8rem;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0.85rem;
-      flex-wrap: wrap;
-    }
-
-    .match-badge {
-      font-family: monospace;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--football-orange);
-      background: rgba(255, 59, 29, 0.15);
-      border: 1px solid rgba(255, 59, 29, 0.4);
-      padding: 4px 11px;
-      border-radius: 4px;
-    }
-
-    .match-meta {
-      font-family: monospace;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .hero-tactical-subbar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.85rem;
-      margin-top: 0.95rem;
-      flex-wrap: wrap;
-    }
-
-    .subbar-chip {
-      font-family: monospace;
-      font-size: 10.5px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.82);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      padding: 5px 14px;
-      border-radius: 999px;
-      backdrop-filter: blur(8px);
-    }
-
-    .subbar-dot {
-      color: var(--football-orange);
-      font-weight: bold;
-    }
-
-    /* Stage Pitch Canvas (Live Passing Vectors on Mid Layer) */
-    .stage-pitch-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 2;
-      opacity: 0.9;
-    }
-
-    /* Stadium Floodlight Cones */
-    .stadium-floodlight-cones {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(ellipse at 25% 15%, rgba(0, 242, 254, 0.14) 0%, transparent 55%),
-                  radial-gradient(ellipse at 75% 15%, rgba(255, 255, 255, 0.12) 0%, transparent 55%);
-      mix-blend-mode: screen;
-    }
-
-    /* Balcony Mode Selectors */
-    .balcony-tactical-controls {
-      display: flex;
-      gap: 0.45rem;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 4px;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .balcony-mode-btn {
-      font-family: monospace;
-      font-size: 9.5px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.75);
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: 4px;
-      padding: 6px 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .balcony-mode-btn:hover {
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .balcony-mode-btn.active {
-      color: var(--football-orange);
-      border-color: var(--football-orange);
-      background: rgba(255, 59, 29, 0.18);
-      box-shadow: 0 0 10px rgba(255, 59, 29, 0.35);
-    }
-
-  
-    /* =========================================================================
-       ELITE FOOTBALL MATCH ANALYSIS HERO SUITE
-       ========================================================================= */
-    :root {
-      --bg: #000000;
-      --bg-darker: #000000;
-      --ink: #000000;
-      --btn: #ff3b1d;
-      --btn-hover: #ff5638;
-      --text: #FFFFFF;
-      --football-orange: #ff3b1d;
-      --football-cyan: #00f2fe;
-      --football-green: #00e599;
-      --football-gold: #ffbe0b;
-      --border-subtle: rgba(255, 255, 255, 0.14);
-    }
-
-    .brand-accent {
-      color: var(--football-orange);
-      font-weight: 800;
-      text-shadow: 0 0 15px rgba(255, 59, 29, 0.5);
-    }
-
-    .badge-dot-live {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--football-orange);
-      box-shadow: 0 0 10px var(--football-orange);
-      margin-right: 6px;
-      animation: livePulseDot 1.4s infinite alternate ease-in-out;
-    }
-
-    @keyframes livePulseDot {
-      from { transform: scale(0.9); opacity: 0.7; }
-      to { transform: scale(1.35); opacity: 1; }
-    }
-
-    .btn-back-portfolio {
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 999px;
-      padding: 7px 16px;
-      transition: all 0.25s ease;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .btn-back-portfolio:hover {
-      color: #fff;
-      border-color: var(--football-orange);
-      background: rgba(255, 59, 29, 0.2);
-      transform: translateX(-2px);
-    }
-
-    .btn-replay-cinema {
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: #00f2fe;
-      border: 1px solid rgba(0, 242, 254, 0.4);
-      border-radius: 999px;
-      padding: 7px 16px;
-      transition: all 0.25s ease;
-      background: rgba(0, 242, 254, 0.1);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .btn-replay-cinema:hover {
-      background: rgba(0, 242, 254, 0.25);
-      border-color: #00f2fe;
-      box-shadow: 0 0 18px rgba(0, 242, 254, 0.5);
-      color: #fff;
-    }
-
-    /* 1. Back Layer (Stadium Bowl) */
-    .layer-back {
-      z-index: 1 !important;
-      transform-origin: 50% 40%;
-      will-change: transform;
-    }
-
-    .layer-back img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.55) contrast(1.18);
-    }
-
-    /* 2. Mid Layer (Transparent Tactical Pitch Canvas directly over grass) */
-    .layer-mid {
-      z-index: 2 !important;
-      transform-origin: 50% 45%;
-      will-change: transform;
-      pointer-events: none;
-    }
-
-    .stage-pitch-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: auto;
-      z-index: 2;
-    }
-
-    /* 3. Headline Block: Above pitch, shining in stadium sky */
-    .headline-block {
-      position: absolute;
-      top: calc(85 * var(--u, 1px));
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 10px !important;
-      text-align: center;
-      pointer-events: none;
-      width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      will-change: transform, opacity;
-    }
-
-    .hero-tactical-banner {
-      display: inline-flex;
-      gap: 0.85rem;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0.85rem;
-      background: rgba(0, 0, 0, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      backdrop-filter: blur(8px);
-      padding: 5px 16px;
-      border-radius: 999px;
-    }
-
-    .match-badge {
-      font-family: monospace;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--football-orange);
-    }
-
-    .match-meta {
-      font-family: monospace;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
-    }
-
-    .word-football {
-      color: #FFFFFF;
-      text-shadow: 0 0 25px rgba(255, 255, 255, 0.45), 0 2px 10px rgba(0, 0, 0, 0.95);
-    }
-
-    .word-match {
-      color: #ff3b1d;
-      text-shadow: 0 0 35px rgba(255, 59, 29, 0.6), 0 2px 10px rgba(0, 0, 0, 0.95);
-    }
-
-    .word-analysis {
-      color: #FFFFFF;
-      text-shadow: 0 0 25px rgba(255, 255, 255, 0.45), 0 2px 10px rgba(0, 0, 0, 0.95);
-    }
-
-    .hero-tactical-subbar {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.85rem;
-      margin-top: 0.95rem;
-      background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      padding: 6px 18px;
-      border-radius: 999px;
-    }
-
-    .subbar-chip {
-      font-family: monospace;
-      font-size: 10.5px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #fff;
-    }
-
-    .subbar-dot {
-      color: var(--football-orange);
-      font-weight: bold;
-    }
-
-    .layer-front {
-      z-index: 5 !important;
-      position: absolute !important;
-      inset: 0 !important;
-      pointer-events: none !important;
-      display: flex !important;
-      align-items: flex-end !important;
-      justify-content: center !important;
-    }
-
-    .layer-front img,
-    .layer-front #imgFront,
-    .layer-front .front-img {
-      position: absolute !important;
-      bottom: 0 !important;
-      left: 50% !important;
-      transform: translateX(-50%) !important;
-      height: 60% !important;
-      width: auto !important;
-      max-width: 1100px !important;
-      object-fit: contain !important;
-      object-position: center bottom !important;
-      display: block !important;
-      pointer-events: none !important;
-      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.95)) !important;
-    }
-
-    /* 5. Balcony Railing Telemetry HUD & Interactive Controls */
-    .balcony-telemetry-hud {
-      position: absolute;
-      bottom: 58px;
-      left: 36px;
-      right: 36px;
-      top: auto !important;
-      z-index: 20 !important;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      pointer-events: auto;
-      opacity: 1 !important;
-      transform: none !important;
-    }
-
-    .balcony-telemetry-hud {
-      position: absolute;
-      bottom: 58px;
-      left: 36px;
-      right: 36px;
-      top: auto !important;
-      z-index: 20 !important;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      pointer-events: auto;
-      opacity: 1 !important;
-      transform: none !important;
-    }
-
-    .hud-main-deck {
-      display: flex;
-      justify-content: space-between;
-      align-items: stretch;
-      gap: 0.85rem;
-      flex-wrap: wrap;
-    }
-
-    /* Live Match Scoreboard Pill */
-    .hud-match-scoreboard {
-      display: flex;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 10px;
-      padding: 0.55rem 1.1rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
-      gap: 1rem;
-    }
-
-    .scoreboard-team {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-    }
-
-    .team-code {
-      font-family: monospace;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      color: #fff;
-    }
-
-    .team-score {
-      font-family: monospace;
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--football-orange);
-      background: rgba(255, 59, 29, 0.15);
-      padding: 2px 8px;
-      border-radius: 4px;
-      border: 1px solid rgba(255, 59, 29, 0.3);
-    }
-
-    .team-xg {
-      font-family: monospace;
-      font-size: 10px;
-      color: rgba(255, 255, 255, 0.65);
-    }
-
-    .scoreboard-divider {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
-      border-right: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 0 0.8rem;
-    }
-
-    .match-time-live {
-      font-family: monospace;
-      font-size: 10.5px;
-      font-weight: 700;
-      color: #00e599;
-      display: flex;
-      align-items: center;
-    }
-
-    .match-stage {
-      font-family: monospace;
-      font-size: 8.5px;
-      letter-spacing: 0.12em;
-      color: rgba(255, 255, 255, 0.5);
-      text-transform: uppercase;
-    }
-
-    /* Telemetry Info Cards */
-    .telemetry-card {
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 10px;
-      padding: 0.55rem 1.15rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 3px;
-      color: #FFFFFF;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
-      min-width: 170px;
-    }
-
-    .telemetry-card .t-label {
-      font-family: monospace;
-      font-size: 9px;
-      letter-spacing: 0.16em;
-      color: rgba(255, 255, 255, 0.6);
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .telemetry-card .t-val {
-      font-family: monospace;
-      font-weight: 700;
-      font-size: 12.5px;
-      color: #00f2fe;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* Interactive Tactical Phase Selector Bar */
-    .balcony-tactical-controls {
-      display: flex;
-      gap: 0.55rem;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.88);
-      padding: 0.4rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      backdrop-filter: blur(14px);
-      align-self: center;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.85);
-    }
-
-    .balcony-mode-btn {
-      font-family: monospace;
-      font-size: 10.5px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.75);
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: 999px;
-      padding: 6px 14px;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .balcony-mode-btn .btn-num {
-      font-size: 9px;
-      color: rgba(255, 255, 255, 0.45);
-      background: rgba(255, 255, 255, 0.1);
-      padding: 1px 5px;
-      border-radius: 3px;
-    }
-
-    .balcony-mode-btn:hover {
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.35);
-      background: rgba(255, 255, 255, 0.08);
-      transform: translateY(-1px);
-    }
-
-    .balcony-mode-btn.active {
-      color: #fff;
-      border-color: var(--football-orange);
-      background: rgba(255, 59, 29, 0.25);
-      box-shadow: 0 0 16px rgba(255, 59, 29, 0.45);
-    }
-
-    .balcony-mode-btn.active .btn-num {
-      color: #fff;
-      background: var(--football-orange);
-    }
-
-    /* Tunnel Doors Markings & Lock */
-    .door-panel {
-      position: absolute;
-      top: 0;
-      height: 100%;
-      width: 50.1%;
-      background-image: url('assets/stadium_tunnel_doors.jpg');
-      background-size: 200% 100%;
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.98);
-      will-change: transform;
-    }
-
-    .tunnel-door-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 3.5rem;
-      pointer-events: none;
-    }
-
-    .left-stencil {
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    .right-stencil {
-      align-items: flex-end;
-      text-align: right;
-    }
-
-    .tunnel-stencil-block {
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-      background: rgba(0, 0, 0, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      padding: 1.35rem 1.75rem;
-      border-radius: 8px;
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.95);
-      max-width: 400px;
-    }
-
-    .tunnel-badge {
-      font-family: monospace;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      color: var(--football-orange);
-      text-transform: uppercase;
-      font-weight: 800;
-    }
-
-    .tunnel-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: #FFFFFF;
-      line-height: 1.2;
-    }
-
-    .tunnel-status {
-      font-family: monospace;
-      font-size: 9.5px;
-      color: rgba(255, 255, 255, 0.75);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .tunnel-hazard-strip {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 12px;
-      height: 100%;
-      background: repeating-linear-gradient(
-        45deg,
-        #ff3b1d,
-        #ff3b1d 14px,
-        #000000 14px,
-        #000000 28px
-      );
-      box-shadow: 0 0 18px rgba(255, 59, 29, 0.7);
-    }
-
-    .tunnel-hazard-strip.strip-right {
-      right: auto;
-      left: 0;
-    }
-
-    .tunnel-center-lock {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      pointer-events: none;
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .lock-ring {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      border: 2px dashed rgba(255, 59, 29, 0.85);
-      animation: spinLockRing 12s linear infinite;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    @keyframes spinLockRing {
-      to { transform: translateX(-50%) rotate(360deg); }
-    }
-
-    .lock-icon {
-      width: 84px;
-      height: 84px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      border-radius: 50%;
-      color: var(--football-orange);
-      box-shadow: 0 0 32px rgba(255, 59, 29, 0.55);
-    }
-
-    .lock-text {
-      font-family: monospace;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      text-align: center;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.9);
-      padding: 6px 16px;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-    }
-
-    .lock-text span {
-      color: var(--football-green);
-      font-weight: 800;
-    }
-
-  </style>
+      </style>
 </head>
 <body class="intro">
 
   <!-- =======================================================================
        1. HERO VIEWPORT — FOOTBALL MATCH ANALYSIS CINEMATIC STAGE (100svh)
        ======================================================================= -->
-      <main class="hero" id="hero" aria-label="Football Match Analysis Hero Stage">
+  <main class="hero" id="hero" aria-label="Football Match Analysis Hero Stage">
 
     <!-- Nav pinned to viewport -->
     <header class="nav" id="mainNav">
@@ -2290,8 +1260,9 @@
           </span>
         </div>
         <div class="nav-right">
-          <a href="../index.html" class="btn-back-portfolio">← Main Portfolio</a>
-          <a href="#analysisRoom" class="btn-enquire" id="btnAction">Explore Analysis Room ↓</a>
+          <a href="../index.html" class="btn-back-portfolio">← Portfolio</a>
+          <button class="btn-replay-cinema" id="btnReplayIntro" type="button" aria-label="Replay Stadium Intro">▶ Replay</button>
+          <a href="#analysisRoom" class="btn-enquire" id="btnAction">Analysis Room ↓</a>
         </div>
       </div>
 
@@ -2317,22 +1288,14 @@
           width="1920"
           height="1080"
         >
-        <div class="stadium-floodlight-cones" aria-hidden="true"></div>
         <div class="top-shade" id="topShade"></div>
       </div>
 
-      <!-- 2. Mid Layer: Live Interactive 3D Tactical Pitch Canvas on the Turf (z-index: 2) -->
-      <div class="stage-layer layer-mid" id="layerMid">
-        <canvas id="stagePitchCanvas" class="stage-pitch-canvas"></canvas>
-      </div>
+      <!-- 2. Mid Layer (z-index: 2) -->
+      <div class="stage-layer layer-mid" id="layerMid"></div>
 
-      <!-- 3. Headline Block: Above pitch, shining in stadium sky (z-index: 3) -->
+      <!-- 3. Headline Block: Above pitch, shining in stadium sky (z-index: 10) -->
       <div class="headline-block" id="headlineBlock">
-        <div class="hero-tactical-banner">
-          <span class="match-badge">UEFA PRO TACTICAL INTELLIGENCE · MATCHDAY 32</span>
-          <span class="match-meta">EL CLÁSICO 2026/27: REAL MADRID 3 — 2 FC BARCELONA</span>
-        </div>
-        <span class="kicker" id="kicker">SPATIAL TACTICAL INTELLIGENCE ·</span>
         <h1 class="giant-word" id="giantWord" aria-label="Football Match Analysis">
           <span class="word-group word-football">
             <span class="letter">F</span><span class="letter">O</span><span class="letter">O</span><span class="letter">T</span><span class="letter">B</span><span class="letter">A</span><span class="letter">L</span><span class="letter">L</span>
@@ -2346,18 +1309,9 @@
             <span class="letter">A</span><span class="letter">N</span><span class="letter">A</span><span class="letter">L</span><span class="letter">Y</span><span class="letter">S</span><span class="letter">I</span><span class="letter">S</span>
           </span>
         </h1>
-        <div class="hero-tactical-subbar">
-          <span class="subbar-chip">xG: REAL MADRID 1.95 vs 1.19 BARCELONA</span>
-          <span class="subbar-dot">•</span>
-          <span class="subbar-chip">ZONE 14 CONTROL: 64%</span>
-          <span class="subbar-dot">•</span>
-          <span class="subbar-chip">87' TRANSITION WINNER (7.4s)</span>
-          <span class="subbar-dot">•</span>
-          <span class="subbar-chip">PPDA: 7.8</span>
-        </div>
       </div>
 
-      <!-- 4. Front Layer: Tactical Football Analyst at Suite Balcony with Laptop (z-index: 4) -->
+      <!-- 4. Front Layer: Tactical Football Analyst at Suite Balcony (z-index: 4) -->
       <div class="stage-layer layer-front" id="layerFront">
         <div class="glass-tint" id="glassTint"></div>
         <img
@@ -2368,63 +1322,29 @@
           width="1376"
           height="768"
         >
-
-        <!-- 5. Football Tactical Telemetry HUD on Balcony Railing (z-index: 5) -->
-        <div class="balcony-telemetry-hud" id="balconyHud" aria-hidden="true">
-          <!-- Top Row: Scoreboard + Key Metrics -->
-          <div class="hud-main-deck">
-            <!-- Live Match Scoreboard Pill -->
-            <div class="hud-match-scoreboard">
-              <div class="scoreboard-team">
-                <span class="team-code">RMA</span>
-                <span class="team-score">3</span>
-                <span class="team-xg">1.95 xG</span>
-              </div>
-              <div class="scoreboard-divider">
-                <span class="match-time-live"><span class="badge-dot-live"></span> 87' FT</span>
-                <span class="match-stage">EL CLÁSICO</span>
-              </div>
-              <div class="scoreboard-team">
-                <span class="team-score">2</span>
-                <span class="team-code">FCB</span>
-                <span class="team-xg">1.19 xG</span>
-              </div>
-            </div>
-
-            <!-- Active Tactical Metric Card -->
-            <div class="telemetry-card">
-              <span class="t-label">Active Tactical Focus</span>
-              <span class="t-val" id="hudActiveMetric"><span class="live-pulse"></span> 87' Winner Transition (7.4s)</span>
-            </div>
-
-            <!-- Decisive Sequence Metric Card -->
-            <div class="telemetry-card">
-              <span class="t-label">Decisive Sequence</span>
-              <span class="t-val" id="hudDecisiveVal" style="color:#ff3b1d;">Bellingham → Vinícius Jr. (0.62 xG Finish)</span>
-            </div>
-          </div>
-
-          <!-- Bottom Row: Interactive Tactical Phase Selectors -->
-          <div class="balcony-tactical-controls">
-            <button class="balcony-mode-btn active" data-mode="transition" type="button">
-              <span class="btn-num">01</span> 87' Winner (7.4s)
-            </button>
-            <button class="balcony-mode-btn" data-mode="zone14" type="button">
-              <span class="btn-num">02</span> Zone 14 Space (64%)
-            </button>
-            <button class="balcony-mode-btn" data-mode="formations" type="button">
-              <span class="btn-num">03</span> 4-4-2 vs 4-3-3 Shapes
-            </button>
-            <button class="balcony-mode-btn" data-mode="press" type="button">
-              <span class="btn-num">04</span> PPDA 7.8 Press Trap
-            </button>
-          </div>
-        </div>
       </div>
 
     </div><!-- /.stage -->
 
-    <!-- 6. Scroll Indicator -->
+    <!-- 5. Opening Box (Top-Down Stadium Camera Pull-Back) -->
+    <div class="opening-box" id="openingBox">
+      <img
+        src="assets/stadium_cinematic_hero.jpg"
+        alt="Top-down view of floodlit football stadium pitch at night"
+        class="aerial-img"
+        id="imgAerial"
+        width="1920"
+        height="1080"
+      >
+    </div>
+
+    <!-- 6. Stadium Tunnel Doors -->
+    <div class="doors-box" id="doorsBox">
+      <div class="door-panel door-left" id="doorLeft"></div>
+      <div class="door-panel door-right" id="doorRight"></div>
+    </div>
+
+    <!-- 7. Scroll Indicator -->
     <a href="#analysisRoom" class="hero-scroll-cue" id="heroScrollCue">
       <span>EXPLORE MATCH ANALYSIS ROOM</span>
       <svg class="cue-bounce" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
@@ -2434,7 +1354,7 @@
 
   </main>
 
-  <!-- =======================================================================
+<!-- =======================================================================
        2. THE ANALYSIS ROOM — FULL FOOTBALL TACTICAL INTELLIGENCE SUITE
        ======================================================================= -->
   <section class="analysis-room-section" id="analysisRoom">
@@ -2715,434 +1635,349 @@
   <!-- =======================================================================
        JAVASCRIPT — FOOTBALL TACTICAL ENGINE & MATCH INTERACTION
        ======================================================================= -->
-  <script>
-(function () {
-  'use strict';
+    <script>
+    (function () {
+      'use strict';
 
-  // Elements
-  const stage = document.getElementById('stage');
-  const stageCanvas = document.getElementById('stagePitchCanvas');
-  const nav = document.getElementById('mainNav');
-  const kicker = document.getElementById('kicker');
-  const headlineBlock = document.getElementById('headlineBlock');
-  const balconyHud = document.getElementById('balconyHud');
-  const heroScrollCue = document.getElementById('heroScrollCue');
-  const hudActiveMetric = document.getElementById('hudActiveMetric');
-  const hudDecisiveVal = document.getElementById('hudDecisiveVal');
-  const imgFront = document.getElementById('imgFront');
-  const hero = document.getElementById('hero');
-  const analysisRoom = document.getElementById('analysisRoom');
+      // Elements
+      const stage = document.getElementById('stage');
+      const doorLeft = document.getElementById('doorLeft');
+      const doorRight = document.getElementById('doorRight');
+      const doorsBox = document.getElementById('doorsBox');
+      const openingBox = document.getElementById('openingBox');
+      const imgAerial = document.getElementById('imgAerial');
+      const nav = document.getElementById('mainNav');
+      const letters = document.querySelectorAll('.giant-word .letter');
+      const headlineBlock = document.getElementById('headlineBlock');
+      const giantWord = document.getElementById('giantWord');
+      const layerBack = document.getElementById('layerBack');
+      const layerFront = document.getElementById('layerFront');
+      const topShade = document.getElementById('topShade');
+      const heroScrollCue = document.getElementById('heroScrollCue');
+      const btnReplayIntro = document.getElementById('btnReplayIntro');
+      const analysisRoom = document.getElementById('analysisRoom');
+      const hero = document.getElementById('hero');
 
-  let stageWidth = 1600;
-  let stageHeight = 900;
-  let wordSize = 64;
+      let stageWidth = 1600;
+      let stageHeight = 900;
+      let wordSize = 48;
+      const TOTAL_MS = 7400;
+      let animations = [];
+      let timerHandles = [];
+      let isIntroFinished = false;
 
-  /* =======================================================================
-     1. Dynamic Responsive Stage Sizing & Typography
-     ======================================================================= */
-  function initStageLayout() {
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-
-    stageWidth = Math.max(vw, vh * 16 / 9);
-    stageHeight = stageWidth * 9 / 16;
-
-    if (stage) {
-      stage.style.width = stageWidth + 'px';
-      stage.style.height = stageHeight + 'px';
-    }
-
-    let u = 1;
-    if (vw >= 820 && vh > 500) {
-      u = Math.min(vw / 1440, vh / 900);
-    }
-    document.documentElement.style.setProperty('--u', u + 'px');
-
-    const measureSpan = document.createElement('span');
-    measureSpan.style.fontFamily = 'Inter, sans-serif';
-    measureSpan.style.fontSize = '100px';
-    measureSpan.style.fontWeight = '800';
-    measureSpan.style.letterSpacing = '-0.03em';
-    measureSpan.style.position = 'absolute';
-    measureSpan.style.visibility = 'hidden';
-    measureSpan.style.whiteSpace = 'nowrap';
-    measureSpan.textContent = 'FOOTBALL MATCH ANALYSIS';
-    document.body.appendChild(measureSpan);
-    const measuredWidthAt100 = measureSpan.getBoundingClientRect().width;
-    document.body.removeChild(measureSpan);
-
-    const widthPerEm = measuredWidthAt100 / 100;
-
-    let navBottom = 100 * u;
-    if (vw < 820) {
-      navBottom = 16 + 40 + 12 + 36;
-    } else if (vh <= 500) {
-      navBottom = 12 + 34;
-    }
-
-    // Headline placement: cleanly positioned in upper stadium sky
-    const topOffset = Math.max(navBottom + 10, stageHeight * 0.10);
-    if (headlineBlock) {
-      headlineBlock.style.top = topOffset + 'px';
-    }
-
-    const maxTitleWidth = Math.min(stageWidth * 0.72, vw * 0.92);
-    wordSize = Math.max(26, Math.min(64 * u, maxTitleWidth / widthPerEm));
-
-    const giantWord = document.getElementById('giantWord');
-    if (giantWord) giantWord.style.fontSize = wordSize + 'px';
-
-    if (kicker) {
-      const kickerFontSize = Math.max(10, 0.14 * wordSize);
-      kicker.style.fontSize = kickerFontSize + 'px';
-      kicker.style.top = (-kickerFontSize - 14) + 'px';
-      kicker.style.transform = 'translateX(-50%)';
-    }
-  }
-
-  initStageLayout();
-  window.addEventListener('resize', initStageLayout);
-
-  /* =======================================================================
-     2. Interactive 3D Tactical Pitch Overlay Engine (Canvas)
-     ======================================================================= */
-  const tacticalModes = {
-    transition: {
-      activeMetric: "87' Winner Transition (7.4s coast-to-coast)",
-      decisiveVal: "Bellingham → Vinícius Jr. (0.62 xG Finish)",
-      madrid: [
-        { x: 0.36, y: 0.58, name: 'Courtois #1', role: 'GK' },
-        { x: 0.42, y: 0.52, name: 'Carvajal #2', role: 'RB' },
-        { x: 0.46, y: 0.54, name: 'Rüdiger #22', role: 'CB' },
-        { x: 0.50, y: 0.52, name: 'Militão #3', role: 'CB' },
-        { x: 0.54, y: 0.48, name: 'Mendy #23', role: 'LB' },
-        { x: 0.44, y: 0.46, name: 'Valverde #15', role: 'RCM' },
-        { x: 0.48, y: 0.48, name: 'Camavinga #6', role: 'CDM' },
-        { x: 0.52, y: 0.44, name: 'Bellingham #5', role: 'CAM' },
-        { x: 0.42, y: 0.40, name: 'Rodrygo #11', role: 'RW' },
-        { x: 0.58, y: 0.40, name: 'Vinícius Jr. #7', role: 'LW' },
-        { x: 0.50, y: 0.38, name: 'Mbappé #9', role: 'ST' }
-      ],
-      barca: [
-        { x: 0.40, y: 0.44, name: 'Koundé #23', role: 'RB' },
-        { x: 0.46, y: 0.42, name: 'Cubarsí #2', role: 'CB' },
-        { x: 0.52, y: 0.42, name: 'Araújo #4', role: 'CB' },
-        { x: 0.58, y: 0.44, name: 'Balde #3', role: 'LB' }
-      ],
-      passSegments: [
-        { fx: 0.44, fy: 0.46, tx: 0.52, ty: 0.44, color: '#00f2fe', label: 'Valverde → Bellingham' },
-        { fx: 0.52, fy: 0.44, tx: 0.58, ty: 0.40, color: '#ff3b1d', label: 'Decisive Through Ball (0.62 xG)' }
-      ],
-      zone14: true
-    },
-    zone14: {
-      activeMetric: "Zone 14 Spatial Domination (64% Possession)",
-      decisiveVal: "5 Key Passes Inside the Golden 18-Yard Arc",
-      madrid: [
-        { x: 0.46, y: 0.48, name: 'Valverde #15', role: 'RCM' },
-        { x: 0.50, y: 0.46, name: 'Bellingham #5', role: 'Zone 14 Pivot' },
-        { x: 0.54, y: 0.48, name: 'Camavinga #6', role: 'LCM' },
-        { x: 0.48, y: 0.42, name: 'Rodrygo #11', role: 'Inside Forward' },
-        { x: 0.56, y: 0.42, name: 'Vinícius Jr. #7', role: 'Inside Forward' }
-      ],
-      barca: [
-        { x: 0.44, y: 0.50, name: 'Pedri #8', role: 'CM' },
-        { x: 0.52, y: 0.50, name: 'De Jong #21', role: 'CDM' },
-        { x: 0.48, y: 0.54, name: 'Cubarsí #2', role: 'CB' }
-      ],
-      passSegments: [
-        { fx: 0.46, fy: 0.48, tx: 0.50, ty: 0.46, color: '#ff3b1d', label: 'Entry Pass into Zone 14' },
-        { fx: 0.50, fy: 0.46, tx: 0.56, ty: 0.42, color: '#ff3b1d', label: 'Overload Release' }
-      ],
-      zone14: true
-    },
-    formations: {
-      activeMetric: "Tactical Block Shapes: 4-4-2 Mid Block vs 4-3-3",
-      decisiveVal: "Compactness: 28m Vertically / 34m Horizontally",
-      madrid: [
-        { x: 0.40, y: 0.56, name: 'Carvajal #2', role: 'RB' },
-        { x: 0.46, y: 0.56, name: 'Rüdiger #22', role: 'CB' },
-        { x: 0.52, y: 0.56, name: 'Militão #3', role: 'CB' },
-        { x: 0.58, y: 0.56, name: 'Mendy #23', role: 'LB' },
-        { x: 0.40, y: 0.50, name: 'Valverde #15', role: 'RM' },
-        { x: 0.46, y: 0.50, name: 'Tchouaméni #14', role: 'CM' },
-        { x: 0.52, y: 0.50, name: 'Camavinga #6', role: 'CM' },
-        { x: 0.58, y: 0.50, name: 'Bellingham #5', role: 'LM' },
-        { x: 0.46, y: 0.44, name: 'Vinícius Jr. #7', role: 'FW' },
-        { x: 0.52, y: 0.44, name: 'Mbappé #9', role: 'FW' }
-      ],
-      barca: [
-        { x: 0.38, y: 0.40, name: 'Balde #3', role: 'LB' },
-        { x: 0.44, y: 0.38, name: 'Araújo #4', role: 'CB' },
-        { x: 0.52, y: 0.38, name: 'Cubarsí #2', role: 'CB' },
-        { x: 0.58, y: 0.40, name: 'Koundé #23', role: 'RB' },
-        { x: 0.48, y: 0.44, name: 'De Jong #21', role: 'CDM' },
-        { x: 0.42, y: 0.48, name: 'Pedri #8', role: 'LCM' },
-        { x: 0.54, y: 0.48, name: 'Olmo #20', role: 'RCM' },
-        { x: 0.40, y: 0.34, name: 'Raphinha #11', role: 'LW' },
-        { x: 0.48, y: 0.32, name: 'Lewandowski #9', role: 'ST' },
-        { x: 0.56, y: 0.34, name: 'Lamine Yamal #19', role: 'RW' }
-      ],
-      passSegments: [],
-      zone14: false
-    },
-    press: {
-      activeMetric: "High-Intensity Counter-Press Trap (PPDA 7.8)",
-      decisiveVal: "Double-Press Trap on Barcelona Deep Pivot",
-      madrid: [
-        { x: 0.44, y: 0.50, name: 'Camavinga #6', role: 'Primary Press' },
-        { x: 0.52, y: 0.48, name: 'Valverde #15', role: 'Interception Trap' },
-        { x: 0.40, y: 0.46, name: 'Bellingham #5', role: 'Passing Lane Cut' },
-        { x: 0.56, y: 0.42, name: 'Mbappé #9', role: 'CB Press' }
-      ],
-      barca: [
-        { x: 0.46, y: 0.48, name: 'De Jong #21', role: 'Target Trap' },
-        { x: 0.38, y: 0.42, name: 'Cubarsí #2', role: 'Ball Carrier' },
-        { x: 0.54, y: 0.44, name: 'Pedri #8', role: 'Covered' }
-      ],
-      passSegments: [
-        { fx: 0.38, fy: 0.42, tx: 0.46, ty: 0.48, color: 'rgba(255,255,255,0.45)', label: 'Trap Trigger Pass' }
-      ],
-      zone14: false
-    }
-  };
-
-  let currentModeKey = 'transition';
-
-  function initStagePitchCanvas() {
-    if (!stageCanvas) return;
-    const ctx = stageCanvas.getContext('2d');
-    let tick = 0;
-
-    function resize() {
-      stageCanvas.width = stageCanvas.offsetWidth || 1920;
-      stageCanvas.height = stageCanvas.offsetHeight || 1080;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    function drawPitch() {
-      tick++;
-      const w = stageCanvas.width;
-      const h = stageCanvas.height;
-      ctx.clearRect(0, 0, w, h);
-
-      const mode = tacticalModes[currentModeKey];
-      if (!mode) return;
-
-      // 1. Perspective Pitch Grid & Zone 14
-      const zx = w * 0.43;
-      const zy = h * 0.52;
-      const zw = w * 0.16;
-      const zh = h * 0.14;
-
-      if (mode.zone14) {
-        const pulse = (Math.sin(tick * 0.05) + 1) * 0.5;
-        ctx.fillStyle = `rgba(255, 59, 29, ${0.14 + pulse * 0.08})`;
-        ctx.fillRect(zx, zy, zw, zh);
-
-        ctx.strokeStyle = '#ff3b1d';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(zx, zy, zw, zh);
-
-        ctx.fillStyle = '#ff3b1d';
-        ctx.font = 'bold 11px monospace';
-        ctx.fillText('ZONE 14: 64% CONTROL', zx + 10, zy + 20);
-
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-        ctx.font = '9.5px monospace';
-        ctx.fillText('5 Big Chances Created', zx + 10, zy + 36);
+      function clearTimers() {
+        timerHandles.forEach(h => clearTimeout(h));
+        timerHandles = [];
       }
 
-      // 2. Animated Passing Vectors
-      if (mode.passSegments && mode.passSegments.length > 0) {
-        mode.passSegments.forEach(seg => {
-          const x1 = seg.fx * w;
-          const y1 = seg.fy * h;
-          const x2 = seg.tx * w;
-          const y2 = seg.ty * h;
+      /* =======================================================================
+         1. Dynamic Responsive Stage Sizing & Centered Typography
+         ======================================================================= */
+      function initStageLayout() {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
 
-          ctx.strokeStyle = seg.color;
-          ctx.lineWidth = 2.5;
-          ctx.setLineDash([8, 8]);
-          ctx.lineDashOffset = -tick * 1.2;
+        stageWidth = Math.max(vw, vh * 16 / 9);
+        stageHeight = stageWidth * 9 / 16;
 
-          ctx.beginPath();
-          ctx.moveTo(x1, y1);
-          ctx.lineTo(x2, y2);
-          ctx.stroke();
-          ctx.setLineDash([]);
+        if (stage) {
+          stage.style.width = stageWidth + 'px';
+          stage.style.height = stageHeight + 'px';
+        }
 
-          ctx.fillStyle = seg.color;
-          ctx.beginPath();
-          ctx.arc(x2, y2, 7 + Math.sin(tick * 0.1) * 2.5, 0, Math.PI * 2);
-          ctx.globalAlpha = 0.35;
-          ctx.fill();
-          ctx.globalAlpha = 1.0;
+        let u = 1;
+        if (vw >= 820 && vh > 500) {
+          u = Math.min(vw / 1440, vh / 900);
+        }
+        document.documentElement.style.setProperty('--u', u + 'px');
 
-          if (seg.label) {
-            const mx = (x1 + x2) / 2;
-            const my = (y1 + y2) / 2;
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
-            ctx.fillRect(mx - 65, my - 12, 130, 20);
-            ctx.strokeStyle = seg.color;
-            ctx.lineWidth = 1;
-            ctx.strokeRect(mx - 65, my - 12, 130, 20);
+        const measureSpan = document.createElement('span');
+        measureSpan.style.fontFamily = 'Inter, sans-serif';
+        measureSpan.style.fontSize = '100px';
+        measureSpan.style.fontWeight = '800';
+        measureSpan.style.letterSpacing = '-0.03em';
+        measureSpan.style.position = 'absolute';
+        measureSpan.style.visibility = 'hidden';
+        measureSpan.style.whiteSpace = 'nowrap';
+        measureSpan.textContent = 'FOOTBALL MATCH ANALYSIS';
+        document.body.appendChild(measureSpan);
+        const measuredWidthAt100 = measureSpan.getBoundingClientRect().width;
+        document.body.removeChild(measureSpan);
 
-            ctx.fillStyle = seg.color;
-            ctx.font = 'bold 9.5px monospace';
-            ctx.textAlign = 'center';
-            ctx.fillText(seg.label, mx, my + 2);
-            ctx.textAlign = 'left';
+        const widthPerEm = measuredWidthAt100 / 100;
+
+        let navBottom = 110;
+        if (nav) {
+          navBottom = nav.offsetTop + nav.offsetHeight;
+        }
+
+        // Clean centering in upper stadium sky
+        const topOffset = Math.max(navBottom + 16, stageHeight * 0.14);
+        if (headlineBlock) {
+          headlineBlock.style.top = topOffset + 'px';
+          headlineBlock.style.transform = 'translateX(-50%)';
+        }
+
+        const maxTitleWidth = Math.min(stageWidth * 0.74, vw * 0.92);
+        wordSize = Math.max(24, Math.min(54 * u, maxTitleWidth / widthPerEm));
+
+        if (giantWord) {
+          giantWord.style.fontSize = wordSize + 'px';
+        }
+      }
+
+      initStageLayout();
+      window.addEventListener('resize', initStageLayout);
+
+      /* =======================================================================
+         2. Web Animations Master Engine
+         ======================================================================= */
+      function createAnimation(el, keyframes) {
+        if (!el) return null;
+        const anim = el.animate(keyframes, {
+          duration: TOTAL_MS,
+          fill: 'forwards'
+        });
+        animations.push(anim);
+        return anim;
+      }
+
+      function finishIntroCleanly() {
+        if (isIntroFinished) return;
+        isIntroFinished = true;
+        clearTimers();
+
+        document.body.classList.remove('intro');
+        document.body.classList.add('intro-complete');
+
+        if (doorsBox) doorsBox.style.display = 'none';
+        if (openingBox) openingBox.style.display = 'none';
+        if (layerFront) layerFront.style.transform = 'translateY(0)';
+        if (headlineBlock) headlineBlock.style.transform = 'translateX(-50%) translateY(0)';
+        if (layerBack) layerBack.style.transform = 'translateY(-1.5%)';
+        if (nav) {
+          nav.style.opacity = '1';
+          nav.style.transform = 'translateY(0)';
+        }
+        letters.forEach(l => {
+          l.style.opacity = '1';
+          l.style.transform = 'translateY(0)';
+        });
+        if (heroScrollCue) {
+          heroScrollCue.style.opacity = '1';
+          heroScrollCue.style.transform = 'translateX(-50%) translateY(0)';
+        }
+      }
+
+      function startIntro() {
+        clearTimers();
+        animations.forEach(a => a.cancel());
+        animations = [];
+        isIntroFinished = false;
+
+        document.body.classList.remove('intro-complete');
+        document.body.classList.add('intro');
+
+        if (doorsBox) doorsBox.style.display = 'block';
+        if (openingBox) {
+          openingBox.style.display = 'block';
+          openingBox.style.opacity = '1';
+        }
+        if (layerFront) layerFront.style.transform = 'translateY(66%)';
+        if (nav) nav.style.opacity = '0';
+        if (heroScrollCue) heroScrollCue.style.opacity = '0';
+
+        // 1. Left Tunnel Door: 0s -> 1.18s
+        createAnimation(doorLeft, [
+          { transform: 'translateX(0)', offset: 0 },
+          { transform: 'translateX(0)', offset: 20 / 7400, easing: 'cubic-bezier(.1,.2,.8,1)' },
+          { transform: 'translateX(-101%)', offset: 1180 / 7400 },
+          { transform: 'translateX(-101%)', offset: 1 }
+        ]);
+
+        // 2. Right Tunnel Door: 0s -> 1.26s
+        createAnimation(doorRight, [
+          { transform: 'translateX(0)', offset: 0 },
+          { transform: 'translateX(0)', offset: 20 / 7400, easing: 'cubic-bezier(.4,.6,.9,1)' },
+          { transform: 'translateX(101%)', offset: 1260 / 7400 },
+          { transform: 'translateX(101%)', offset: 1 }
+        ]);
+
+        // 3. Aerial Pitch Camera Pull-Back: 0s -> 2.45s
+        createAnimation(imgAerial, [
+          { transform: 'scale(1.36) translateY(5%)', offset: 0 },
+          { transform: 'scale(1.36) translateY(5%)', offset: 800 / 7400, easing: 'cubic-bezier(.22,1,.36,1)' },
+          { transform: 'scale(1.0) translateY(0)', offset: 2450 / 7400 },
+          { transform: 'scale(1.0) translateY(0)', offset: 1 }
+        ]);
+
+        // 4. Opening Box Crossfade Dissolve: 2.45s -> 2.95s
+        createAnimation(openingBox, [
+          { opacity: 1, offset: 0 },
+          { opacity: 1, offset: 2450 / 7400, easing: 'cubic-bezier(.45,0,.55,1)' },
+          { opacity: 0, offset: 2950 / 7400 },
+          { opacity: 0, offset: 1 }
+        ]);
+
+        // 5. Navigation Bar Reveal: 2.45s -> 2.75s
+        createAnimation(nav, [
+          { opacity: 0, transform: 'translateY(-6px)', offset: 0 },
+          { opacity: 0, transform: 'translateY(-6px)', offset: 2450 / 7400, easing: 'ease-out' },
+          { opacity: 1, transform: 'translateY(0)', offset: 2750 / 7400 },
+          { opacity: 1, transform: 'translateY(0)', offset: 1 }
+        ]);
+
+        // 6. Letter-by-Letter Staggered Title Rise: 2.45s -> 3.35s
+        letters.forEach((letter, i) => {
+          const startSec = 2.45 + i * 0.026;
+          const endSec = startSec + 0.52;
+          createAnimation(letter, [
+            { opacity: 0, transform: 'translateY(0.22em)', offset: 0 },
+            { opacity: 0, transform: 'translateY(0.22em)', offset: (startSec * 1000) / TOTAL_MS, easing: 'cubic-bezier(.2,.65,.3,1)' },
+            { opacity: 1, transform: 'translateY(0)', offset: (endSec * 1000) / TOTAL_MS },
+            { opacity: 1, transform: 'translateY(0)', offset: 1 }
+          ]);
+        });
+
+        // 7. Top Shade Fade: 2.90s -> 3.70s
+        createAnimation(topShade, [
+          { opacity: 0, offset: 0 },
+          { opacity: 0, offset: 2900 / 7400, easing: 'ease-in-out' },
+          { opacity: 1, offset: 3700 / 7400 },
+          { opacity: 1, offset: 1 }
+        ]);
+
+        // 8. Back Layer Subtle Depth Shift: 2.90s -> 4.30s
+        createAnimation(layerBack, [
+          { transform: 'translateY(0)', offset: 0 },
+          { transform: 'translateY(0)', offset: 2900 / 7400, easing: 'cubic-bezier(.45,0,.35,1)' },
+          { transform: 'translateY(-1.5%)', offset: 4300 / 7400 },
+          { transform: 'translateY(-1.5%)', offset: 1 }
+        ]);
+
+        // 9. Headline Block Settling: 3.00s -> 4.80s
+        createAnimation(headlineBlock, [
+          { transform: 'translateX(-50%) translateY(4%)', offset: 0 },
+          { transform: 'translateX(-50%) translateY(4%)', offset: 3000 / 7400, easing: 'cubic-bezier(.3,0,.4,1)' },
+          { transform: 'translateX(-50%) translateY(0)', offset: 4800 / 7400 },
+          { transform: 'translateX(-50%) translateY(0)', offset: 1 }
+        ]);
+
+        // 10. Front Layer Manager Cutout Elevation: 3.35s -> 6.00s (-2.5%) -> 7.30s (0)
+        createAnimation(layerFront, [
+          { transform: 'translateY(66%)', offset: 0 },
+          { transform: 'translateY(66%)', offset: 3350 / 7400, easing: 'cubic-bezier(.2,.5,.2,1)' },
+          { transform: 'translateY(-2.5%)', offset: 6000 / 7400, easing: 'cubic-bezier(.45,0,.55,1)' },
+          { transform: 'translateY(0)', offset: 7300 / 7400 },
+          { transform: 'translateY(0)', offset: 1 }
+        ]);
+
+        // 11. Hero Scroll Cue Fade: 4.50s -> 5.40s
+        createAnimation(heroScrollCue, [
+          { opacity: 0, transform: 'translateX(-50%) translateY(12px)', offset: 0 },
+          { opacity: 0, transform: 'translateX(-50%) translateY(12px)', offset: 4500 / 7400, easing: 'ease-out' },
+          { opacity: 1, transform: 'translateX(-50%) translateY(0)', offset: 5400 / 7400 },
+          { opacity: 1, transform: 'translateX(-50%) translateY(0)', offset: 1 }
+        ]);
+
+        // Clean removal of doors once off-screen
+        timerHandles.push(setTimeout(() => {
+          if (doorsBox) doorsBox.style.display = 'none';
+        }, 1350));
+
+        // Clean removal of opening box once dissolved
+        timerHandles.push(setTimeout(() => {
+          if (openingBox) openingBox.style.display = 'none';
+        }, 2950));
+
+        // Seamless completion at 7.4s
+        timerHandles.push(setTimeout(() => {
+          finishIntroCleanly();
+        }, TOTAL_MS));
+      }
+
+      // Initialize intro or bypass if direct anchor target
+      if (window.location.hash && window.location.hash !== '#hero') {
+        finishIntroCleanly();
+      } else {
+        startIntro();
+      }
+
+      // Replay intro button
+      if (btnReplayIntro) {
+        btnReplayIntro.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          startIntro();
+        });
+      }
+
+      // Early unlock on user scroll
+      window.addEventListener('scroll', () => {
+        if (!isIntroFinished && window.scrollY > 50) {
+          finishIntroCleanly();
+        }
+      }, { passive: true });
+
+      /* =======================================================================
+         3. Smooth Scrolling Support (Wheel, Cue & Anchor Links)
+         ======================================================================= */
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (!targetId || targetId === '#') return;
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            finishIntroCleanly();
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      if (heroScrollCue) {
+        heroScrollCue.addEventListener('click', (e) => {
+          e.preventDefault();
+          finishIntroCleanly();
+          if (analysisRoom) {
+            analysisRoom.scrollIntoView({ behavior: 'smooth' });
           }
         });
       }
 
-      // 3. Real Madrid Player Pins (White / Gold)
-      if (mode.madrid) {
-        mode.madrid.forEach(p => {
-          const px = p.x * w;
-          const py = p.y * h;
+      if (hero && analysisRoom) {
+        let isAutoScrolling = false;
+        hero.addEventListener('wheel', (e) => {
+          if (e.deltaY > 30 && window.scrollY < 80 && !isAutoScrolling) {
+            isAutoScrolling = true;
+            finishIntroCleanly();
+            analysisRoom.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => { isAutoScrolling = false; }, 900);
+          }
+        }, { passive: true });
+      }
 
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
-          ctx.beginPath();
-          ctx.arc(px, py, 11, 0, Math.PI * 2);
-          ctx.fill();
+      /* =======================================================================
+         4. Interactive Pitch Telemetry Lab in Analysis Room
+         ======================================================================= */
+      const pitchButtons = document.querySelectorAll('.pitch-ctrl-btn');
+      pitchButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const layer = btn.getAttribute('data-layer');
+          pitchButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
 
-          ctx.fillStyle = '#FFFFFF';
-          ctx.beginPath();
-          ctx.arc(px, py, 6, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.strokeStyle = '#00f2fe';
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-
-          ctx.fillStyle = '#FFFFFF';
-          ctx.font = 'bold 9.5px sans-serif';
-          ctx.fillText(p.name, px + 12, py - 4);
-          ctx.fillStyle = '#00f2fe';
-          ctx.font = '8px monospace';
-          ctx.fillText(p.role, px + 12, py + 6);
+          const layers = ['xg', 'passing', 'defensive', 'space'];
+          layers.forEach(l => {
+            const el = document.getElementById('layer-' + l);
+            if (el) {
+              el.style.display = (l === layer) ? 'block' : 'none';
+            }
+          });
         });
-      }
-
-      // 4. Barcelona Player Pins (Garnet / Blue)
-      if (mode.barca) {
-        mode.barca.forEach(p => {
-          const px = p.x * w;
-          const py = p.y * h;
-
-          ctx.fillStyle = 'rgba(255, 59, 29, 0.25)';
-          ctx.beginPath();
-          ctx.arc(px, py, 11, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.fillStyle = '#ff3b1d';
-          ctx.beginPath();
-          ctx.arc(px, py, 6, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.strokeStyle = '#FFFFFF';
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-
-          ctx.fillStyle = '#FFFFFF';
-          ctx.font = 'bold 9.5px sans-serif';
-          ctx.fillText(p.name, px + 12, py - 4);
-          ctx.fillStyle = '#ff7b63';
-          ctx.font = '8px monospace';
-          ctx.fillText(p.role, px + 12, py + 6);
-        });
-      }
-
-      requestAnimationFrame(drawPitch);
-    }
-
-    drawPitch();
-  }
-  initStagePitchCanvas();
-
-  // Interactive Balcony Mode Selectors
-  const modeButtons = document.querySelectorAll('.balcony-mode-btn');
-  modeButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const modeKey = btn.getAttribute('data-mode');
-      if (!tacticalModes[modeKey]) return;
-
-      modeButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentModeKey = modeKey;
-
-      if (hudActiveMetric) {
-        hudActiveMetric.innerHTML = `<span class="live-pulse"></span> ${tacticalModes[modeKey].activeMetric}`;
-      }
-      if (hudDecisiveVal) {
-        hudDecisiveVal.textContent = tacticalModes[modeKey].decisiveVal;
-      }
-    });
-  });
-
-  /* =======================================================================
-     3. Smooth Scrolling Support (Wheel, Cue & Anchor Links)
-     ======================================================================= */
-  // Smooth scroll for all hash anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (!targetId || targetId === '#') return;
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-
-  // Hero scroll cue click
-  if (heroScrollCue) {
-    heroScrollCue.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (analysisRoom) {
-        analysisRoom.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  }
-
-  // Natural wheel scroll helper on hero section
-  if (hero && analysisRoom) {
-    let isAutoScrolling = false;
-    hero.addEventListener('wheel', (e) => {
-      if (e.deltaY > 30 && window.scrollY < 80 && !isAutoScrolling) {
-        isAutoScrolling = true;
-        analysisRoom.scrollIntoView({ behavior: 'smooth' });
-        setTimeout(() => { isAutoScrolling = false; }, 900);
-      }
-    }, { passive: true });
-  }
-
-  /* =======================================================================
-     4. Interactive Pitch Telemetry Lab in Analysis Room
-     ======================================================================= */
-  const pitchButtons = document.querySelectorAll('.pitch-ctrl-btn');
-  pitchButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const layer = btn.getAttribute('data-layer');
-      pitchButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const layers = ['xg', 'passing', 'defensive', 'space'];
-      layers.forEach(l => {
-        const el = document.getElementById('layer-' + l);
-        if (el) {
-          el.style.display = (l === layer) ? 'block' : 'none';
-        }
       });
-    });
-  });
 
-})();
-
+    })();
   </script>
 </body>
 </html>
