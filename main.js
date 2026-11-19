@@ -21,8 +21,8 @@ import Lenis from 'lenis';
   window.lenis = lenis;
 
   // Lock scroll while preloader is active
-  lenis.stop();
-  window.scrollTo(0, 0);
+  // Enable smooth scroll immediately
+  lenis.start();
 
   // Smooth scroll on anchor link clicks (Navbar & Quick Rail & Hero CTAs)
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -406,63 +406,19 @@ import Lenis from 'lenis';
   const preloaderBar = document.getElementById('preloader-bar');
   const preloaderStatus = document.getElementById('preloader-status');
 
-  function runPreloader() {
-    if (prefersReducedMotion) {
-      if (preloader) preloader.style.display = 'none';
-      document.body.classList.add('hero-active');
-      lenis.start();
-      return;
+    function runPreloader() {
+    document.body.classList.add('hero-active');
+    lenis.start();
+    if (preloader) {
+      preloader.classList.add('is-fading');
+      preloader.classList.add('is-wiped');
+      preloader.setAttribute('aria-hidden', 'true');
+      preloader.style.pointerEvents = 'none';
+      setTimeout(() => {
+        if (preloader) preloader.style.display = 'none';
+      }, 150);
     }
-
-    const statusPhases = [
-      { t: 0, text: 'CALIBRATING TACTICAL DATA ARCHITECTURE...' },
-      { t: 24, text: 'PARSING ISL HISTORICAL MATCHES (~1,100 FIXTURES)...' },
-      { t: 50, text: 'SYNCHRONIZING 37 FEATURE VECTORS & SPATIAL VORONOI...' },
-      { t: 76, text: 'INITIALIZING 8 PRODUCTION REPOSITORIES...' },
-      { t: 96, text: 'SYSTEM ARMED & CALIBRATED • READY' }
-    ];
-
-    const start = performance.now();
-    const duration = 1850;
-
-    function tick(now) {
-      const elapsed = now - start;
-      const linearProgress = Math.min(1, elapsed / duration);
-      // Silky smooth easeOutCubic curve
-      const easeProgress = 1 - Math.pow(1 - linearProgress, 3);
-      const count = Math.round(easeProgress * 100);
-
-      if (preloaderNum) preloaderNum.textContent = count;
-      if (preloaderBar) preloaderBar.style.width = `${count}%`;
-
-      if (preloaderStatus) {
-        for (let i = statusPhases.length - 1; i >= 0; i--) {
-          if (count >= statusPhases[i].t) {
-            preloaderStatus.textContent = statusPhases[i].text;
-            break;
-          }
-        }
-      }
-
-      if (linearProgress < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        if (preloader) preloader.classList.add('is-fading');
-        setTimeout(() => {
-          if (preloader) preloader.classList.add('is-wiped');
-          document.body.classList.add('hero-active');
-          lenis.start();
-          if (preloader) {
-            preloader.setAttribute('aria-hidden', 'true');
-            preloader.style.pointerEvents = 'none';
-          }
-        }, 220);
-      }
-    }
-    requestAnimationFrame(tick);
   }
-
-
 
   runPreloader();
 

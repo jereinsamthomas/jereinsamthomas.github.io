@@ -54,6 +54,8 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      overflow-y: auto;
+      height: auto;
     }
 
     body {
@@ -61,6 +63,7 @@
       background-color: var(--bg);
       color: var(--text);
       overflow-x: hidden;
+      overflow-y: auto;
       position: relative;
     }
 
@@ -117,12 +120,11 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 48%;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.35) 50%, transparent 100%);
+      height: 52%;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
       pointer-events: none;
       z-index: 3;
-      opacity: 0;
-      will-change: opacity;
+      opacity: 1 !important;
     }
 
     .rain-video {
@@ -141,15 +143,20 @@
     /* 2. Headline Block */
     .headline-block {
       position: absolute;
-      top: calc(96 * var(--u, 1px));
+      top: calc(85 * var(--u, 1px));
       left: 50%;
       transform: translateX(-50%);
       z-index: 10 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px !important;
       text-align: center;
-      white-space: nowrap;
       pointer-events: none;
       width: 100%;
       max-width: 1400px;
+      margin: 0 auto;
       will-change: transform, opacity;
     }
 
@@ -199,7 +206,7 @@
       transition: opacity 0.4s ease;
     }
 
-    body:not(.intro) .hero-football-tag {
+    .hero-football-tag {
       opacity: 1;
     }
 
@@ -239,22 +246,32 @@
     /* Tactical Telemetry HUD Overlay on Balcony Railing */
     .balcony-telemetry-hud {
       position: absolute;
-      bottom: 22px;
+      bottom: 58px;
       left: 36px;
       right: 36px;
       top: auto !important;
-      z-index: 15 !important;
+      z-index: 20 !important;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 0.65rem;
       pointer-events: auto;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      opacity: 1 !important;
+      transform: none !important;
     }
 
-    body:not(.intro) .balcony-telemetry-hud {
-      opacity: 1;
-      transform: translateY(0);
+    .balcony-telemetry-hud {
+      position: absolute;
+      bottom: 58px;
+      left: 36px;
+      right: 36px;
+      top: auto !important;
+      z-index: 20 !important;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      pointer-events: auto;
+      opacity: 1 !important;
+      transform: none !important;
     }
 
     .telemetry-card {
@@ -365,24 +382,13 @@
     }
 
     /* Initial state before intro clock starts */
-    .intro .nav {
-      opacity: 0;
-      transform: translateY(-6px);
-    }
+    
 
-    .intro .kicker {
-      opacity: 0;
-      transform: translate(0, 0.5em);
-    }
+    
 
-    .intro .giant-word .letter {
-      opacity: 0;
-      transform: translateY(0.14em);
-    }
+    
 
-    .intro .layer-front {
-      transform: translateY(66%);
-    }
+    
 
     /* 7. Nav (Pinned to viewport) */
     .nav {
@@ -520,25 +526,58 @@
     /* Floating Scroll Cue */
     .hero-scroll-cue {
       position: absolute;
-      bottom: 24px;
+      bottom: 14px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
+      z-index: 25;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
-      color: rgba(255, 255, 255, 0.8);
+      gap: 8px;
+      text-decoration: none;
+      color: #FFFFFF;
+      font-family: monospace;
       font-size: 11px;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
+      padding: 6px 16px;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 240, 255, 0.15);
       cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.4s ease;
+      pointer-events: auto;
+      opacity: 1 !important;
+      transition: all 0.3s ease;
     }
 
-    body:not(.intro) .hero-scroll-cue {
-      opacity: 1;
+    .hero-scroll-cue {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 25;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #FFFFFF;
+      font-family: monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 240, 255, 0.15);
+      cursor: pointer;
+      pointer-events: auto;
+      opacity: 1 !important;
+      transition: all 0.3s ease;
     }
 
     .cue-bounce {
@@ -894,22 +933,87 @@
         --u: 1px;
       }
 
-      .nav {
-        top: 16px;
-        padding: 0 18px;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-      }
+          .nav {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      padding: 0 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 30;
+      pointer-events: none;
+    }
 
-      .nav-row-1 {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-      }
+    .nav-row-1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .nav-left, .nav-right, .pill-bar {
+      pointer-events: auto;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-enquire {
+      height: 38px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff3b1d, #ff5e36);
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 12.5px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      box-shadow: 0 4px 18px rgba(255, 59, 29, 0.4);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .btn-enquire:hover {
+      box-shadow: 0 6px 24px rgba(255, 59, 29, 0.65);
+      transform: translateY(-1px);
+    }
+
+    .btn-back-portfolio {
+      height: 38px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.65);
+      color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+    }
+    .btn-back-portfolio:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
 
       .wordmark {
         font-size: 14px;
@@ -956,8 +1060,19 @@
       }
 
       .balcony-telemetry-hud {
-        display: none;
-      }
+      position: absolute;
+      bottom: 58px;
+      left: 36px;
+      right: 36px;
+      top: auto !important;
+      z-index: 20 !important;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      pointer-events: auto;
+      opacity: 1 !important;
+      transform: none !important;
+    }
     }
 
     /* At 360px and narrower */
@@ -970,17 +1085,87 @@
 
     /* Short landscape screens (height <= 500px) */
     @media (max-height: 500px) and (orientation: landscape) {
-      .nav {
-        top: 12px;
-        height: 34px;
-        padding: 0 24px;
-        flex-direction: row;
-        gap: 0;
-      }
+          .nav {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      padding: 0 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 30;
+      pointer-events: none;
+    }
 
-      .nav-row-1 {
-        display: contents;
-      }
+    .nav-row-1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .nav-left, .nav-right, .pill-bar {
+      pointer-events: auto;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-enquire {
+      height: 38px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff3b1d, #ff5e36);
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 12.5px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      box-shadow: 0 4px 18px rgba(255, 59, 29, 0.4);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .btn-enquire:hover {
+      box-shadow: 0 6px 24px rgba(255, 59, 29, 0.65);
+      transform: translateY(-1px);
+    }
+
+    .btn-back-portfolio {
+      height: 38px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.65);
+      color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+    }
+    .btn-back-portfolio:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
 
       .wordmark {
         font-size: 13px;
@@ -1024,11 +1209,32 @@
         display: none !important;
       }
       .nav, .kicker, .giant-word .letter, .layer-front, .layer-mid, .layer-back, .headline-block, .top-shade, .balcony-telemetry-hud, .hero-scroll-cue {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-        animation: none !important;
-      }
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 25;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #FFFFFF;
+      font-family: monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 240, 255, 0.15);
+      cursor: pointer;
+      pointer-events: auto;
+      opacity: 1 !important;
+      transition: all 0.3s ease;
+    }
       .rain-video {
         display: none !important;
       }
@@ -1587,15 +1793,20 @@
     /* 3. Headline Block: Above pitch, shining in stadium sky */
     .headline-block {
       position: absolute;
-      top: calc(96 * var(--u, 1px));
+      top: calc(85 * var(--u, 1px));
       left: 50%;
       transform: translateX(-50%);
       z-index: 10 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px !important;
       text-align: center;
-      white-space: nowrap;
       pointer-events: none;
       width: 100%;
       max-width: 1400px;
+      margin: 0 auto;
       will-change: transform, opacity;
     }
 
@@ -1670,54 +1881,62 @@
       font-weight: bold;
     }
 
-    /* 4. Front Layer: Tactical Football Analyst on Suite Balcony */
     .layer-front {
-      position: absolute;
-      inset: 0;
       z-index: 5 !important;
-      pointer-events: none;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      transform-origin: 50% 100%;
-      will-change: transform;
+      position: absolute !important;
+      inset: 0 !important;
+      pointer-events: none !important;
+      display: flex !important;
+      align-items: flex-end !important;
+      justify-content: center !important;
     }
 
-    .front-img {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 70%;
-      width: auto;
-      max-width: 1300px;
-      object-fit: contain;
-      object-position: center bottom;
-      display: block;
-      pointer-events: none;
-      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.85));
+    .layer-front img,
+    .layer-front #imgFront,
+    .layer-front .front-img {
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      height: 60% !important;
+      width: auto !important;
+      max-width: 1100px !important;
+      object-fit: contain !important;
+      object-position: center bottom !important;
+      display: block !important;
+      pointer-events: none !important;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.95)) !important;
     }
 
     /* 5. Balcony Railing Telemetry HUD & Interactive Controls */
     .balcony-telemetry-hud {
       position: absolute;
-      bottom: 22px;
+      bottom: 58px;
       left: 36px;
       right: 36px;
       top: auto !important;
-      z-index: 15 !important;
+      z-index: 20 !important;
       display: flex;
       flex-direction: column;
       gap: 0.65rem;
       pointer-events: auto;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      opacity: 1 !important;
+      transform: none !important;
     }
 
-    body:not(.intro) .balcony-telemetry-hud {
-      opacity: 1;
-      transform: translateY(0);
+    .balcony-telemetry-hud {
+      position: absolute;
+      bottom: 58px;
+      left: 36px;
+      right: 36px;
+      top: auto !important;
+      z-index: 20 !important;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      pointer-events: auto;
+      opacity: 1 !important;
+      transform: none !important;
     }
 
     .hud-main-deck {
@@ -2071,9 +2290,8 @@
           </span>
         </div>
         <div class="nav-right">
-          <a href="../index.html" class="btn-back-portfolio">← Portfolio</a>
-          <button class="btn-replay-cinema" id="btnReplayIntro" type="button" aria-label="Replay Stadium Intro">▶ Replay Cinema</button>
-          <a href="#analysisRoom" class="btn-enquire" id="btnAction">Launch Tactical Lab ↗</a>
+          <a href="../index.html" class="btn-back-portfolio">← Main Portfolio</a>
+          <a href="#analysisRoom" class="btn-enquire" id="btnAction">Explore Analysis Room ↓</a>
         </div>
       </div>
 
@@ -2205,70 +2423,7 @@
 
     </div><!-- /.stage -->
 
-    <!-- 6. Opening Box (Top-Down Aerial Pitch Zoom & Tilt with Live Optical Radar) -->
-    <div class="opening-box" id="openingBox">
-      <img
-        src="assets/stadium_cinematic_hero.jpg"
-        alt="Top-down aerial view of floodlit football stadium pitch at night"
-        class="aerial-img"
-        id="imgAerial"
-        width="1920"
-        height="1080"
-      >
-      <!-- Live Optical Player Tracking Canvas -->
-      <canvas id="openingTacticalCanvas" class="opening-tactical-canvas"></canvas>
-
-      <!-- Stadium Cinema HUD Overlay -->
-      <div class="opening-tactical-hud" id="openingTacticalHud">
-        <div class="hud-top-meta">
-          <span class="hud-pill"><span class="badge-dot-live"></span> VENUE: SANTIAGO BERNABÉU · 84,744 ATTENDANCE</span>
-          <span class="hud-pill">MATCHDAY 32 · EL CLÁSICO 2026/27</span>
-          <span class="hud-pill" style="color:#00f2fe;">OPTICAL 60 FPS TRACKING</span>
-        </div>
-        <div class="hud-center-telemetry">
-          <div class="tactical-radar-crosshair"></div>
-          <div class="telemetry-readout">SPATIAL TRACKING ACTIVE · 22 PLAYERS + BALL MAPPED</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 7. Stadium Tunnel Blast Doors -->
-    <div class="doors-box" id="doorsBox">
-      <div class="door-panel door-left" id="doorLeft">
-        <div class="tunnel-door-overlay">
-          <div class="tunnel-stencil-block left-stencil">
-            <span class="tunnel-badge">UEFA STADIUM TUNNEL · SECTOR A-01</span>
-            <h3 class="tunnel-title">PLAYERS &amp; ANALYSTS ONLY</h3>
-            <p class="tunnel-status"><span class="badge-dot-live"></span> MATCHDAY 32 ACTIVE</p>
-          </div>
-          <div class="tunnel-hazard-strip"></div>
-        </div>
-      </div>
-      <div class="door-panel door-right" id="doorRight">
-        <div class="tunnel-door-overlay">
-          <div class="tunnel-stencil-block right-stencil">
-            <span class="tunnel-badge">OPTICAL TRACKING · 60 FPS HD</span>
-            <h3 class="tunnel-title">EL CLÁSICO 2026/27 TACTICS</h3>
-            <p class="tunnel-status">SYSTEMS CALIBRATED · SENSORS LIVE</p>
-          </div>
-          <div class="tunnel-hazard-strip strip-right"></div>
-        </div>
-      </div>
-
-      <!-- Center Seam Lock Emblem -->
-      <div class="tunnel-center-lock" id="tunnelCenterLock">
-        <div class="lock-ring"></div>
-        <div class="lock-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-          </svg>
-        </div>
-        <div class="lock-text">STADIUM MATCH CONTROL<br><span>INITIALIZING TACTICAL SUITE</span></div>
-      </div>
-    </div>
-
-    <!-- 8. Scroll Indicator -->
+    <!-- 6. Scroll Indicator -->
     <a href="#analysisRoom" class="hero-scroll-cue" id="heroScrollCue">
       <span>EXPLORE MATCH ANALYSIS ROOM</span>
       <svg class="cue-bounce" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
@@ -2500,765 +2655,434 @@
   <!-- =======================================================================
        JAVASCRIPT — FOOTBALL TACTICAL ENGINE & MATCH INTERACTION
        ======================================================================= -->
-      <script>
-    (function () {
-      'use strict';
+  <script>
+(function () {
+  'use strict';
 
-      // Elements
-      const stage = document.getElementById('stage');
-      const doorLeft = document.getElementById('doorLeft');
-      const doorRight = document.getElementById('doorRight');
-      const doorsBox = document.getElementById('doorsBox');
-      const tunnelCenterLock = document.getElementById('tunnelCenterLock');
-      const openingBox = document.getElementById('openingBox');
-      const imgAerial = document.getElementById('imgAerial');
-      const openingCanvas = document.getElementById('openingTacticalCanvas');
-      const stageCanvas = document.getElementById('stagePitchCanvas');
-      const nav = document.getElementById('mainNav');
-      const kicker = document.getElementById('kicker');
-      const letters = document.querySelectorAll('.giant-word .letter');
-      const headlineBlock = document.getElementById('headlineBlock');
-      const layerBack = document.getElementById('layerBack');
-      const layerMid = document.getElementById('layerMid');
-      const layerFront = document.getElementById('layerFront');
-      const topShade = document.getElementById('topShade');
-      const balconyHud = document.getElementById('balconyHud');
-      const btnReplayIntro = document.getElementById('btnReplayIntro');
-      const hudActiveMetric = document.getElementById('hudActiveMetric');
-      const hudDecisiveVal = document.getElementById('hudDecisiveVal');
+  // Elements
+  const stage = document.getElementById('stage');
+  const stageCanvas = document.getElementById('stagePitchCanvas');
+  const nav = document.getElementById('mainNav');
+  const kicker = document.getElementById('kicker');
+  const headlineBlock = document.getElementById('headlineBlock');
+  const balconyHud = document.getElementById('balconyHud');
+  const heroScrollCue = document.getElementById('heroScrollCue');
+  const hudActiveMetric = document.getElementById('hudActiveMetric');
+  const hudDecisiveVal = document.getElementById('hudDecisiveVal');
+  const imgFront = document.getElementById('imgFront');
+  const hero = document.getElementById('hero');
+  const analysisRoom = document.getElementById('analysisRoom');
 
-      const imgDoors = new Image();
-      imgDoors.src = 'assets/stadium_tunnel_doors.jpg';
-      const imgFront = document.getElementById('imgFront');
+  let stageWidth = 1600;
+  let stageHeight = 900;
+  let wordSize = 64;
 
-      let stageWidth = 1600;
-      let stageHeight = 900;
-      let wordSize = 290;
-      let baselineY = 387;
+  /* =======================================================================
+     1. Dynamic Responsive Stage Sizing & Typography
+     ======================================================================= */
+  function initStageLayout() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
 
-      /* =======================================================================
-         1. Dynamic Responsive Stage Sizing & Typography
-         ======================================================================= */
-      function initStageLayout() {
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
+    stageWidth = Math.max(vw, vh * 16 / 9);
+    stageHeight = stageWidth * 9 / 16;
 
-        stageWidth = Math.max(vw, vh * 16 / 9);
-        stageHeight = stageWidth * 9 / 16;
+    if (stage) {
+      stage.style.width = stageWidth + 'px';
+      stage.style.height = stageHeight + 'px';
+    }
 
-        stage.style.width = stageWidth + 'px';
-        stage.style.height = stageHeight + 'px';
+    let u = 1;
+    if (vw >= 820 && vh > 500) {
+      u = Math.min(vw / 1440, vh / 900);
+    }
+    document.documentElement.style.setProperty('--u', u + 'px');
 
-        let u = 1;
-        if (vw >= 820 && vh > 500) {
-          u = Math.min(vw / 1440, vh / 900);
-        }
-        document.documentElement.style.setProperty('--u', u + 'px');
+    const measureSpan = document.createElement('span');
+    measureSpan.style.fontFamily = 'Inter, sans-serif';
+    measureSpan.style.fontSize = '100px';
+    measureSpan.style.fontWeight = '800';
+    measureSpan.style.letterSpacing = '-0.03em';
+    measureSpan.style.position = 'absolute';
+    measureSpan.style.visibility = 'hidden';
+    measureSpan.style.whiteSpace = 'nowrap';
+    measureSpan.textContent = 'FOOTBALL MATCH ANALYSIS';
+    document.body.appendChild(measureSpan);
+    const measuredWidthAt100 = measureSpan.getBoundingClientRect().width;
+    document.body.removeChild(measureSpan);
 
-        const measureSpan = document.createElement('span');
-        measureSpan.style.fontFamily = 'Inter, sans-serif';
-        measureSpan.style.fontSize = '100px';
-        measureSpan.style.fontWeight = '700';
-        measureSpan.style.letterSpacing = '-0.045em';
-        measureSpan.style.position = 'absolute';
-        measureSpan.style.visibility = 'hidden';
-        measureSpan.style.whiteSpace = 'nowrap';
-        measureSpan.textContent = 'FOOTBALL MATCH ANALYSIS';
-        document.body.appendChild(measureSpan);
-        const measuredWidthAt100 = measureSpan.getBoundingClientRect().width;
-        document.body.removeChild(measureSpan);
+    const widthPerEm = measuredWidthAt100 / 100;
 
-        const widthPerEm = measuredWidthAt100 / 100;
-        const isPortrait = vh > 1.2 * vw;
-        const baselinePercent = isPortrait ? 0.362 : 0.43;
-        baselineY = stageHeight * baselinePercent;
+    let navBottom = 100 * u;
+    if (vw < 820) {
+      navBottom = 16 + 40 + 12 + 36;
+    } else if (vh <= 500) {
+      navBottom = 12 + 34;
+    }
 
-        const stageTopInViewport = (vh - stageHeight) / 2;
-        const baselineInViewport = stageTopInViewport + baselineY;
+    // Headline placement: cleanly positioned in upper stadium sky
+    const topOffset = Math.max(navBottom + 10, stageHeight * 0.10);
+    if (headlineBlock) {
+      headlineBlock.style.top = topOffset + 'px';
+    }
 
-        let navBottom = 100 * u;
-        if (vw < 820) {
-          navBottom = 16 + 40 + 12 + 36;
-        } else if (vh <= 500) {
-          navBottom = 12 + 34;
-        }
+    const maxTitleWidth = Math.min(stageWidth * 0.72, vw * 0.92);
+    wordSize = Math.max(26, Math.min(64 * u, maxTitleWidth / widthPerEm));
 
-        // Headline placement: cleanly positioned in upper stadium sky
-        const topOffset = Math.max(navBottom + 10, stageHeight * 0.10);
-        if (headlineBlock) {
-          headlineBlock.style.top = topOffset + 'px';
-        }
+    const giantWord = document.getElementById('giantWord');
+    if (giantWord) giantWord.style.fontSize = wordSize + 'px';
 
-        const maxTitleWidth = Math.min(stageWidth * 0.72, vw * 0.92);
-        wordSize = Math.max(26, Math.min(64 * u, maxTitleWidth / widthPerEm));
+    if (kicker) {
+      const kickerFontSize = Math.max(10, 0.14 * wordSize);
+      kicker.style.fontSize = kickerFontSize + 'px';
+      kicker.style.top = (-kickerFontSize - 14) + 'px';
+      kicker.style.transform = 'translateX(-50%)';
+    }
+  }
 
-        const giantWord = document.getElementById('giantWord');
-        if (giantWord) giantWord.style.fontSize = wordSize + 'px';
+  initStageLayout();
+  window.addEventListener('resize', initStageLayout);
 
-        if (kicker) {
-          const kickerFontSize = Math.max(10, 0.14 * wordSize);
-          kicker.style.fontSize = kickerFontSize + 'px';
-          kicker.style.top = (-kickerFontSize - 14) + 'px';
-          kicker.style.transform = 'translateX(-50%)';
-        }
+  /* =======================================================================
+     2. Interactive 3D Tactical Pitch Overlay Engine (Canvas)
+     ======================================================================= */
+  const tacticalModes = {
+    transition: {
+      activeMetric: "87' Winner Transition (7.4s coast-to-coast)",
+      decisiveVal: "Bellingham → Vinícius Jr. (0.62 xG Finish)",
+      madrid: [
+        { x: 0.36, y: 0.58, name: 'Courtois #1', role: 'GK' },
+        { x: 0.42, y: 0.52, name: 'Carvajal #2', role: 'RB' },
+        { x: 0.46, y: 0.54, name: 'Rüdiger #22', role: 'CB' },
+        { x: 0.50, y: 0.52, name: 'Militão #3', role: 'CB' },
+        { x: 0.54, y: 0.48, name: 'Mendy #23', role: 'LB' },
+        { x: 0.44, y: 0.46, name: 'Valverde #15', role: 'RCM' },
+        { x: 0.48, y: 0.48, name: 'Camavinga #6', role: 'CDM' },
+        { x: 0.52, y: 0.44, name: 'Bellingham #5', role: 'CAM' },
+        { x: 0.42, y: 0.40, name: 'Rodrygo #11', role: 'RW' },
+        { x: 0.58, y: 0.40, name: 'Vinícius Jr. #7', role: 'LW' },
+        { x: 0.50, y: 0.38, name: 'Mbappé #9', role: 'ST' }
+      ],
+      barca: [
+        { x: 0.40, y: 0.44, name: 'Koundé #23', role: 'RB' },
+        { x: 0.46, y: 0.42, name: 'Cubarsí #2', role: 'CB' },
+        { x: 0.52, y: 0.42, name: 'Araújo #4', role: 'CB' },
+        { x: 0.58, y: 0.44, name: 'Balde #3', role: 'LB' }
+      ],
+      passSegments: [
+        { fx: 0.44, fy: 0.46, tx: 0.52, ty: 0.44, color: '#00f2fe', label: 'Valverde → Bellingham' },
+        { fx: 0.52, fy: 0.44, tx: 0.58, ty: 0.40, color: '#ff3b1d', label: 'Decisive Through Ball (0.62 xG)' }
+      ],
+      zone14: true
+    },
+    zone14: {
+      activeMetric: "Zone 14 Spatial Domination (64% Possession)",
+      decisiveVal: "5 Key Passes Inside the Golden 18-Yard Arc",
+      madrid: [
+        { x: 0.46, y: 0.48, name: 'Valverde #15', role: 'RCM' },
+        { x: 0.50, y: 0.46, name: 'Bellingham #5', role: 'Zone 14 Pivot' },
+        { x: 0.54, y: 0.48, name: 'Camavinga #6', role: 'LCM' },
+        { x: 0.48, y: 0.42, name: 'Rodrygo #11', role: 'Inside Forward' },
+        { x: 0.56, y: 0.42, name: 'Vinícius Jr. #7', role: 'Inside Forward' }
+      ],
+      barca: [
+        { x: 0.44, y: 0.50, name: 'Pedri #8', role: 'CM' },
+        { x: 0.52, y: 0.50, name: 'De Jong #21', role: 'CDM' },
+        { x: 0.48, y: 0.54, name: 'Cubarsí #2', role: 'CB' }
+      ],
+      passSegments: [
+        { fx: 0.46, fy: 0.48, tx: 0.50, ty: 0.46, color: '#ff3b1d', label: 'Entry Pass into Zone 14' },
+        { fx: 0.50, fy: 0.46, tx: 0.56, ty: 0.42, color: '#ff3b1d', label: 'Overload Release' }
+      ],
+      zone14: true
+    },
+    formations: {
+      activeMetric: "Tactical Block Shapes: 4-4-2 Mid Block vs 4-3-3",
+      decisiveVal: "Compactness: 28m Vertically / 34m Horizontally",
+      madrid: [
+        { x: 0.40, y: 0.56, name: 'Carvajal #2', role: 'RB' },
+        { x: 0.46, y: 0.56, name: 'Rüdiger #22', role: 'CB' },
+        { x: 0.52, y: 0.56, name: 'Militão #3', role: 'CB' },
+        { x: 0.58, y: 0.56, name: 'Mendy #23', role: 'LB' },
+        { x: 0.40, y: 0.50, name: 'Valverde #15', role: 'RM' },
+        { x: 0.46, y: 0.50, name: 'Tchouaméni #14', role: 'CM' },
+        { x: 0.52, y: 0.50, name: 'Camavinga #6', role: 'CM' },
+        { x: 0.58, y: 0.50, name: 'Bellingham #5', role: 'LM' },
+        { x: 0.46, y: 0.44, name: 'Vinícius Jr. #7', role: 'FW' },
+        { x: 0.52, y: 0.44, name: 'Mbappé #9', role: 'FW' }
+      ],
+      barca: [
+        { x: 0.38, y: 0.40, name: 'Balde #3', role: 'LB' },
+        { x: 0.44, y: 0.38, name: 'Araújo #4', role: 'CB' },
+        { x: 0.52, y: 0.38, name: 'Cubarsí #2', role: 'CB' },
+        { x: 0.58, y: 0.40, name: 'Koundé #23', role: 'RB' },
+        { x: 0.48, y: 0.44, name: 'De Jong #21', role: 'CDM' },
+        { x: 0.42, y: 0.48, name: 'Pedri #8', role: 'LCM' },
+        { x: 0.54, y: 0.48, name: 'Olmo #20', role: 'RCM' },
+        { x: 0.40, y: 0.34, name: 'Raphinha #11', role: 'LW' },
+        { x: 0.48, y: 0.32, name: 'Lewandowski #9', role: 'ST' },
+        { x: 0.56, y: 0.34, name: 'Lamine Yamal #19', role: 'RW' }
+      ],
+      passSegments: [],
+      zone14: false
+    },
+    press: {
+      activeMetric: "High-Intensity Counter-Press Trap (PPDA 7.8)",
+      decisiveVal: "Double-Press Trap on Barcelona Deep Pivot",
+      madrid: [
+        { x: 0.44, y: 0.50, name: 'Camavinga #6', role: 'Primary Press' },
+        { x: 0.52, y: 0.48, name: 'Valverde #15', role: 'Interception Trap' },
+        { x: 0.40, y: 0.46, name: 'Bellingham #5', role: 'Passing Lane Cut' },
+        { x: 0.56, y: 0.42, name: 'Mbappé #9', role: 'CB Press' }
+      ],
+      barca: [
+        { x: 0.46, y: 0.48, name: 'De Jong #21', role: 'Target Trap' },
+        { x: 0.38, y: 0.42, name: 'Cubarsí #2', role: 'Ball Carrier' },
+        { x: 0.54, y: 0.44, name: 'Pedri #8', role: 'Covered' }
+      ],
+      passSegments: [
+        { fx: 0.38, fy: 0.42, tx: 0.46, ty: 0.48, color: 'rgba(255,255,255,0.45)', label: 'Trap Trigger Pass' }
+      ],
+      zone14: false
+    }
+  };
+
+  let currentModeKey = 'transition';
+
+  function initStagePitchCanvas() {
+    if (!stageCanvas) return;
+    const ctx = stageCanvas.getContext('2d');
+    let tick = 0;
+
+    function resize() {
+      stageCanvas.width = stageCanvas.offsetWidth || 1920;
+      stageCanvas.height = stageCanvas.offsetHeight || 1080;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function drawPitch() {
+      tick++;
+      const w = stageCanvas.width;
+      const h = stageCanvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const mode = tacticalModes[currentModeKey];
+      if (!mode) return;
+
+      // 1. Perspective Pitch Grid & Zone 14
+      const zx = w * 0.43;
+      const zy = h * 0.52;
+      const zw = w * 0.16;
+      const zh = h * 0.14;
+
+      if (mode.zone14) {
+        const pulse = (Math.sin(tick * 0.05) + 1) * 0.5;
+        ctx.fillStyle = `rgba(255, 59, 29, ${0.14 + pulse * 0.08})`;
+        ctx.fillRect(zx, zy, zw, zh);
+
+        ctx.strokeStyle = '#ff3b1d';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(zx, zy, zw, zh);
+
+        ctx.fillStyle = '#ff3b1d';
+        ctx.font = 'bold 11px monospace';
+        ctx.fillText('ZONE 14: 64% CONTROL', zx + 10, zy + 20);
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+        ctx.font = '9.5px monospace';
+        ctx.fillText('5 Big Chances Created', zx + 10, zy + 36);
       }
 
-      initStageLayout();
-      window.addEventListener('resize', initStageLayout);
+      // 2. Animated Passing Vectors
+      if (mode.passSegments && mode.passSegments.length > 0) {
+        mode.passSegments.forEach(seg => {
+          const x1 = seg.fx * w;
+          const y1 = seg.fy * h;
+          const x2 = seg.tx * w;
+          const y2 = seg.ty * h;
 
-      /* =======================================================================
-         2. Web Animations Master Clock Timeline (7.4s / 7400ms)
-         ======================================================================= */
-      const TOTAL_MS = 7400;
-      let animations = [];
+          ctx.strokeStyle = seg.color;
+          ctx.lineWidth = 2.5;
+          ctx.setLineDash([8, 8]);
+          ctx.lineDashOffset = -tick * 1.2;
 
-      const easeDoorsLeft = 'cubic-bezier(.1,.2,.8,1)';
-      const easeDoorsRight = 'cubic-bezier(.4,.6,.9,1)';
-      const easeInOut = 'ease-in-out';
-      const easeOut = 'ease-out';
-      const easeHandoff = 'cubic-bezier(.45,0,.55,1)';
-      const easeReveal = 'cubic-bezier(.2,.65,.3,1)';
-      const easeBack = 'cubic-bezier(.45,0,.35,1)';
-      const easeHeadline = 'cubic-bezier(.3,0,.4,1)';
-      const easeFrontUp = 'cubic-bezier(.2,.5,.2,1)';
-
-      function createAnimation(el, keyframes) {
-        if (!el) return null;
-        const anim = el.animate(keyframes, {
-          duration: TOTAL_MS,
-          fill: 'both'
-        });
-        anim.pause();
-        animations.push(anim);
-        return anim;
-      }
-
-      function buildTimelineAnimations() {
-        animations.forEach(a => a.cancel());
-        animations = [];
-
-        // Center Lock: 0.02s -> 0.75s fade & split
-        createAnimation(tunnelCenterLock, [
-          { offset: 0, opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
-          { offset: 20 / 7400, opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
-          { offset: 750 / 7400, opacity: 0, transform: 'translate(-50%, -50%) scale(1.35)' },
-          { offset: 1, opacity: 0, transform: 'translate(-50%, -50%) scale(1.35)' }
-        ]);
-
-        // Left Tunnel Door: 0.02s -> 1.18s
-        createAnimation(doorLeft, [
-          { offset: 0, transform: 'translateX(0)' },
-          { offset: 20 / 7400, transform: 'translateX(0)', easing: easeDoorsLeft },
-          { offset: 1180 / 7400, transform: 'translateX(-101%)' },
-          { offset: 1, transform: 'translateX(-101%)' }
-        ]);
-
-        // Right Tunnel Door: 0.02s -> 1.26s
-        createAnimation(doorRight, [
-          { offset: 0, transform: 'translateX(0)' },
-          { offset: 20 / 7400, transform: 'translateX(0)', easing: easeDoorsRight },
-          { offset: 1260 / 7400, transform: 'translateX(101%)' },
-          { offset: 1, transform: 'translateX(101%)' }
-        ]);
-
-        // Aerial Pitch Camera Pull-Back: 0.02s -> 2.45s
-        createAnimation(imgAerial, [
-          { offset: 0, transform: 'scale(1.42) translateY(10%)' },
-          { offset: 1000 / 7400, transform: 'scale(1.42) translateY(10%)', easing: 'cubic-bezier(.22,1,.36,1)' },
-          { offset: 2450 / 7400, transform: 'scale(1.0) translateY(0)' },
-          { offset: 1, transform: 'scale(1.0) translateY(0)' }
-        ]);
-
-        // Opening Box Dissolve: 2.45s -> 2.95s
-        createAnimation(openingBox, [
-          { offset: 0, opacity: 1 },
-          { offset: 2450 / 7400, opacity: 1, easing: easeHandoff },
-          { offset: 2950 / 7400, opacity: 0 },
-          { offset: 1, opacity: 0 }
-        ]);
-
-        // Nav Reveal: 2.45s -> 2.75s
-        createAnimation(nav, [
-          { offset: 0, opacity: 0, transform: 'translateY(-6px)' },
-          { offset: 2450 / 7400, opacity: 0, transform: 'translateY(-6px)', easing: easeOut },
-          { offset: 2750 / 7400, opacity: 1, transform: 'translateY(0)' },
-          { offset: 1, opacity: 1, transform: 'translateY(0)' }
-        ]);
-
-        // Kicker: 2.45s -> 3.10s
-        createAnimation(kicker, [
-          { offset: 0, opacity: 0, transform: 'translate(0, 0.5em)' },
-          { offset: 2450 / 7400, opacity: 0, transform: 'translate(0, 0.5em)', easing: easeReveal },
-          { offset: 3100 / 7400, opacity: 1, transform: 'translate(0, 0)' },
-          { offset: 1, opacity: 1, transform: 'translate(0, 0)' }
-        ]);
-
-        // Letters Reveal: 2.45 + i * 0.026 -> + 0.55s
-        letters.forEach((letter, i) => {
-          const startSec = 2.45 + i * 0.026;
-          const endSec = startSec + 0.55;
-          createAnimation(letter, [
-            { offset: 0, opacity: 0, transform: 'translateY(0.14em)' },
-            { offset: (startSec * 1000) / TOTAL_MS, opacity: 0, transform: 'translateY(0.14em)', easing: easeReveal },
-            { offset: (endSec * 1000) / TOTAL_MS, opacity: 1, transform: 'translateY(0)' },
-            { offset: 1, opacity: 1, transform: 'translateY(0)' }
-          ]);
-        });
-
-        // Top Shade: 2.90s -> 3.70s
-        createAnimation(topShade, [
-          { offset: 0, opacity: 0 },
-          { offset: 2900 / 7400, opacity: 0, easing: easeInOut },
-          { offset: 3700 / 7400, opacity: 1 },
-          { offset: 1, opacity: 1 }
-        ]);
-
-        // Back Layer: 2.90s -> 4.30s
-        createAnimation(layerBack, [
-          { offset: 0, transform: 'translateY(0)' },
-          { offset: 2900 / 7400, transform: 'translateY(0)', easing: easeBack },
-          { offset: 4300 / 7400, transform: 'translateY(-1.5%)' },
-          { offset: 1, transform: 'translateY(-1.5%)' }
-        ]);
-
-        // Headline Block: 3.00s -> 4.80s
-        createAnimation(headlineBlock, [
-          { offset: 0, transform: 'translateX(-50%) translateY(6%)' },
-          { offset: 3000 / 7400, transform: 'translateX(-50%) translateY(6%)', easing: easeHeadline },
-          { offset: 4800 / 7400, transform: 'translateX(-50%) translateY(0)' },
-          { offset: 1, transform: 'translateX(-50%) translateY(0)' }
-        ]);
-
-        // Front Layer (Tactical Analyst): 3.35s -> 6.00s (-2.5%) -> 7.30s (0)
-        createAnimation(layerFront, [
-          { offset: 0, transform: 'translateY(66%)' },
-          { offset: 3350 / 7400, transform: 'translateY(66%)', easing: easeFrontUp },
-          { offset: 6000 / 7400, transform: 'translateY(-2.5%)', easing: easeHandoff },
-          { offset: 7300 / 7400, transform: 'translateY(0)' },
-          { offset: 1, transform: 'translateY(0)' }
-        ]);
-
-        // Balcony HUD: 4.20s -> 5.20s
-        createAnimation(balconyHud, [
-          { offset: 0, opacity: 0, transform: 'translateY(16px)' },
-          { offset: 4200 / 7400, opacity: 0, transform: 'translateY(16px)', easing: easeOut },
-          { offset: 5200 / 7400, opacity: 1, transform: 'translateY(0)' },
-          { offset: 1, opacity: 1, transform: 'translateY(0)' }
-        ]);
-      }
-
-      buildTimelineAnimations();
-
-      /* =======================================================================
-         3. Master Clock Animation Engine
-         ======================================================================= */
-      let clockStartTime = null;
-      let isIntroFinished = false;
-
-      function masterTick(now) {
-        if (!clockStartTime) clockStartTime = now;
-        const elapsedMs = now - clockStartTime;
-        const boundedMs = Math.min(elapsedMs, TOTAL_MS);
-
-        for (let i = 0; i < animations.length; i++) {
-          animations[i].currentTime = boundedMs;
-        }
-
-        // Hide doors cleanly once offscreen (at 1.35s)
-        if (elapsedMs >= 1350 && doorsBox && doorsBox.style.display !== 'none') {
-          doorsBox.style.display = 'none';
-        }
-
-        // Hide opening box once fully dissolved (at 2.95s)
-        if (elapsedMs >= 2950 && openingBox && openingBox.style.display !== 'none') {
-          openingBox.style.display = 'none';
-        }
-
-        // Seamless, smooth finish at end of timeline (no sudden layout jump)
-        if (elapsedMs >= TOTAL_MS && !isIntroFinished) {
-          isIntroFinished = true;
-          document.body.classList.remove('intro');
-          document.body.classList.add('intro-complete');
-
-          // Lock permanent resting positions
-          if (doorsBox) doorsBox.style.display = 'none';
-          if (openingBox) openingBox.style.display = 'none';
-          if (layerFront) layerFront.style.transform = 'translateY(0)';
-          if (headlineBlock) headlineBlock.style.transform = 'translateX(-50%) translateY(0)';
-          if (layerBack) layerBack.style.transform = 'translateY(-1.5%)';
-          if (nav) {
-            nav.style.opacity = '1';
-            nav.style.transform = 'translateY(0)';
-          }
-          if (kicker) {
-            kicker.style.opacity = '1';
-            kicker.style.transform = 'translate(0, 0)';
-          }
-          letters.forEach(l => {
-            l.style.opacity = '1';
-            l.style.transform = 'translateY(0)';
-          });
-          if (balconyHud) {
-            balconyHud.style.opacity = '1';
-            balconyHud.style.transform = 'translateY(0)';
-          }
-          if (heroScrollCue) {
-            heroScrollCue.style.opacity = '1';
-          }
-          return;
-        }
-
-        if (!isIntroFinished) {
-          requestAnimationFrame(masterTick);
-        }
-      }
-
-      function startIntro() {
-        document.body.classList.remove('intro-complete');
-        document.body.classList.add('intro');
-        if (doorsBox) {
-          doorsBox.style.display = 'block';
-        }
-        if (openingBox) {
-          openingBox.style.display = 'block';
-          openingBox.style.opacity = '1';
-        }
-        if (tunnelCenterLock) {
-          tunnelCenterLock.style.opacity = '1';
-          tunnelCenterLock.style.transform = 'translate(-50%, -50%) scale(1)';
-        }
-        if (layerFront) {
-          layerFront.style.transform = 'translateY(66%)';
-        }
-        buildTimelineAnimations();
-        clockStartTime = performance.now();
-        isIntroFinished = false;
-        requestAnimationFrame(masterTick);
-      }
-
-      // Check Readiness & Start
-      if (imgFront && imgFront.complete) {
-        setTimeout(startIntro, 80);
-      } else {
-        window.addEventListener('load', () => setTimeout(startIntro, 80));
-      }
-
-      if (btnReplayIntro) {
-        btnReplayIntro.addEventListener('click', (e) => {
-          e.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          setTimeout(startIntro, 200);
-        });
-      }
-
-      /* =======================================================================
-         4. Live Optical Pitch Tracking Radar (Opening Sequence)
-         ======================================================================= */
-      function initOpeningRadar() {
-        if (!openingCanvas) return;
-        const ctx = openingCanvas.getContext('2d');
-
-        function resize() {
-          openingCanvas.width = openingCanvas.offsetWidth || 1920;
-          openingCanvas.height = openingCanvas.offsetHeight || 1080;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-
-        const nodes = [
-          { x: 0.44, y: 0.65, vx: 0.0003, vy: -0.0002, team: 'madrid', name: 'Bellingham #5' },
-          { x: 0.32, y: 0.58, vx: -0.0003, vy: 0.0003, team: 'madrid', name: 'Vinícius #7' },
-          { x: 0.52, y: 0.48, vx: 0.0004, vy: 0.0002, team: 'madrid', name: 'Mbappé #9' },
-          { x: 0.40, y: 0.78, vx: 0.0002, vy: -0.0003, team: 'madrid', name: 'Valverde #15' },
-          { x: 0.48, y: 0.48, vx: -0.0003, vy: 0.0002, team: 'barca', name: 'De Jong #21' },
-          { x: 0.60, y: 0.40, vx: 0.0003, vy: -0.0002, team: 'barca', name: 'Pedri #8' },
-          { x: 0.66, y: 0.36, vx: 0.0002, vy: 0.0004, team: 'barca', name: 'Lamine Yamal #19' }
-        ];
-
-        let tick = 0;
-
-        function drawRadar() {
-          tick++;
-          const w = openingCanvas.width;
-          const h = openingCanvas.height;
-          ctx.clearRect(0, 0, w, h);
-
-          // Center Circle Pulse
-          ctx.strokeStyle = 'rgba(0, 242, 254, 0.2)';
-          ctx.lineWidth = 1;
-          const cx = w * 0.5;
-          const cy = h * 0.52;
-          const r = (Math.sin(tick * 0.04) * 6) + Math.min(w, h) * 0.15;
           ctx.beginPath();
-          ctx.arc(cx, cy, r, 0, Math.PI * 2);
-          ctx.stroke();
-
-          // Connect passing line
-          ctx.strokeStyle = 'rgba(255, 59, 29, 0.45)';
-          ctx.setLineDash([6, 6]);
-          ctx.lineDashOffset = -tick * 0.8;
-          ctx.beginPath();
-          ctx.moveTo(nodes[0].x * w, nodes[0].y * h);
-          ctx.lineTo(nodes[1].x * w, nodes[1].y * h);
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
           ctx.stroke();
           ctx.setLineDash([]);
 
-          // Draw tracked player dots
-          nodes.forEach(node => {
-            node.x += node.vx;
-            node.y += node.vy;
-            if (node.x < 0.2 || node.x > 0.8) node.vx *= -1;
-            if (node.y < 0.3 || node.y > 0.85) node.vy *= -1;
+          ctx.fillStyle = seg.color;
+          ctx.beginPath();
+          ctx.arc(x2, y2, 7 + Math.sin(tick * 0.1) * 2.5, 0, Math.PI * 2);
+          ctx.globalAlpha = 0.35;
+          ctx.fill();
+          ctx.globalAlpha = 1.0;
 
-            const px = node.x * w;
-            const py = node.y * h;
-            const isMadrid = node.team === 'madrid';
+          if (seg.label) {
+            const mx = (x1 + x2) / 2;
+            const my = (y1 + y2) / 2;
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+            ctx.fillRect(mx - 65, my - 12, 130, 20);
+            ctx.strokeStyle = seg.color;
+            ctx.lineWidth = 1;
+            ctx.strokeRect(mx - 65, my - 12, 130, 20);
 
-            ctx.fillStyle = isMadrid ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 242, 254, 0.25)';
-            ctx.beginPath();
-            ctx.arc(px, py, 9, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = isMadrid ? '#FFFFFF' : '#00f2fe';
-            ctx.beginPath();
-            ctx.arc(px, py, 4.5, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = isMadrid ? '#fff' : '#00f2fe';
+            ctx.fillStyle = seg.color;
             ctx.font = 'bold 9.5px monospace';
-            ctx.fillText(node.name, px + 10, py + 3);
-          });
-
-          if (!isIntroFinished) {
-            requestAnimationFrame(drawRadar);
-          }
-        }
-
-        drawRadar();
-      }
-      initOpeningRadar();
-
-      /* =======================================================================
-         5. Interactive Live 3D Tactical Pitch Canvas & Modes
-         ======================================================================= */
-      const tacticalModes = {
-        transition: {
-          activeMetric: "87' Decisive Transition (7.4s Turnaround)",
-          decisiveVal: "Bellingham → Vinícius Jr. (0.62 xG Finish)",
-          madrid: [
-            { x: 0.30, y: 0.68, name: 'Valverde #15', role: 'Recovery (0.0s)' },
-            { x: 0.44, y: 0.58, name: 'Bellingham #5', role: 'Turn & Assist (2.1s)' },
-            { x: 0.66, y: 0.42, name: 'Vinícius Jr. #7', role: '1v1 Finish (7.4s)' },
-            { x: 0.56, y: 0.36, name: 'Mbappé #9', role: 'Decoy Run' },
-            { x: 0.38, y: 0.74, name: 'Camavinga #6', role: 'Defensive Cover' }
-          ],
-          barca: [
-            { x: 0.42, y: 0.54, name: 'De Jong #21', role: 'Dispossessed' },
-            { x: 0.52, y: 0.46, name: 'Pedri #8', role: 'Tracking Back' },
-            { x: 0.64, y: 0.46, name: 'Cubarsí #2', role: 'Backpedal' },
-            { x: 0.70, y: 0.38, name: 'Koundé #23', role: 'Out of Position' }
-          ],
-          passSegments: [
-            { fx: 0.30, fy: 0.68, tx: 0.44, ty: 0.58, color: '#00f2fe', label: '18m Line-Break' },
-            { fx: 0.44, fy: 0.58, tx: 0.66, ty: 0.42, color: '#ff3b1d', label: '32m Diagonal Through-Ball' }
-          ],
-          zone14: false
-        },
-        zone14: {
-          activeMetric: "Zone 14 Space Dominance (64% Control)",
-          decisiveVal: "5 Key Passes Inside Barcelona Danger Zone",
-          madrid: [
-            { x: 0.46, y: 0.54, name: 'Bellingham #5', role: 'Zone 14 Anchor' },
-            { x: 0.38, y: 0.66, name: 'Valverde #15', role: 'Support' },
-            { x: 0.48, y: 0.68, name: 'Camavinga #6', role: 'Pivot' },
-            { x: 0.60, y: 0.44, name: 'Vinícius Jr. #7', role: 'Left Half-Space' },
-            { x: 0.54, y: 0.38, name: 'Mbappé #9', role: 'Box Threat' }
-          ],
-          barca: [
-            { x: 0.48, y: 0.48, name: 'De Jong #21', role: 'Stretched' },
-            { x: 0.40, y: 0.50, name: 'Pedri #8', role: 'Half-Space' },
-            { x: 0.58, y: 0.42, name: 'Cubarsí #2', role: 'CB Step' }
-          ],
-          passSegments: [
-            { fx: 0.38, fy: 0.66, tx: 0.46, ty: 0.54, color: '#00f2fe', label: 'Entry Pass' },
-            { fx: 0.46, fy: 0.54, tx: 0.60, ty: 0.44, color: '#ff3b1d', label: 'Key Pass' }
-          ],
-          zone14: true
-        },
-        formations: {
-          activeMetric: "Mid-Block 4-4-2 vs Positional 4-3-3",
-          decisiveVal: "Compactness: 28.4m vs Width: 61.2m",
-          madrid: [
-            { x: 0.34, y: 0.78, name: 'Mendy #23', role: 'LB' },
-            { x: 0.42, y: 0.80, name: 'Rüdiger #22', role: 'CB' },
-            { x: 0.52, y: 0.80, name: 'Militão #3', role: 'CB' },
-            { x: 0.60, y: 0.78, name: 'Carvajal #2', role: 'RB' },
-            { x: 0.36, y: 0.64, name: 'Bellingham #5', role: 'LM' },
-            { x: 0.44, y: 0.66, name: 'Camavinga #6', role: 'CM' },
-            { x: 0.52, y: 0.66, name: 'Valverde #15', role: 'CM' },
-            { x: 0.60, y: 0.64, name: 'Rodrygo #11', role: 'RM' },
-            { x: 0.44, y: 0.50, name: 'Vinícius Jr. #7', role: 'FW' },
-            { x: 0.52, y: 0.50, name: 'Mbappé #9', role: 'FW' }
-          ],
-          barca: [
-            { x: 0.32, y: 0.42, name: 'Balde #3', role: 'LB' },
-            { x: 0.44, y: 0.36, name: 'Araújo #4', role: 'CB' },
-            { x: 0.52, y: 0.36, name: 'Cubarsí #2', role: 'CB' },
-            { x: 0.64, y: 0.42, name: 'Koundé #23', role: 'RB' },
-            { x: 0.48, y: 0.46, name: 'De Jong #21', role: 'CDM' },
-            { x: 0.40, y: 0.52, name: 'Pedri #8', role: 'LCM' },
-            { x: 0.56, y: 0.52, name: 'Olmo #20', role: 'RCM' },
-            { x: 0.34, y: 0.56, name: 'Raphinha #11', role: 'LW' },
-            { x: 0.48, y: 0.58, name: 'Lewandowski #9', role: 'ST' },
-            { x: 0.62, y: 0.56, name: 'Lamine Yamal #19', role: 'RW' }
-          ],
-          passSegments: [],
-          zone14: false
-        },
-        press: {
-          activeMetric: "High-Intensity Counter-Press Trap (PPDA 7.8)",
-          decisiveVal: "Double-Press Trap on Barcelona Deep Pivot",
-          madrid: [
-            { x: 0.44, y: 0.54, name: 'Camavinga #6', role: 'Primary Press' },
-            { x: 0.52, y: 0.52, name: 'Valverde #15', role: 'Interception Trap' },
-            { x: 0.40, y: 0.48, name: 'Bellingham #5', role: 'Passing Lane Cut' },
-            { x: 0.56, y: 0.42, name: 'Mbappé #9', role: 'CB Press' }
-          ],
-          barca: [
-            { x: 0.46, y: 0.50, name: 'De Jong #21', role: 'Target Trap' },
-            { x: 0.38, y: 0.44, name: 'Cubarsí #2', role: 'Ball Carrier' },
-            { x: 0.56, y: 0.46, name: 'Pedri #8', role: 'Covered' }
-          ],
-          passSegments: [
-            { fx: 0.38, fy: 0.44, tx: 0.46, ty: 0.50, color: 'rgba(255,255,255,0.4)', label: 'Trap Trigger Pass' }
-          ],
-          zone14: false
-        }
-      };
-
-      let currentModeKey = 'transition';
-
-      function initStagePitchCanvas() {
-        if (!stageCanvas) return;
-        const ctx = stageCanvas.getContext('2d');
-        let tick = 0;
-
-        function resize() {
-          stageCanvas.width = stageCanvas.offsetWidth || 1920;
-          stageCanvas.height = stageCanvas.offsetHeight || 1080;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-
-        function drawPitch() {
-          tick++;
-          const w = stageCanvas.width;
-          const h = stageCanvas.height;
-          ctx.clearRect(0, 0, w, h);
-
-          const mode = tacticalModes[currentModeKey];
-          if (!mode) return;
-
-          // 1. Perspective Pitch Grid & Zone 14
-          const zx = w * 0.40;
-          const zy = h * 0.48;
-          const zw = w * 0.18;
-          const zh = h * 0.16;
-
-          if (mode.zone14) {
-            // Glowing Zone 14 Danger Box
-            const pulse = (Math.sin(tick * 0.05) + 1) * 0.5;
-            ctx.fillStyle = `rgba(255, 59, 29, ${0.14 + pulse * 0.08})`;
-            ctx.fillRect(zx, zy, zw, zh);
-
-            ctx.strokeStyle = '#ff3b1d';
-            ctx.lineWidth = 2;
-            ctx.strokeRect(zx, zy, zw, zh);
-
-            ctx.fillStyle = '#ff3b1d';
-            ctx.font = 'bold 11px monospace';
-            ctx.fillText('ZONE 14: 64% CONTROL', zx + 12, zy + 22);
-
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-            ctx.font = '9.5px monospace';
-            ctx.fillText('5 Big Chances Created', zx + 12, zy + 38);
-          }
-
-          // 2. Animated Passing Vectors
-          if (mode.passSegments && mode.passSegments.length > 0) {
-            mode.passSegments.forEach(seg => {
-              const x1 = seg.fx * w;
-              const y1 = seg.fy * h;
-              const x2 = seg.tx * w;
-              const y2 = seg.ty * h;
-
-              ctx.strokeStyle = seg.color;
-              ctx.lineWidth = 2.5;
-              ctx.setLineDash([8, 8]);
-              ctx.lineDashOffset = -tick * 1.2;
-
-              ctx.beginPath();
-              ctx.moveTo(x1, y1);
-              ctx.lineTo(x2, y2);
-              ctx.stroke();
-              ctx.setLineDash([]);
-
-              // Pulse beacon at destination
-              ctx.fillStyle = seg.color;
-              ctx.beginPath();
-              ctx.arc(x2, y2, 8 + Math.sin(tick * 0.1) * 3, 0, Math.PI * 2);
-              ctx.globalAlpha = 0.35;
-              ctx.fill();
-              ctx.globalAlpha = 1.0;
-
-              // Pass label
-              if (seg.label) {
-                const mx = (x1 + x2) / 2;
-                const my = (y1 + y2) / 2;
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
-                ctx.fillRect(mx - 60, my - 12, 120, 20);
-                ctx.strokeStyle = seg.color;
-                ctx.lineWidth = 1;
-                ctx.strokeRect(mx - 60, my - 12, 120, 20);
-
-                ctx.fillStyle = seg.color;
-                ctx.font = 'bold 9.5px monospace';
-                ctx.textAlign = 'center';
-                ctx.fillText(seg.label, mx, my + 2);
-                ctx.textAlign = 'left';
-              }
-            });
-          }
-
-          // 3. Real Madrid Player Pins (White / Gold)
-          if (mode.madrid) {
-            mode.madrid.forEach(p => {
-              const px = p.x * w;
-              const py = p.y * h;
-
-              // Halo
-              ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
-              ctx.beginPath();
-              ctx.arc(px, py, 11, 0, Math.PI * 2);
-              ctx.fill();
-
-              // Pin Core
-              ctx.fillStyle = '#FFFFFF';
-              ctx.beginPath();
-              ctx.arc(px, py, 6, 0, Math.PI * 2);
-              ctx.fill();
-
-              // Border
-              ctx.strokeStyle = '#ffbe0b';
-              ctx.lineWidth = 1.5;
-              ctx.stroke();
-
-              // Player Label Pill
-              ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
-              ctx.fillRect(px + 10, py - 14, 110, 22);
-              ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
-              ctx.strokeRect(px + 10, py - 14, 110, 22);
-
-              ctx.fillStyle = '#FFFFFF';
-              ctx.font = 'bold 9.5px monospace';
-              ctx.fillText(p.name, px + 15, py - 2);
-
-              ctx.fillStyle = 'rgba(255, 190, 11, 0.85)';
-              ctx.font = '8px monospace';
-              ctx.fillText(p.role, px + 15, py + 6);
-            });
-          }
-
-          // 4. FC Barcelona Player Pins (Blaugrana / Cyan)
-          if (mode.barca) {
-            mode.barca.forEach(p => {
-              const px = p.x * w;
-              const py = p.y * h;
-
-              ctx.fillStyle = 'rgba(0, 242, 254, 0.25)';
-              ctx.beginPath();
-              ctx.arc(px, py, 11, 0, Math.PI * 2);
-              ctx.fill();
-
-              ctx.fillStyle = '#00f2fe';
-              ctx.beginPath();
-              ctx.arc(px, py, 6, 0, Math.PI * 2);
-              ctx.fill();
-
-              ctx.strokeStyle = '#ff3b1d';
-              ctx.lineWidth = 1.5;
-              ctx.stroke();
-
-              ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
-              ctx.fillRect(px + 10, py - 14, 110, 22);
-              ctx.strokeStyle = 'rgba(0, 242, 254, 0.25)';
-              ctx.strokeRect(px + 10, py - 14, 110, 22);
-
-              ctx.fillStyle = '#00f2fe';
-              ctx.font = 'bold 9.5px monospace';
-              ctx.fillText(p.name, px + 15, py - 2);
-
-              ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
-              ctx.font = '8px monospace';
-              ctx.fillText(p.role, px + 15, py + 6);
-            });
-          }
-
-          requestAnimationFrame(drawPitch);
-        }
-
-        drawPitch();
-      }
-      initStagePitchCanvas();
-
-      // Interactive Balcony Mode Selectors
-      const modeButtons = document.querySelectorAll('.balcony-mode-btn');
-      modeButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          modeButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-
-          const modeKey = btn.getAttribute('data-mode') || 'transition';
-          currentModeKey = modeKey;
-
-          const mode = tacticalModes[modeKey];
-          if (mode) {
-            if (hudActiveMetric) hudActiveMetric.innerHTML = '<span class="live-pulse"></span> ' + mode.activeMetric;
-            if (hudDecisiveVal) hudDecisiveVal.textContent = mode.decisiveVal;
+            ctx.textAlign = 'center';
+            ctx.fillText(seg.label, mx, my + 2);
+            ctx.textAlign = 'left';
           }
         });
+      }
+
+      // 3. Real Madrid Player Pins (White / Gold)
+      if (mode.madrid) {
+        mode.madrid.forEach(p => {
+          const px = p.x * w;
+          const py = p.y * h;
+
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+          ctx.beginPath();
+          ctx.arc(px, py, 11, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.arc(px, py, 6, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.strokeStyle = '#00f2fe';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = 'bold 9.5px sans-serif';
+          ctx.fillText(p.name, px + 12, py - 4);
+          ctx.fillStyle = '#00f2fe';
+          ctx.font = '8px monospace';
+          ctx.fillText(p.role, px + 12, py + 6);
+        });
+      }
+
+      // 4. Barcelona Player Pins (Garnet / Blue)
+      if (mode.barca) {
+        mode.barca.forEach(p => {
+          const px = p.x * w;
+          const py = p.y * h;
+
+          ctx.fillStyle = 'rgba(255, 59, 29, 0.25)';
+          ctx.beginPath();
+          ctx.arc(px, py, 11, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#ff3b1d';
+          ctx.beginPath();
+          ctx.arc(px, py, 6, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = 'bold 9.5px sans-serif';
+          ctx.fillText(p.name, px + 12, py - 4);
+          ctx.fillStyle = '#ff7b63';
+          ctx.font = '8px monospace';
+          ctx.fillText(p.role, px + 12, py + 6);
+        });
+      }
+
+      requestAnimationFrame(drawPitch);
+    }
+
+    drawPitch();
+  }
+  initStagePitchCanvas();
+
+  // Interactive Balcony Mode Selectors
+  const modeButtons = document.querySelectorAll('.balcony-mode-btn');
+  modeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modeKey = btn.getAttribute('data-mode');
+      if (!tacticalModes[modeKey]) return;
+
+      modeButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentModeKey = modeKey;
+
+      if (hudActiveMetric) {
+        hudActiveMetric.innerHTML = `<span class="live-pulse"></span> ${tacticalModes[modeKey].activeMetric}`;
+      }
+      if (hudDecisiveVal) {
+        hudDecisiveVal.textContent = tacticalModes[modeKey].decisiveVal;
+      }
+    });
+  });
+
+  /* =======================================================================
+     3. Smooth Scrolling Support (Wheel, Cue & Anchor Links)
+     ======================================================================= */
+  // Smooth scroll for all hash anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Hero scroll cue click
+  if (heroScrollCue) {
+    heroScrollCue.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (analysisRoom) {
+        analysisRoom.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  // Natural wheel scroll helper on hero section
+  if (hero && analysisRoom) {
+    let isAutoScrolling = false;
+    hero.addEventListener('wheel', (e) => {
+      if (e.deltaY > 30 && window.scrollY < 80 && !isAutoScrolling) {
+        isAutoScrolling = true;
+        analysisRoom.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => { isAutoScrolling = false; }, 900);
+      }
+    }, { passive: true });
+  }
+
+  /* =======================================================================
+     4. Interactive Pitch Telemetry Lab in Analysis Room
+     ======================================================================= */
+  const pitchButtons = document.querySelectorAll('.pitch-ctrl-btn');
+  pitchButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const layer = btn.getAttribute('data-layer');
+      pitchButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const layers = ['xg', 'passing', 'defensive', 'space'];
+      layers.forEach(l => {
+        const el = document.getElementById('layer-' + l);
+        if (el) {
+          el.style.display = (l === layer) ? 'block' : 'none';
+        }
       });
+    });
+  });
 
-      /* =======================================================================
-         6. Pitch Telemetry Layer Switcher (Analysis Room Below)
-         ======================================================================= */
-      function setupPitchControls() {
-        const buttons = document.querySelectorAll('.pitch-ctrl-btn');
-        const layers = {
-          xg: document.getElementById('layer-xg'),
-          passing: document.getElementById('layer-passing'),
-          defensive: document.getElementById('layer-defensive'),
-          space: document.getElementById('layer-space')
-        };
+})();
 
-        buttons.forEach(btn => {
-          btn.addEventListener('click', () => {
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const layerKey = btn.getAttribute('data-layer');
-            Object.keys(layers).forEach(k => {
-              if (layers[k]) {
-                layers[k].style.display = (k === layerKey) ? 'block' : 'none';
-              }
-            });
-          });
-        });
-      }
-
-      setupPitchControls();
-
-    })();
   </script>
 </body>
 </html>
